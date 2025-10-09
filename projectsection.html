@@ -13,7 +13,7 @@
 
         body {
             font-family: 'Courier New', monospace;
-            background: #f5f5f5;
+            background: #d5d4c8;
             background-image: url('images/background.jpg');
             background-size: cover;
             background-position: center;
@@ -137,10 +137,17 @@
             justify-content: center;
         }
 
+        .posters-container p {
+            width: 100%;
+            max-width: 400px;
+            left: 5vw;
+            margin-right: 30px;
+        }
+
         .poster-stack {
             position: relative;
-            width: 600px;
-            height: 800px;
+            width: 500px;
+            height: 700px;
         }
 
         .poster-item {
@@ -148,10 +155,11 @@
             width: 100%;
             height: 100%;
             background: #fff;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
             transition: all 0.1s ease-out;
             left: 0;
             top: 0;
+            transform: translateX(120%);
+            opacity: 0;
         }
 
         .poster-item img {
@@ -162,7 +170,7 @@
 
         /* Complete Projects Section - Horizontal Scroll */
         .projects-section {
-            min-height: 400vh;
+            min-height: 600vh;
             position: relative;
             padding: 100px 0;
         }
@@ -216,31 +224,13 @@
             opacity: 1;
         }
 
-        /* Gallery Sections - Big Images */
+        /* Gallery Sections - Masonry Grid */
         .gallery-section {
             padding: 100px 40px;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
-            gap: 60px;
+            column-count: 4;
+            column-gap: 20px;
             max-width: 1600px;
             margin: 0 auto;
-        }
-
-        .gallery-item {
-            width: 100%;
-            aspect-ratio: 4/3;
-            overflow: hidden;
-        }
-
-        .gallery-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-
-        .gallery-item:hover img {
-            transform: scale(1.05);
         }
 
         .section-title {
@@ -249,6 +239,89 @@
             text-align: center;
             margin: 100px 0 50px 0;
             color: #333;
+            column-span: all;
+        }
+
+        .gallery-item {
+            break-inside: avoid;
+            margin-bottom: 30px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .gallery-item:hover {
+            z-index: 10;
+        }
+
+        .gallery-item img {
+            width: 90%;
+            height: auto;
+            display: block;
+            transition: filter 0.5s ease, transform 0.3s ease;
+        }
+
+        .gallery-item::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        /* BLACK & WHITE for ILLUSTRATION section */
+        #illustration .gallery-item img {
+            filter: grayscale(100%);
+        }
+
+        #illustration .gallery-item:hover img {
+            filter: grayscale(0%);
+            transform: scale(1.02);
+        }
+
+        /* BLUR + WHITE OVERLAY for 3D section */
+        #3d .gallery-item img {
+            filter: blur(4px) brightness(1.2);
+        }
+
+        #3d .gallery-item::after {
+            background: rgba(255, 255, 255, 0.3);
+            transition: opacity 0.5s ease;
+        }
+
+        #3d .gallery-item:hover img {
+            filter: blur(0) brightness(1);
+        }
+
+        #3d .gallery-item:hover::after {
+            opacity: 0;
+        }
+
+        /* Vary sizes for visual interest */
+        .gallery-item:nth-child(3n + 1) {
+            transform: scale(1.1);
+        }
+
+        .gallery-item:nth-child(5n + 2) {
+            transform: scale(0.95);
+        }
+
+        .gallery-item:nth-child(7n + 3) {
+            transform: scale(1.05);
+        }
+
+        /* Responsive masonry */
+        @media (max-width: 1200px) {
+            .gallery-section {
+                column-count: 2;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .gallery-section {
+                column-count: 1;
+            }
         }
     </style>
 </head>
@@ -261,20 +334,14 @@
     <!-- Scroll Progress -->
     <div class="scroll-progress">
         <div class="scroll-shape">
-            <img src="images/Magnolia_grandiflora_-_flower_1.png" alt="Scroll indicator">
+            <img src="images/flower.GIF" alt="Scroll indicator">
         </div>
     </div>
-
 
     <!-- Little Me Character -->
     <a href="./index2.html">
         <img class="little-me" src="images/IMG_0465.GIF" alt="Little Me">
     </a>
-
-    <!-- Divider Line (Fixed Vertical) -->
-    <div class="divider-line">
-        <img src="images/line.GIF" alt="Divider">
-    </div>
 
     <!-- Project Menu -->
     <nav class="project-menu">
@@ -288,24 +355,41 @@
     <section class="posters-section" id="posters">
         <h2 class="section-title">Posters</h2>
         <div class="posters-container">
+            <p>To show you why <i>my brain is still developing,</i>
+            I decided to start by showing you a compilation 
+            of graphical works in the printing sfere.
+            Completly diverse and true to themselves, 
+            this experiments mean a lot as they grew beside me.</p>
             <div class="poster-stack">
                 <div class="poster-item" data-index="0">
-                    <img src="images/images copy/newposters/EXPERIMENTALGRAPHICS2.webp" alt="Poster 1">
+                    <img src="images/images copy/lisbonposters copy/lightmode.png" alt="Poster 0">
                 </div>
                 <div class="poster-item" data-index="1">
-                    <img src="images/images copy/newposters/mitcover.webp" alt="Poster 2">
+                    <img src="images/images copy/lisbonposters copy/posterlisbon2.png" alt="Poster 1">
                 </div>
                 <div class="poster-item" data-index="2">
-                    <img src="images/images copy/newposters/madalena_araras.png" alt="Poster 3">
+                    <img src="images/images copy/newposters/EXPERIMENTALGRAPHICS2.webp" alt="Poster 2">
                 </div>
                 <div class="poster-item" data-index="3">
-                    <img src="images/images copy/newposters/madalena_araras.png" alt="Poster 4">
+                    <img src="images/images copy/newposters/madalena_araras.png" alt="Poster 3">
                 </div>
                 <div class="poster-item" data-index="4">
-                    <img src="images/images copy/newposters/Encapsulate_culture@5x.webp" alt="Poster 5">
+                    <img src="images/images copy/newposters/madalena_never2small copy.png" alt="Poster 4">
                 </div>
                 <div class="poster-item" data-index="5">
-                    <img src="images/poster6.jpg" alt="Poster 6">
+                    <img src="images/images copy/newposters/DOWELOVE_01.png" alt="Poster 5">
+                </div>
+                <div class="poster-item" data-index="6">
+                    <img src="images/images copy/newposters/Encapsulate_culture@5x.webp" alt="Poster 6">
+                </div>
+                <div class="poster-item" data-index="7">
+                    <img src="images/images copy/lisbonposters copy/darkmode.png" alt="Poster 7">
+                </div>
+                <div class="poster-item" data-index="8">
+                    <img src="images/images copy/newposters/mitcover.webp" alt="Poster 8">
+                </div>
+                <div class="poster-item" data-index="9">
+                    <img src="images/images copy/newposters/brains.jpg" alt="Poster 9">
                 </div>
             </div>
         </div>
@@ -317,56 +401,86 @@
         <div class="project-title" id="currentProjectTitle"></div>
         <div class="projects-container">
             <div class="projects-scroll">
-                <div class="project-item" data-title="Body Bloom">
-                    <img src="images/project1.jpg" alt="Body Bloom">
+                <div class="project-item" data-title="Modis Academia">
+                    <img src="images/MODIS/logodelimatations.png" alt="Modis Academia">
                 </div>
-                <div class="project-item" data-title="Nura">
-                    <img src="images/project2.jpg" alt="Nura">
+                <div class="project-item" data-title="GDO">
+                    <img src="images/images copy/gare/App copy/mockups/Free iPhone 14 on Tripod Mockup copy.png" alt="GDO">
                 </div>
-                <div class="project-item" data-title="Time Collection">
-                    <img src="images/ezgif-60cb350fb4cf7e.gif" alt="Time Collection">
+                <div class="project-item" data-title="Olura Supplements">
+                    <img src="images/olura/mupi.jpg" alt="Olura Supplements">
                 </div>
-                <div class="project-item" data-title="Vintage Records">
-                    <img src="images/book.png" alt="Vintage Records">
+                <div class="project-item" data-title="Rapaz e o Mar">
+                    <img src="images/rapazeomar/tiktok1 copy.jpg" alt="Rapazeomar">
                 </div>
-                <div class="project-item" data-title="Ocean Wave">
-                    <img src="images/ezgif-6b00df97da6b47.gif" alt="Ocean Wave">
+                <div class="project-item" data-title="Albums & Singles">
+                    <img src="images/ezgif-6b00df97da6b47.gif" alt="Albums & Singles">
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ILLUSTRATION SECTION - Big Images Gallery -->
+    <!-- ILLUSTRATION SECTION - Masonry Gallery -->
     <section class="gallery-section" id="illustration">
-        <h2 class="section-title" style="grid-column: 1/-1;">Illustration</h2>
+        <h2 class="section-title">Illustration</h2>
         <div class="gallery-item">
-            <img src="images/illustration1.jpg" alt="Illustration 1">
+            <img src="images/New Folder With Items 2/WebP/Ativo 2 (1).webp" alt="Illustration 4">
         </div>
         <div class="gallery-item">
-            <img src="images/illustration2.jpg" alt="Illustration 2">
+            <img src="images/images copy/illustra/bluegirl copy.png" alt="Illustration 1">
         </div>
         <div class="gallery-item">
-            <img src="images/illustration3.jpg" alt="Illustration 3">
+            <img src="images/images copy/illustra/IMG_0142.JPG" alt="Illustration 4">
         </div>
         <div class="gallery-item">
-            <img src="images/illustration4.jpg" alt="Illustration 4">
+            <img src="images/images copy/illustra/praia.jpg" alt="Illustration 5">
         </div>
         <div class="gallery-item">
-            <img src="images/illustration5.jpg" alt="Illustration 5">
+            <img src="images/images copy/illustra/fashion2.png" alt="Illustration 3">
         </div>
         <div class="gallery-item">
-            <img src="images/illustration6.jpg" alt="Illustration 6">
+            <img src="images/images copy/illustra/oldcouple.jpg" alt="Illustration 6">
+        </div>
+        <div class="gallery-item">
+            <img src="images/images copy/illustra/sleeping.jpg" alt="Illustration 3">
+        </div>
+        <div class="gallery-item">
+            <img src="images/New Folder With Items 2/WebP/Ativo 4.webp" alt="Illustration 4">
+        </div>
+        <div class="gallery-item">
+            <img src="images/New Folder With Items 2/WebP/Ativo 3.webp" alt="Illustration 4">
+        </div>
+        <div class="gallery-item">
+            <img src="images/images copy/illustra/self_portrait copy.png" alt="Illustration 4">
+        </div>
+        <div class="gallery-item">
+            <img src="images/images copy/illustra/story1.JPG" alt="Illustration 5">
+        </div>
+        <div class="gallery-item">
+            <img src="images/images copy/illustra/story2.JPG" alt="Illustration 6">
+        </div>
+        <div class="gallery-item">
+            <img src="images/images copy/illustra/story3.JPG" alt="Illustration 5">
+        </div>
+        <div class="gallery-item">
+            <img src="images/images copy/illustra/story4.JPG" alt="Illustration 6">
+        </div>
+        <div class="gallery-item">
+            <img src="images/New Folder With Items 2/WebP/Ativo 1.webp" alt="Illustration 4">
+        </div>
+        <div class="gallery-item">
+            <img src="images/New Folder With Items 2/WebP/Ativo 6.webp" alt="Illustration 4">
         </div>
     </section>
 
-    <!-- 3D MODELING SECTION - Big Images Gallery -->
+    <!-- 3D MODELING SECTION - Masonry Gallery -->
     <section class="gallery-section" id="3d">
-        <h2 class="section-title" style="grid-column: 1/-1;">3d Modeling</h2>
+        <h2 class="section-title">3d Modeling</h2>
         <div class="gallery-item">
-            <img src="images/3d1.jpg" alt="3D Model 1">
+            <img src="images/images copy/WebP/001.webp" alt="3D Model 1">
         </div>
         <div class="gallery-item">
-            <img src="images/3d2.jpg" alt="3D Model 2">
+            <img src="images/images copy/" alt="3D Model 2">
         </div>
         <div class="gallery-item">
             <img src="images/3d3.jpg" alt="3D Model 3">
@@ -393,7 +507,6 @@
             const sectionRect = postersSection.getBoundingClientRect();
             const sectionHeight = postersSection.offsetHeight;
             
-            // More aggressive scroll progress calculation
             const rawProgress = -sectionRect.top / (sectionHeight - window.innerHeight);
             const scrollProgress = Math.max(0, Math.min(1, rawProgress));
             
@@ -408,6 +521,7 @@
             });
         }
         
+        // Complete projects horizontal scroll with title
         function updateProjectsScroll() {
             const projectsSection = document.querySelector('.projects-section');
             const projectsScroll = document.querySelector('.projects-scroll');
@@ -416,44 +530,57 @@
             const sectionRect = projectsSection.getBoundingClientRect();
             const sectionHeight = projectsSection.offsetHeight;
             
-            // Check if we're in the projects section viewport
             const inProjectsSection = sectionRect.top < window.innerHeight && sectionRect.bottom > 0;
             
             if (inProjectsSection) {
-                // More aggressive scroll progress calculation
                 const rawProgress = -sectionRect.top / (sectionHeight - window.innerHeight);
                 const scrollProgress = Math.max(0, Math.min(1, rawProgress));
                 
+                // Horizontal scroll - starts at 15% and ends at 95% for better first/last visibility
+                let adjustedProgress = 0;
+                if (scrollProgress < 0.15) {
+                    adjustedProgress = 0;
+                } else if (scrollProgress > 0.95) {
+                    adjustedProgress = 1;
+                } else {
+                    adjustedProgress = (scrollProgress - 0.15) / 0.8;
+                }
+                
                 const maxScroll = projectsScroll.scrollWidth - window.innerWidth;
-                const scrollAmount = scrollProgress * maxScroll;
+                const scrollAmount = adjustedProgress * maxScroll;
                 projectsScroll.style.transform = `translateX(-${scrollAmount}px)`;
                 
-                // Update title based on visible project with smoother transition
-                const currentIndex = Math.min(
-                    projectItems.length - 1, 
-                    Math.floor(scrollProgress * projectItems.length)
-                );
-                const currentProject = projectItems[currentIndex];
-                if (currentProject) {
-                    projectTitle.textContent = currentProject.dataset.title;
-                    projectTitle.classList.add('visible');
+                // Title timing - synced with scroll
+                if (scrollProgress > 0.1 && scrollProgress < 0.98) {
+                    const titleProgress = (scrollProgress - 0.1) / 0.88;
+                    const currentIndex = Math.min(
+                        projectItems.length - 1, 
+                        Math.floor(titleProgress * projectItems.length)
+                    );
+                    const currentProject = projectItems[currentIndex];
+                    if (currentProject) {
+                        projectTitle.textContent = currentProject.dataset.title;
+                        projectTitle.classList.add('visible');
+                    }
+                } else {
+                    projectTitle.classList.remove('visible');
                 }
             } else {
-                // Hide title when not in projects section
                 projectTitle.classList.remove('visible');
             }
         }
 
+        // Main scroll handler
         window.addEventListener('scroll', () => {
             const scrollPos = window.scrollY;
 
-            // Update poster stack
+            // Update poster stacking
             updatePosterStack();
-
-            // Update projects scroll
+            
+            // Update projects horizontal scroll
             updateProjectsScroll();
 
-            // Rotate scroll shape
+            // Rotate scroll indicator
             const docHeight = document.documentElement.scrollHeight - window.innerHeight;
             const scrollPercent = scrollPos / docHeight;
             const rotation = scrollPercent * 360;
@@ -474,13 +601,19 @@
             });
         });
 
-        // Menu links smooth scroll
+        // Smooth scroll for menu links
         document.querySelectorAll('.menu-link').forEach(link => {
             link.addEventListener('click', (e) => {
                 e.preventDefault();
                 const target = link.getAttribute('href');
                 document.querySelector(target).scrollIntoView({ behavior: 'smooth' });
             });
+        });
+
+        // Initialize on load
+        window.addEventListener('load', () => {
+            updatePosterStack();
+            updateProjectsScroll();
         });
     </script>
 </body>

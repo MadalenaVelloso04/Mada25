@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
     <title>Madalena Velloso - Portfolio</title>
     <style>
         * {
@@ -14,8 +13,8 @@
 
         body {
             font-family: 'Courier New', monospace;
-            background: #f5f5f5;
-            background-image: url('images/Texture\ 1\ Large.jpeg');
+            background: #d5d4c8;
+            background-image: url('images/background.jpg');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -211,7 +210,7 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            transition: all 1s cubic-bezier(0.4, 0, 0.2, 1) ;
+            transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
             z-index: 500;
             pointer-events: none;
             opacity: 0;
@@ -257,11 +256,110 @@
             margin-bottom: 100px;
         }
 
+        /* Info Section - Cargo Style */
+        .info-section {
+            padding: 0px 40px 100px;
+            opacity: 0;
+            transition: opacity 1s ease;
+            margin-top: -80vh;
+        }
+
+        .info-section.visible {
+            opacity: 1;
+        }
+
+        .info-container {
+            max-width: 800px;
+            margin: 0 auto 80px;
+            display: grid;
+            grid-template-columns: 180px 1fr;
+            gap: 80px;
+            border-bottom: 1px solid rgba(51, 51, 51, 0.3);
+            padding-bottom: 80px;
+        }
+
+        .info-container:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+
+        .info-column {
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        .info-heading {
+            font-size: 0.9rem;
+            font-weight: normal;
+            font-style: italic;
+            color: #333;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .info-content {
+            display: grid;
+            gap: 15px;
+        }
+
+        .info-content p {
+            margin: 0;
+            color: #333;
+        }
+
+        .info-item {
+            margin-bottom: 35px;
+            padding-bottom: 35px;
+            border-bottom: 1px solid rgba(51, 51, 51, 0.1);
+        }
+
+        .info-item:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .info-item p strong {
+            font-weight: normal;
+            font-style: italic;
+        }
+
+        .info-link {
+            color: #333;
+            text-decoration: underline;
+            transition: color 0.3s ease;
+        }
+
+        .info-link:hover {
+            color: #999;
+        }
+
+        .info-main {
+            max-width: 800px;
+        }
+
+        /* Profile Picture */
+        .profile-picture {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid rgba(51, 51, 51, 0.2);
+            margin-left: auto;
+        }
+
+        .profile-with-image {
+            display: grid;
+            grid-template-columns: 1fr 200px;
+            gap: 60px;
+            align-items: start;
+        }
+
         /* Work Items */
         .work-container {
             padding: 100px 20px;
             position: relative;
-            max-width: 900px;
+            max-width: 600px;
             margin: 0 auto;
             opacity: 0;
             transition: opacity 1s ease;
@@ -275,7 +373,7 @@
             position: sticky;
             top: 10vh;
             width: 100%;
-            max-width: 900px;
+            max-width: 500px;
             margin: 0 auto 100vh;
             overflow: hidden;
             cursor: pointer;
@@ -347,6 +445,36 @@
         .work-item:hover .work-title {
             opacity: 1;
         }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .info-container {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .profile-with-image {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .profile-picture {
+                margin-left: 0;
+                margin-top: 20px;
+            }
+
+            .side-text {
+                font-size: 1rem;
+            }
+
+            .hero-text {
+                font-size: 2rem;
+            }
+
+            .about-text {
+                font-size: 1.5rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -377,7 +505,7 @@
     <!-- Scroll Progress -->
     <div class="scroll-progress">
         <div class="scroll-shape">
-            <img src="images/Magnolia_grandiflora_-_flower_1.png" alt="Scroll indicator">
+            <img src="images/flower.GIF" alt="Scroll indicator">
         </div>
     </div>
 
@@ -440,10 +568,113 @@
         </div>
     </div>
 
+    <!-- Info Section - Cargo Style -->
+    <section class="info-section" id="about">
+        <div class="info-container">
+            <div class="info-column">
+                <h3 class="info-heading">Profile</h3>
+            </div>
+
+            <div class="info-column info-main profile-with-image">
+                <div class="info-content">
+                    <p>Madalena Velloso</p>
+                    <p>madalenavelloso04@gmail.com</p>
+                    <p><a href="#" class="info-link">Instagram</a></p>
+                    <p><a href="#" class="info-link">Behance</a></p>
+                </div>
+                <img src="images/me.JPEG" alt="Madalena Velloso" class="profile-picture">
+            </div>
+        </div>
+
+        <div class="info-container">
+            <div class="info-column">
+                <h3 class="info-heading">About</h3>
+            </div>
+
+            <div class="info-column info-main">
+                <div class="info-content">
+                    <p>I'm a multi-disciplinary designer passionate about creating meaningful visual experiences. Based in Lisbon, I specialize in visual identity, editorial design, and digital experiences.</p>
+                    
+                    <p>My work explores the intersection of traditional craft and contemporary aesthetics, always seeking to create designs that resonate emotionally while serving their purpose functionally.</p>
+                    
+                    <p>I believe in the power of simplicity and the importance of detail. Every project is an opportunity to tell a story, and I approach each with curiosity and dedication to craft something unique and meaningful.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="info-container">
+            <div class="info-column">
+                <h3 class="info-heading">Education</h3>
+            </div>
+
+            <div class="info-column info-main">
+                <div class="info-content">
+                    <div class="info-item">
+                        <p><strong>IADE - Creative University</strong></p>
+                        <p>Bachelor in Global Design</p>
+                        <p>2022 - 2025</p>
+                    </div>
+
+                      <div class="info-item">
+                        <p><strong>NABA - Nuova Academia di Belle Arti</strong></p>
+                        <p>Erasmus Semester</p>
+                        <p>2025</p>
+                    </div>
+                    
+                    <div class="info-item">
+                        <p><strong>Design Fundamentals</strong></p>
+                        <p>Art Direction & Graphic Design</p>
+                        <p>(3 years)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="info-container">
+            <div class="info-column">
+                <h3 class="info-heading">Experience</h3>
+            </div>
+
+            <div class="info-column info-main">
+                <div class="info-content">
+                    <div class="info-item">
+                        <p><strong>Freelance Designer</strong></p>
+                        <p>Brand identity, illustration, web design, and everything in between</p>
+                        <p>2023 - Present</p>
+                    </div>
+                    <div class="info-item">
+                        <p><strong>Design Studio Intern</strong></p>
+                        <p>Brand Design</p>
+                        <p>Lisbon, Portugal</p>
+                        <p>2022</p>
+                    </div>
+                    <div class="info-item">
+                        <p><strong>Graphic Design Aprentice</strong></p>
+                        <p>Print lab</p>
+                        <p>2023</p>
+                    </div> 
+                </div>
+            </div>
+        </div>
+
+        <div class="info-container">
+            <div class="info-column">
+                <h3 class="info-heading">Skills</h3>
+            </div>
+
+            <div class="info-column info-main">
+                <div class="info-content">
+                    <p>Brand Identity, Editorial Design, Typography, Web Design, 3D Modeling, Illustration, Print Design, Motion Graphics</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <script>
         const heroText = document.querySelector('.hero-text');
         const littleMe = document.querySelector('.little-me');
         const aboutSection = document.querySelector('.about');
+        const infoSection = document.querySelector('.info-section');
         const workContainer = document.querySelector('.work-container');
         const sideTexts = document.querySelectorAll('.side-text');
         const hamburger = document.querySelector('.hamburger');
@@ -505,6 +736,7 @@
                 scrollProgress.classList.remove('visible');
                 littleMe.classList.remove('visible');
                 littleMe.classList.remove('corner');
+                infoSection.classList.remove('visible');
                 workContainer.classList.remove('visible');
             }
 
@@ -512,6 +744,12 @@
                 littleMe.classList.add('visible');
             } else {
                 littleMe.classList.remove('visible');
+            }
+
+            // Show info section
+            const infoOffset = infoSection.getBoundingClientRect().top;
+            if (infoOffset < window.innerHeight * 0.8) {
+                infoSection.classList.add('visible');
             }
 
             const workOffset = workContainer.getBoundingClientRect().top;
@@ -535,7 +773,12 @@
 
         document.querySelectorAll('.menu a').forEach(link => {
             link.addEventListener('click', (e) => {
-                e.preventDefault();
+                // Only prevent default for anchor links (starting with #)
+                if (link.getAttribute('href').startsWith('#')) {
+                    e.preventDefault();
+                    const target = link.getAttribute('href');
+                    document.querySelector(target).scrollIntoView({ behavior: 'smooth' });
+                }
                 toggleMenu();
             });
         });
