@@ -1,1334 +1,932 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-PT">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio — Art Direction</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600&family=JetBrains+Mono:wght@300;400&display=swap');
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --primary-black: #0a0a0a;
-            --secondary-black: #1a1a1a;
-            --accent-white: #f8f8f8;
-            --subtle-gray: #888;
-            --light-gray: #e5e5e5;
-            --accent-blue: #5e978c;
-            --glass-bg: rgba(248, 248, 248, 0.1);
-            --glass-border: rgba(255, 255, 255, 0.2);
-        }
-
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: var(--accent-white);
-            color: var(--primary-black);
-            line-height: 1.4;
-            overflow-x: hidden;
-            font-weight: 300;
-            padding-right: 120px;
-        }
-
-        /* VERTICAL NAVIGATION */
-        .nav {
-            position: fixed;
-            top: 0;
-            right: 0;
-            width: 80px;
-            height: 100vh;
-            z-index: 1000;
-            background: linear-gradient(135deg, 
-                rgba(248, 248, 248, 0.95) 0%, 
-                rgba(255, 255, 255, 0.9) 50%,
-                rgba(248, 248, 248, 0.95) 100%);
-            backdrop-filter: blur(20px);
-            border-left: 1px solid var(--glass-border);
-            box-shadow: 
-                0 8px 32px rgba(0, 0, 0, 0.1),
-                inset 0 1px 0 rgba(255, 255, 255, 0.4);
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            padding: 40px 0;
-        }
-
-        .nav::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(180deg, 
-                rgba(255, 255, 255, 0.1) 0%,
-                transparent 50%,
-                rgba(0, 0, 0, 0.05) 100%);
-            pointer-events: none;
-        }
-
-        .logo {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 8px;
-            font-weight: 400;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            writing-mode: vertical-lr;
-            text-orientation: mixed;
-            padding: 0 20px;
-            color: var(--primary-black);
-            position: relative;
-            z-index: 2;
-        }
-
-        .nav-links {
-            display: flex;
-            flex-direction: column;
-            gap: 30px;
-            font-size: 10px;
-            font-weight: 400;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            padding: 0 20px;
-            position: relative;
-            z-index: 2;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: var(--subtle-gray);
-            transition: all 0.3s ease;
-            position: relative;
-            writing-mode: vertical-lr;
-            text-orientation: mixed;
-            padding: 15px 8px;
-            border-radius: 8px;
-            background: transparent;
-        }
-
-        .nav-links a:hover {
-            color: var(--primary-black);
-            background: rgba(255, 255, 255, 0.3);
-            box-shadow: 
-                0 4px 16px rgba(0, 0, 0, 0.1),
-                inset 0 1px 0 rgba(255, 255, 255, 0.5);
-            backdrop-filter: blur(10px);
-        }
-
-        .nav-links a.active {
-            color: var(--primary-black);
-            background: linear-gradient(135deg, 
-                rgba(255, 255, 255, 0.4) 0%,
-                rgba(255, 255, 255, 0.2) 100%);
-            box-shadow: 
-                0 4px 20px rgba(0, 0, 0, 0.15),
-                inset 0 1px 0 rgba(255, 255, 255, 0.6),
-                inset 0 -1px 0 rgba(0, 0, 0, 0.1);
-            backdrop-filter: blur(15px);
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            right: -3px;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 0;
-            height: 20px;
-            background: var(--accent-blue);
-            transition: width 0.3s ease;
-            border-radius: 2px;
-        }
-
-        .nav-links a:hover::after,
-        .nav-links a.active::after {
-            width: 3px;
-        }
-
-        .nav-footer {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 7px;
-            color: var(--subtle-gray);
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-            writing-mode: vertical-lr;
-            text-orientation: mixed;
-            padding: 0 20px;
-            position: relative;
-            z-index: 2;
-        }
-
-        /* MAIN CONTENT ADJUSTMENTS */
-        .hero {
-            height: 100vh;
-            position: relative;
-            overflow: hidden;
-            margin-right: -120px;
-            padding-right: 120px;
-        }
-
-        .hero-image {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            filter: grayscale(20%) brightness(0.8);
-        }
-
-        .hero-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.4) 100%);
-            mix-blend-mode: multiply;
-        }
-
-        .hero-content {
-            position: absolute;
-            bottom: 80px;
-            left: 30px;
-            right: 150px;
-            max-width: 1480px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 1fr 300px;
-            gap: 60px;
-            align-items: end;
-        }
-
-        .hero-title {
-            font-size: clamp(60px, 8vw, 120px);
-            font-weight: 200;
-            line-height: 0.9;
-            color: white;
-            text-shadow: 0 4px 20px rgba(0,0,0,0.3);
-            letter-spacing: -0.02em;
-        }
-
-        .hero-meta {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 10px;
-            color: rgba(255,255,255,0.8);
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-            line-height: 1.8;
-        }
-
-        .hero-meta span {
-            display: block;
-            margin-bottom: 5px;
-        }
-
-        /* PROJECT GRID */
-        .projects {
-            padding: 100px 0 100px 30px;
-            max-width: 1480px;
-            margin: 0 auto;
-        }
-
-        .section-header {
-            display: grid;
-            grid-template-columns: 1fr 200px;
-            gap: 60px;
-            margin-bottom: 80px;
-            align-items: end;
-        }
-
-        .section-title {
-            font-size: 48px;
-            font-weight: 300;
-            letter-spacing: -0.01em;
-        }
-
-        .section-meta {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 10px;
-            color: var(--subtle-gray);
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-            line-height: 1.8;
-        }
-
-        .project {
-            margin-bottom: 120px;
-            position: relative;
-        }
-
-        .project-main {
-            display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 60px;
-            margin-bottom: 40px;
-        }
-
-        .project-image-container {
-            position: relative;
-            aspect-ratio: 4/3;
-            overflow: hidden;
-            background: var(--primary-black);
-            border-radius: 8px;
-        }
-
-        .project-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.6s ease, filter 0.6s ease;
-            filter: grayscale(10%);
-        }
-
-        .project:hover .project-image {
-            transform: scale(1.03);
-            filter: grayscale(0%);
-        }
-
-        .project-overlay {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            z-index: 2;
-        }
-
-        .project-number {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 10px;
-            color: rgba(255,255,255,0.9);
-            background: linear-gradient(135deg, 
-                rgba(0, 0, 0, 0.8) 0%,
-                rgba(0, 0, 0, 0.6) 100%);
-            padding: 10px 15px;
-            border-radius: 20px;
-            backdrop-filter: blur(15px);
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 
-                0 4px 16px rgba(0, 0, 0, 0.3),
-                inset 0 1px 0 rgba(255, 255, 255, 0.1);
-        }
-
-        .project-info {
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            padding: 20px 0;
-        }
-
-        .project-header {
-            margin-bottom: 40px;
-        }
-
-        .project-title {
-            font-size: 32px;
-            font-weight: 400;
-            margin-bottom: 15px;
-            letter-spacing: -0.01em;
-        }
-
-        .project-subtitle {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 10px;
-            color: var(--subtle-gray);
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-            margin-bottom: 25px;
-        }
-
-        .project-description {
-            font-size: 13px;
-            line-height: 1.6;
-            color: var(--subtle-gray);
-            margin-bottom: 30px;
-        }
-
-        .project-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
-
-       .btn {
-            font-family: 'JetBrains Mono', monospace;
-            display: inline-block;
-            margin-top: 30px;
-  padding: 5px 20px;
-  background-color: #f8f8f8;
-  border-radius: 20px;
-  text-decoration: none;
-  color: inherit;
-  border: 1px solid var(--subtle-gray);
-  transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
-}
-
-.btn:hover {
-  background-color: #ebeaea;
-  transform: scale(1.05) translateY(-1px);
-  border-radius: 30px;
-  box-shadow: 0 8px 5px rgba(0, 0, 0, 0.041);
-}
-
-
-        .tag {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 9px;
-            padding: 8px 12px;
-            background: linear-gradient(135deg, 
-                rgba(255, 255, 255, 0.1) 0%,
-                rgba(255, 255, 255, 0.05) 100%);
-            border: 1px solid rgba(0, 0, 0, 0.1);
-            border-radius: 12px;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: var(--primary-black);
-            backdrop-filter: blur(5px);
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-        }
-
-        .project-stats {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 9px;
-            color: var(--subtle-gray);
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-            line-height: 2;
-        }
-
-        .project-stats span {
-            display: block;
-        }
-
-       .more-projects {
-    position: relative;
-    background: var(--accent-white);
-    color: var(--primary-black);
-    margin-right: -120px;
-    padding-right: 120px;
-    overflow: hidden;
-}
-
-.carousel-container {
-    position: sticky;
-    top: 0;
-    height: 100vh;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    overflow: hidden;
-}
-
-.carousel-wrapper {
-    width: 100%;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    position: relative;
-}
-
-.carousel-title {
-    font-size: 48px;
-    font-weight: 300;
-    letter-spacing: -0.01em;
-    margin-bottom: 60px;
-    color: var(--secondary-black);
-    position: absolute;
-    top: 80px;
-    left: 30px;
-    z-index: 10;
-}
-
-.carousel-track {
-    display: flex;
-    gap: 40px;
-    align-items: center;
-    will-change: transform;
-    height: auto;
-    width: max-content;
-    padding: 0 30px;
-    transition: none;
-}
-
-.carousel-item {
-    flex: 0 0 auto;
-    width: 500px;
-    position: relative;
-}
-
-.carousel-image-container {
-    position: relative;
-    aspect-ratio: 4/3;
-    overflow: hidden;
-    background: var(--secondary-black);
-    cursor: pointer;
-    transition: transform 0.4s ease;
-    border-radius: 12px;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-}
-
-.carousel-image-container:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15);
-}
-
-.carousel-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.6s ease, filter 0.6s ease;
-    filter: grayscale(20%);
-}
-
-.carousel-image-container:hover .carousel-image {
-    transform: scale(1.05);
-    filter: grayscale(0%);
-}
-
-.carousel-overlay {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: linear-gradient(
-        transparent 0%,
-        rgba(255, 255, 255, 0.3) 30%,
-        rgba(255, 255, 255, 0.7) 70%,
-        rgba(255, 255, 255, 0.9) 100%
-    );
-    padding: 40px 30px 30px;
-    transform: translateY(10px);
-    opacity: 0;
-    transition: all 0.4s ease;
-}
-
-.carousel-image-container:hover .carousel-overlay {
-    transform: translateY(0);
-    opacity: 1;
-}
-
-.carousel-project-title {
-    font-size: 20px;
-    font-weight: 400;
-    color: var(--primary-black);
-    margin-bottom: 8px;
-    letter-spacing: -0.01em;
-}
-
-.carousel-project-type {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 10px;
-    color: var(--subtle-gray);
-    text-transform: uppercase;
-    letter-spacing: 0.15em;
-}
-
-/* Carousel progress indicator */
-.carousel-progress {
-    position: fixed;
-    bottom: 40px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 200px;
-    height: 2px;
-    background: rgba(0, 0, 0, 0.1);
-    border-radius: 1px;
-    z-index: 100;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
-
-.carousel-progress.active {
-    opacity: 1;
-}
-
-.carousel-progress-bar {
-    height: 100%;
-    background: var(--accent-blue);
-    border-radius: 1px;
-    transition: width 0.1s ease-out;
-    width: 0%;
-}
-
-
-
-        /* FLOATING ELEMENTS */
-        .floating-date {
-            position: absolute;
-            left: 0;
-            top: 50%;
-            transform: translateY(-50%) rotate(-90deg);
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 10px;
-            color: var(--subtle-gray);
-            text-transform: uppercase;
-            letter-spacing: 0.2em;
-            transform-origin: center;
-        }
-
-        /* ABOUT SECTION */
-        .about {
-            background: var(--primary-black);
-            color: var(--accent-white);
-            padding: 120px 0 120px 30px;
-            margin-right: -120px;
-            padding-right: 120px;
-        }
-
-        .about-content {
-            max-width: 1480px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 80px;
-            padding-right: 30px;
-        }
-
-        .about-left {
-            display: flex;
-            flex-direction: column;
-            gap: 40px;
-        }
-
-        .about-title {
-            font-size: 48px;
-            font-weight: 300;
-            letter-spacing: -0.01em;
-        }
-
-        .about-text {
-            font-size: 14px;
-            line-height: 1.7;
-            color: rgba(255,255,255,0.8);
-        }
-
-        .about-right {
-            position: relative;
-            aspect-ratio: 3/4;
-            overflow: hidden;
-            border-radius: 8px;
-        }
-
-        .about-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            filter: grayscale(30%);
-        }
-
-        /* CONTACT SECTION */
-        .contact {
-            padding: 120px 0 120px 30px;
-            text-align: center;
-            height: 100vh;
-        }
-
-        .contact-content {
-            justify-content: center;
-            align-items: center;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .contact-title {
-            font-size: 48px;
-            font-weight: 300;
-            margin-bottom: 20px;
-            letter-spacing: -0.01em;
-        }
-
-        .contact-subtitle {
-            font-size: 14px;
-            color: var(--subtle-gray);
-            margin-bottom: 60px;
-        }
-
-        .contact-info {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 40px;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 11px;
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-        }
-
-        .contact-item {
-            padding: 30px 20px;
-            background: linear-gradient(135deg, 
-                rgba(255, 255, 255, 0.05) 0%,
-                rgba(255, 255, 255, 0.02) 100%);
-            border: 1px solid rgba(0, 0, 0, 0.1);
-            border-radius: 12px;
-            backdrop-filter: blur(5px);
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
-        }
-
-        .contact-item h3 {
-            color: var(--subtle-gray);
-            margin-bottom: 10px;
-            font-weight: 400;
-        }
-
-        .contact-item p {
-            color: var(--primary-black);
-            font-weight: 400;
-        }
-
-        /* CURSOR */
-        .cursor {
-            position: fixed;
-            width: 8px;
-            height: 8px;
-            background: var(--accent-blue);
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 9999;
-            transition: transform 0.1s ease, opacity 0.3s ease;
-            mix-blend-mode: difference;
-        }
-
-        .cursor.hover {
-            transform: scale(4);
-            opacity: 0.8;
-        }
-
-        /* SCROLL INDICATOR */
-        .scroll-indicator {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: calc(100% - 120px);
-            height: 2px;
-            background: rgba(0,0,0,0.1);
-            z-index: 1001;
-        }
-
-        .scroll-progress {
-            height: 100%;
-            background: var(--accent-blue);
-            width: 0%;
-            transition: width 0.1s ease;
-        }
-
-        /* RESPONSIVE */
-        @media (max-width: 1024px) {
-            body {
-                padding-right: 80px;
-            }
-
-            .nav {
-                width: 80px;
-            }
-
-            .hero {
-                margin-right: -80px;
-                padding-right: 80px;
-            }
-
-            .hero-content {
-                right: 110px;
-                grid-template-columns: 1fr;
-                gap: 40px;
-            }
-
-            .about {
-                margin-right: -80px;
-                padding-right: 80px;
-            }
-
-            .scroll-indicator {
-                width: calc(100% - 80px);
-            }
-
-            .project-main {
-                grid-template-columns: 1fr;
-                gap: 40px;
-            }
-
-            .section-header {
-                grid-template-columns: 1fr;
-                gap: 20px;
-            }
-
-            .about-content {
-                grid-template-columns: 1fr;
-                gap: 60px;
-            }
-
-            .floating-date {
-                display: none;
-            }
-        }
-
-        @media (max-width: 768px) {
-            body {
-                padding-right: 0;
-            }
-
-            .nav {
-                width: 100%;
-                height: auto;
-                position: relative;
-                flex-direction: row;
-                padding: 20px 30px;
-                justify-content: space-between;
-                align-items: center;
-                border-left: none;
-                border-bottom: 1px solid var(--glass-border);
-            }
-
-            .logo {
-                writing-mode: horizontal-tb;
-                text-orientation: initial;
-                font-size: 10px;
-            }
-
-            .nav-links {
-                flex-direction: row;
-                gap: 20px;
-                padding: 0;
-            }
-
-            .nav-links a {
-                writing-mode: horizontal-tb;
-                text-orientation: initial;
-                padding: 8px 12px;
-            }
-
-            .nav-links a::after {
-                right: 0;
-                left: 0;
-                top: auto;
-                bottom: -3px;
-                width: 0;
-                height: 1px;
-                transform: none;
-            }
-
-            .nav-links a:hover::after,
-            .nav-links a.active::after {
-                width: 100%;
-                height: 1px;
-            }
-
-            .nav-footer {
-                display: none;
-            }
-
-            .hero {
-                margin-right: 0;
-                padding-right: 0;
-            }
-
-            .hero-content {
-                left: 20px;
-                right: 20px;
-                bottom: 60px;
-            }
-
-            .hero-title {
-                font-size: 48px;
-            }
-
-            .projects {
-                padding: 80px 20px;
-            }
-
-            .about {
-                margin-right: 0;
-                padding-left: 20px;
-                padding-right: 20px;
-            }
-
-            .contact {
-                padding: 120px 20px;
-            }
-
-            .scroll-indicator {
-                width: 100%;
-            }
-
-            .section-title,
-            .about-title,
-            .contact-title {
-                font-size: 32px;
-            }
-
-            .project-title {
-                font-size: 24px;
-            }
-
-            .contact-info {
-                grid-template-columns: 1fr;
-                gap: 30px;
-            }
-        }
-
-        /* ANIMATIONS */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.8s ease, transform 0.8s ease;
-        }
-
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .project {
-            opacity: 0;
-            transform: translateY(40px);
-            transition: opacity 0.8s ease, transform 0.8s ease;
-        }
-
-        .project.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    </style>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Madalena Velloso — Portfolio</title>
+<meta name="description" content="Visual storytelling, art direction & digital design portfolio based in Lisbon">
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Work+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --bg:#f5f1e8;
+    --ink:#2a2520;
+    --accent:#8b7355;
+    --muted:#7a6f67;
+    --white:#fffdfb;
+    --card-shadow: 0 20px 40px rgba(0,0,0,0.08);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  html,body{height:100%}
+  body{
+    font-family:'Work Sans',system-ui,Arial,Helvetica,sans-serif;
+    background:var(--bg);color:var(--ink);
+    -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
+    overflow-x:hidden;
+  }
+  a{color:inherit;text-decoration:none}
+  img{display:block;max-width:100%;height:auto}
+
+  /* -------- FLOATING SHAPES -------- */
+  .floating-shapes{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+  .shape{position:absolute;opacity:0.03;transition:transform 0.3s ease-out}
+  .shape.circle{border-radius:50%;background:var(--accent)}
+  .shape.square{background:var(--ink);transform:rotate(45deg)}
+  .shape.line{height:2px;background:var(--accent)}
+
+  /* -------- NAV -------- */
+  nav.top{
+    position:fixed;right:32px;top:-80px;z-index:1400;
+    display:flex;gap:22px;align-items:center;font-family:'Space Mono',monospace;
+    letter-spacing:0.08em;text-transform:uppercase;
+    background:rgba(255,253,251,0.85);
+    backdrop-filter: blur(12px);
+    padding:12px 18px;border-radius:10px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+    transition:top .45s ease, background .3s ease;
+  }
+  nav.top.show{top:20px;}
+  nav.top a{
+    font-size:12px;
+    padding:6px 8px;
+    position:relative;
+    opacity:0.9;
+    transition:color .3s, transform .3s;
+  }
+  nav.top a:focus{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px}
+  nav.top a::after{
+    content:"";
+    position:absolute;
+    left:0;bottom:-2px;
+    width:100%;height:2px;
+    background:var(--accent);
+    transform:scaleX(0);
+    transform-origin:right;
+    transition:transform .35s ease;
+  }
+  nav.top a:hover{transform:scale(1.05);}
+  nav.top a:hover::after{transform:scaleX(1);transform-origin:left;}
+
+  /* Mobile toggle */
+  .nav-toggle{display:none;flex-direction:column;gap:5px;cursor:pointer}
+  .nav-toggle span{width:22px;height:2px;background:var(--ink);transition:.3s}
+  .nav-open nav.top{flex-direction:column;gap:12px;right:12px}
+  .nav-open .nav-toggle span:nth-child(1){transform:rotate(45deg) translate(4px,5px)}
+  .nav-open .nav-toggle span:nth-child(2){opacity:0}
+  .nav-open .nav-toggle span:nth-child(3){transform:rotate(-45deg) translate(4px,-5px)}
+
+  /* -------- HERO -------- */
+  .hero{position:relative;height:100vh;display:flex;align-items:flex-end;overflow:hidden}
+  .hero video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;filter:brightness(0.7)}
+  .hero .overlay{position:absolute;inset:0;background:linear-gradient(180deg,transparent 10%, rgba(42,37,32,0.45) 100%);z-index:1}
+  .hero-content{position:relative;z-index:2;padding:5vh 6vw 9vh 6vw;color:var(--white);display:flex;justify-content:space-between;align-items:flex-end;width:100%}
+  .hero h1{
+    font-family:'Space Mono',monospace;font-weight:700;
+    font-size:clamp(48px,9vw,110px);line-height:0.95;
+    letter-spacing:-0.02em;margin-bottom:8px;
+    transform:translateY(0);
+    transition:transform .4s ease-out;
+  }
+  .hero h1 span{display:inline-block;opacity:0;animation:fadeInUp 0.8s ease forwards}
+  .hero h1 span:nth-child(1){animation-delay:0.2s}
+  .hero h1 span:nth-child(2){animation-delay:0.4s}
+  .hero .meta{font-family:'Space Mono',monospace;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;opacity:0;animation:fadeIn 1s ease 0.8s forwards}
+  .hero-location{opacity:0;animation:fadeIn 1s ease 1s forwards}
+  @keyframes fadeInUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+  @keyframes fadeIn{from{opacity:0}to{opacity:0.95}}
+  
+  .scroll-hint{position:absolute;left:50%;transform:translateX(-50%);bottom:28px;color:var(--white);font-family:'Space Mono',monospace;font-size:10px;opacity:0.8;animation:float 2.2s ease-in-out infinite;z-index:2}
+  @keyframes float{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,10px)}}
+
+  /* -------- PARALLAX LAYERS -------- */
+  .parallax-section{position:relative;overflow:hidden}
+  .parallax-bg{position:absolute;inset:0;background-size:cover;background-position:center;will-change:transform}
+  .parallax-content{position:relative;z-index:2}
+
+  /* -------- FADE-IN -------- */
+  .fade-section{opacity:0;transform:translateY(40px);transition:opacity 0.8s ease,transform 0.8s ease;}
+  .fade-section.visible{opacity:1;transform:translateY(0);}
+  
+  .slide-in-left{opacity:0;transform:translateX(-60px);transition:opacity 0.9s ease,transform 0.9s ease}
+  .slide-in-left.visible{opacity:1;transform:translateX(0)}
+  
+  .slide-in-right{opacity:0;transform:translateX(60px);transition:opacity 0.9s ease,transform 0.9s ease}
+  .slide-in-right.visible{opacity:1;transform:translateX(0)}
+
+  /* -------- CURSOR EFFECTS -------- */
+  .cursor-glow{
+    position:fixed;
+    top:0;left:0;
+    width:20px;height:20px;
+    border-radius:50%;
+    background:radial-gradient(circle,var(--accent),transparent 70%);
+    pointer-events:none;
+    transform:translate(-50%,-50%);
+    mix-blend-mode:overlay;
+    opacity:0.6;
+    z-index:2000;
+    transition:transform .1s;
+  }
+  
+  .cursor-trail{
+    position:fixed;
+    width:6px;height:6px;
+    border-radius:50%;
+    background:var(--accent);
+    pointer-events:none;
+    opacity:0;
+    z-index:1999;
+    transition:opacity 0.3s;
+  }
+
+  /* -------- STATS SECTION -------- */
+  .stats-banner{
+    background:linear-gradient(135deg, var(--ink) 0%, #3d3530 100%);
+    color:var(--white);
+    padding:8vh 6vw;
+    position:relative;
+    overflow:hidden;
+  }
+  .stats-banner::before{
+    content:"";
+    position:absolute;
+    top:-50%;left:-50%;
+    width:200%;height:200%;
+    background:radial-gradient(circle, rgba(139,115,85,0.1) 0%, transparent 70%);
+    animation:rotate 20s linear infinite;
+  }
+  @keyframes rotate{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+  
+  .stats-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+    gap:48px;
+    max-width:1200px;
+    margin:0 auto;
+    position:relative;
+    z-index:2;
+  }
+  .stat-item{text-align:center}
+  .stat-number{
+    font-family:'Space Mono',monospace;
+    font-size:clamp(42px,5vw,72px);
+    font-weight:700;
+    color:var(--accent);
+    margin-bottom:8px;
+  }
+  .stat-label{
+    font-size:14px;
+    text-transform:uppercase;
+    letter-spacing:0.1em;
+    opacity:0.9;
+  }
+
+  /* -------- PROJECTS -------- */
+  .projects{padding:12vh 0;background:var(--bg);position:relative}
+  .projects .title{
+    text-align:center;
+    font-family:'Space Mono',monospace;
+    font-weight:700;
+    font-size:clamp(36px,5vw,64px);
+    margin-bottom:2vh;
+    color:var(--ink);
+    position:relative;
+  }
+  .projects .subtitle{
+    text-align:center;
+    color:var(--accent);
+    font-size:16px;
+    margin-bottom:6vh;
+    font-weight:300;
+  }
+  
+  .folders{max-width:1200px;margin:0 auto;padding:0 6vw}
+  .folder{
+    border-bottom:1px solid rgba(42,37,32,0.06);
+    cursor:pointer;
+    position:relative;
+    transform:translateY(0);
+    transition:transform 0.3s ease;
+  }
+  .folder:hover{transform:translateY(-2px)}
+  .folder-header{
+    display:grid;
+    grid-template-columns:80px 1fr 180px 56px;
+    gap:28px;
+    padding:42px 18px;
+    align-items:center;
+    transition:padding .32s ease,background .32s ease;
+  }
+  .folder-header:focus{
+    outline:2px solid var(--accent);
+    outline-offset:-2px;
+    background:rgba(139,115,85,0.035);
+  }
+  .folder:hover .folder-header{background:rgba(139,115,85,0.035);padding-left:64px}
+  .num{font-family:'Space Mono',monospace;color:var(--accent);font-weight:700;letter-spacing:0.12em;font-size:13px}
+  .title-small{font-family:'Space Mono',monospace;font-weight:700;font-size:clamp(20px,2.6vw,34px)}
+  .type{font-family:'Space Mono',monospace;color:var(--accent);font-size:12px;text-transform:uppercase;letter-spacing:0.08em}
+  .chev{font-family:'Space Mono',monospace;font-size:20px;transition:transform 300ms ease}
+  .folder.active .chev{transform:rotate(90deg)}
+  .folder-content{
+    max-height:0;
+    overflow:hidden;
+    transition:max-height .52s cubic-bezier(.2,.9,.2,1);
+  }
+  .folder.active .folder-content{max-height:1400px}
+  .folder-inner{
+    display:grid;
+    grid-template-columns:1.4fr 1fr;
+    gap:36px;
+    padding:0 16px 56px 160px;
+    align-items:start;
+  }
+  .preview{
+    aspect-ratio:4/3;
+    background:#ddd;
+    overflow:hidden;
+    border-radius:4px;
+    display:block;
+    box-shadow:var(--card-shadow);
+    position:relative;
+  }
+  .preview::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(135deg, transparent 0%, rgba(139,115,85,0.2) 100%);
+    opacity:0;
+    transition:opacity 0.4s ease;
+  }
+  .folder:hover .preview::after{opacity:1}
+  .preview img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    filter:grayscale(20%);
+    transition:transform .56s cubic-bezier(.2,.9,.2,1),filter .56s ease;
+  }
+  .folder:hover .preview img{transform:scale(1.04);filter:grayscale(0%)}
+  .folder-desc{font-size:16px;line-height:1.7;color:#5a524c;font-weight:300;margin-bottom:18px}
+  .tags{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:18px}
+  .tag{
+    font-family:'Space Mono',monospace;
+    font-size:10px;
+    padding:8px 12px;
+    background:var(--bg);
+    border:1px solid rgba(42,37,32,0.08);
+    border-radius:2px;
+    text-transform:uppercase;
+    transition:all 0.3s ease;
+  }
+  .tag:hover{background:var(--accent);color:var(--white);border-color:var(--accent)}
+  .meta-block{font-family:'Space Mono',monospace;color:var(--accent);font-size:11px;line-height:2;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:18px}
+  .project-link{
+    display:inline-block;
+    padding:10px 22px;
+    background:var(--ink);
+    color:var(--white);
+    font-family:'Space Mono',monospace;
+    border-radius:3px;
+    text-transform:uppercase;
+    font-size:12px;
+    transition:transform .24s ease, background .24s ease;
+    position:relative;
+    overflow:hidden;
+  }
+  .project-link::before{
+    content:"";
+    position:absolute;
+    top:50%;left:50%;
+    width:0;height:0;
+    border-radius:50%;
+    background:var(--accent);
+    transform:translate(-50%,-50%);
+    transition:width 0.4s ease, height 0.4s ease;
+    z-index:-1;
+  }
+  .project-link:hover::before{width:300px;height:300px}
+  .project-link:hover{transform:translateX(6px)}
+
+  /* Cursor preview */
+  .cursor-preview{
+    position:fixed;
+    pointer-events:none;
+    z-index:1400;
+    width:360px;
+    height:260px;
+    border-radius:4px;
+    overflow:hidden;
+    opacity:0;
+    transform:translate(-50%,-50%) scale(.98);
+    transition:opacity .28s ease,transform .28s ease;
+    box-shadow:0 30px 60px rgba(0,0,0,0.18);
+    background:#111;
+  }
+  .cursor-preview img{width:100%;height:100%;object-fit:cover;filter:grayscale(20%)}
+  .cursor-preview.active{opacity:1;transform:translate(-50%,-50%) scale(1)}
+
+  /* -------- ABOUT -------- */
+  .about{padding:14vh 0;background:var(--ink);color:var(--white);position:relative;overflow:hidden}
+  .about-bg-text{
+    position:absolute;
+    font-size:20vw;
+    font-weight:700;
+    opacity:0.02;
+    white-space:nowrap;
+    font-family:'Space Mono',monospace;
+    pointer-events:none;
+  }
+  .about-bg-text:nth-child(1){top:10%;left:-10%;transform:rotate(-5deg)}
+  .about-bg-text:nth-child(2){bottom:10%;right:-10%;transform:rotate(5deg)}
+  
+  .about .about-grid{
+    max-width:1200px;
+    margin:0 auto;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:60px;
+    align-items:center;
+    padding:0 6vw;
+    position:relative;
+    z-index:2;
+  }
+  .about h2{font-family:'Space Mono',monospace;font-size:clamp(28px,4vw,48px);margin-bottom:20px}
+  .about p{font-size:16px;line-height:1.8;font-weight:300;opacity:0.95;margin-bottom:16px}
+  .about p strong{color:var(--accent);font-weight:500}
+  .portrait{
+    aspect-ratio:3/4;
+    border-radius:4px;
+    overflow:hidden;
+    background:#222;
+    box-shadow:var(--card-shadow);
+    position:relative;
+  }
+  .portrait::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(135deg, transparent 0%, rgba(139,115,85,0.3) 100%);
+    z-index:1;
+    mix-blend-mode:overlay;
+  }
+  .portrait img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    filter:grayscale(30%);
+    transition:transform 0.6s ease, filter 0.6s ease;
+  }
+  .portrait:hover img{transform:scale(1.05);filter:grayscale(0%)}
+
+  /* -------- SKILLS MARQUEE -------- */
+  .skills-marquee{
+    background:var(--accent);
+    color:var(--white);
+    padding:32px 0;
+    overflow:hidden;
+    position:relative;
+  }
+  .marquee-content{
+    display:flex;
+    animation:marquee 30s linear infinite;
+    white-space:nowrap;
+  }
+  .marquee-item{
+    font-family:'Space Mono',monospace;
+    font-size:24px;
+    font-weight:700;
+    padding:0 48px;
+    text-transform:uppercase;
+    letter-spacing:0.1em;
+  }
+  @keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+  /* -------- CONTACT -------- */
+  .contact{padding:12vh 0;background:var(--bg);color:var(--ink);position:relative}
+  .contact .wrap{max-width:1100px;margin:0 auto;display:flex;flex-direction:column;gap:28px;align-items:center;text-align:center;padding:0 6vw}
+  .contact h2{font-family:'Space Mono',monospace;font-size:clamp(28px,4vw,48px)}
+  .contact p.sub{color:var(--accent);font-weight:300}
+  .contacts{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;width:100%;max-width:920px;margin-top:18px}
+  .card{
+    background:#fff;
+    padding:28px;
+    border-radius:6px;
+    box-shadow:0 12px 30px rgba(0,0,0,0.06);
+    transition:transform 0.3s ease, box-shadow 0.3s ease;
+    position:relative;
+    overflow:hidden;
+  }
+  .card::before{
+    content:"";
+    position:absolute;
+    top:0;left:0;
+    width:100%;height:3px;
+    background:var(--accent);
+    transform:scaleX(0);
+    transform-origin:left;
+    transition:transform 0.4s ease;
+  }
+  .card:hover{transform:translateY(-8px);box-shadow:0 20px 40px rgba(0,0,0,0.12)}
+  .card:hover::before{transform:scaleX(1)}
+  .card h4{margin-bottom:12px;font-family:'Space Mono',monospace;color:var(--accent)}
+
+  /* -------- FOOTER -------- */
+  footer.site-footer{
+    background:#131212;
+    color:#fff;
+    text-align:center;
+    padding:48px 20px;
+    font-size:13px;
+    letter-spacing:0.03em;
+  }
+  .footer-content{
+    max-width:1200px;
+    margin:0 auto;
+    padding:0 6vw;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:20px;
+  }
+  .footer-links{display:flex;gap:24px;font-family:'Space Mono',monospace;font-size:11px}
+  .footer-links a{opacity:0.8;transition:opacity 0.3s}
+  .footer-links a:hover{opacity:1}
+
+  @media(max-width:1024px){
+    .cursor-preview,.cursor-glow,.cursor-trail{display:none}
+    .floating-shapes{display:none}
+  }
+
+  @media(max-width:768px){
+    .nav-toggle{display:flex;position:fixed;top:18px;right:18px;z-index:1500}
+    nav.top{display:none;}
+    .nav-open nav.top{display:flex;top:60px;}
+    .about .about-grid{grid-template-columns:1fr}
+    .folder-header{grid-template-columns:50px 1fr 40px;gap:12px}
+    .num{font-size:11px}
+    .type{display:none}
+    .folder-inner{grid-template-columns:1fr;padding:0 16px 40px 16px}
+    .stats-grid{grid-template-columns:1fr 1fr;gap:32px}
+    .footer-content{flex-direction:column;text-align:center}
+  }
+</style>
 </head>
 <body>
-    <!-- Cursor -->
-    <div class="cursor"></div>
 
-    <!-- Scroll Indicator -->
-    <div class="scroll-indicator">
-        <div class="scroll-progress"></div>
+  <!-- Floating background shapes -->
+  <div class="floating-shapes" id="floatingShapes"></div>
+
+  <!-- NAV -->
+  <div class="nav-toggle" id="navToggle"><span></span><span></span><span></span></div>
+  <nav class="top" id="siteNav">
+    <a href="#home">Home</a>
+    <a href="#projects">Work</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <!-- Cursor effects -->
+  <div class="cursor-glow" id="cursorGlow"></div>
+
+  <!-- CURSOR PREVIEW -->
+  <div class="cursor-preview" id="cursorPreview"><img src="" alt=""></div>
+
+  <!-- HERO -->
+  <header id="home" class="hero">
+    <video autoplay muted loop playsinline poster="images/MODIS/poster4.png">
+      <source src="images/MODIS/concept2.gif" type="video/mp4">
+    </video>
+    <div class="overlay"></div>
+    <div class="hero-content">
+      <div>
+        <h1 id="heroTitle"><span>VISUAL</span><br><span>STORYTELLING</span></h1>
+        <div class="meta">Art Direction • Digital Design • Creative Vision</div>
+      </div>
+      <div class="hero-location" style="text-align:right;font-family:'Space Mono',monospace;font-size:12px;">Lisbon • 2025</div>
     </div>
+    <div class="scroll-hint">Scroll to explore</div>
+  </header>
 
-    <!-- Vertical Navigation -->
-    <nav class="nav">
-        <div class="logo">Creative Direction</div>
-        <div class="nav-links">
-            <a href="#home" class="active">Home</a>
-            <a href="#projects">Projects</a>
-            <a href="#about">About</a>
-            <a href="#contact">Contact</a>
+  <!-- STATS BANNER -->
+  <section class="stats-banner fade-section">
+    <div class="stats-grid">
+      <div class="stat-item">
+        <div class="stat-number" data-target="15">0</div>
+        <div class="stat-label">Projects Completed</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number" data-target="8">0</div>
+        <div class="stat-label">Happy Clients</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number" data-target="3">0</div>
+        <div class="stat-label">Years Experience</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number" data-target="100">0</div>
+        <div class="stat-label">Cups of Coffee</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <main id="projects" class="projects fade-section parallax-section">
+    <div class="parallax-content">
+      <h2 class="title">Selected Works</h2>
+      <p class="subtitle">A curated collection of creative projects</p>
+      <section id="folders" class="folders"></section>
+    </div>
+  </main>
+
+  <!-- SKILLS MARQUEE -->
+  <div class="skills-marquee">
+    <div class="marquee-content">
+      <span class="marquee-item">• Branding</span>
+      <span class="marquee-item">• Art Direction</span>
+      <span class="marquee-item">• Visual Identity</span>
+      <span class="marquee-item">• Editorial Design</span>
+      <span class="marquee-item">• Digital Design</span>
+      <span class="marquee-item">• Illustration</span>
+      <span class="marquee-item">• Branding</span>
+      <span class="marquee-item">• Art Direction</span>
+      <span class="marquee-item">• Visual Identity</span>
+      <span class="marquee-item">• Editorial Design</span>
+      <span class="marquee-item">• Digital Design</span>
+      <span class="marquee-item">• Illustration</span>
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <section id="about" class="about fade-section parallax-section">
+    <div class="about-bg-text">DESIGN</div>
+    <div class="about-bg-text">CREATE</div>
+    <div class="about-grid">
+      <div class="about-text slide-in-left">
+        <h2>Creative Direction & Visual Identity</h2>
+        <p>Olá — sou <strong>Madalena Velloso</strong>, estudante de design com fundo em belas-artes. Cresci rodeada por arte e história, e trago essa sensibilidade clássica para projetos contemporâneos de direção de arte e identidade visual.</p>
+        <p>Começo no papel: desenho, colagem, textura. Depois digitalizo e construo sistemas visuais que funcionam tanto no papel quanto na experiência digital. Trabalho em branding, editorial, direção de arte e ilustração.</p>
+        <p>Cada projeto é uma oportunidade de contar uma história visual única e memorável.</p>
+      </div>
+      <div class="portrait slide-in-right"><img src="images/images copy/berlinme-1.jpg" alt="Madalena Velloso"></div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="contact fade-section">
+    <div class="wrap">
+      <h2>LET'S TALK</h2>
+      <p class="sub">Available for new projects and collaborations</p>
+      <div class="contacts">
+        <div class="card">
+          <h4>Email</h4>
+          <p><a href="mailto:madalenavelloso@gmail.com">madalenavelloso@gmail.com</a></p>
         </div>
-        <div class="nav-footer">Est. 2024</div>
-    </nav>
-
-    <!-- Hero Section -->
-    <section id="home" class="hero">
-        <img src="images/MODIS/concept2.gif" alt="Hero" class="hero-image">
-        <div class="hero-overlay"></div>
-        <div class="hero-content">
-            <h1 class="hero-title">Visual<br>Storytelling</h1>
-            <div class="hero-meta">
-                <span>Art Direction</span>
-                <span>Digital Design</span>
-                <span>Creative Vision</span>
-                <span>—</span>
-                <span>Est. 2024</span>
-            </div>
+        <div class="card">
+          <h4>Location</h4>
+          <p>Lisbon, Portugal</p>
         </div>
-    </section>
-
-    <!-- Projects Section -->
-    <section id="projects" class="projects">
-        <div class="section-header fade-in">
-            <h2 class="section-title">Selected Works</h2>
-            <div class="section-meta">
-                2025<br>
-                Portfolio<br>
-                —<br>
-                05 Projects
-            </div>
+        <div class="card">
+          <h4>Availability</h4>
+          <p>Open for projects</p>
         </div>
+      </div>
+    </div>
+  </section>
 
-        <div class="project">
-            <div class="project-main">
-                <div class="project-image-container">
-                    <img src="images/MODIS/poster4.png" alt="Form Light Shadow" class="project-image">
-                    <div class="project-overlay">
-                        <div class="project-number">001</div>
-                    </div>
-                </div>
-                <div class="project-info">
-                    <div class="project-header">
-                        <h3 class="project-title">Modis Academy</h3>
-                        <div class="project-subtitle">Branding / Web design</div>
-                        <p class="project-description">
-                            Modis is a forward-thinking fashion academy focused on design, form, and creative direction.
-                        </p>
-                        <div class="project-tags">
-                            <span class="tag">Branding</span>
-                            <span class="tag">Editorial</span>
-                            <span class="tag">Web</span>
-                        </div>
-                    </div>
-                    <div class="project-stats">
-                       
-                        <span>Client: Fictional Brand</span>
-                        <span>Year: 2025</span>
-                        <span>Duration: 1 Week</span>
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="footer-content">
+      <div style="opacity:.9">© 2025 Madalena Velloso — All rights reserved</div>
+      <div class="footer-links">
+        <a href="#home">Home</a>
+        <a href="#projects">Work</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <div style="font-family:'Space Mono',monospace;font-size:12px;opacity:.85">Lisbon • Portugal</div>
+    </div>
+  </footer>
 
-                       <a href="modis.html" class="btn">See more</a>
-                      
-                    </div>
-                </div>
-            </div>
-            <div class="floating-date">2025</div>
+<script>
+(function() {
+  /* Data */
+  const projectsData=[
+    {id:'001',title:'Modis Academy',type:'Branding / Web',img:'images/MODIS/poster4.png',desc:'A forward-thinking fashion academy focused on design, form and creative direction.',tags:['Branding','Editorial','Web'],client:'Fictional Brand',year:'2025',duration:'1 Week',link:'modis.html'},
+    {id:'002',title:'Digital Illustration',type:'Conceptual / Digital Art',img:'images/images copy/illustra/story1.JPG',desc:'A collection of graphical interpretations and scenes — an exploration of color and texture.',tags:['Conceptual','Illustration','Abstract'],client:'Personal Project',year:'2025',duration:'Ongoing',link:'illustração.html'},
+    {id:'003',title:'Olura',type:'Health Care / Packaging',img:'images/olura/mupi.jpg',desc:'Packaging and identity for a supplement brand for young women.',tags:['Health','Packaging','Identity'],client:'Fictional Brand',year:'2025',duration:'1 Week',link:'olura.html'},
+    {id:'004',title:'K-AFE',type:'Cultural / Community',img:'images/images copy/INSTAGRAMK-AFE/frontstore.png',desc:'Warm minimal identity inspired by Korean café culture.',tags:['Cultural','Community','Branding'],client:'Fictional Brand',year:'2023',duration:'1 Week',link:'otherpage.html'},
+    {id:'005',title:'Experimental Posters',type:'Graphic / Experimental',img:'images/images copy/WebP/mononcle1.webp',desc:'Series of experimental posters exploring typographic form.',tags:['Graphic','Experimental','Typography'],client:'Personal Projects',year:'Ongoing',duration:'Ongoing',link:'posters.html'}
+  ];
+
+  const foldersEl=document.getElementById('folders');
+  
+  function createFolderMarkup(p){
+    const el=document.createElement('article');
+    el.className='folder';
+    el.setAttribute('data-preview',p.img);
+    el.innerHTML=`
+      <div class="folder-header" tabindex="0" role="button" aria-expanded="false">
+        <div class="num">${p.id}</div>
+        <div class="title-small">${p.title}</div>
+        <div class="type">${p.type}</div>
+        <div class="chev">→</div>
+      </div>
+      <div class="folder-content">
+        <div class="folder-inner">
+          <figure class="preview">
+            <img src="${p.img}" alt="${p.title}" loading="lazy">
+          </figure>
+          <div>
+            <p class="folder-desc">${p.desc}</p>
+            <div class="tags">${p.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div>
+            <div class="meta-block">Client: ${p.client} • Year: ${p.year} • Duration: ${p.duration}</div>
+            <a class="project-link" href="${p.link}">View Project</a>
+          </div>
         </div>
+      </div>`;
+    return el;
+  }
+  
+  projectsData.forEach(p=>foldersEl.appendChild(createFolderMarkup(p)));
 
-        <div class="project">
-            <div class="project-main">
-                <div class="project-image-container">
-                    <img src="images/images copy/illustra/story1.JPG" alt="Movement Unseen" class="project-image">
-                    <div class="project-overlay">
-                        <div class="project-number">002</div>
-                    </div>
-                </div>
-                <div class="project-info">
-                    <div class="project-header">
-                        <h3 class="project-title">Digital Illustration</h3>
-                        <div class="project-subtitle">Conceptual / Digital Art</div>
-                        <p class="project-description">
-                            Folder filled with delicious graphical interpretations of different sceneries and sets. A colision of color and styles ready to be discovered.
-                        </p>
-                        <div class="project-tags">
-                            <span class="tag">Conceptual</span>
-                            <span class="tag">Illustration</span>
-                            <span class="tag">Abstract</span>
-                        </div>
-                    </div>
-                    <div class="project-stats">
-                        <span>Client: Personal Project</span>
-                        <span>Year: 2025</span>
-                        <span>Duration: Continuous work</span>
-                         <a href="illustração.html" class="btn">See more</a>
-                    </div>
-                </div>
-            </div>
-            <div class="floating-date">2025</div>
-        </div>
+  /* Floating shapes background */
+  const shapesContainer = document.getElementById('floatingShapes');
+  const shapeTypes = ['circle', 'square', 'line'];
+  const shapeCount = 15;
+  
+  for(let i = 0; i < shapeCount; i++) {
+    const shape = document.createElement('div');
+    const type = shapeTypes[Math.floor(Math.random() * shapeTypes.length)];
+    shape.className = `shape ${type}`;
+    
+    const size = Math.random() * 100 + 50;
+    shape.style.width = type === 'line' ? `${size * 2}px` : `${size}px`;
+    shape.style.height = type === 'line' ? '2px' : `${size}px`;
+    shape.style.left = `${Math.random() * 100}%`;
+    shape.style.top = `${Math.random() * 100}%`;
+    
+    shapesContainer.appendChild(shape);
+  }
 
-        <div class="project">
-            <div class="project-main">
-                <div class="project-image-container">
-                    <img src="images/olura/mupi.jpg" alt="Open Visions" class="project-image">
-                    <div class="project-overlay">
-                        <div class="project-number">003</div>
-                    </div>
-                </div>
-                <div class="project-info">
-                    <div class="project-header">
-                        <h3 class="project-title">Olura</h3>
-                        <div class="project-subtitle">Health Care / Packaging</div>
-                        <p class="project-description">
-                            Olura is a supplement brand made for young women. As the female body changes, Olura supports every part of it.
-                        </p>
-                        <div class="project-tags">
-                            <span class="tag">Health</span>
-                            <span class="tag">Packaging</span>
-                            <span class="tag">Visual Identity</span>
-                        </div>
-                    </div>
-                    <div class="project-stats">
-                        <span>Client: Fictional Brand</span>
-                        <span>Year: 2025</span>
-                        <span>Duration: 1 Week</span>
-                         <a href="olura.html" class="btn">See more</a>
-                    </div>
-                </div>
-            </div>
-            <div class="floating-date">2025</div>
-        </div>
+  /* Parallax for floating shapes */
+  let mouseX = 0, mouseY = 0;
+  window.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX / window.innerWidth;
+    mouseY = e.clientY / window.innerHeight;
+  });
 
-        <div class="project">
-            <div class="project-main">
-                <div class="project-image-container">
-                    <img src="images/images copy/INSTAGRAMK-AFE/frontstore.png" alt="Sewing Culture" class="project-image">
-                    <div class="project-overlay">
-                        <div class="project-number">004</div>
-                    </div>
-                </div>
-                <div class="project-info">
-                    <div class="project-header">
-                        <h3 class="project-title">K-AFE</h3>
-                        <div class="project-subtitle">Cultural / Community</div>
-                        <p class="project-description">
-                            A warm, minimalistic brand identity inspired by Korean café culture, featuring hand-drawn mascot coffee cups that embody comfort, coziness, and personal connection.
-                        </p>
+  function animateShapes() {
+    const shapes = document.querySelectorAll('.shape');
+    shapes.forEach((shape, i) => {
+      const speed = (i % 3 + 1) * 0.5;
+      const x = (mouseX - 0.5) * 50 * speed;
+      const y = (mouseY - 0.5) * 50 * speed;
+      shape.style.transform = `translate(${x}px, ${y}px) ${shape.classList.contains('square') ? 'rotate(45deg)' : ''}`;
+    });
+    requestAnimationFrame(animateShapes);
+  }
+  animateShapes();
 
-                        <div class="project-tags">
-                            <span class="tag">Cultural</span>
-                            <span class="tag">Community</span>
-                            <span class="tag">Branding</span>
+  /* Cursor glow */
+  const glow = document.getElementById('cursorGlow');
+  window.addEventListener('mousemove', e => {
+    glow.style.left = e.clientX + "px";
+    glow.style.top = e.clientY + "px";
+  });
 
-                             <a href="otherpage.html" class="btn">See more</a>
-                        </div>
-                    </div>
-                    <div class="project-stats">
-                        <span>Client: Fictional Brand</span>
-                        <span>Year: 2023</span>
-                        <span>Duration: 1 Week</span>
-                    </div>
-                </div>
-            </div>
-            <div class="floating-date">2023</div>
-        </div>
-
-        <div class="project">
-            <div class="project-main">
-                <div class="project-image-container">
-                    <img src="images/images copy/WebP/mononcle1.webp" alt="Revolutionary Learning" class="project-image">
-                    <div class="project-overlay">
-                        <div class="project-number">005</div>
-                    </div>
-                </div>
-                <div class="project-info">
-                    <div class="project-header">
-                        <h3 class="project-title">Revolutionary Learning</h3>
-                        <div class="project-subtitle">Education / Future Tech</div>
-                        <p class="project-description">
-                            Where you can find my collection of recent experimental graphic posters.
-                        </p>
-                        <div class="project-tags">
-                            <span class="tag">Graphic</span>
-                            <span class="tag">Future Tech</span>
-                            <span class="tag">Experience</span>
-                        </div>
-                    </div>
-                    <div class="project-stats">
-                        <span>Client: Personal Projects</span>
-                        <span>Year: Continuous work</span>
-                        <span>Duration: Continuous work</span>
-                         <a href="posters.html" class="btn">See more</a>
-                    </div>
-                </div>
-            </div>
-            <div class="floating-date">2022-present</div>
-        </div>
-    </section>
-
-      
-
-    <!-- About Section -->
-    <section id="about" class="about">
-        <div class="about-content">
-            <div class="about-left">
-                <h2 class="about-title fade-in">Creative Direction & Visual Identity</h2>
-                <div class="about-text fade-in">
-                    <p>My name is Madalena Velloso, and I'm a Portuguese 21 year old design student with a deep-rooted passion for fine arts. Growing up immersed in a world of culture and visual communication, with parents in the history of art field, I've always been surrounded by creativity and artistic expression</p>
-                    
-                    <p>The combination of my fine arts background with my design studies has pushed me to think beyond the conventional, always returning to the essentials—paper and pencil—as the foundation of my creative process.</p>
-                </div>
-            </div>
-            <div class="about-right fade-in">
-                <img src="images/images copy/berlinme-1.jpg" alt="About" class="about-image">
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-   <!-- Contact Section -->
-    <section id="contact" class="contact">
-        <div class="contact-content">
-            <h2 class="contact-title fade-in">Let's Talk!</h2>
-            <p class="contact-subtitle fade-in">Let's collaborate on your next visionary project!</p>
-            
-            <div class="contact-info fade-in">
-                <div class="contact-item">
-                    <h3>Email</h3>
-                    <p>madalenavelloso@gmail.com</p>
-                </div>
-                <div class="contact-item">
-                    <h3>Location</h3>
-                    <p>Lisbon, Portugal</p>
-                </div>
-                <div class="contact-item">
-                    <h3>Availability</h3>
-                    <p>Open for Projects</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="footer-content">
-            <div class="footer-left">
-                <div class="footer-logo">
-                    <span class="text-reveal">Creative Direction</span>
-                </div>
-                <div class="footer-tagline">
-                    <span class="text-reveal">Crafting visual stories that inspire</span>
-                </div>
-            </div>
-            
-            <div class="footer-center">
-                <div class="footer-links">
-                    <a href="#home" class="text-reveal">Home</a>
-                    <a href="#projects" class="text-reveal">Projects</a>
-                    <a href="#about" class="text-reveal">About</a>
-                    <a href="#contact" class="text-reveal">Contact</a>
-                </div>
-                <div class="footer-social">
-                    <a href="#" class="text-reveal">Instagram</a>
-                    <a href="#" class="text-reveal">Behance</a>
-                    <a href="#" class="text-reveal">LinkedIn</a>
-                </div>
-            </div>
-            
-            <div class="footer-right">
-                <div class="footer-contact">
-                    <div class="text-reveal">madalenavelloso@gmail.com</div>
-                    <div class="text-reveal">Lisbon, Portugal</div>
-                </div>
-                <div class="footer-year">
-                    <span class="text-reveal">© 2025</span>
-                </div>
-            </div>
-        </div>
-        
-        <div class="footer-bottom">
-            <div class="footer-credits text-reveal">
-                Made with passion and precision
-            </div>
-        </div>
-    </footer>
-
-    <script>
-        // Cursor
-        const cursor = document.querySelector('.cursor');
-        let mouseX = 0;
-        let mouseY = 0;
-        let cursorX = 0;
-        let cursorY = 0;
-
-        document.addEventListener('mousemove', (e) => {
-            mouseX = e.clientX;
-            mouseY = e.clientY;
-        });
-
-        function updateCursor() {
-            cursorX += (mouseX - cursorX) * 0.1;
-            cursorY += (mouseY - cursorY) * 0.1;
-            cursor.style.transform = `translate(${cursorX - 4}px, ${cursorY - 4}px)`;
-            requestAnimationFrame(updateCursor);
-        }
-        updateCursor();
-
-        // Cursor hover effects
-        document.querySelectorAll('a, .project-image-container').forEach(el => {
-            el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
-            el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
-        });
-
-        // Smooth scrolling
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
-            });
-        });
-
-        // Navigation active state
-        window.addEventListener('scroll', () => {
-            const sections = document.querySelectorAll('section');
-            const navLinks = document.querySelectorAll('.nav-links a');
-            
-            let current = '';
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                if (scrollY >= sectionTop - 200) {
-                    current = section.getAttribute('id');
-                }
-            });
-
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href') === `#${current}`) {
-                    link.classList.add('active');
-                }
-            });
-        });
-
-        // Scroll progress
-        window.addEventListener('scroll', () => {
-            const scrollProgress = document.querySelector('.scroll-progress');
-            const scrollPercent = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
-            scrollProgress.style.width = scrollPercent + '%';
-        });
-
-        // Intersection Observer for animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.fade-in, .project').forEach(el => {
-            observer.observe(el);
-        });
-
-        // Parallax effect for hero
-        window.addEventListener('scroll', () => {
-            const scrolled = window.pageYOffset;
-            const heroImage = document.querySelector('.hero-image');
-            if (heroImage) {
-                heroImage.style.transform = `translateY(${scrolled * 0.3}px)`;
-            }
-        });
-    </script>
-
-    <script>
-      const carouselTrack = document.querySelector('.carousel-track');
-const carouselSection = document.querySelector('.more-projects');
-
-let isInCarousel = false;
-let scrollPos = 0;
-
-window.addEventListener('scroll', () => {
-    const sectionTop = carouselSection.offsetTop;
-    const sectionBottom = sectionTop + carouselSection.offsetHeight;
-    const viewportTop = window.scrollY;
-    const viewportBottom = viewportTop + window.innerHeight;
-
-    // Entering carousel
-    if (viewportTop >= sectionTop && viewportBottom <= sectionBottom + window.innerHeight) {
-        isInCarousel = true;
+  /* Navbar scroll behavior */
+  let lastScroll = 0;
+  const nav = document.getElementById('siteNav');
+  
+  window.addEventListener('scroll', () => {
+    const cur = window.scrollY;
+    if(cur < lastScroll || cur < 100) {
+      nav.classList.add('show');
     } else {
-        isInCarousel = false;
+      nav.classList.remove('show');
     }
-});
+    lastScroll = cur;
+  });
+  
+  document.getElementById('navToggle').addEventListener('click', () => {
+    document.body.classList.toggle('nav-open');
+  });
 
-window.addEventListener('wheel', (e) => {
-    if (!isInCarousel) return;
+  /* Smooth scroll for nav links */
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if(target) {
+        const offset = 80;
+        const targetPos = target.getBoundingClientRect().top + window.scrollY - offset;
+        window.scrollTo({ top: targetPos, behavior: 'smooth' });
+        document.body.classList.remove('nav-open');
+      }
+    });
+  });
 
-    e.preventDefault(); // Stop vertical scroll
+  /* Intersection Observer for fade-in effects */
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if(e.isIntersecting) {
+        e.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+  
+  document.querySelectorAll('.fade-section, .slide-in-left, .slide-in-right').forEach(sec => observer.observe(sec));
 
-    const maxTranslate = carouselTrack.scrollWidth - window.innerWidth;
-    scrollPos += e.deltaY; // Use vertical scroll input
-    scrollPos = Math.max(0, Math.min(maxTranslate, scrollPos));
-
-    carouselTrack.style.transform = `translateX(${-scrollPos}px)`;
-
-    // If reached end, allow normal scroll
-    if ((scrollPos <= 0 && e.deltaY < 0) || (scrollPos >= maxTranslate && e.deltaY > 0)) {
-        isInCarousel = false;
+  /* Hero parallax */
+  const heroTitle = document.getElementById('heroTitle');
+  const hero = document.querySelector('.hero');
+  
+  window.addEventListener('scroll', () => {
+    const scrolled = window.scrollY;
+    const heroHeight = hero.offsetHeight;
+    
+    if(scrolled < heroHeight) {
+      heroTitle.style.transform = `translateY(${scrolled * 0.3}px)`;
+      hero.querySelector('.overlay').style.opacity = 0.3 + (scrolled / heroHeight) * 0.4;
     }
-}, { passive: false });
+  });
 
-    </script>
+  /* Parallax for sections */
+  const parallaxSections = document.querySelectorAll('.parallax-section');
+  
+  window.addEventListener('scroll', () => {
+    parallaxSections.forEach(section => {
+      const rect = section.getBoundingClientRect();
+      const scrollPercent = (window.innerHeight - rect.top) / (window.innerHeight + rect.height);
+      
+      if(scrollPercent > 0 && scrollPercent < 1) {
+        const offset = (scrollPercent - 0.5) * 100;
+        section.style.transform = `translateY(${offset * 0.2}px)`;
+      }
+    });
+  });
+
+  /* Animated counter for stats */
+  const statNumbers = document.querySelectorAll('.stat-number');
+  let hasAnimated = false;
+  
+  const statsObserver = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if(e.isIntersecting && !hasAnimated) {
+        hasAnimated = true;
+        statNumbers.forEach(num => {
+          const target = parseInt(num.getAttribute('data-target'));
+          const duration = 2000;
+          const step = target / (duration / 16);
+          let current = 0;
+          
+          const timer = setInterval(() => {
+            current += step;
+            if(current >= target) {
+              num.textContent = target + (target === 100 ? '+' : '');
+              clearInterval(timer);
+            } else {
+              num.textContent = Math.floor(current);
+            }
+          }, 16);
+        });
+      }
+    });
+  }, { threshold: 0.5 });
+  
+  document.querySelectorAll('.stats-banner').forEach(sec => statsObserver.observe(sec));
+
+  /* Folder interactions */
+  const cursorPreview = document.getElementById('cursorPreview');
+  const previewImg = cursorPreview.querySelector('img');
+  
+  document.querySelectorAll('.folder').forEach(folder => {
+    const header = folder.querySelector('.folder-header');
+    const src = folder.getAttribute('data-preview');
+    
+    const toggleFolder = () => {
+      const isActive = folder.classList.toggle('active');
+      header.setAttribute('aria-expanded', isActive);
+    };
+    
+    header.addEventListener('click', toggleFolder);
+    header.addEventListener('keydown', (e) => {
+      if(e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        toggleFolder();
+      }
+    });
+    
+    header.addEventListener('mouseenter', () => {
+      if(window.innerWidth > 1024 && src) {
+        previewImg.src = src;
+        cursorPreview.classList.add('active');
+      }
+    });
+    
+    header.addEventListener('mouseleave', () => {
+      cursorPreview.classList.remove('active');
+    });
+  });
+  
+  window.addEventListener('mousemove', e => {
+    cursorPreview.style.left = e.clientX + 'px';
+    cursorPreview.style.top = e.clientY + 'px';
+  });
+
+  /* Parallax for about section background text */
+  const aboutBgTexts = document.querySelectorAll('.about-bg-text');
+  
+  window.addEventListener('scroll', () => {
+    const aboutSection = document.querySelector('.about');
+    if(!aboutSection) return;
+    
+    const rect = aboutSection.getBoundingClientRect();
+    const scrollPercent = (window.innerHeight - rect.top) / (window.innerHeight + rect.height);
+    
+    if(scrollPercent > 0 && scrollPercent < 1) {
+      aboutBgTexts.forEach((text, i) => {
+        const direction = i % 2 === 0 ? 1 : -1;
+        text.style.transform = `translateX(${scrollPercent * 200 * direction}px) rotate(${i % 2 === 0 ? -5 : 5}deg)`;
+      });
+    }
+  });
+
+  /* Image lazy loading fallback */
+  if('loading' in HTMLImageElement.prototype) {
+    const images = document.querySelectorAll('img[loading="lazy"]');
+    images.forEach(img => {
+      img.src = img.src;
+    });
+  } else {
+    const script = document.createElement('script');
+    script.src = 'https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js';
+    document.body.appendChild(script);
+  }
+
+  /* Add ripple effect on project links */
+  document.querySelectorAll('.project-link').forEach(link => {
+    link.addEventListener('click', function(e) {
+      const ripple = document.createElement('span');
+      const rect = this.getBoundingClientRect();
+      const size = Math.max(rect.width, rect.height);
+      const x = e.clientX - rect.left - size / 2;
+      const y = e.clientY - rect.top - size / 2;
+      
+      ripple.style.cssText = `
+        position: absolute;
+        width: ${size}px;
+        height: ${size}px;
+        border-radius: 50%;
+        background: rgba(255,255,255,0.6);
+        left: ${x}px;
+        top: ${y}px;
+        pointer-events: none;
+        animation: ripple 0.6s ease-out;
+      `;
+      
+      this.appendChild(ripple);
+      setTimeout(() => ripple.remove(), 600);
+    });
+  });
+
+  /* Add CSS for ripple animation */
+  const style = document.createElement('style');
+  style.textContent = `
+    @keyframes ripple {
+      from { transform: scale(0); opacity: 1; }
+      to { transform: scale(2); opacity: 0; }
+    }
+  `;
+  document.head.appendChild(style);
+
+  /* Tilt effect on cards */
+  document.querySelectorAll('.card').forEach(card => {
+    card.addEventListener('mousemove', function(e) {
+      const rect = this.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+      
+      const rotateX = (y - centerY) / 10;
+      const rotateY = (centerX - x) / 10;
+      
+      this.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-8px)`;
+    });
+    
+    card.addEventListener('mouseleave', function() {
+      this.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(0)';
+    });
+  });
+
+  /* Initialize - show nav after load */
+  setTimeout(() => nav.classList.add('show'), 500);
+})();
+</script>
 </body>
 </html>

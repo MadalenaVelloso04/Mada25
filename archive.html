@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Archive - Madalena Velloso</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Courier New', monospace;
+            background: #f5f5f5;
+            background-image: url('images/background.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            overflow-x: hidden;
+            cursor: none;
+            padding: 120px 40px 80px;
+        }
+
+        /* Custom Cursor */
+        .custom-cursor {
+            position: fixed;
+            width: 52px;
+            height: 52px;
+            pointer-events: none;
+            z-index: 10000;
+            transform: translate(-50%, -50%);
+        }
+
+        .custom-cursor img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        /* Little Me - Static in Corner */
+        .little-me {
+            position: fixed;
+            top: 40px;
+            left: 40px;
+            width: 100px;
+            height: auto;
+            z-index: 1000;
+            cursor: none;
+            transition: transform 0.3s ease;
+        }
+
+        .little-me:hover {
+            transform: scale(1.1);
+        }
+
+        /* Archive Title */
+        .archive-title {
+            font-size: 4rem;
+            font-style: italic;
+            text-align: center;
+            margin-bottom: 80px;
+            color: #333;
+        }
+
+        /* Masonry Grid */
+        .masonry-grid {
+            column-count: 4;
+            column-gap: 20px;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        .grid-item {
+            break-inside: avoid;
+            margin-bottom: 20px;
+            position: relative;
+            overflow: hidden;
+            cursor: none;
+            transition: transform 0.3s ease;
+        }
+
+        .grid-item:hover {
+            transform: scale(1.02);
+            z-index: 10;
+        }
+
+        .grid-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+            filter: blur(4px) brightness(1.2);
+            transition: filter 0.5s ease;
+        }
+
+        .grid-item::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.3);
+            transition: opacity 0.5s ease;
+            pointer-events: none;
+        }
+
+        .grid-item:hover img {
+            filter: blur(0) brightness(1);
+        }
+
+        .grid-item:hover::after {
+            opacity: 0;
+        }
+
+        /* Different sizes for variety */
+        .grid-item:nth-child(3n + 1) {
+            transform: scale(1.1);
+        }
+
+        .grid-item:nth-child(5n + 2) {
+            transform: scale(0.9);
+        }
+
+        .grid-item:nth-child(7n + 3) {
+            transform: scale(1.05);
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .masonry-grid {
+                column-count: 3;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .masonry-grid {
+                column-count: 2;
+            }
+            
+            .archive-title {
+                font-size: 3rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .masonry-grid {
+                column-count: 1;
+            }
+            
+            .archive-title {
+                font-size: 2rem;
+            }
+
+            body {
+                padding: 100px 20px 60px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Custom Cursor -->
+    <div class="custom-cursor">
+        <img src="images/Ilustração_Sem_Título.png" alt="">
+    </div>
+
+    <!-- Little Me - Link to Home -->
+    <a href="index2.html">
+        <img class="little-me" src="images/IMG_0465.GIF" alt="Home">
+    </a>
+
+    <!-- Archive Title -->
+    <h1 class="archive-title">Archive</h1>
+
+    <!-- Masonry Grid -->
+    <div class="masonry-grid">
+        <div class="grid-item">
+            <img src="images/images copy/WebP/001.webp" alt="Archive item 1">
+        </div>
+        <div class="grid-item">
+            <img src="images/images copy/WebP/zine1.webp" alt="Archive item 2">
+        </div>
+        <div class="grid-item">
+            <img src="images/images copy/WebP/thatsenough.webp" alt="Archive item 3">
+        </div>
+        <div class="grid-item">
+            <img src="images/archive4.jpg" alt="Archive item 4">
+        </div>
+        <div class="grid-item">
+            <img src="images/archive5.jpg" alt="Archive item 5">
+        </div>
+        <div class="grid-item">
+            <img src="images/archive6.jpg" alt="Archive item 6">
+        </div>
+        <div class="grid-item">
+            <img src="images/archive7.jpg" alt="Archive item 7">
+        </div>
+        <div class="grid-item">
+            <img src="images/archive8.jpg" alt="Archive item 8">
+        </div>
+        <div class="grid-item">
+            <img src="images/archive9.jpg" alt="Archive item 9">
+        </div>
+        <div class="grid-item">
+            <img src="images/archive10.jpg" alt="Archive item 10">
+        </div>
+        <div class="grid-item">
+            <img src="images/archive11.jpg" alt="Archive item 11">
+        </div>
+        <div class="grid-item">
+            <img src="images/archive12.jpg" alt="Archive item 12">
+        </div>
+        <div class="grid-item">
+            <img src="images/archive13.jpg" alt="Archive item 13">
+        </div>
+        <div class="grid-item">
+            <img src="images/archive14.jpg" alt="Archive item 14">
+        </div>
+        <div class="grid-item">
+            <img src="images/archive15.jpg" alt="Archive item 15">
+        </div>
+        <div class="grid-item">
+            <img src="images/archive16.jpg" alt="Archive item 16">
+        </div>
+        <div class="grid-item">
+            <img src="images/archive17.jpg" alt="Archive item 17">
+        </div>
+        <div class="grid-item">
+            <img src="images/archive18.jpg" alt="Archive item 18">
+        </div>
+        <div class="grid-item">
+            <img src="images/archive19.jpg" alt="Archive item 19">
+        </div>
+        <div class="grid-item">
+            <img src="images/archive20.jpg" alt="Archive item 20">
+        </div>
+    </div>
+
+    <script>
+        const customCursor = document.querySelector('.custom-cursor');
+
+        // Custom cursor follow mouse
+        document.addEventListener('mousemove', (e) => {
+            customCursor.style.left = e.clientX + 'px';
+            customCursor.style.top = e.clientY + 'px';
+        });
+    </script>
+</body>
+</html>

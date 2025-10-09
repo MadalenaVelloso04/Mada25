@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Madalena Velloso - Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Courier New', monospace;
+            background: #f5f5f5;
+            background-image: url('images/background.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            overflow-x: hidden;
+            cursor: none;
+        }
+
+        a, .work-item, .poster-item, .project-item {
+            cursor: none;
+        }
+
+        /* Custom Cursor */
+        .custom-cursor {
+            position: fixed;
+            width: 52px;
+            height: 52px;
+            pointer-events: none;
+            z-index: 10000;
+            transform: translate(-50%, -50%);
+        }
+
+        .custom-cursor img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        /* Scroll Progress Indicator */
+        .scroll-progress {
+            position: fixed;
+            right: 60px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 100;
+            opacity: 1;
+            transition: opacity 1s ease;
+        }
+
+        .scroll-shape {
+            width: 80px;
+            height: 80px;
+            transition: transform 0.1s linear;
+        }
+
+        .scroll-shape img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        /* Little Me Character */
+        .little-me {
+            position: fixed;
+            width: 100px;
+            height: auto;
+            top: 40px;
+            left: 40px;
+            z-index: 500;
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Divider Line (GIF) - Fixed vertical line */
+        .divider-line {
+            width: 2px;
+            height: calc(40vh - 100px);
+            position: fixed;
+            left: 30%;
+            top: 40px;
+            transform: translateX(-50%);
+            z-index: 99;
+            display: flex;
+            justify-content: center;
+            align-items: stretch;
+        }
+
+        .divider-line img {
+            width: 100%;
+            height: 100%;
+            object-fit: fill;
+        }
+
+        /* Project Menu */
+        .project-menu {
+            position: fixed;
+            left: 140px;
+            top: 40px;
+            z-index: 100;
+            opacity: 1;
+        }
+
+        .project-menu a {
+            display: block;
+            font-size: 1.5rem;
+            font-style: italic;
+            color: #333;
+            text-decoration: none;
+            margin: 15px 0;
+            transition: color 0.3s ease;
+        }
+
+        .project-menu a:hover,
+        .project-menu a.active {
+            color: #999;
+        }
+
+        /* Posters Section - Stacking on Top from Side */
+        .posters-section {
+            min-height: 500vh;
+            position: relative;
+            padding: 100px 0;
+        }
+
+        .posters-container {
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .poster-stack {
+            position: relative;
+            width: 600px;
+            height: 800px;
+        }
+
+        .poster-item {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: #fff;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            transition: all 0.1s ease-out;
+            left: 0;
+            top: 0;
+        }
+
+        .poster-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Complete Projects Section - Horizontal Scroll */
+        .projects-section {
+            min-height: 400vh;
+            position: relative;
+            padding: 100px 0;
+        }
+
+        .projects-container {
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .projects-scroll {
+            display: flex;
+            height: 100%;
+            width: max-content;
+            transition: transform 0.1s ease-out;
+        }
+
+        .project-item {
+            width: 100vw;
+            height: 100%;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 200px;
+        }
+
+        .project-item img {
+            max-width: 100%;
+            max-height: 80vh;
+            object-fit: contain;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+
+        .project-title {
+            position: fixed;
+            right: 100px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 3rem;
+            font-style: italic;
+            color: #333;
+            z-index: 50;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .project-title.visible {
+            opacity: 1;
+        }
+
+        /* Gallery Sections - Big Images */
+        .gallery-section {
+            padding: 100px 40px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 60px;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        .gallery-item {
+            width: 100%;
+            aspect-ratio: 4/3;
+            overflow: hidden;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .section-title {
+            font-size: 4rem;
+            font-style: italic;
+            text-align: center;
+            margin: 100px 0 50px 0;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <!-- Custom Cursor -->
+    <div class="custom-cursor">
+        <img src="images/Ilustração_Sem_Título.png" alt="">
+    </div>
+
+    <!-- Scroll Progress -->
+    <div class="scroll-progress">
+        <div class="scroll-shape">
+            <img src="images/Magnolia_grandiflora_-_flower_1.png" alt="Scroll indicator">
+        </div>
+    </div>
+
+
+    <!-- Little Me Character -->
+    <a href="./index2.html">
+        <img class="little-me" src="images/IMG_0465.GIF" alt="Little Me">
+    </a>
+
+    <!-- Divider Line (Fixed Vertical) -->
+    <div class="divider-line">
+        <img src="images/line.GIF" alt="Divider">
+    </div>
+
+    <!-- Project Menu -->
+    <nav class="project-menu">
+        <a href="#posters" class="menu-link" data-section="posters">Posters</a>
+        <a href="#projects" class="menu-link" data-section="projects">Complete Projects</a>
+        <a href="#illustration" class="menu-link" data-section="illustration">Illustration</a>
+        <a href="#3d" class="menu-link" data-section="3d">3d Modeling</a>
+    </nav>
+
+    <!-- POSTERS SECTION - Stacking on Top -->
+    <section class="posters-section" id="posters">
+        <h2 class="section-title">Posters</h2>
+        <div class="posters-container">
+            <div class="poster-stack">
+                <div class="poster-item" data-index="0">
+                    <img src="images/images copy/newposters/EXPERIMENTALGRAPHICS2.webp" alt="Poster 1">
+                </div>
+                <div class="poster-item" data-index="1">
+                    <img src="images/images copy/newposters/mitcover.webp" alt="Poster 2">
+                </div>
+                <div class="poster-item" data-index="2">
+                    <img src="images/images copy/newposters/madalena_araras.png" alt="Poster 3">
+                </div>
+                <div class="poster-item" data-index="3">
+                    <img src="images/images copy/newposters/madalena_araras.png" alt="Poster 4">
+                </div>
+                <div class="poster-item" data-index="4">
+                    <img src="images/images copy/newposters/Encapsulate_culture@5x.webp" alt="Poster 5">
+                </div>
+                <div class="poster-item" data-index="5">
+                    <img src="images/poster6.jpg" alt="Poster 6">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- COMPLETE PROJECTS SECTION - Horizontal Scroll with Changing Title -->
+    <section class="projects-section" id="projects">
+        <h2 class="section-title">Complete Projects</h2>
+        <div class="project-title" id="currentProjectTitle"></div>
+        <div class="projects-container">
+            <div class="projects-scroll">
+                <div class="project-item" data-title="Body Bloom">
+                    <img src="images/project1.jpg" alt="Body Bloom">
+                </div>
+                <div class="project-item" data-title="Nura">
+                    <img src="images/project2.jpg" alt="Nura">
+                </div>
+                <div class="project-item" data-title="Time Collection">
+                    <img src="images/ezgif-60cb350fb4cf7e.gif" alt="Time Collection">
+                </div>
+                <div class="project-item" data-title="Vintage Records">
+                    <img src="images/book.png" alt="Vintage Records">
+                </div>
+                <div class="project-item" data-title="Ocean Wave">
+                    <img src="images/ezgif-6b00df97da6b47.gif" alt="Ocean Wave">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ILLUSTRATION SECTION - Big Images Gallery -->
+    <section class="gallery-section" id="illustration">
+        <h2 class="section-title" style="grid-column: 1/-1;">Illustration</h2>
+        <div class="gallery-item">
+            <img src="images/illustration1.jpg" alt="Illustration 1">
+        </div>
+        <div class="gallery-item">
+            <img src="images/illustration2.jpg" alt="Illustration 2">
+        </div>
+        <div class="gallery-item">
+            <img src="images/illustration3.jpg" alt="Illustration 3">
+        </div>
+        <div class="gallery-item">
+            <img src="images/illustration4.jpg" alt="Illustration 4">
+        </div>
+        <div class="gallery-item">
+            <img src="images/illustration5.jpg" alt="Illustration 5">
+        </div>
+        <div class="gallery-item">
+            <img src="images/illustration6.jpg" alt="Illustration 6">
+        </div>
+    </section>
+
+    <!-- 3D MODELING SECTION - Big Images Gallery -->
+    <section class="gallery-section" id="3d">
+        <h2 class="section-title" style="grid-column: 1/-1;">3d Modeling</h2>
+        <div class="gallery-item">
+            <img src="images/3d1.jpg" alt="3D Model 1">
+        </div>
+        <div class="gallery-item">
+            <img src="images/3d2.jpg" alt="3D Model 2">
+        </div>
+        <div class="gallery-item">
+            <img src="images/3d3.jpg" alt="3D Model 3">
+        </div>
+        <div class="gallery-item">
+            <img src="images/3d4.jpg" alt="3D Model 4">
+        </div>
+    </section>
+
+    <script>
+        const customCursor = document.querySelector('.custom-cursor');
+        const scrollShape = document.querySelector('.scroll-shape');
+
+        // Custom cursor follow mouse
+        document.addEventListener('mousemove', (e) => {
+            customCursor.style.left = e.clientX + 'px';
+            customCursor.style.top = e.clientY + 'px';
+        });
+
+        // Posters stacking effect - slide from side and stack on top
+        function updatePosterStack() {
+            const postersSection = document.querySelector('.posters-section');
+            const posterItems = document.querySelectorAll('.poster-item');
+            const sectionRect = postersSection.getBoundingClientRect();
+            const sectionHeight = postersSection.offsetHeight;
+            
+            // More aggressive scroll progress calculation
+            const rawProgress = -sectionRect.top / (sectionHeight - window.innerHeight);
+            const scrollProgress = Math.max(0, Math.min(1, rawProgress));
+            
+            posterItems.forEach((item, index) => {
+                const itemProgress = Math.max(0, Math.min(1, (scrollProgress * posterItems.length) - index));
+                const translateX = (1 - itemProgress) * 120;
+                const zIndex = index;
+                
+                item.style.transform = `translateX(${translateX}%)`;
+                item.style.opacity = itemProgress > 0 ? 1 : 0;
+                item.style.zIndex = zIndex;
+            });
+        }
+        
+        function updateProjectsScroll() {
+            const projectsSection = document.querySelector('.projects-section');
+            const projectsScroll = document.querySelector('.projects-scroll');
+            const projectItems = document.querySelectorAll('.project-item');
+            const projectTitle = document.getElementById('currentProjectTitle');
+            const sectionRect = projectsSection.getBoundingClientRect();
+            const sectionHeight = projectsSection.offsetHeight;
+            
+            // Check if we're in the projects section viewport
+            const inProjectsSection = sectionRect.top < window.innerHeight && sectionRect.bottom > 0;
+            
+            if (inProjectsSection) {
+                // More aggressive scroll progress calculation
+                const rawProgress = -sectionRect.top / (sectionHeight - window.innerHeight);
+                const scrollProgress = Math.max(0, Math.min(1, rawProgress));
+                
+                const maxScroll = projectsScroll.scrollWidth - window.innerWidth;
+                const scrollAmount = scrollProgress * maxScroll;
+                projectsScroll.style.transform = `translateX(-${scrollAmount}px)`;
+                
+                // Update title based on visible project with smoother transition
+                const currentIndex = Math.min(
+                    projectItems.length - 1, 
+                    Math.floor(scrollProgress * projectItems.length)
+                );
+                const currentProject = projectItems[currentIndex];
+                if (currentProject) {
+                    projectTitle.textContent = currentProject.dataset.title;
+                    projectTitle.classList.add('visible');
+                }
+            } else {
+                // Hide title when not in projects section
+                projectTitle.classList.remove('visible');
+            }
+        }
+
+        window.addEventListener('scroll', () => {
+            const scrollPos = window.scrollY;
+
+            // Update poster stack
+            updatePosterStack();
+
+            // Update projects scroll
+            updateProjectsScroll();
+
+            // Rotate scroll shape
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const scrollPercent = scrollPos / docHeight;
+            const rotation = scrollPercent * 360;
+            scrollShape.style.transform = `rotate(${rotation}deg)`;
+
+            // Update active menu link
+            const sections = document.querySelectorAll('section[id]');
+            sections.forEach(section => {
+                const rect = section.getBoundingClientRect();
+                if (rect.top <= window.innerHeight / 2 && rect.bottom >= window.innerHeight / 2) {
+                    document.querySelectorAll('.menu-link').forEach(link => {
+                        link.classList.remove('active');
+                        if (link.dataset.section === section.id) {
+                            link.classList.add('active');
+                        }
+                    });
+                }
+            });
+        });
+
+        // Menu links smooth scroll
+        document.querySelectorAll('.menu-link').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const target = link.getAttribute('href');
+                document.querySelector(target).scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+    </script>
+</body>
+</html>
