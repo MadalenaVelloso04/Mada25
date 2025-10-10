@@ -256,6 +256,71 @@
             margin-bottom: 100px;
         }
 
+        /* Work Info Bar - Cargo Style */
+        #work-info-bar {
+            position: fixed;
+            bottom: 30%;
+            left: 40px;
+            background: rgb(255, 255, 255);
+            padding: 0;
+            max-width: 280px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            line-height: 1.6;
+            display: none;
+            opacity: 0;
+            z-index: 900;
+            border: 1px solid rgba(51, 51, 51, 0.15);
+            transition: opacity 0.4s ease;
+        }
+
+        .info-bar-header {
+            padding: 20px 24px;
+            border-bottom: 1px solid rgba(51, 51, 51, 0.1);
+        }
+
+        #info-title {
+            font-size: 1.1rem;
+            font-weight: normal;
+            font-style: italic;
+            margin: 0;
+            color: #333;
+        }
+
+        .info-bar-content {
+            padding: 20px 24px;
+        }
+
+        #info-category {
+            margin: 0 0 16px 0;
+            color: #666;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        #info-description {
+            margin: 0 0 20px 0;
+            color: #333;
+            line-height: 1.7;
+        }
+
+        .info-meta {
+            display: grid;
+            gap: 8px;
+            font-size: 0.8rem;
+        }
+
+        .info-meta-row {
+            display: grid;
+            grid-template-columns: 60px 1fr;
+            color: #666;
+        }
+
+        .info-meta-row span:last-child {
+            color: #333;
+        }
+
         /* Info Section - Cargo Style */
         .info-section {
             padding: 0px 40px 100px;
@@ -362,7 +427,7 @@
             max-width: 600px;
             margin: 0 auto;
             opacity: 0;
-            transition: opacity 1s ease;
+            
         }
 
         .work-container.visible {
@@ -373,7 +438,7 @@
             position: sticky;
             top: 10vh;
             width: 100%;
-            max-width: 500px;
+            max-width: 600px;
             margin: 0 auto 100vh;
             overflow: hidden;
             cursor: pointer;
@@ -398,8 +463,7 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            filter: blur(8px) brightness(1.4);
-            transition: filter 0.6s ease;
+        
         }
 
         .work-image::after {
@@ -409,19 +473,10 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(255, 255, 255, 0.5);
-            transition: opacity 0.6s ease;
             pointer-events: none;
         }
 
-        .work-item:hover .work-image img,
-        .work-item:hover .work-image video {
-            filter: blur(0) brightness(1);
-        }
-
-        .work-item:hover .work-image::after {
-            opacity: 0;
-        }
+       
 
         .work-item:hover .work-image {
             transform: scale(1.05);
@@ -474,13 +529,19 @@
             .about-text {
                 font-size: 1.5rem;
             }
+
+            #work-info-bar {
+                left: 20px;
+                right: 20px;
+                max-width: calc(100% - 40px);
+            }
         }
     </style>
 </head>
 <body>
     <!-- Custom Cursor -->
     <div class="custom-cursor">
-        <img src="images/Ilustração_Sem_Título.png" alt="">
+        <img src="images/Ilustração_Sem_Título.png" alt="">
     </div>
 
     <!-- Hamburger Menu -->
@@ -528,43 +589,85 @@
         </div>
     </section>
 
+    <!-- Work Info Bar - Cargo Style -->
+    <div id="work-info-bar">
+        <div class="info-bar-header">
+            <h2 id="info-title"></h2>
+            <button id="close-info-bar" style="
+                position: absolute;
+                top: 20px;
+                right: 20px;
+                background: none;
+                border: none;
+                font-size: 1.2rem;
+                color: #666;
+                cursor: none;
+                padding: 0;
+                width: 20px;
+                height: 20px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                transition: color 0.3s ease;
+            " onmouseover="this.style.color='#333'" onmouseout="this.style.color='#666'">×</button>
+        </div>
+        <div class="info-bar-content">
+            <p id="info-category"></p>
+            <p id="info-description"></p>
+            <div class="info-meta">
+                <div class="info-meta-row">
+                    <span>Year</span>
+                    <span id="info-year"></span>
+                </div>
+                <div class="info-meta-row">
+                    <span>Role</span>
+                    <span id="info-role"></span>
+                </div>
+                <div class="info-meta-row">
+                    <span>Status</span>
+                    <span id="info-status"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Work Items -->
     <div class="work-container">
-        <div class="work-item">
+        <div class="work-item" data-work="body-bloom">
             <div class="work-image">
-                <img src="images/MODIS/concept2.gif" alt="olura">
+                <img src="images/MODIS/concept2.gif" alt="Body Bloom">
             </div>
-            <div class="work-title">Body Bloom</div>
+            <div class="work-title">Modis Academia</div>
         </div>
-        <div class="work-item">
+        <div class="work-item" data-work="nura">
             <div class="work-image">
-                <video autoplay muted loop src="images/images copy/gare/App copy/video_app_behance.mp4" alt="olura"></video>
+                <video autoplay muted loop src="images/images copy/gare/App copy/video_app_behance.mp4" alt="Nura"></video>
             </div>
-            <div class="work-title">Nura</div>
+            <div class="work-title">GDO Wayfinding</div>
         </div>
-        <div class="work-item">
+        <div class="work-item" data-work="time-collection">
             <div class="work-image">
-                <img src="images/ezgif-60cb350fb4cf7e.gif" alt="olura">
+                <img src="images/ezgif-60cb350fb4cf7e.gif" alt="Time Collection">
             </div>
-            <div class="work-title">Time Collection</div>
+            <div class="work-title">Olura Supplements</div>
         </div>
-        <div class="work-item">
+        <div class="work-item" data-work="vintage-records">
             <div class="work-image">
-                <img src="images/book.png" alt="book">
+                <img src="images/book.png" alt="Vintage Records">
             </div>
-            <div class="work-title">Vintage Records</div>
+            <div class="work-title">O Rapaz e o mar</div>
         </div>
-        <div class="work-item">
+        <div class="work-item" data-work="ocean-wave">
             <div class="work-image">
-                <img src="images/ezgif-6b00df97da6b47.gif" alt="">
+                <img src="images/ezgif-6b00df97da6b47.gif" alt="Ocean Wave">
             </div>
-            <div class="work-title">Ocean Wave</div>
+            <div class="work-title">Albums & Singles</div>
         </div>
-        <div class="work-item">
+        <div class="work-item" data-work="editorial-mix">
             <div class="work-image">
-                <video autoplay muted loop src="images/images copy/desc/Screen Recording 2025-10-09 at 16.03.36.mov" alt=""></video>
+                <video autoplay muted loop src="images/images copy/desc/Screen Recording 2025-10-09 at 16.03.36.mov" alt="Editorial Mix"></video>
             </div>
-            <div class="work-title">Editorial Mix</div>
+            <div class="work-title">Short-Movie</div>
         </div>
     </div>
 
@@ -615,7 +718,7 @@
                         <p>2022 - 2025</p>
                     </div>
 
-                      <div class="info-item">
+                    <div class="info-item">
                         <p><strong>NABA - Nuova Academia di Belle Arti</strong></p>
                         <p>Erasmus Semester</p>
                         <p>2025</p>
@@ -769,6 +872,9 @@
             const scrollPercent = scrollPos / docHeight;
             const rotation = scrollPercent * 360;
             scrollShape.style.transform = `rotate(${rotation}deg)`;
+
+            // Update work info bar
+            updateWorkInfo();
         });
 
         document.querySelectorAll('.menu a').forEach(link => {
@@ -782,6 +888,100 @@
                 toggleMenu();
             });
         });
+
+        // Work Info Bar Logic
+        const workInfoBar = document.getElementById('work-info-bar');
+        const workItems = document.querySelectorAll('.work-item');
+
+        // Define data for each work item
+        const workData = {
+            'body-bloom': {
+                title: 'Modis Academia',
+                category: 'Brand Identity / Web Design',
+                description: 'fashion academy that positions itself as modern, editorial, and avant-garde.',
+                year: '2025',
+                role: 'Visual Identity, Web Design',
+                status: 'Live'
+            },
+            'nura': {
+                title: 'Olura',
+                category: 'App Design / UX/UI',
+                description: 'A mindful travel companion app that helps users discover authentic local experiences and sustainable destinations.',
+                year: '2024',
+                role: 'UX/UI Design, Motion Design',
+                status: 'Prototype'
+            },
+            'time-collection': {
+                title: 'Time Collection',
+                category: 'Editorial Design / Typography',
+                description: 'An experimental typographic exploration of time through motion, capturing the fluidity and permanence of moments.',
+                year: '2023',
+                role: 'Art Direction, Typography',
+                status: 'Published'
+            },
+            'vintage-records': {
+                title: 'Vintage Records',
+                category: 'Editorial Design / Print',
+                description: 'A curated book celebrating the golden age of vinyl, exploring album artwork and music history through design.',
+                year: '2023',
+                role: 'Editorial Design, Photography',
+                status: 'Published'
+            },
+            'ocean-wave': {
+                title: 'Ocean Wave',
+                category: '3D Design / Motion Graphics',
+                description: 'An immersive visual journey exploring the beauty and power of ocean dynamics through generative design.',
+                year: '2024',
+                role: '3D Modeling, Animation',
+                status: 'Exhibition'
+            },
+            'editorial-mix': {
+                title: 'Editorial Mix',
+                category: 'Editorial Design / Digital',
+                description: 'A dynamic collection of editorial experiments blending traditional layout with interactive digital experiences.',
+                year: '2024',
+                role: 'Art Direction, Interactive Design',
+                status: 'Ongoing'
+            }
+        };
+
+        // Update info bar when project reaches sticky point
+        function updateWorkInfo() {
+            let activeWork = null;
+            const stickyPoint = window.innerHeight * 0.15;
+
+            workItems.forEach(item => {
+                const rect = item.getBoundingClientRect();
+                if (rect.top <= stickyPoint && rect.bottom >= stickyPoint) {
+                    activeWork = item.getAttribute('data-work');
+                }
+            });
+
+            if (activeWork && workData[activeWork]) {
+                const data = workData[activeWork];
+                document.getElementById('info-title').textContent = data.title;
+                document.getElementById('info-category').textContent = data.category;
+                document.getElementById('info-description').textContent = data.description;
+                document.getElementById('info-year').textContent = data.year;
+                document.getElementById('info-role').textContent = data.role;
+                document.getElementById('info-status').textContent = data.status;
+
+                workInfoBar.style.display = 'block';
+                setTimeout(() => {
+                    workInfoBar.style.opacity = '1';
+                }, 10);
+            } else {
+                workInfoBar.style.opacity = '0';
+                setTimeout(() => {
+                    if (workInfoBar.style.opacity === '0') {
+                        workInfoBar.style.display = 'none';
+                    }
+                }, 400);
+            }
+        }
+
+        // Initial check
+        setTimeout(updateWorkInfo, 100);
     </script>
 </body>
 </html>
