@@ -311,7 +311,7 @@
             transform: scale(1.05);
         }
 
-        /* Responsive masonry */
+       /* Responsive masonry */
         @media (max-width: 1200px) {
             .gallery-section {
                 column-count: 2;
@@ -321,6 +321,357 @@
         @media (max-width: 768px) {
             .gallery-section {
                 column-count: 1;
+            }
+        }
+
+        /* TABLET & SMALLER LAPTOPS */
+        @media (max-width: 1024px) {
+            .scroll-progress {
+                right: 30px;
+            }
+
+            .scroll-shape {
+                width: 60px;
+                height: 60px;
+            }
+
+            .little-me {
+                width: 80px;
+                left: 20px;
+                top: 20px;
+            }
+
+            .project-menu {
+                left: 100px;
+                top: 20px;
+            }
+
+            .project-menu a {
+                font-size: 1.2rem;
+                margin: 10px 0;
+            }
+
+            .divider-line {
+                left: 25%;
+                height: calc(35vh - 80px);
+            }
+
+            .poster-stack {
+                width: 400px;
+                height: 560px;
+            }
+
+            .posters-container p {
+                max-width: 300px;
+                font-size: 0.9rem;
+            }
+
+            .project-item {
+                padding: 0 100px;
+            }
+
+            .project-title {
+                right: 60px;
+                font-size: 2.5rem;
+            }
+
+            .section-title {
+                font-size: 3rem;
+            }
+
+            .gallery-section {
+                padding: 80px 30px;
+                column-count: 3;
+            }
+        }
+
+        /* TABLET PORTRAIT */
+        @media (max-width: 768px) {
+            body {
+                cursor: auto;
+            }
+
+            .custom-cursor {
+                display: none;
+            }
+
+            a, .work-item, .poster-item, .project-item {
+                cursor: pointer;
+            }
+
+            .scroll-progress {
+                right: 15px;
+                top: auto;
+                bottom: 20px;
+                transform: none;
+            }
+
+            .scroll-shape {
+                width: 50px;
+                height: 50px;
+            }
+
+            .little-me {
+                width: 60px;
+                left: 15px;
+                top: 15px;
+            }
+
+            .project-menu {
+                position: relative;
+                left: auto;
+                top: auto;
+                padding: 80px 20px 20px;
+                display: flex;
+                flex-wrap: wrap;
+                gap: 15px;
+                justify-content: center;
+                background: rgba(213, 212, 200, 0.9);
+                backdrop-filter: blur(10px);
+            }
+
+            .project-menu a {
+                font-size: 1rem;
+                margin: 0;
+            }
+
+            .divider-line {
+                display: none;
+            }
+
+            .posters-section {
+                min-height: 300vh;
+                padding: 50px 0;
+            }
+
+            .posters-container {
+                flex-direction: column;
+                padding: 20px;
+            }
+
+            .posters-container p {
+                position: relative;
+                left: 0;
+                max-width: 100%;
+                margin: 0 0 30px 0;
+                text-align: center;
+                font-size: 0.9rem;
+            }
+
+            .poster-stack {
+                width: 90vw;
+                max-width: 350px;
+                height: 490px;
+            }
+
+            .projects-section {
+                min-height: 400vh;
+                padding: 50px 0;
+            }
+
+            .project-item {
+                padding: 0 40px;
+            }
+
+            .project-item img {
+                max-height: 60vh;
+            }
+
+            .project-title {
+                position: fixed;
+                right: 20px;
+                top: auto;
+                bottom: 80px;
+                transform: none;
+                font-size: 1.8rem;
+                text-align: right;
+            }
+
+            .section-title {
+                font-size: 2.5rem;
+                margin: 80px 0 30px 0;
+            }
+
+            .gallery-section {
+                padding: 60px 20px;
+                column-count: 2;
+                column-gap: 15px;
+            }
+
+            .gallery-item {
+                margin-bottom: 20px;
+            }
+
+            .gallery-item img {
+                width: 100%;
+            }
+
+            /* Make hover effects work on touch */
+            #illustration .gallery-item img,
+            #3d .gallery-item img {
+                filter: none;
+            }
+
+            #3d .gallery-item::after {
+                display: none;
+            }
+        }
+
+        /* MOBILE */
+        @media (max-width: 480px) {
+            .little-me {
+                width: 50px;
+                left: 10px;
+                top: 10px;
+            }
+
+            .scroll-progress {
+                right: 10px;
+                bottom: 15px;
+            }
+
+            .scroll-shape {
+                width: 40px;
+                height: 40px;
+            }
+
+            .project-menu {
+                padding: 70px 15px 15px;
+                gap: 10px;
+            }
+
+            .project-menu a {
+                font-size: 0.9rem;
+            }
+
+            .posters-section {
+                min-height: 250vh;
+            }
+
+            .posters-container p {
+                font-size: 0.85rem;
+                margin-bottom: 20px;
+                padding: 0 10px;
+            }
+
+            .poster-stack {
+                width: 85vw;
+                max-width: 280px;
+                height: 392px;
+            }
+
+            .projects-section {
+                min-height: 350vh;
+            }
+
+            .project-item {
+                padding: 0 20px;
+            }
+
+            .project-item img {
+                max-height: 50vh;
+            }
+
+            .project-title {
+                right: 15px;
+                bottom: 70px;
+                font-size: 1.5rem;
+                max-width: calc(100vw - 30px);
+            }
+
+            .section-title {
+                font-size: 2rem;
+                margin: 60px 0 20px 0;
+            }
+
+            .gallery-section {
+                padding: 40px 15px;
+                column-count: 1;
+                column-gap: 0;
+            }
+
+            .gallery-item {
+                margin-bottom: 15px;
+            }
+
+            /* Simplify transforms on mobile for performance */
+            .gallery-item:nth-child(3n + 1),
+            .gallery-item:nth-child(5n + 2),
+            .gallery-item:nth-child(7n + 3) {
+                transform: none;
+            }
+        }
+
+        /* VERY SMALL MOBILE */
+        @media (max-width: 360px) {
+            .little-me {
+                width: 40px;
+            }
+
+            .project-menu a {
+                font-size: 0.8rem;
+            }
+
+            .posters-container p {
+                font-size: 0.8rem;
+            }
+
+            .poster-stack {
+                height: 350px;
+            }
+
+            .section-title {
+                font-size: 1.6rem;
+            }
+
+            .project-title {
+                font-size: 1.2rem;
+            }
+        }
+
+        /* LANDSCAPE MOBILE */
+        @media (max-width: 900px) and (max-height: 500px) and (orientation: landscape) {
+            .little-me {
+                width: 40px;
+                top: 10px;
+                left: 10px;
+            }
+
+            .project-menu {
+                padding: 60px 15px 10px;
+            }
+
+            .project-menu a {
+                font-size: 0.85rem;
+            }
+
+            .poster-stack {
+                width: 300px;
+                height: 70vh;
+                max-height: 400px;
+            }
+
+            .posters-container p {
+                font-size: 0.8rem;
+                max-width: 250px;
+            }
+
+            .project-item img {
+                max-height: 70vh;
+            }
+
+            .project-title {
+                font-size: 1.5rem;
+                bottom: 60px;
+            }
+
+            .section-title {
+                font-size: 2rem;
+                margin: 40px 0 20px 0;
+            }
+
+            .scroll-progress {
+                bottom: 10px;
             }
         }
     </style>

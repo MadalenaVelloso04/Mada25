@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Madalena Velloso - Portfolio</title>
-    <style>
+       <style>
         * {
             margin: 0;
             padding: 0;
@@ -409,6 +409,7 @@
             align-items: start;
         }
 
+        /* WORK SECTION WITH HOVER BURST EFFECT */
         .work-container {
             padding: 100px 20px;
             position: relative;
@@ -427,7 +428,6 @@
             width: 100%;
             max-width: 600px;
             margin: 0 auto 100vh;
-            overflow: visible;
             cursor: pointer;
             aspect-ratio: 1/1;
         }
@@ -442,7 +442,6 @@
             background: #ddd;
             position: relative;
             transition: transform 0.6s ease;
-            overflow: hidden;
         }
 
         .work-image img,
@@ -452,74 +451,63 @@
             object-fit: cover;
         }
 
-        .work-image::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-        }
-
+        /* HOVER BURST CONTAINER */
         .hover-images {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 68%;
+            left: 60%;
+            width: 0;
+            height: 0;
             pointer-events: none;
-            opacity: 0;
-            transition: opacity 0.5s ease;
-            z-index: 10;
+            z-index: 50;
         }
 
-        .work-item:hover .hover-images {
-            opacity: 1;
-        }
-
+        /* HOVER IMAGE ITEMS */
         .hover-img {
             position: absolute;
-            width: 35%;
-            height: 35%;
-            object-fit: cover;
-            border: 2px solid rgba(51, 51, 51, 0.2);
+            width: 200px;
+            height: 200px;
+            border: 1px solid rgba(51, 51, 51, 0.3);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
             opacity: 0;
-            transform: scale(0.8);
-            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            transform: translate(-50%, -50%) scale(0.2);
+            transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+            background: #fff;
+            overflow: hidden;
+        }
+        
+        .hover-img img,
+        .hover-img video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
         }
 
+
+        /* BURST EFFECT ON HOVER */
         .work-item:hover .hover-img {
             opacity: 1;
-            transform: scale(1);
         }
 
-        .hover-img:nth-child(1) {
-            top: -15%;
-            left: -15%;
-            transition-delay: 0.1s;
+        .work-item:hover .hover-img:nth-child(1) {
+            transform: translate(calc(-50% - 350px), calc(-50% - 280px)) scale(1) rotate(-8deg);
+            transition-delay: 0s;
         }
 
-        .hover-img:nth-child(2) {
-            top: -15%;
-            right: -15%;
-            transition-delay: 0.15s;
+        .work-item:hover .hover-img:nth-child(2) {
+            transform: translate(calc(-50% + 150px), calc(-50% - 280px)) scale(1) rotate(8deg);
+            transition-delay: 0.08s;
         }
 
-        .hover-img:nth-child(3) {
-            bottom: -15%;
-            left: -15%;
-            transition-delay: 0.2s;
+        .work-item:hover .hover-img:nth-child(3) {
+            transform: translate(calc(-50% - 350px), calc(-50% + 80px)) scale(1) rotate(8deg);
+            transition-delay: 0.16s;
         }
 
-        .hover-img:nth-child(4) {
-            bottom: -15%;
-            right: -15%;
-            transition-delay: 0.25s;
-        }
-
-        .work-item:hover .work-image {
-            transform: scale(1.05);
+        .work-item:hover .hover-img:nth-child(4) {
+            transform: translate(calc(-50% + 150px), calc(-50% + 80px)) scale(1) rotate(-8deg);
+            transition-delay: 0.24s;
         }
 
         .work-title {
@@ -532,7 +520,7 @@
             color: #ffffff;
             opacity: 0;
             transition: opacity 0.5s ease;
-            z-index: 20;
+            z-index: 40;
             pointer-events: none;
             text-align: center;
         }
@@ -960,7 +948,7 @@
 </head>
 <body>
     <div class="custom-cursor">
-        <img src="images/Ilustração_Sem_Título.png" alt="cursor">
+        <img src="images/Ilustração_Sem_Título.png" alt="cursor">
     </div>
 
     <div class="hamburger" onclick="toggleMenu()">
@@ -1004,7 +992,6 @@
     <div id="work-info-bar">
         <div class="info-bar-header">
             <h2 id="info-title"></h2>
-            <button id="close-info-bar" style="position: absolute; top: 20px; right: 20px; background: none; border: none; font-size: 1.2rem; color: #666; cursor: none; padding: 0; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; transition: color 0.3s ease;" onmouseover="this.style.color='#333'" onmouseout="this.style.color='#666'">×</button>
         </div>
         <div class="info-bar-content">
             <p id="info-category"></p>
@@ -1031,10 +1018,10 @@
             <div class="work-image">
                 <img src="images/MODIS/concept2.gif" alt="Body Bloom">
                 <div class="hover-images">
-                    <img class="hover-img" src="images/MODIS/concept2.gif" alt="Modis 1">
-                    <img class="hover-img" src="images/MODIS/concept2.gif" alt="Modis 2">
-                    <img class="hover-img" src="images/MODIS/concept2.gif" alt="Modis 3">
-                    <img class="hover-img" src="images/MODIS/concept2.gif" alt="Modis 4">
+                    <div class="hover-img"><img src="images/MODIS/notebook.png" alt="Modis 1"></div>
+                    <div class="hover-img"><img src="images/MODIS/banner.png" alt="Modis 2"></div>
+                    <div class="hover-img"><img src="images/MODIS/MUPI.png" alt="Modis 3"></div>
+                    <div class="hover-img"><img src="images/MODIS/website.png" alt="Modis 4"></div>
                 </div>
             </div>
             <div class="work-title">Modis Academia</div>
@@ -1044,10 +1031,10 @@
             <div class="work-image">
                 <video autoplay muted loop src="images/images copy/gare/App copy/video_app_behance.mp4"></video>
                 <div class="hover-images">
-                    <img class="hover-img" src="images/MODIS/concept2.gif" alt="GDO 1">
-                    <img class="hover-img" src="images/MODIS/concept2.gif" alt="GDO 2">
-                    <img class="hover-img" src="images/MODIS/concept2.gif" alt="GDO 3">
-                    <img class="hover-img" src="images/MODIS/concept2.gif" alt="GDO 4">
+                    <div class="hover-img"><img src="images/images copy/gare/wall circles.png" alt="GDO 1"></div>
+                    <div class="hover-img"><img src="images/images copy/gare/App copy/mockups/Bendito_Mockup-CMB-Iphone-02 copy.png" alt="GDO 2"></div>
+                    <div class="hover-img"><img src="images/images copy/gare/quote.png" alt="GDO 3"></div>
+                    <div class="hover-img"><img src="images/images copy/gare/ciubos.png" alt="GDO 4"></div>
                 </div>
             </div>
             <div class="work-title">GDO Wayfinding</div>
@@ -1057,10 +1044,10 @@
             <div class="work-image">
                 <img src="images/ezgif-60cb350fb4cf7e.gif" alt="Olura Supplements">
                 <div class="hover-images">
-                    <img class="hover-img" src="images/ezgif-60cb350fb4cf7e.gif" alt="Olura 1">
-                    <img class="hover-img" src="images/ezgif-60cb350fb4cf7e.gif" alt="Olura 2">
-                    <img class="hover-img" src="images/ezgif-60cb350fb4cf7e.gif" alt="Olura 3">
-                    <img class="hover-img" src="images/ezgif-60cb350fb4cf7e.gif" alt="Olura 4">
+                    <div class="hover-img"><img src="images/olura/mockup1.png" alt="Olura 1"></div>
+                    <div class="hover-img"><img src="images/olura/mupi3.png" alt="Olura 2"></div>
+                    <div class="hover-img"><img src="images/olura/mupi.jpg" alt="Olura 3"></div>
+                    <div class="hover-img"><img src="images/olura/mockup3.png" alt="Olura 4"></div>
                 </div>
             </div>
             <div class="work-title">Olura Supplements</div>
@@ -1070,10 +1057,10 @@
             <div class="work-image">
                 <img src="images/book.png" alt="Vintage Records">
                 <div class="hover-images">
-                    <img class="hover-img" src="images/book.png" alt="Book 1">
-                    <img class="hover-img" src="images/book.png" alt="Book 2">
-                    <img class="hover-img" src="images/book.png" alt="Book 3">
-                    <img class="hover-img" src="images/book.png" alt="Book 4">
+                    <div class="hover-img"><img src="images/rapazeomar/tiktok1 copy.jpg" alt="Book 1"></div>
+                    <div class="hover-img"><img src="images/rapazeomar/tiktok2 copy.jpg" alt="Book 2"></div>
+                    <div class="hover-img"><img src="images/rapazeomar/tiktok3 copy.png" alt="Book 3"></div>
+                    <div class="hover-img"><img src="images/rapazeomar/tiktok4 copy.jpg" alt="Book 4"></div>
                 </div>
             </div>
             <div class="work-title">O Rapaz e o mar</div>
@@ -1083,10 +1070,10 @@
             <div class="work-image">
                 <img src="images/ezgif-6b00df97da6b47.gif" alt="Ocean Wave">
                 <div class="hover-images">
-                    <img class="hover-img" src="images/ezgif-6b00df97da6b47.gif" alt="Albums 1">
-                    <img class="hover-img" src="images/ezgif-6b00df97da6b47.gif" alt="Albums 2">
-                    <img class="hover-img" src="images/ezgif-6b00df97da6b47.gif" alt="Albums 3">
-                    <img class="hover-img" src="images/ezgif-6b00df97da6b47.gif" alt="Albums 4">
+                    <div class="hover-img"><img src="images/images copy/vinyl/mockup_backcover copy.png" alt="Albums 1"></div>
+                    <div class="hover-img"><img src="images/images copy/vinyl/Album_cover copy 3.png" alt="Albums 2"></div>
+                    <div class="hover-img"><img src="images/images copy/vinyl/mockup_single_2 copy.png" alt="Albums 3"></div>
+                    <div class="hover-img"><img src="images/images copy/vinyl/mockup_single_1.5 copy.jpeg" alt="Albums 4"></div>
                 </div>
             </div>
             <div class="work-title">Albums & Singles</div>
@@ -1096,10 +1083,10 @@
             <div class="work-image">
                 <video autoplay muted loop src="images/images copy/desc/Screen Recording 2025-10-09 at 16.03.36.mov"></video>
                 <div class="hover-images">
-                    <img class="hover-img" src="images/book.png" alt="Movie 1">
-                    <img class="hover-img" src="images/book.png" alt="Movie 2">
-                    <img class="hover-img" src="images/book.png" alt="Movie 3">
-                    <img class="hover-img" src="images/book.png" alt="Movie 4">
+                    <div class="hover-img"><video autoplay muted loop src="images/images copy/desc/0000-0025 copy.mp4"></video></div>
+                    <div class="hover-img"><video autoplay muted loop src="images/images copy/desc/0001-0090_001 copy.mp4"></video></div>
+                    <div class="hover-img"><video autoplay muted loop src="images/images copy/desc/0001-0140_001.mp4"></video></div>
+                    <div class="hover-img"><video autoplay muted loop src="images/images copy/desc/animation1.1.mp4"></video></div>
                 </div>
             </div>
             <div class="work-title">Short-Movie</div>
@@ -1129,8 +1116,6 @@
             <div class="info-column info-main">
                 <div class="info-content">
                     <p>I'm a multi-disciplinary designer passionate about creating meaningful visual experiences. Based in Lisbon, I specialize in visual identity, editorial design, and digital experiences.</p>
-                    <p>My work explores the intersection of traditional craft and contemporary aesthetics, always seeking to create designs that resonate emotionally while serving their purpose functionally.</p>
-                    <p>I believe in the power of simplicity and the importance of detail. Every project is an opportunity to tell a story, and I approach each with curiosity and dedication to craft something unique and meaningful.</p>
                 </div>
             </div>
         </div>
@@ -1146,43 +1131,6 @@
                         <p>Bachelor in Global Design</p>
                         <p>2022 - 2025</p>
                     </div>
-                    <div class="info-item">
-                        <p><strong>NABA - Nuova Academia di Belle Arti</strong></p>
-                        <p>Erasmus Semester</p>
-                        <p>2025</p>
-                    </div>
-                    <div class="info-item">
-                        <p><strong>Design Fundamentals</strong></p>
-                        <p>Art Direction & Graphic Design</p>
-                        <p>(3 years)</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="info-container">
-            <div class="info-column">
-                <h3 class="info-heading">Experience</h3>
-            </div>
-            <div class="info-column info-main">
-                <div class="info-content">
-                    <div class="info-item">
-                        <p><strong>Freelance Designer</strong></p>
-                        <p>Brand identity, illustration, web design, and everything in between</p>
-                        <p>2023 - Present</p>
-                    </div>
-                    <div class="info-item">
-                        <p><strong>Designer at Skardy Studio</strong></p>
-                        <p>Brand Design</p>
-                        <p>Lisbon, Portugal</p>
-                        <p>2023 / 1y</p>
-                    </div>
-                    <div class="info-item">
-                        <p><strong>Graphic Design Aprentice at Desisto Studio</strong></p>
-                        <p>Print lab</p>
-                        <p>Lisbon, Portugal</p>
-                        <p>2023</p>
-                    </div> 
                 </div>
             </div>
         </div>
