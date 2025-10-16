@@ -26,7 +26,6 @@
             cursor: none;
         }
 
-        /* Custom Cursor */
         .custom-cursor {
             position: fixed;
             width: 52px;
@@ -42,7 +41,6 @@
             object-fit: contain;
         }
 
-        /* Hamburger Menu */
         .hamburger {
             position: fixed;
             top: 40px;
@@ -81,7 +79,6 @@
             transform: rotate(-45deg) translate(13px, -13px);
         }
 
-        /* Full Screen Menu */
         .menu {
             position: fixed;
             top: 0;
@@ -126,7 +123,6 @@
             color: #999;
         }
 
-        /* Fixed Side Text */
         .side-text {
             position: fixed;
             font-size: 1.5rem;
@@ -152,7 +148,6 @@
             transform: translateY(-50%);
         }
 
-        /* Scroll Progress Indicator */
         .scroll-progress {
             position: fixed;
             right: 60px;
@@ -179,7 +174,6 @@
             object-fit: contain;
         }
 
-        /* Hero Section */
         .hero {
             height: 300vh;
             position: relative;
@@ -202,7 +196,6 @@
             white-space: normal;
         }
 
-        /* Little Me Character */
         .little-me {
             position: fixed;
             width: 520px;
@@ -229,7 +222,6 @@
             transform: translate(0, 0);
         }
 
-        /* About Section */
         .about {
             min-height: 100vh;
             display: flex;
@@ -256,10 +248,9 @@
             margin-bottom: 100px;
         }
 
-        /* Work Info Bar - Cargo Style */
         #work-info-bar {
             position: fixed;
-            bottom: 30%;
+            bottom: 5%;
             left: 40px;
             background: rgb(255, 255, 255);
             padding: 0;
@@ -321,7 +312,6 @@
             color: #333;
         }
 
-        /* Info Section - Cargo Style */
         .info-section {
             padding: 0px 40px 100px;
             opacity: 0;
@@ -403,7 +393,6 @@
             max-width: 800px;
         }
 
-        /* Profile Picture */
         .profile-picture {
             width: 200px;
             height: 200px;
@@ -420,14 +409,12 @@
             align-items: start;
         }
 
-        /* Work Items */
         .work-container {
             padding: 100px 20px;
             position: relative;
             max-width: 600px;
             margin: 0 auto;
             opacity: 0;
-            
         }
 
         .work-container.visible {
@@ -440,7 +427,7 @@
             width: 100%;
             max-width: 600px;
             margin: 0 auto 100vh;
-            overflow: hidden;
+            overflow: visible;
             cursor: pointer;
             aspect-ratio: 1/1;
         }
@@ -463,7 +450,6 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-        
         }
 
         .work-image::after {
@@ -476,7 +462,61 @@
             pointer-events: none;
         }
 
-       
+        .hover-images {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            z-index: 10;
+        }
+
+        .work-item:hover .hover-images {
+            opacity: 1;
+        }
+
+        .hover-img {
+            position: absolute;
+            width: 35%;
+            height: 35%;
+            object-fit: cover;
+            border: 2px solid rgba(51, 51, 51, 0.2);
+            opacity: 0;
+            transform: scale(0.8);
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .work-item:hover .hover-img {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .hover-img:nth-child(1) {
+            top: -15%;
+            left: -15%;
+            transition-delay: 0.1s;
+        }
+
+        .hover-img:nth-child(2) {
+            top: -15%;
+            right: -15%;
+            transition-delay: 0.15s;
+        }
+
+        .hover-img:nth-child(3) {
+            bottom: -15%;
+            left: -15%;
+            transition-delay: 0.2s;
+        }
+
+        .hover-img:nth-child(4) {
+            bottom: -15%;
+            right: -15%;
+            transition-delay: 0.25s;
+        }
 
         .work-item:hover .work-image {
             transform: scale(1.05);
@@ -489,10 +529,10 @@
             transform: translate(-50%, -50%);
             font-size: 2rem;
             font-style: italic;
-            color: #333;
+            color: #ffffff;
             opacity: 0;
             transition: opacity 0.5s ease;
-            z-index: 10;
+            z-index: 20;
             pointer-events: none;
             text-align: center;
         }
@@ -501,11 +541,247 @@
             opacity: 1;
         }
 
-        /* Responsive */
+        @media (max-width: 1024px) {
+            .hover-images {
+                display: none;
+            }
+
+            .hamburger {
+                top: 30px;
+                right: calc(100vw - 120px);
+                width: 45px;
+                height: 36px;
+            }
+
+            .menu a {
+                font-size: 3rem;
+                margin: 15px 0;
+            }
+
+            .side-text {
+                font-size: 1.3rem;
+            }
+
+            .side-text.left {
+                left: 30px;
+            }
+
+            .side-text.right {
+                right: 30px;
+            }
+
+            .scroll-progress {
+                right: 40px;
+            }
+
+            .scroll-shape {
+                width: 70px;
+                height: 70px;
+            }
+
+            .hero-text {
+                font-size: 2.5rem;
+                max-width: 85%;
+            }
+
+            .little-me {
+                width: 450px;
+            }
+
+            .little-me.corner {
+                width: 90px;
+                top: 30px;
+                left: 30px;
+            }
+
+            .about-text {
+                font-size: 1.8rem;
+            }
+
+            #work-info-bar {
+                left: 30px;
+                bottom: 30px;
+                max-width: 260px;
+                font-size: 0.8rem;
+                z-index: 50;
+            }
+
+            .info-bar-header {
+                padding: 18px 22px;
+            }
+
+            #info-title {
+                font-size: 1rem;
+            }
+
+            .info-bar-content {
+                padding: 18px 22px;
+            }
+
+            .work-container {
+                max-width: 500px;
+            }
+
+            .work-item {
+                max-width: 500px;
+            }
+
+            .work-title {
+                font-size: 1.8rem;
+            }
+
+            .info-section {
+                padding: 0 30px 80px;
+            }
+
+            .info-container {
+                grid-template-columns: 160px 1fr;
+                gap: 60px;
+                padding-bottom: 60px;
+                margin-bottom: 60px;
+            }
+        }
+
         @media (max-width: 768px) {
+            body {
+                cursor: auto;
+            }
+
+            .custom-cursor {
+                display: none;
+            }
+
+            a, .work-item, .hamburger {
+                cursor: pointer;
+            }
+
+            .hamburger {
+                top: 20px;
+                right: 20px;
+                width: 40px;
+                height: 32px;
+                z-index: 1001;
+            }
+
+            .hamburger span {
+                height: 2.5px;
+            }
+
+            .menu {
+                background: rgba(255, 255, 255, 0.97);
+            }
+
+            .menu a {
+                font-size: 2.5rem;
+                margin: 15px 0;
+            }
+
+            .side-text {
+                font-size: 1rem;
+            }
+
+            .side-text.left {
+                left: 20px;
+            }
+
+            .side-text.right {
+                right: 20px;
+            }
+
+            .scroll-progress {
+                right: 20px;
+                top: auto;
+                bottom: 20px;
+                transform: none;
+            }
+
+            .scroll-shape {
+                width: 60px;
+                height: 60px;
+            }
+
+            .hero {
+                height: 250vh;
+            }
+
+            .hero-text {
+                font-size: 2rem;
+                max-width: 90%;
+                padding: 0 20px;
+            }
+
+            .little-me {
+                width: 300px;
+            }
+
+            .little-me.corner {
+                width: 70px;
+                top: 20px;
+                left: 20px;
+            }
+
+            .about {
+                padding: 80px 20px;
+            }
+
+            .about-text {
+                font-size: 1.5rem;
+                margin-bottom: 80px;
+            }
+
+            #work-info-bar {
+                position: fixed;
+                bottom: 20px;
+                top: auto;
+                left: 20px;
+                right: 20px;
+                max-width: calc(100% - 40px);
+                font-size: 0.8rem;
+            }
+
+            .info-bar-header {
+                padding: 16px 20px;
+            }
+
+            #info-title {
+                font-size: 1rem;
+                padding-right: 30px;
+            }
+
+            .info-bar-content {
+                padding: 16px 20px;
+            }
+
+            .work-container {
+                padding: 80px 20px;
+                max-width: 100%;
+            }
+
+            .work-item {
+                max-width: 100%;
+                margin-bottom: 80vh;
+                aspect-ratio: 1/1;
+            }
+
+            .work-item:last-child {
+                margin-bottom: 80vh;
+            }
+
+            .work-title {
+                font-size: 1.5rem;
+                padding: 0 20px;
+            }
+
+            .info-section {
+                padding: 0 20px 60px;
+                margin-top: -60vh;
+            }
+
             .info-container {
                 grid-template-columns: 1fr;
                 gap: 20px;
+                padding-bottom: 50px;
+                margin-bottom: 50px;
             }
 
             .profile-with-image {
@@ -515,43 +791,184 @@
 
             .profile-picture {
                 margin-left: 0;
-                margin-top: 20px;
+                width: 150px;
+                height: 150px;
+            }
+
+            .info-heading {
+                font-size: 0.85rem;
+            }
+
+            .info-column {
+                font-size: 0.9rem;
+            }
+
+            .info-item {
+                margin-bottom: 25px;
+                padding-bottom: 25px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hamburger {
+                top: 15px;
+                right: 15px;
+                width: 35px;
+                height: 28px;
+            }
+
+            .hamburger span {
+                height: 2px;
+            }
+
+            .hamburger.active span:nth-child(1) {
+                transform: rotate(45deg) translate(10px, 10px);
+            }
+
+            .hamburger.active span:nth-child(3) {
+                transform: rotate(-45deg) translate(10px, -10px);
+            }
+
+            .menu a {
+                font-size: 2rem;
+                margin: 12px 0;
             }
 
             .side-text {
-                font-size: 1rem;
+                font-size: 0.85rem;
+            }
+
+            .side-text.left {
+                left: 15px;
+            }
+
+            .side-text.right {
+                right: 15px;
+            }
+
+            .scroll-progress {
+                right: 15px;
+                bottom: 15px;
+            }
+
+            .scroll-shape {
+                width: 50px;
+                height: 50px;
+            }
+
+            .hero {
+                height: 200vh;
             }
 
             .hero-text {
-                font-size: 2rem;
+                font-size: 1.5rem;
+                max-width: 95%;
+                padding: 0 15px;
+                line-height: 1.5;
+            }
+
+            .little-me {
+                width: 240px;
+            }
+
+            .little-me.corner {
+                width: 60px;
+                top: 15px;
+                left: 15px;
+            }
+
+            .about {
+                padding: 60px 15px;
+                min-height: 80vh;
             }
 
             .about-text {
-                font-size: 1.5rem;
+                font-size: 1.2rem;
+                margin-bottom: 60px;
+                line-height: 1.5;
             }
 
             #work-info-bar {
-                left: 20px;
-                right: 20px;
-                max-width: calc(100% - 40px);
+                top: auto;
+                bottom: 15px;
+                left: 15px;
+                right: 15px;
+                max-width: calc(100% - 30px);
+                font-size: 0.75rem;
+            }
+
+            .info-bar-header {
+                padding: 14px 18px;
+            }
+
+            #info-title {
+                font-size: 0.95rem;
+            }
+
+            .info-bar-content {
+                padding: 14px 18px;
+            }
+
+            .work-container {
+                padding: 60px 15px;
+            }
+
+            .work-item {
+                margin-bottom: 60vh;
+            }
+
+            .work-item:last-child {
+                margin-bottom: 60vh;
+            }
+
+            .work-title {
+                font-size: 1.2rem;
+                padding: 0 15px;
+            }
+
+            .info-section {
+                padding: 0 15px 50px;
+                margin-top: -50vh;
+            }
+
+            .info-container {
+                gap: 15px;
+                padding-bottom: 40px;
+                margin-bottom: 40px;
+            }
+
+            .profile-picture {
+                width: 120px;
+                height: 120px;
+            }
+
+            .info-heading {
+                font-size: 0.8rem;
+            }
+
+            .info-column {
+                font-size: 0.85rem;
+                line-height: 1.6;
+            }
+
+            .info-item {
+                margin-bottom: 20px;
+                padding-bottom: 20px;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Custom Cursor -->
     <div class="custom-cursor">
         <img src="images/Ilustração_Sem_Título.png" alt="cursor">
     </div>
 
-    <!-- Hamburger Menu -->
     <div class="hamburger" onclick="toggleMenu()">
         <span></span>
         <span></span>
         <span></span>
     </div>
 
-    <!-- Full Screen Menu -->
     <div class="menu">
         <a href="#about">About</a>
         <a href="./projectsection.html">Works</a>
@@ -559,28 +976,23 @@
         <a href="#contacts">Contacts</a>
     </div>
 
-    <!-- Side Text -->
     <div class="side-text left">mAdA vEllOso</div>
     <div class="side-text right">Multi-Designer</div>
 
-    <!-- Scroll Progress -->
     <div class="scroll-progress">
         <div class="scroll-shape">
             <img src="images/flower.GIF" alt="Scroll indicator">
         </div>
     </div>
 
-    <!-- Little Me Character -->
     <img class="little-me" src="images/IMG_0465.GIF" alt="Little Me">
 
-    <!-- Hero Section -->
     <section class="hero">
         <div class="hero-text">
             Heyo! My name is Madalena Velloso, portuguese, 21 years old, based in Lisbon.
         </div>
     </section>
 
-    <!-- About Section -->
     <section class="about">
         <div class="about-content">
             <div class="about-text">
@@ -589,27 +1001,10 @@
         </div>
     </section>
 
-    <!-- Work Info Bar - Cargo Style -->
     <div id="work-info-bar">
         <div class="info-bar-header">
             <h2 id="info-title"></h2>
-            <button id="close-info-bar" style="
-                position: absolute;
-                top: 20px;
-                right: 20px;
-                background: none;
-                border: none;
-                font-size: 1.2rem;
-                color: #666;
-                cursor: none;
-                padding: 0;
-                width: 20px;
-                height: 20px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                transition: color 0.3s ease;
-            " onmouseover="this.style.color='#333'" onmouseout="this.style.color='#666'">×</button>
+            <button id="close-info-bar" style="position: absolute; top: 20px; right: 20px; background: none; border: none; font-size: 1.2rem; color: #666; cursor: none; padding: 0; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; transition: color 0.3s ease;" onmouseover="this.style.color='#333'" onmouseout="this.style.color='#666'">×</button>
         </div>
         <div class="info-bar-content">
             <p id="info-category"></p>
@@ -631,53 +1026,91 @@
         </div>
     </div>
 
-    <!-- Work Items -->
     <div class="work-container">
         <div class="work-item" data-work="body-bloom">
             <div class="work-image">
                 <img src="images/MODIS/concept2.gif" alt="Body Bloom">
+                <div class="hover-images">
+                    <img class="hover-img" src="images/MODIS/concept2.gif" alt="Modis 1">
+                    <img class="hover-img" src="images/MODIS/concept2.gif" alt="Modis 2">
+                    <img class="hover-img" src="images/MODIS/concept2.gif" alt="Modis 3">
+                    <img class="hover-img" src="images/MODIS/concept2.gif" alt="Modis 4">
+                </div>
             </div>
             <div class="work-title">Modis Academia</div>
         </div>
+        
         <div class="work-item" data-work="nura">
             <div class="work-image">
-                <video autoplay muted loop src="images/images copy/gare/App copy/video_app_behance.mp4" alt="Nura"></video>
+                <video autoplay muted loop src="images/images copy/gare/App copy/video_app_behance.mp4"></video>
+                <div class="hover-images">
+                    <img class="hover-img" src="images/MODIS/concept2.gif" alt="GDO 1">
+                    <img class="hover-img" src="images/MODIS/concept2.gif" alt="GDO 2">
+                    <img class="hover-img" src="images/MODIS/concept2.gif" alt="GDO 3">
+                    <img class="hover-img" src="images/MODIS/concept2.gif" alt="GDO 4">
+                </div>
             </div>
             <div class="work-title">GDO Wayfinding</div>
         </div>
+        
         <div class="work-item" data-work="Olura Supplements">
             <div class="work-image">
                 <img src="images/ezgif-60cb350fb4cf7e.gif" alt="Olura Supplements">
+                <div class="hover-images">
+                    <img class="hover-img" src="images/ezgif-60cb350fb4cf7e.gif" alt="Olura 1">
+                    <img class="hover-img" src="images/ezgif-60cb350fb4cf7e.gif" alt="Olura 2">
+                    <img class="hover-img" src="images/ezgif-60cb350fb4cf7e.gif" alt="Olura 3">
+                    <img class="hover-img" src="images/ezgif-60cb350fb4cf7e.gif" alt="Olura 4">
+                </div>
             </div>
             <div class="work-title">Olura Supplements</div>
         </div>
+        
         <div class="work-item" data-work="vintage-records">
             <div class="work-image">
                 <img src="images/book.png" alt="Vintage Records">
+                <div class="hover-images">
+                    <img class="hover-img" src="images/book.png" alt="Book 1">
+                    <img class="hover-img" src="images/book.png" alt="Book 2">
+                    <img class="hover-img" src="images/book.png" alt="Book 3">
+                    <img class="hover-img" src="images/book.png" alt="Book 4">
+                </div>
             </div>
             <div class="work-title">O Rapaz e o mar</div>
         </div>
+        
         <div class="work-item" data-work="ocean-wave">
             <div class="work-image">
                 <img src="images/ezgif-6b00df97da6b47.gif" alt="Ocean Wave">
+                <div class="hover-images">
+                    <img class="hover-img" src="images/ezgif-6b00df97da6b47.gif" alt="Albums 1">
+                    <img class="hover-img" src="images/ezgif-6b00df97da6b47.gif" alt="Albums 2">
+                    <img class="hover-img" src="images/ezgif-6b00df97da6b47.gif" alt="Albums 3">
+                    <img class="hover-img" src="images/ezgif-6b00df97da6b47.gif" alt="Albums 4">
+                </div>
             </div>
             <div class="work-title">Albums & Singles</div>
         </div>
+        
         <div class="work-item" data-work="editorial-mix">
             <div class="work-image">
-                <video autoplay muted loop src="images/images copy/desc/Screen Recording 2025-10-09 at 16.03.36.mov" alt="Editorial Mix"></video>
+                <video autoplay muted loop src="images/images copy/desc/Screen Recording 2025-10-09 at 16.03.36.mov"></video>
+                <div class="hover-images">
+                    <img class="hover-img" src="images/book.png" alt="Movie 1">
+                    <img class="hover-img" src="images/book.png" alt="Movie 2">
+                    <img class="hover-img" src="images/book.png" alt="Movie 3">
+                    <img class="hover-img" src="images/book.png" alt="Movie 4">
+                </div>
             </div>
             <div class="work-title">Short-Movie</div>
         </div>
     </div>
 
-    <!-- Info Section - Cargo Style -->
     <section class="info-section" id="about">
         <div class="info-container">
             <div class="info-column">
                 <h3 class="info-heading">Profile</h3>
             </div>
-
             <div class="info-column info-main profile-with-image">
                 <div class="info-content">
                     <p>Madalena Velloso</p>
@@ -693,13 +1126,10 @@
             <div class="info-column">
                 <h3 class="info-heading">About</h3>
             </div>
-
             <div class="info-column info-main">
                 <div class="info-content">
                     <p>I'm a multi-disciplinary designer passionate about creating meaningful visual experiences. Based in Lisbon, I specialize in visual identity, editorial design, and digital experiences.</p>
-                    
                     <p>My work explores the intersection of traditional craft and contemporary aesthetics, always seeking to create designs that resonate emotionally while serving their purpose functionally.</p>
-                    
                     <p>I believe in the power of simplicity and the importance of detail. Every project is an opportunity to tell a story, and I approach each with curiosity and dedication to craft something unique and meaningful.</p>
                 </div>
             </div>
@@ -709,7 +1139,6 @@
             <div class="info-column">
                 <h3 class="info-heading">Education</h3>
             </div>
-
             <div class="info-column info-main">
                 <div class="info-content">
                     <div class="info-item">
@@ -717,13 +1146,11 @@
                         <p>Bachelor in Global Design</p>
                         <p>2022 - 2025</p>
                     </div>
-
                     <div class="info-item">
                         <p><strong>NABA - Nuova Academia di Belle Arti</strong></p>
                         <p>Erasmus Semester</p>
                         <p>2025</p>
                     </div>
-                    
                     <div class="info-item">
                         <p><strong>Design Fundamentals</strong></p>
                         <p>Art Direction & Graphic Design</p>
@@ -737,7 +1164,6 @@
             <div class="info-column">
                 <h3 class="info-heading">Experience</h3>
             </div>
-
             <div class="info-column info-main">
                 <div class="info-content">
                     <div class="info-item">
@@ -765,7 +1191,6 @@
             <div class="info-column">
                 <h3 class="info-heading">Skills</h3>
             </div>
-
             <div class="info-column info-main">
                 <div class="info-content">
                     <p>Brand Identity, Editorial Design, Typography, Web Design, 3D Modeling, Illustration, Print Design, Motion Graphics</p>
@@ -786,7 +1211,6 @@
         const scrollShape = document.querySelector('.scroll-shape');
         const customCursor = document.querySelector('.custom-cursor');
 
-        // Custom cursor follow mouse
         document.addEventListener('mousemove', (e) => {
             customCursor.style.left = e.clientX + 'px';
             customCursor.style.top = e.clientY + 'px';
@@ -799,8 +1223,6 @@
 
         window.addEventListener('scroll', () => {
             const scrollPos = window.scrollY;
-
-            // Text shrinks while staying centered, then scrolls naturally
             const minSize = 1.2;
             const maxSize = 3;
             const shrinkEnd = 800;
@@ -850,7 +1272,6 @@
                 littleMe.classList.remove('visible');
             }
 
-            // Show info section
             const infoOffset = infoSection.getBoundingClientRect().top;
             if (infoOffset < window.innerHeight * 0.8) {
                 infoSection.classList.add('visible');
@@ -874,13 +1295,11 @@
             const rotation = scrollPercent * 360;
             scrollShape.style.transform = `rotate(${rotation}deg)`;
 
-            // Update work info bar
             updateWorkInfo();
         });
 
         document.querySelectorAll('.menu a').forEach(link => {
             link.addEventListener('click', (e) => {
-                // Only prevent default for anchor links (starting with #)
                 if (link.getAttribute('href').startsWith('#')) {
                     e.preventDefault();
                     const target = link.getAttribute('href');
@@ -890,11 +1309,9 @@
             });
         });
 
-        // Work Info Bar Logic
         const workInfoBar = document.getElementById('work-info-bar');
         const workItems = document.querySelectorAll('.work-item');
 
-      // Define data for each work item
         const workData = {
             'body-bloom': {
                 title: 'Modis Academia',
@@ -907,7 +1324,7 @@
             'nura': {
                 title: 'GDO App and wayfinding',
                 category: 'App Design / UX/UI / Branding / Wayfinding',
-                description: 'A multidisciplinary project reimagining the identity and wayfinding of Portugals busiest station — merging design, movement, and user-centered thinking into one cohesive visual system.',
+                description: 'A multidisciplinary project reimagining the identity and wayfinding of Portugals busiest station.',
                 year: 'Oct-Nov 2024',
                 role: 'UX/UI Design, Wayfinding, 3D',
                 status: 'Proposal'
@@ -923,7 +1340,7 @@
             'vintage-records': {
                 title: 'O Rapaz e o Mar',
                 category: 'Illustration',
-                description: '"O rapaz e o Mar" (The Boy and the Sea in english) is a childrens book written and illustrated by me.',
+                description: '"O rapaz e o Mar" is a childrens book written and illustrated by me.',
                 year: 'September 2025',
                 role: 'Illustrations',
                 status: 'During evaluation'
@@ -938,15 +1355,14 @@
             },
             'editorial-mix': {
                 title: 'Short-Movie',
-                category: 'Creatice Direction / Branding / 3D modeling',
-                description: 'Descarrilados, meaning "derailed," is a fantasy grounded in historical reality—a story for us, but a lived experience for those who endured these dark times. This animation serves as both an illustrative and educational work about Portugal´s oppressive dictatorship under António de Oliveira Salazar.',
+                category: 'Creative Direction / Branding / 3D modeling',
+                description: 'Descarrilados is a fantasy grounded in historical reality about Portugals oppressive dictatorship.',
                 year: '2024',
                 role: 'Art Direction, Designer, 3D modeler',
                 status: 'Published'
             }
         };
 
-        // Update info bar when project reaches sticky point
         function updateWorkInfo() {
             let activeWork = null;
             const stickyPoint = window.innerHeight * 0.15;
@@ -981,7 +1397,6 @@
             }
         }
 
-        // Initial check
         setTimeout(updateWorkInfo, 100);
     </script>
 </body>
