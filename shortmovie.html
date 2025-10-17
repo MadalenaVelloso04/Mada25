@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modis Academy - Madalena Velloso</title>
+    <title>Project Title - Madalena Velloso</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600&family=JetBrains+Mono:wght@300;400&display=swap');
         
@@ -16,7 +16,7 @@
         :root {
             --primary-black: #0a0a0a;
             --secondary-black: #1a1a1a;
-            --accent-white:#ffffff;
+            --accent-white: #ffffff;
             --subtle-gray: #888;
             --light-gray: #e5e5e5;
             --accent-blue: #5e978c;
@@ -31,6 +31,46 @@
             font-weight: 300;
             overflow-x: hidden;
             cursor: none;
+        }
+
+        /* Custom Cursor */
+        .custom-cursor {
+            position: fixed;
+            width: 52px;
+            height: 52px;
+            pointer-events: none;
+            z-index: 10000;
+            transform: translate(-50%, -50%);
+        }
+
+        .custom-cursor img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        /* BACK BUTTON */
+        .back-button {
+            position: fixed;
+            top: 40px;
+            left: 40px;
+            z-index: 999;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 9px;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            text-decoration: none;
+            color: var(--subtle-gray);
+            transition: color 0.3s ease;
+        }
+
+        .back-button:hover {
+            color: var(--primary-black);
+        }
+
+        .back-button::before {
+            content: '← ';
+            margin-right: 8px;
         }
 
         /* OPENING FULL SCREEN IMAGE */
@@ -58,30 +98,6 @@
             height: 100%;
             object-fit: cover;
             transition: all 0.1s linear;
-        }
-
-        /* BACK BUTTON */
-        .back-button {
-            position: fixed;
-            top: 40px;
-            left: 40px;
-            z-index: 999;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 9px;
-            text-transform: uppercase;
-            letter-spacing: 0.2em;
-            text-decoration: none;
-            color: var(--subtle-gray);
-            transition: color 0.3s ease;
-        }
-
-        .back-button:hover {
-            color: var(--primary-black);
-        }
-
-        .back-button::before {
-            content: '← ';
-            margin-right: 8px;
         }
 
         /* Little Me Character */
@@ -147,12 +163,12 @@
             padding: 0 40px;
         }
 
-        /* LAYOUT VARIATIONS */
+        /* SECTION STYLES */
         .section {
             margin-bottom: 200px;
         }
 
-        /* Section with large image and side text */
+        /* Image + Text Layout */
         .image-text-section {
             display: grid;
             grid-template-columns: 2.5fr 1fr;
@@ -167,12 +183,7 @@
             overflow: hidden;
         }
 
-        .large-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
+        .large-image img,
         .large-image video {
             width: 100%;
             height: 100%;
@@ -208,7 +219,102 @@
             max-width: 280px;
         }
 
-        /* Full width image with overlay */
+        /* Text Section */
+        .text-section {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 100px;
+            margin-bottom: 200px;
+            padding: 100px 0;
+        }
+
+        .text-section-left {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 9px;
+            color: var(--subtle-gray);
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            line-height: 2;
+        }
+
+        .text-section-right {
+            padding-top: 20px;
+        }
+
+        .large-text {
+            font-size: 24px;
+            font-weight: 300;
+            line-height: 1.4;
+            margin-bottom: 40px;
+            letter-spacing: -0.01em;
+        }
+
+        /* Two Column Layout */
+        .two-column-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            margin-bottom: 200px;
+        }
+
+        .column-image {
+            aspect-ratio: 4/5;
+            background: var(--light-gray);
+            overflow: hidden;
+        }
+
+        .column-image img,
+        .column-image video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Grid Mosaic */
+        .grid-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 200px;
+            max-width: fit-content;
+            width: 100%;
+            justify-content: center;
+        }
+
+        .grid-item {
+            background: var(--light-gray);
+        }
+
+        .grid-item:first-child {
+            grid-row: span 2;
+            aspect-ratio: 1/1.5;
+        }
+
+        .grid-item:nth-child(2) {
+            aspect-ratio: 1;
+        }
+
+        .grid-item:nth-child(3) {
+            aspect-ratio: 1;
+        }
+
+        .grid-item:nth-child(4) {
+            grid-column: span 2;
+            aspect-ratio: 2/1;
+        }
+
+        .grid-item:nth-child(5) {
+            aspect-ratio: 1;
+        }
+
+        .grid-item img,
+        .grid-item video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Full Width Image with Overlay */
         .full-image-section {
             position: relative;
             height: 80vh;
@@ -247,112 +353,7 @@
             max-width: 400px;
         }
 
-        /* Grid mosaic */
-        .grid-section {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            gap: 20px;
-            margin-bottom: 200px;
-            max-width: fit-content;
-            width: 100%;
-            justify-content: center;
-        }
-
-        .grid-item {
-            background: var(--light-gray);
-        }
-
-        .grid-item:first-child {
-            grid-row: span 2;
-            aspect-ratio: 1/1.5;
-        }
-
-        .grid-item:nth-child(2) {
-            aspect-ratio: 1;
-        }
-
-        .grid-item:nth-child(3) {
-            aspect-ratio: 1;
-        }
-
-        .grid-item:nth-child(4) {
-            grid-column: span 2;
-            aspect-ratio: 2/1;
-        }
-
-        .grid-item:nth-child(5) {
-            aspect-ratio: 1;
-        }
-
-        .grid-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .grid-item video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        /* Text only section */
-        .text-section {
-            display: grid;
-            grid-template-columns: 1fr 2fr;
-            gap: 100px;
-            margin-bottom: 200px;
-            padding: 100px 0;
-        }
-
-        .text-section-left {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 9px;
-            color: var(--subtle-gray);
-            text-transform: uppercase;
-            letter-spacing: 0.2em;
-            line-height: 2;
-        }
-
-        .text-section-right {
-            padding-top: 20px;
-        }
-
-        .large-text {
-            font-size: 24px;
-            font-weight: 300;
-            line-height: 1.4;
-            margin-bottom: 40px;
-            letter-spacing: -0.01em;
-        }
-
-        /* Two column layout */
-        .two-column-section {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            margin-bottom: 200px;
-        }
-
-        .column-image {
-            aspect-ratio: 4/5;
-            background: var(--light-gray);
-            overflow: hidden;
-        }
-
-        .column-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .column-image video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        /* Final section */
+        /* Final Section */
         .final-section {
             background: var(--primary-black);
             color: white;
@@ -401,22 +402,6 @@
         .next-project::after {
             content: '→';
             font-size: 10px;
-        }
-
-        /* Custom Cursor */
-        .custom-cursor {
-            position: fixed;
-            width: 52px;
-            height: 52px;
-            pointer-events: none;
-            z-index: 10000;
-            transform: translate(-50%, -50%);
-        }
-
-        .custom-cursor img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
         }
 
         /* ANIMATIONS */
@@ -592,19 +577,19 @@
     <!-- Full Screen Opening Image -->
     <section class="opening-image-section">
         <div class="opening-image-container">
-            <img src="images/MODIS/poster.png" alt="Project Opening" class="opening-image">
+            <img src="images/images copy/desc/0097.webp" alt="Project Opening" class="opening-image">
         </div>
     </section>
 
     <!-- Hero -->
     <section class="hero fade-in">
         <div class="hero-content">
-            <div class="hero-subtitle">Branding / Editorial</div>
-            <h1 class="hero-title">Modis<br>Academy</h1>
+            <div class="hero-subtitle">Category / Type</div>
+            <h1 class="hero-title">Project<br>Title</h1>
             <div class="hero-meta">
-                <span>Client: Fictional Brand</span>
+                <span>Client: Name</span>
                 <span>Year: 2025</span>
-                <span>Duration: 1 Week</span>
+                <span>Duration: X Weeks</span>
             </div>
         </div>
     </section>
@@ -615,16 +600,16 @@
         <section class="section fade-in">
             <div class="image-text-section">
                 <div class="large-image">
-                    <video autoplay loop muted src="images/MODIS/embossed.mp4" alt="Form Light Shadow"></video>
+                    <img src="your-image.jpg" alt="Project Image">
                 </div>
                 <div class="side-text">
                     <div class="section-number">001 – Overview</div>
-                    <h2 class="section-title">Exploring Concepts</h2>
+                    <h2 class="section-title">Section Heading</h2>
                     <p class="text-block">
-                       For this project, I developed the identity for Modis, a fashion academy that positions itself as modern, editorial, and avant-garde. The concept was inspired by the idea of 'an eye for fashion.' This is expressed through the logotype, where the O in Modis becomes the eye itself, symbolizing vision and perspective.
+                        Your project description goes here. Explain the concept, inspiration, and main ideas behind the work.
                     </p>
                     <p class="text-block">
-                       The logo goes further, combining two O's with a small head to form the silhouette of a figure in a flowing dress.
+                        Additional details about the project approach and methodology.
                     </p>
                 </div>
             </div>
@@ -642,10 +627,10 @@
                 </div>
                 <div class="text-section-right">
                     <p class="large-text">
-                       The project began with sketches, exploring different ways to capture the essence of vision and fashion through shapes and symbols. From these hand-drawn ideas, I refined the concept digitally, experimenting with proportions, compositions, and variations of the "eye" and flowing dress forms.
+                        Describe your process, methodology, and how you approached the project challenges.
                     </p>
                     <p class="text-block">
-                     I refined the logo and logotype in Adobe Illustrator, focusing on clean lines and adaptability. With Photoshop, I created editorial-style mockups to test textures and photographic contexts, ensuring a modern, dynamic feel.
+                        Additional process details and technical information about tools and techniques used.
                     </p>
                 </div>
             </div>
@@ -655,77 +640,31 @@
         <section class="section fade-in">
             <div class="two-column-section">
                 <div class="column-image">
-                    <img src="images/MODIS/logodelimatations.png" alt="Development Process">
+                    <img src="image1.jpg" alt="Detail 1">
                 </div>
                 <div class="column-image">
-                    <img src="images/MODIS/concept5.png" alt="Visual Research">
+                    <img src="image2.jpg" alt="Detail 2">
                 </div>
             </div>
         </section>
 
-        <!-- Grid Mosaic -->
+        <!-- Grid Mosaic (customize as needed) -->
         <section class="section fade-in">
             <div class="grid-section">
                 <div class="grid-item">
-                    <img src="images/MODIS/MUPI.png" alt="Detail 1">
+                    <img src="grid1.jpg" alt="Detail 1">
                 </div>
                 <div class="grid-item">
-                    <img src="images/MODIS/flower.JPG" alt="Detail 2">
+                    <img src="grid2.jpg" alt="Detail 2">
                 </div>
                 <div class="grid-item">
-                    <img src="images/MODIS/concept2.png" alt="Detail 3">
+                    <img src="grid3.jpg" alt="Detail 3">
                 </div>
                 <div class="grid-item">
-                    <video autoplay loop muted src="images/MODIS/website.mp4" alt="Detail 4"></video>
+                    <img src="grid4.jpg" alt="Detail 4">
                 </div>
                 <div class="grid-item">
-                    <img src="images/MODIS/concept2.gif" alt="Detail 5">
-                </div>
-                <div class="grid-item">
-                    <video autoplay loop muted src="images/MODIS/diferentO.mp4" alt="Detail 6"></video>
-                </div>
-                <div class="grid-item">
-                    <img src="images/MODIS/notebook.png" alt="Detail 7">
-                </div>
-            </div>
-        </section>
-
-        <section class="section fade-in">
-            <div class="two-column-section">
-                <div class="column-image">
-                    <img src="images/MODIS/poster4.png" alt="Development Process">
-                </div>
-                <div class="column-image">
-                    <img src="images/MODIS/tote.png" alt="Visual Research">
-                </div>
-            </div>
-        </section>
-
-        <!-- Grid Mosaic -->
-        <section class="section fade-in">
-            <div class="grid-section">
-                <div class="grid-item">
-                    <img src="images/MODIS/stationery.png" alt="Detail 1">
-                </div>
-                <div class="grid-item">
-                    <img src="images/MODIS/tee.png" alt="Detail 2">
-                </div>
-                <div class="grid-item">
-                    <img src="images/MODIS/idcard.png" alt="Detail 3">
-                </div>
-                <div class="grid-item">
-                    <img src="images/MODIS/banner.png" alt="Detail 4">
-                </div>
-            </div>
-        </section>
-
-        <section class="section fade-in">
-            <div class="two-column-section">
-                <div class="column-image">
-                    <img src="images/MODIS/PNG/keyvisual_1.png" alt="Development Process">
-                </div>
-                <div class="column-image">
-                    <img src="images/MODIS/PNG/key_visual2.png" alt="Visual Research">
+                    <img src="grid5.jpg" alt="Detail 5">
                 </div>
             </div>
         </section>
@@ -734,11 +673,11 @@
     <!-- Full Width Image -->
     <section class="section fade-in">
         <div class="full-image-section">
-            <img src="images/MODIS/PNG/beige_orange.png" alt="Final Execution" class="full-image">
+            <img src="full-width-image.jpg" alt="Final Execution" class="full-image">
             <div class="image-overlay">
                 <h2 class="overlay-title">Visual Impact & Execution</h2>
                 <p class="overlay-text">
-                   Across applications, the system maintains a modern editorial tone while adapting seamlessly to different formats—print, digital, and motion. Animated studies further enhance its impact, ensuring that Modis feels alive, relevant, and visually striking in both static and moving contexts.
+                    Describe the final execution, impact, and how the project came together.
                 </p>
             </div>
         </div>
@@ -748,71 +687,68 @@
     <section class="final-section fade-in">
         <h2 class="final-title">Project Complete</h2>
         <p class="final-text">
-           This project transformed the idea of "an eye for fashion" into a bold, versatile identity. Through sketches, digital design, and motion, Modis came to life as a modern, editorial, and avant-garde brand.
+            Your closing thoughts about the project and its impact or results.
         </p>
-        <a href="./olura.html" class="next-project">Next Project</a>
+        <a href="next-project.html" class="next-project">Next Project</a>
     </section>
 
     <script>
-        // Get elements
-        const customCursor = document.querySelector('.custom-cursor');
-        const openingImage = document.querySelector('.opening-image');
-        const openingSection = document.querySelector('.opening-image-section');
-        const openingContainer = document.querySelector('.opening-image-container');
-        
-        // Custom cursor follow mouse
-        document.addEventListener('mousemove', (e) => {
-            customCursor.style.left = e.clientX + 'px';
-            customCursor.style.top = e.clientY + 'px';
-        });
+     // Custom cursor
+const customCursor = document.querySelector('.custom-cursor');
+const openingImage = document.querySelector('.opening-image');
+const openingContainer = document.querySelector('.opening-image-container');
 
-      // Smooth scroll + zoom-out fix for opening image
+// Cursor follows mouse
+document.addEventListener('mousemove', (e) => {
+    customCursor.style.left = e.clientX + 'px';
+    customCursor.style.top = e.clientY + 'px';
+});
+
+// --- SMOOTH ZOOM + SCROLL EFFECT ---
 window.addEventListener('scroll', () => {
     const scrollPos = window.scrollY;
 
     if (openingImage && openingContainer) {
-        const shrinkEnd = 1000;    // zoom-out duration
-        const scrollStart = 1400;  // when upward movement begins
+        const shrinkEnd = 1000;    // when zoom-out ends
+        const scrollStart = 1400;  // when movement up starts
         const minScale = 0.6;
 
         let scale = 1;
         let translateY = 0;
 
         if (scrollPos < shrinkEnd) {
-            // Phase 1: Zoom out
+            // Phase 1: Zoom out smoothly
             const progress = scrollPos / shrinkEnd;
             scale = 1 - progress * (1 - minScale);
-            translateY = 0;
         } else if (scrollPos < scrollStart) {
-            // Phase 2: Hold steady (paused zoom-out)
+            // Phase 2: Hold steady
             scale = minScale;
-            translateY = 0;
         } else {
             // Phase 3: Move up
             const scrollOffset = scrollPos - scrollStart;
             scale = minScale;
-            translateY = -scrollOffset; // move upward
+            translateY = -scrollOffset;
         }
 
-        // ✅ Combine translate and scale in one transform string
+        // Combine all transforms in one line
         openingContainer.style.transform = `translate(-50%, calc(-50% + ${translateY}px)) scale(${scale})`;
         openingContainer.style.transformOrigin = 'center center';
     }
 });
 
+// --- FADE-IN OBSERVER ---
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+        }
+    });
+}, { threshold: 0.1 });
 
-        // Intersection Observer for fade-in animations
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, { threshold: 0.1 });
+document.querySelectorAll('.fade-in').forEach(el => {
+    observer.observe(el);
+});
 
-        document.querySelectorAll('.fade-in').forEach(el => {
-            observer.observe(el);
-        });
     </script>
 </body>
 </html>
