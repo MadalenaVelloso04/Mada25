@@ -13,7 +13,7 @@
 
         body {
             font-family: 'Courier New', monospace;
-            background: #d5d4c8;
+             background: #d5d4c8;
             background-image: url('images/background.jpg');
             background-size: cover;
             background-position: center;
@@ -506,6 +506,11 @@
         }
 
         .work-item:hover .hover-img:nth-child(4) {
+            transform: translate(calc(-50% + 150px), calc(-50% + 80px)) scale(1) rotate(-8deg);
+            transition-delay: 0.24s;
+        }
+
+           .work-item:hover .hover-img:nth-child(5) {
             transform: translate(calc(-50% + 150px), calc(-50% + 80px)) scale(1) rotate(-8deg);
             transition-delay: 0.24s;
         }
@@ -1014,9 +1019,23 @@
     </div>
 
     <div class="work-container">
+        <div class="work-item" data-work="petali">
+            <div class="work-image">
+                  <video autoplay muted loop src="images/petali copy/a close up shot of the can rotating on its axis, studio lighting, product photography.mp4" alt="Petali"></video>
+                <div class="hover-images">
+                    <div class="hover-img"><img src="images/petali copy/boxes.jpeg" alt="petali 1"></div>
+                    <div class="hover-img"><img src="images/petali copy/menumockup.jpeg" alt="petali 2"></div>
+                    <div class="hover-img"><img src="images/petali copy/soda2.jpeg" alt="petali 3"></div>
+                    <div class="hover-img"><img src="images/petali copy/cans.jpeg" alt="petali 4"></div>
+                </div>
+            </div>
+            <div class="work-title">Modis Academia</div>
+        </div>
+
+ 
         <div class="work-item" data-work="body-bloom">
             <div class="work-image">
-                <img src="images/MODIS/concept2.gif" alt="Body Bloom">
+                <img src="images/MODIS/concept2.gif" alt="petali">
                 <div class="hover-images">
                     <div class="hover-img"><img src="images/MODIS/notebook.png" alt="Modis 1"></div>
                     <div class="hover-img"><img src="images/MODIS/banner.png" alt="Modis 2"></div>
@@ -1024,7 +1043,7 @@
                     <div class="hover-img"><img src="images/MODIS/website.png" alt="Modis 4"></div>
                 </div>
             </div>
-            <div class="work-title">Modis Academia</div>
+            <div class="work-title">Petali Sodas</div>
         </div>
         
         <div class="work-item" data-work="nura">
@@ -1300,6 +1319,16 @@
         const workItems = document.querySelectorAll('.work-item');
 
         const workData = {
+
+           'petali': {
+                title: 'Petali Sodas',
+                category: 'Brand Identity / Web Design',
+                description: 'fashion academy that positions itself as modern, editorial, and avant-garde.',
+                year: '2025',
+                role: 'Visual Identity, Web Design',
+                status: 'Prototype'
+            },
+
             'body-bloom': {
                 title: 'Modis Academia',
                 category: 'Brand Identity / Web Design',
@@ -1390,6 +1419,7 @@
   item.addEventListener('click', () => {
     const work = item.getAttribute('data-work');
     const links = {
+        'Petali': 'petali.html',
       'body-bloom': 'modis.html',
       'nura': 'gdo.html',
       'Olura Supplements': 'olura.html',
