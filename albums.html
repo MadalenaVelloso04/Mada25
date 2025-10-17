@@ -61,7 +61,7 @@
     .section { margin-bottom: 200px; }
 
     /* Image + Text Section */
-    .image-text-section { display: grid; grid-template-columns: 2.5fr 1fr; gap: 80px; align-items: start; }
+    .image-text-section { display: grid; grid-template-columns: 2.5fr 1fr; gap: 80px; align-items: start; margin-top: 100px;}
     .large-image { width: 100%; aspect-ratio: 3/2; background: var(--light-gray); overflow: hidden; }
     .large-image img, .large-image video { width: 100%; height: 100%; object-fit: cover; }
     .side-text { padding-top: 60px; }
@@ -70,13 +70,13 @@
     .text-block { font-size: 13px; line-height: 1.6; color: var(--subtle-gray); margin-bottom: 25px; max-width: 280px; }
 
     /* Text Section */
-    .text-section { display: grid; grid-template-columns: 1fr 2fr; gap: 100px; margin-bottom: 200px; padding: 100px 0; }
+    .text-section { display: grid; grid-template-columns: 1fr 2fr; gap: 100px; margin-bottom: 60px; padding: 50px 0; }
     .text-section-left { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--subtle-gray); text-transform: uppercase; letter-spacing: 0.2em; line-height: 2; }
     .text-section-right { padding-top: 20px; }
     .large-text { font-size: 24px; font-weight: 300; line-height: 1.4; margin-bottom: 40px; letter-spacing: -0.01em; }
 
     /* Two Column Section */
-    .two-column-section { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; margin-bottom: 200px; }
+    .two-column-section { display: grid; grid-template-columns: 1fr 1fr; gap: 20px;}
     .column-image { aspect-ratio: 6/5; background: var(--light-gray); overflow: hidden; }
     .column-image img, .column-image video { width: 100%; height: 100%; object-fit: cover; }
 
@@ -162,32 +162,34 @@
       </div>
     </section>
 
-
-    <section class="section fade-in">
-      <div class="grid-section">
-        <div class="grid-item"><img src="images/images copy/vinyl/single_1_cover_1.jpeg" alt=""></div>
+      <section class="section fade-in">
+      <div class="two-column-section">
         <div class="grid-item"><img src="images/images copy/vinyl/mockup_single_1.5 copy.jpeg" alt=""></div>
-          <div class="grid-item"><img src="images/images copy/vinyl/mockup_single_2 copy.png" alt=""></div>
-           <div class="grid-item"><img src="images/images copy/vinyl/single_1_cover_mockup.jpeg" alt=""></div>
-            <div class="grid-item"><img src="images/images copy/vinyl/single_1.5_mockup copy.png" alt=""></div>
+       <div class="grid-item"><img src="images/images copy/vinyl/single_1.5_mockup copy.png" alt=""></div>
       </div>
     </section>
-  </div>
 
-  <section class="section fade-in">
-    <div class="full-image-section">
-      <img src="PATH/TO/IMAGE.jpg" alt="" class="full-image">
-      <div class="image-overlay">
-        <h2 class="overlay-title">Overlay Title</h2>
-        <p class="overlay-text">Description for this image section.</p>
+      <section class="section fade-in">
+      <div class="two-column-section">
+        <div class="grid-item"><img src="images/images copy/vinyl/single_1_cover_1.jpeg" alt=""></div>
+         <div class="grid-item"><img src="images/images copy/vinyl/single_1_cover_mockup.jpeg" alt=""></div>
       </div>
-    </div>
-  </section>
+    </section>
+
+      <section class="section fade-in">
+      <div class="two-column-section">
+       <div class="grid-item"><img src="images/images copy/vinyl/mockup_single_2 copy.png" alt=""></div>
+         <div class="grid-item"><img src="images/images copy/vinyl/Album_cover copy 3.png" alt=""></div>
+      </div>
+    </section>
+
+
+   
+  </div>
 
   <section class="final-section fade-in">
     <h2 class="final-title">Project Complete</h2>
-    <p class="final-text">Final summary paragraph for your project.</p>
-    <a href="./next.html" class="next-project">Next Project</a>
+    <a href="./shortmovie.html" class="next-project">Next Project</a>
   </section>
 
    <script>
