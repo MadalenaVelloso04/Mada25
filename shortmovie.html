@@ -96,20 +96,20 @@
     .back-button::before{content:'← ';margin-right:8px}
     .back-button:hover{color:var(--primary-black)}
 
-    /* custom cursor (red circle) */
-    .custom-cursor{
-      position:fixed;
-      width:52px;
-      height:52px;
-      pointer-events:none;
-      z-index:10000;
-      transform:translate(-50%,-50%);
-      background:var(--accent-red);
-      border-radius:50%;
-      opacity:0.85;
-      mix-blend-mode:normal;
-      transition:transform .12s linear, opacity .12s linear;
-    }
+  /* custom cursor (PNG image) */
+.custom-cursor {
+  position: fixed;
+  width: 64px; /* adjust to your PNG size */
+  height: 64px;
+  pointer-events: none;
+  z-index: 10000;
+  transform: translate(-50%, -50%);
+  background: url("images/Ilustração_Sem_Título.png") center center / contain no-repeat;
+  opacity: 1;
+  mix-blend-mode: normal;
+  transition: transform 0.12s linear, opacity 0.12s linear;
+}
+
 
     /* hero section */
     .hero{
