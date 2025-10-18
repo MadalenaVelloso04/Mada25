@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -207,6 +208,7 @@
             line-height: 1.6;
             color: var(--subtle-gray);
             margin-bottom: 25px;
+            max-width: 280px;
         }
 
         .text-block strong {
@@ -253,36 +255,41 @@
             max-width: 400px;
         }
 
-        /* Grid mosaic */
+        /* Grid mosaic - Modis style */
         .grid-section {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: 1fr 1fr 1fr;
             gap: 20px;
             margin-bottom: 200px;
+            max-width: fit-content;
+            width: 100%;
+            justify-content: center;
         }
 
         .grid-item {
             background: var(--light-gray);
-            overflow: hidden;
         }
 
-        .grid-item.tall {
+        .grid-item:first-child {
             grid-row: span 2;
             aspect-ratio: 1/1.5;
         }
 
-        .grid-item.wide {
+        .grid-item:nth-child(2) {
+            aspect-ratio: 1;
+        }
+
+        .grid-item:nth-child(3) {
+            aspect-ratio: 1;
+        }
+
+        .grid-item:nth-child(4) {
             grid-column: span 2;
             aspect-ratio: 2/1;
         }
 
-        .grid-item.square {
+        .grid-item:nth-child(5) {
             aspect-ratio: 1;
-        }
-
-        .grid-item.full {
-            grid-column: span 3;
-            aspect-ratio: 3/1;
         }
 
         .grid-item img,
@@ -382,14 +389,6 @@
             line-height: 1.2;
             letter-spacing: -0.02em;
             margin-bottom: 20px;
-        }
-
-        .quote-author {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 9px;
-            text-transform: uppercase;
-            letter-spacing: 0.2em;
-            color: var(--subtle-gray);
         }
 
         /* Process grid */
@@ -580,6 +579,10 @@
                 grid-template-columns: 1fr 1fr;
             }
 
+            .grid-item:nth-child(4) {
+                grid-column: span 2;
+            }
+
             .hero-meta {
                 flex-direction: column;
                 gap: 20px;
@@ -641,10 +644,12 @@
                 gap: 15px;
             }
 
-            .grid-item.tall,
-            .grid-item.wide,
-            .grid-item.full {
+            .grid-item:first-child {
                 grid-row: span 1;
+                aspect-ratio: 4/3;
+            }
+
+            .grid-item:nth-child(4) {
                 grid-column: span 1;
                 aspect-ratio: 4/3;
             }
@@ -724,7 +729,7 @@
         <section class="section fade-in">
             <div class="image-text-section">
                 <div class="large-image">
-                    <img src="images/gare/wayfiding1.png" alt="Wayfinding signage system">
+                    <img src="images/gare/ciubos.png" alt="Wayfinding signage system">
                 </div>
                 <div class="side-text">
                     <div class="section-number">01 — Overview</div>
@@ -742,22 +747,40 @@
             </div>
         </section>
 
-        <!-- Grid Images -->
+        <!-- Text Section -->
         <section class="section fade-in">
-            <div class="grid-section">
-                <div class="grid-item square">
-                    <img src="images/gare/correction.png" alt="View of Gare from entry level">
+            <div class="text-section">
+                <div class="text-section-left">
+                    Research<br>
+                    Analysis<br>
+                    Discovery<br>
+                    —<br>
+                    Process
                 </div>
-                <div class="grid-item wide">
-                    <img src="images/gare/wayfinding3.png" alt="Research notes and field observations">
+                <div class="text-section-right">
+                    <p class="large-text">
+                        This was more than just signage — it required a complete rethink of the station's presence, both physical and digital. We approached it systematically, combining architectural analysis with real user research.
+                    </p>
+                    <p class="text-block">
+                        Through multiple site visits, we documented circulation patterns, interviewed commuters and staff, and identified critical pain points in the current wayfinding system. These insights shaped every design decision that followed.
+                    </p>
                 </div>
             </div>
         </section>
 
+
+         <div class="large-image">
+                    <img style="margin-bottom: 40px;" src="images/gare/quote.png" alt="Architectural study">
+                
+                </div>
+
+      
+
+
+
         <!-- Quote Section -->
         <section class="quote-section fade-in">
             <blockquote class="quote">"A better hub, for you."</blockquote>
-            <cite class="quote-author">Gare do Oriente Design Philosophy</cite>
         </section>
 
         <!-- Visual Identity Section -->
@@ -794,30 +817,50 @@
                 </div>
             </div>
         </section>
+        
+       
 
-        <!-- Identity Grid -->
+  
+
+                 <!-- Two Column Images -->
         <section class="section fade-in">
-            <div class="grid-section">
-                <div class="grid-item square">
-                    <img src="images/gare/comcores.png" alt="Color system">
+            <div class="two-column-section">
+                <div class="large-image">
+                    <video autoplay muted loop src="images/gare/App copy/changingshape.mov" alt="Architectural study">
                 </div>
-                <div class="grid-item square">
-                    <img src="images/gare/logo.png" alt="Logo variations">
-                </div>
-                <div class="grid-item full">
-                    <img src="images/gare/componenrtes.png" alt="Brand components">
-                </div>
-                <div class="grid-item full">
-                    <img src="images/gare/quote.png" alt="Typography examples">
+                <div class="large-image">
+                    <video autoplay muted loop src="images/gare/App copy/foryou.mov" alt="Billboard mockup">
                 </div>
             </div>
         </section>
+
+ 
+
+        <!-- Grid Mosaic - Modis Style -->
+        <section class="section fade-in">
+            <div class="grid-section">
+                <div class="grid-item">
+                    <img src="images/gare/App copy/Infographic mupi 2.png" alt="Typography system">
+                </div>
+                <div class="grid-item">
+                    <img src="images/poster.png" alt="Logo variations">
+                </div>
+                <div class="grid-item">
+                    <img src="images/gare/logo.png" alt="Color applications">
+                </div>
+                <div class="grid-item">
+                    <img src="images/gare/Wayfinding Wall with Men Mockup.png" alt="Brand components">
+                </div>
+            </div>
+        </section>
+
+        
 
         <!-- Applications Section -->
         <section class="section fade-in">
             <div class="image-text-section">
                 <div class="large-image">
-                    <img src="images/gare/cubos2 copy.png" alt="Colored ceiling signs mockup">
+                    <img src="images/gare/behance project spaces copy/photo05.png" alt="Colored ceiling signs mockup">
                 </div>
                 <div class="side-text">
                     <div class="section-number">03 — Applications</div>
@@ -832,6 +875,30 @@
             </div>
         </section>
 
+                           <!-- Two Column Images -->
+        <section class="section fade-in">
+            <div class="two-column-section">
+                <div class="column-image">
+                    <img src="images/gare/ cubos.jpeg" alt="Architectural study">
+                </div>
+                <div class="column-image">
+                    <img src="images/gare/cubos2 copy.jpeg" alt="Billboard mockup">
+                </div>
+            </div>
+        </section>
+
+                     <!-- Two Column Images -->
+        <section class="section fade-in">
+            <div class="two-column-section">
+                <div class="column-image">
+                    <img src="images/gare/Rectangle_Stand_Mockup_2..1jpg.jpg" alt="Architectural study">
+                </div>
+                <div class="column-image">
+                    <img src="images/gare/Rectangle_Stand_Mockup_3.jpg" alt="Billboard mockup">
+                </div>
+            </div>
+        </section>
+
         <!-- Application Images -->
         <section class="section fade-in">
             <div class="two-column-section">
@@ -840,6 +907,29 @@
                 </div>
                 <div class="column-image">
                     <img src="images/gare/behance project spaces copy/photo24.png" alt="Floor map design">
+                </div>
+            </div>
+        </section>
+
+            <section class="section fade-in">
+            <div class="two-column-section">
+                <div class="column-image">
+                    <img src="images/gare/behance project spaces copy/photo16.png" alt="Platform signage">
+                </div>
+                <div class="column-image">
+                    <img src="images/gare/behance project spaces copy/photo19.png" alt="Floor map design">
+                </div>
+            </div>
+        </section>
+
+                <!-- Two Column Images -->
+        <section class="section fade-in">
+            <div class="two-column-section">
+                <div class="large-image">
+                    <img src="images/gare/wall circles.jpeg" alt="Architectural study">
+                </div>
+                <div class="large-image">
+                    <img src="images/gare/NebulaMockups_CONCRETE_Billboard_01.jpg" alt="Billboard mockup">
                 </div>
             </div>
         </section>
@@ -857,63 +947,6 @@
                 <div class="text-section-right">
                     <div class="section-number">04 — The Gare App</div>
                     <h2 class="section-title">Digital Presence: The Gare App</h2>
-                    <p class="large-text">
-                        Our app is more than a companion — it's a full extension of Gare do Oriente's identity, built for both locals and visitors.
-                    </p>
-                    <ul>
-                        <li><strong>Interactive Transport Map:</strong> See live station data, routes, and floor-specific guidance.</li>
-                        <li><strong>Curated Local Routes:</strong> Discover Lisbon through themed walking tours created by residents.</li>
-                        <li><strong>User-Generated Content:</strong> Share discoveries, stories, and small businesses through a community-driven feed.</li>
-                        <li><strong>Reward System:</strong> Earn points for engaging with the city — and redeem them for real transport benefits.</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-
-        <!-- App Showcase -->
-        <section class="section fade-in">
-            <div class="full-image-section">
-                <video src="images/gare/App copy/video_app_behance.mp4" muted loop autoplay playsinline class="full-image"></video>
-                <div class="image-overlay">
-                    <h2 class="overlay-title">A Digital Extension of the Station</h2>
-                    <p class="overlay-text">
-                        The app brings Gare do Oriente into the digital future, offering real-time guidance, community engagement, and rewarding exploration.
-                    </p>
-                </div>
-            </div>
-        </section>
-
-        <!-- App Grid -->
-        <section class="section fade-in">
-            <div class="grid-section">
-                <div class="grid-item square">
-                    <img src="images/gare/behance_app copy/Free Laying iPhone 16 Pro Mockup.png" alt="App home screen">
-                </div>
-                <div class="grid-item square">
-                    <img src="images/gare/behance_app copy/login.png" alt="Login screen">
-                </div>
-                <div class="grid-item full">
-                    <img src="images/gare/behance_app copy/newsletter.png" alt="Newsletter feature">
-                </div>
-                <div class="grid-item full">
-                    <img src="images/gare/appbuttons.gif" alt="App UI buttons">
-                </div>
-            </div>
-        </section>
-
-        <!-- Process Section -->
-        <section class="section fade-in">
-            <div class="text-section">
-                <div class="text-section-left">
-                    Methodology<br>
-                    Research<br>
-                    Iteration<br>
-                    —<br>
-                    Process
-                </div>
-                <div class="text-section-right">
-                    <div class="section-number">05 — Process</div>
-                    <h2 class="section-title">Design Process</h2>
                     <p class="large-text">
                         Our method combined immersive research with practical design iteration — turning insights into tested solutions.
                     </p>
