@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -510,14 +509,17 @@
         /* Custom Cursor */
         .custom-cursor {
             position: fixed;
-            width: 20px;
-            height: 20px;
-            border: 2px solid var(--accent-green);
-            border-radius: 50%;
+            width: 52px;
+            height: 52px;
             pointer-events: none;
             z-index: 10000;
             transform: translate(-50%, -50%);
-            transition: width 0.2s, height 0.2s, border-color 0.2s;
+        }
+
+        .custom-cursor img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
         }
 
         /* ANIMATIONS */
@@ -690,7 +692,9 @@
 </head>
 <body>
     <!-- Custom Cursor -->
-    <div class="custom-cursor"></div>
+    <div class="custom-cursor">
+        <img src="images/Ilustração_Sem_Título.png" alt="">
+    </div>
 
     <!-- Back Button -->
     <a href="./index.html" class="back-button">Back to Projects</a>
@@ -698,7 +702,7 @@
     <!-- Full Screen Opening Image -->
     <section class="opening-image-section">
         <div class="opening-image-container">
-            <video src="images/gare/App copy/video_app_behance.mp4" autoplay muted loop playsinline class="opening-image"></video>
+            <video src="images/animatic copy.mov" autoplay muted loop playsinline class="opening-image"></video>
         </div>
     </section>
 
@@ -960,7 +964,7 @@
                         <div class="process-item">
                             <div class="process-number">02</div>
                             <h3>Component Design</h3>
-                            <p>Shapes were extracted from the architecture and aligned to a pixel grid to ensure consistency across digital and physical media.</p>
+                            <p><p>Shapes were extracted from the architecture and aligned to a pixel grid to ensure consistency across digital and physical media.</p>
                         </div>
                         <div class="process-item">
                             <div class="process-number">03</div>
@@ -987,14 +991,6 @@
 
     </div>
 
-    <!-- Final Section -->
-    <section class="final-section fade-in">
-        <h2 class="final-title">Project Complete</h2>
-        <p class="final-text">
-            This project transformed Gare do Oriente from a confusing monument into an intuitive, human-centered transport hub. Through research, design, and digital innovation, we created a complete visual system that serves thousands of daily travelers.
-        </p>
-        <a href="./projects.html" class="next-project">Back to Projects</a>
-    </section>
 
     <script>
         // Custom cursor follow mouse

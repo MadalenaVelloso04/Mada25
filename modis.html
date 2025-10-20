@@ -128,15 +128,32 @@
             margin-bottom: 60px;
         }
 
+        .hero-description {
+            font-size: 15px;
+            line-height: 1.7;
+            color: var(--subtle-gray);
+            margin-bottom: 30px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
         .hero-meta {
             display: flex;
             justify-content: center;
-            gap: 60px;
+            flex-wrap: wrap;
+            gap: 20px;
             font-family: 'JetBrains Mono', monospace;
             font-size: 9px;
             color: var(--subtle-gray);
             text-transform: uppercase;
             letter-spacing: 0.15em;
+            margin-top: 40px;
+        }
+
+        .hero-meta span {
+            padding: 8px 16px;
+            border: 1px solid var(--light-gray);
         }
 
         /* MAIN CONTENT */
@@ -600,10 +617,15 @@
         <div class="hero-content">
             <div class="hero-subtitle">Branding / Editorial</div>
             <h1 class="hero-title">Modis<br>Academy</h1>
+            <p class="hero-description">
+                A modern, editorial, and avant-garde fashion academy identity built on the concept of "an eye for fashion" — where vision meets creativity.
+                <br><br>
+                <em>Personal project, 2025</em>
+            </p>
             <div class="hero-meta">
-                <span>Client: Fictional Brand</span>
-                <span>Year: 2025</span>
-                <span>Duration: 1 Week</span>
+                <span>Adobe Illustrator</span>
+                <span>Adobe Photoshop</span>
+                <span>Adobe After Effects</span>
             </div>
         </div>
     </section>
@@ -617,7 +639,7 @@
                     <video autoplay loop muted src="images/MODIS/embossed.mp4" alt="Form Light Shadow"></video>
                 </div>
                 <div class="side-text">
-                    <div class="section-number">001 – Overview</div>
+                    <div class="section-number">001 — Overview</div>
                     <h2 class="section-title">Exploring Concepts</h2>
                     <p class="text-block">
                        For this project, I developed the identity for Modis, a fashion academy that positions itself as modern, editorial, and avant-garde. The concept was inspired by the idea of 'an eye for fashion.' This is expressed through the logotype, where the O in Modis becomes the eye itself, symbolizing vision and perspective.
@@ -636,7 +658,7 @@
                     Methodology<br>
                     Research<br>
                     Development<br>
-                    –<br>
+                    —<br>
                     Process
                 </div>
                 <div class="text-section-right">
@@ -730,27 +752,6 @@
         </section>
     </div>
 
-    <!-- Full Width Image -->
-    <section class="section fade-in">
-        <div class="full-image-section">
-            <img src="images/MODIS/PNG/beige_orange.png" alt="Final Execution" class="full-image">
-            <div class="image-overlay">
-                <h2 class="overlay-title">Visual Impact & Execution</h2>
-                <p class="overlay-text">
-                   Across applications, the system maintains a modern editorial tone while adapting seamlessly to different formats—print, digital, and motion. Animated studies further enhance its impact, ensuring that Modis feels alive, relevant, and visually striking in both static and moving contexts.
-                </p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Final Section -->
-    <section class="final-section fade-in">
-        <h2 class="final-title">Project Complete</h2>
-        <p class="final-text">
-           This project transformed the idea of "an eye for fashion" into a bold, versatile identity. Through sketches, digital design, and motion, Modis came to life as a modern, editorial, and avant-garde brand.
-        </p>
-        <a href="./olura.html" class="next-project">Next Project</a>
-    </section>
 
     <script>
         // Get elements

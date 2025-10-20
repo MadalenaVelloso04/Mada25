@@ -77,27 +77,7 @@
             visibility: visible;
         }
 
-     
 
-        /* Divider Line (GIF) - Fixed vertical line */
-        .divider-line {
-            width: 2px;
-            height: calc(40vh - 100px);
-            position: fixed;
-            left: 30%;
-            top: 40px;
-            transform: translateX(-50%);
-            z-index: 99;
-            display: flex;
-            justify-content: center;
-            align-items: stretch;
-        }
-
-        .divider-line img {
-            width: 100%;
-            height: 100%;
-            object-fit: fill;
-        }
 
         /* Project Menu */
         .project-menu {
@@ -120,7 +100,7 @@
 
         .project-menu a:hover,
         .project-menu a.active {
-            color: #999;
+            color: blue;
         }
 
         /* Posters Section - Stacking on Top from Side */
@@ -226,103 +206,115 @@
             opacity: 1;
         }
 
-        /* Gallery Sections - Masonry Grid */
-        .gallery-section {
-            padding: 100px 40px;
-            column-count: 4;
-            column-gap: 20px;
-            max-width: 1600px;
-            margin: 0 auto;
-        }
+       /* Masonry layout for Illustration & 3D */
+.masonry-gallery {
+  column-count: 3;
+  column-gap: 12px;
+  padding: 0 40px;
+}
 
-        .section-title {
-            font-size: 4rem;
-            font-style: italic;
-            text-align: center;
-            margin: 100px 0 50px 0;
-            color: #333;
-            column-span: all;
-        }
+.masonry-gallery img,
+.masonry-gallery video {
+  width: 100%;
+  margin-bottom: 12px;
 
-        .gallery-item {
-            break-inside: avoid;
-            margin-bottom: 30px;
-            overflow: hidden;
-            position: relative;
-        }
+  display: block;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  cursor: pointer;
+}
 
-        .gallery-item:hover {
-            z-index: 10;
-        }
+.masonry-gallery img:hover,
+.masonry-gallery video:hover {
+  transform: scale(1.02);
+  opacity: 0.9;
+}
 
-        .gallery-item img {
-            width: 90%;
-            height: auto;
-            display: block;
-            transition: filter 0.5s ease, transform 0.3s ease;
-        }
+.section-title {
+  font-size: 4rem;
+  font-style: italic;
+  text-align: center;
+  margin-bottom: 60px;
+  color: #333;
+  font-weight: lighter;
+  width: 100%;
+  grid-column: 1 / -1;
+}
 
-        .gallery-item::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-        }
+@media (max-width: 1024px) {
+  .masonry-gallery { column-count: 2; }
+}
+@media (max-width: 600px) {
+  .masonry-gallery { column-count: 1; }
+}
 
-        /* BLACK & WHITE for ILLUSTRATION section */
-        #illustration .gallery-item img {
-            filter: grayscale(100%);
-        }
+/* Lightbox Styling */
+.lightbox {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(6px);
+  justify-content: center;
+  align-items: center;
+  z-index: 30000;
+  cursor: none;
+}
 
-        #illustration .gallery-item:hover img {
-            filter: grayscale(0%);
-            transform: scale(1.02);
-        }
+.lightbox.show {
+  display: flex;
+}
 
-        /* BLUR + WHITE OVERLAY for 3D section */
-        #3d .gallery-item img {
-            filter: blur(4px) brightness(1.2);
-        }
+.lightbox img,
+.lightbox video {
+  max-width: 90%;
+  max-height: 85vh;
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+  transition: transform 0.4s ease;
+  display: none;
+}
 
-        #3d .gallery-item::after {
-            background: rgba(255, 255, 255, 0.3);
-            transition: opacity 0.5s ease;
-        }
+.lightbox img.active,
+.lightbox video.active {
+  display: block;
+}
 
-        #3d .gallery-item:hover img {
-            filter: blur(0) brightness(1);
-        }
+.lightbox img:hover,
+.lightbox video:hover {
+  transform: scale(1.02);
+}
 
-        #3d .gallery-item:hover::after {
-            opacity: 0;
-        }
+.lightbox-close {
+  position: fixed;
+  top: 40px;
+  right: 50px;
+  font-size: 1.2rem;
+  font-style: italic;
+  color: #333;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: 'Courier New', monospace;
+  z-index: 31000;
+  transition: color 0.2s ease;
+}
 
-        /* Vary sizes for visual interest */
-        .gallery-item:nth-child(3n + 1) {
-            transform: scale(1.1);
-        }
+.lightbox-close:hover {
+  color: blue;
+}
 
-        .gallery-item:nth-child(5n + 2) {
-            transform: scale(0.95);
-        }
-
-        .gallery-item:nth-child(7n + 3) {
-            transform: scale(1.05);
-        }
 
        /* Responsive masonry */
         @media (max-width: 1200px) {
-            .gallery-section {
+            .masonry-gallery {
                 column-count: 2;
             }
         }
-
         @media (max-width: 768px) {
-            .gallery-section {
+            .masonry-gallery {
                 column-count: 1;
+                width: 100%;
+                max-width: 100vw;
             }
         }
 
@@ -758,7 +750,7 @@
                     <img src="images/MODIS/logodelimatations.png" alt="Modis Academia">
                 </div>
                 <div class="project-item" data-title="GDO">
-                    <img src="images/images copy/gare/App copy/mockups/Free iPhone 14 on Tripod Mockup copy.png" alt="GDO">
+                    <img src="images/gare/App copy/mockups/Free iPhone 14 on Tripod Mockup copy.png" alt="GDO">
                 </div>
                 <div class="project-item" data-title="Olura Supplements">
                     <img src="images/olura/mupi.jpg" alt="Olura Supplements">
@@ -773,75 +765,53 @@
         </div>
     </section>
 
-    <!-- ILLUSTRATION SECTION - Masonry Gallery -->
-    <section class="gallery-section" id="illustration">
-        <h2 class="section-title">Illustration</h2>
-        <div class="gallery-item">
-            <img src="images/New Folder With Items 2/WebP/Ativo 2 (1).webp" alt="Illustration 4">
-        </div>
-        <div class="gallery-item">
-            <img src="images/images copy/illustra/bluegirl copy.png" alt="Illustration 1">
-        </div>
-        <div class="gallery-item">
-            <img src="images/images copy/illustra/IMG_0142.JPG" alt="Illustration 4">
-        </div>
-        <div class="gallery-item">
-            <img src="images/images copy/illustra/praia.jpg" alt="Illustration 5">
-        </div>
-        <div class="gallery-item">
-            <img src="images/images copy/illustra/fashion2.png" alt="Illustration 3">
-        </div>
-        <div class="gallery-item">
-            <img src="images/images copy/illustra/oldcouple.jpg" alt="Illustration 6">
-        </div>
-        <div class="gallery-item">
-            <img src="images/images copy/illustra/sleeping.jpg" alt="Illustration 3">
-        </div>
-        <div class="gallery-item">
-            <img src="images/New Folder With Items 2/WebP/Ativo 4.webp" alt="Illustration 4">
-        </div>
-        <div class="gallery-item">
-            <img src="images/New Folder With Items 2/WebP/Ativo 3.webp" alt="Illustration 4">
-        </div>
-        <div class="gallery-item">
-            <img src="images/images copy/illustra/self_portrait copy.png" alt="Illustration 4">
-        </div>
-        <div class="gallery-item">
-            <img src="images/images copy/illustra/story1.JPG" alt="Illustration 5">
-        </div>
-        <div class="gallery-item">
-            <img src="images/images copy/illustra/story2.JPG" alt="Illustration 6">
-        </div>
-        <div class="gallery-item">
-            <img src="images/images copy/illustra/story3.JPG" alt="Illustration 5">
-        </div>
-        <div class="gallery-item">
-            <img src="images/images copy/illustra/story4.JPG" alt="Illustration 6">
-        </div>
-        <div class="gallery-item">
-            <img src="images/New Folder With Items 2/WebP/Ativo 1.webp" alt="Illustration 4">
-        </div>
-        <div class="gallery-item">
-            <img src="images/New Folder With Items 2/WebP/Ativo 6.webp" alt="Illustration 4">
-        </div>
-    </section>
 
-    <!-- 3D MODELING SECTION - Masonry Gallery -->
-    <section class="gallery-section" id="3d">
-        <h2 class="section-title">3d Modeling</h2>
-        <div class="gallery-item">
-            <img src="images/images copy/WebP/001.webp" alt="3D Model 1">
-        </div>
-        <div class="gallery-item">
-            <img src="images/images copy/" alt="3D Model 2">
-        </div>
-        <div class="gallery-item">
-            <img src="images/3d3.jpg" alt="3D Model 3">
-        </div>
-        <div class="gallery-item">
-            <img src="images/3d4.jpg" alt="3D Model 4">
-        </div>
-    </section>
+
+    <!-- Illustration Section -->
+<section id="illustration" class="gallery-section" id="illustration">
+  <h2 class="section-title">Illustration</h2>
+  <div class="masonry-gallery">
+   <img src="images/New Folder With Items 2/WebP/Ativo 2 (1).webp" alt="Illustration 4">
+            <img src="images/images copy/illustra/bluegirl copy.png" alt="Illustration 1">
+            <img src="images/images copy/illustra/IMG_0142.JPG" alt="Illustration 4">
+            <img src="images/images copy/illustra/praia.jpg" alt="Illustration 5">
+            <img src="images/images copy/illustra/fashion2.png" alt="Illustration 3">
+            <img src="images/images copy/illustra/oldcouple.jpg" alt="Illustration 6">
+            <img src="images/images copy/illustra/sleeping.jpg" alt="Illustration 3">
+            <img src="images/New Folder With Items 2/WebP/Ativo 4.webp" alt="Illustration 4">
+            <img src="images/New Folder With Items 2/WebP/Ativo 3.webp" alt="Illustration 4">
+            <img src="images/images copy/illustra/self_portrait copy.png" alt="Illustration 4">
+            <img src="images/images copy/illustra/story1.JPG" alt="Illustration 5">
+            <img src="images/images copy/illustra/story2.JPG" alt="Illustration 6">
+            <img src="images/images copy/illustra/story3.JPG" alt="Illustration 5">
+            <img src="images/images copy/illustra/story4.JPG" alt="Illustration 6">
+            <img src="images/New Folder With Items 2/WebP/Ativo 1.webp" alt="Illustration 4">
+            <img src="images/New Folder With Items 2/WebP/Ativo 6.webp" alt="Illustration 4">
+    
+  </div>
+</section>
+
+<!-- 3D Section -->
+<section id="3d" class="gallery-section">
+  <h2 class="section-title">3D</h2>
+  <div class="masonry-gallery">
+     <img src="images/images copy/WebP/001.webp" alt="3D Model 1">
+
+            <img src="images/littleboy.png" alt="3D Model 3">
+
+            <img src="images/thatsenough.jpg" alt="3D Model 2">
+
+            <img src="images/ecoex.png" alt="3D Model 4">
+  </div>
+</section>
+
+<!-- Lightbox -->
+<div id="lightbox" class="lightbox">
+  <button class="lightbox-close">close</button>
+  <img src="" alt="Expanded artwork">
+  <video src="" controls autoplay loop></video>
+</div>
+
 
     <script>
         const customCursor = document.querySelector('.custom-cursor');
@@ -968,6 +938,45 @@
             updatePosterStack();
             updateProjectsScroll();
         });
+
+        // Lightbox Functionality (supports images & videos)
+const lightbox = document.getElementById('lightbox');
+const lightboxImg = lightbox.querySelector('img');
+const lightboxVideo = lightbox.querySelector('video');
+const closeBtn = document.querySelector('.lightbox-close');
+
+document.querySelectorAll('.masonry-gallery img, .masonry-gallery video').forEach(media => {
+  media.addEventListener('click', () => {
+    if (media.tagName.toLowerCase() === 'img') {
+      lightboxImg.src = media.src;
+      lightboxImg.classList.add('active');
+      lightboxVideo.classList.remove('active');
+      lightboxVideo.pause();
+    } else {
+      lightboxVideo.src = media.src;
+      lightboxVideo.classList.add('active');
+      lightboxImg.classList.remove('active');
+    }
+    lightbox.classList.add('show');
+  });
+});
+
+closeBtn.addEventListener('click', () => {
+  lightbox.classList.remove('show');
+  lightboxImg.classList.remove('active');
+  lightboxVideo.classList.remove('active');
+  lightboxVideo.pause();
+});
+
+lightbox.addEventListener('click', (e) => {
+  if (e.target === lightbox) {
+    lightbox.classList.remove('show');
+    lightboxImg.classList.remove('active');
+    lightboxVideo.classList.remove('active');
+    lightboxVideo.pause();
+  }
+});
+
     </script>
 </body>
 </html>
