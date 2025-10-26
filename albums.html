@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Project Template — Modis Layout</title>
+  <title>Albums & Singles — Modis Layout</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600&family=JetBrains+Mono:wght@300;400&display=swap');
 
@@ -76,8 +76,8 @@
     .large-text { font-size: 24px; font-weight: 300; line-height: 1.4; margin-bottom: 40px; letter-spacing: -0.01em; }
 
     /* Two Column Section */
-    .two-column-section { display: grid; grid-template-columns: 1fr 1fr; gap: 20px;}
-    .column-image { aspect-ratio: 6/5; background: var(--light-gray); overflow: hidden; }
+    .two-column-section { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; margin-bottom: 200px; }
+    .column-image { aspect-ratio: 4/5; background: var(--light-gray); overflow: hidden; }
     .column-image img, .column-image video { width: 100%; height: 100%; object-fit: cover; }
 
     /* Grid Section */
@@ -105,6 +105,36 @@
 
     .fade-in { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease, transform 0.8s ease; }
     .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+    /* RESPONSIVE */
+    @media (max-width: 1024px) {
+      .content { padding: 0 30px; }
+      .image-text-section { grid-template-columns: 1fr; gap: 60px; }
+      .text-section { grid-template-columns: 1fr; gap: 60px; }
+      .two-column-section { grid-template-columns: 1fr; gap: 40px; }
+      .grid-section { grid-template-columns: 1fr 1fr; }
+      .hero-meta { flex-direction: column; gap: 20px; }
+      .full-image-section { margin: 0 -30px 200px; height: 60vh; }
+      .final-section { margin: 0 -30px; padding: 100px 30px; }
+    }
+
+    @media (max-width: 768px) {
+      body { cursor: auto; }
+      .custom-cursor { display: none; }
+      .content { padding: 0 20px; }
+      .back-button { top: 20px; left: 20px; font-size: 8px; }
+      .hero-content { padding: 0 20px; }
+      .hero-title { font-size: 50px; }
+      .section { margin-bottom: 120px; }
+      .section-title { font-size: 24px; }
+      .large-text { font-size: 20px; }
+      .grid-section { grid-template-columns: 1fr; gap: 15px; }
+      .full-image-section { margin: 0 -20px 120px; height: 50vh; }
+      .image-overlay { padding: 40px 30px 30px; }
+      .overlay-title { font-size: 28px; }
+      .final-section { margin: 0 -20px; padding: 80px 20px; }
+      .text-section { padding: 60px 0; }
+    }
   </style>
 </head>
 <body>
@@ -162,95 +192,87 @@
       </div>
     </section>
 
-      <section class="section fade-in">
+    <section class="section fade-in">
       <div class="two-column-section">
-        <div class="grid-item"><img src="images/images copy/vinyl/mockup_single_1.5 copy.jpeg" alt=""></div>
-       <div class="grid-item"><img src="images/images copy/vinyl/single_1.5_mockup copy.png" alt=""></div>
+        <div class="column-image"><img src="images/images copy/vinyl/mockup_single_1.5 copy.jpeg" alt=""></div>
+        <div class="column-image"><img src="images/images copy/vinyl/single_1.5_mockup copy.png" alt=""></div>
       </div>
     </section>
 
-      <section class="section fade-in">
+    <section class="section fade-in">
       <div class="two-column-section">
-        <div class="grid-item"><img src="images/images copy/vinyl/single_1_cover_1.jpeg" alt=""></div>
-         <div class="grid-item"><img src="images/images copy/vinyl/single_1_cover_mockup.jpeg" alt=""></div>
+        <div class="column-image"><img src="images/images copy/vinyl/single_1_cover_1.jpeg" alt=""></div>
+        <div class="column-image"><img src="images/images copy/vinyl/single_1_cover_mockup.jpeg" alt=""></div>
       </div>
     </section>
 
-      <section class="section fade-in">
+    <section class="section fade-in">
       <div class="two-column-section">
-       <div class="grid-item"><img src="images/images copy/vinyl/mockup_single_2 copy.png" alt=""></div>
-         <div class="grid-item"><img src="images/images copy/vinyl/Album_cover copy 3.png" alt=""></div>
+        <div class="column-image"><img src="images/images copy/vinyl/mockup_single_2 copy.png" alt=""></div>
+        <div class="column-image"><img src="images/images copy/vinyl/Album_cover copy 3.png" alt=""></div>
       </div>
     </section>
-
-
-   
   </div>
 
+  <script>
+    const customCursor = document.querySelector('.custom-cursor');
+    const openingContainer = document.querySelector('.opening-image-container');
+    const openingSection = document.querySelector('.opening-image-section');
 
-   <script>
-  const customCursor = document.querySelector('.custom-cursor');
-  const openingContainer = document.querySelector('.opening-image-container');
-  const openingSection = document.querySelector('.opening-image-section');
-
-  // Cursor follow
-  document.addEventListener('mousemove', e => {
-    customCursor.style.left = e.clientX + 'px';
-    customCursor.style.top = e.clientY + 'px';
-  });
-
-  // Smooth zoom-out and scroll-up for opening video
-  window.addEventListener('scroll', () => {
-    const scrollPos = window.scrollY;
-    const shrinkEnd = window.innerHeight * 1.2; // makes scaling smoother
-    const scrollStart = window.innerHeight * 1.5;
-    const minScale = 0.65;
-
-    if (!openingContainer) return;
-
-    let scale = 1;
-    let translateY = 0;
-
-    if (scrollPos < shrinkEnd) {
-      // Zoom out
-      const progress = scrollPos / shrinkEnd;
-      scale = 1 - progress * (1 - minScale);
-    } else if (scrollPos < scrollStart) {
-      // Hold position
-      scale = minScale;
-    } else {
-      // Move upward gradually
-      const offset = scrollPos - scrollStart;
-      scale = minScale;
-      translateY = -offset * 0.8; // smoother travel speed
-    }
-
-    openingContainer.style.transform = `translate(-50%, calc(-50% + ${translateY}px)) scale(${scale})`;
-    openingContainer.style.transformOrigin = 'center center';
-  });
-
-  // Fade-in observer
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) entry.target.classList.add('visible');
+    // Cursor follow
+    document.addEventListener('mousemove', e => {
+      customCursor.style.left = e.clientX + 'px';
+      customCursor.style.top = e.clientY + 'px';
     });
-  }, { threshold: 0.1 });
 
-  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+    // Smooth zoom-out and scroll-up for opening video
+    window.addEventListener('scroll', () => {
+      const scrollPos = window.scrollY;
+      const shrinkEnd = window.innerHeight * 1.2;
+      const scrollStart = window.innerHeight * 1.5;
+      const minScale = 0.65;
 
-  // Keep content above video once you scroll past
-  window.addEventListener('scroll', () => {
-    const sectionHeight = openingSection.offsetHeight;
-    if (window.scrollY > sectionHeight - window.innerHeight) {
-      openingContainer.style.position = 'absolute';
-      openingContainer.style.top = 'auto';
-      openingContainer.style.bottom = '0';
-    } else {
-      openingContainer.style.position = 'fixed';
-      openingContainer.style.top = '50%';
-    }
-  });
-</script>
+      if (!openingContainer) return;
 
+      let scale = 1;
+      let translateY = 0;
+
+      if (scrollPos < shrinkEnd) {
+        const progress = scrollPos / shrinkEnd;
+        scale = 1 - progress * (1 - minScale);
+      } else if (scrollPos < scrollStart) {
+        scale = minScale;
+      } else {
+        const offset = scrollPos - scrollStart;
+        scale = minScale;
+        translateY = -offset * 0.8;
+      }
+
+      openingContainer.style.transform = `translate(-50%, calc(-50% + ${translateY}px)) scale(${scale})`;
+      openingContainer.style.transformOrigin = 'center center';
+    });
+
+    // Fade-in observer
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+    // Keep content above video once you scroll past
+    window.addEventListener('scroll', () => {
+      const sectionHeight = openingSection.offsetHeight;
+      if (window.scrollY > sectionHeight - window.innerHeight) {
+        openingContainer.style.position = 'absolute';
+        openingContainer.style.top = 'auto';
+        openingContainer.style.bottom = '0';
+      } else {
+        openingContainer.style.position = 'fixed';
+        openingContainer.style.top = '50%';
+      }
+    });
+  </script>
 </body>
 </html>
