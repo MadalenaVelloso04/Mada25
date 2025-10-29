@@ -1411,15 +1411,25 @@
 </div>
 
     <script>
-        // LOADER FUNCTIONALITY
+      // LOADER FUNCTIONALITY
+        // Ensure loader shows first
+        document.addEventListener('DOMContentLoaded', () => {
+            const loaderWrapper = document.querySelector('.loader-wrapper');
+            loaderWrapper.style.display = 'flex';
+        });
+
         window.addEventListener('load', () => {
             const loaderWrapper = document.querySelector('.loader-wrapper');
-            loaderWrapper.classList.add('fade-out');
-            document.body.classList.add('loaded');
             
+            // Add a small delay to ensure everything is loaded
             setTimeout(() => {
-                loaderWrapper.style.display = 'none';
-            }, 500);
+                loaderWrapper.classList.add('fade-out');
+                document.body.classList.add('loaded');
+                
+                setTimeout(() => {
+                    loaderWrapper.style.display = 'none';
+                }, 500);
+            }, 300);
         });
 
         const heroText = document.querySelector('.hero-text');
