@@ -92,12 +92,10 @@
     .overlay-title { font-size: 42px; font-weight: 300; line-height: 1.1; margin-bottom: 20px; max-width: 500px; }
     .overlay-text { font-size: 13px; line-height: 1.6; color: rgba(255,255,255,0.8); max-width: 400px; }
 
-    /* Final Section */
-    .final-section { background: var(--primary-black); color: white; padding: 120px 60px; margin: 0 -40px; text-align: center; }
-    .final-title { font-size: clamp(48px, 8vw, 96px); font-weight: 200; line-height: 1; letter-spacing: -0.02em; margin-bottom: 40px; }
-    .final-text { font-size: 14px; line-height: 1.6; color: rgba(255,255,255,0.7); max-width: 500px; margin: 0 auto 60px; }
-    .next-project { display: inline-flex; align-items: center; gap: 15px; font-family: 'JetBrains Mono', monospace; font-size: 9px; text-transform: uppercase; letter-spacing: 0.2em; text-decoration: none; color: rgba(255,255,255,0.8); border: 1px solid rgba(255,255,255,0.3); padding: 15px 25px; transition: all 0.3s ease; }
-    .next-project:hover { color: white; border-color: rgba(255,255,255,0.6); transform: translateY(-2px); }
+   /* Final Section */
+    .final-section { padding: 60px; margin: 0 -10px; text-align: center; }
+    .next-project { display: inline-flex; align-items: center; gap: 15px; font-family: 'JetBrains Mono', monospace; font-size: 9px; text-transform: uppercase; letter-spacing: 0.2em; text-decoration: none; color: rgba(0, 0, 0, 0.8); border: 1px solid rgba(0, 0, 0, 0.3); padding: 15px; transition: all 0.3s ease; }
+    .next-project:hover { color: rgb(0, 0, 0); border-color: rgba(0, 0, 0, 0.6); transform: translateY(-2px); }
 
     /* Cursor */
     .custom-cursor { position: fixed; width: 52px; height: 52px; pointer-events: none; z-index: 10000; transform: translate(-50%, -50%); }
@@ -139,7 +137,7 @@
 </head>
 <body>
   <div class="custom-cursor"><img src="images/Ilustração_Sem_Título.png" alt="cursor"></div>
-  <a href="index.html" class="back-button">Back to Main</a>
+       <a href="javascript:history.back()" class="back-button">Go Back</a>
 
   <section class="opening-image-section">
     <div class="opening-image-container">
@@ -201,14 +199,10 @@
 
 
     <section class="final-section">
-        <h2 class="final-title">Next Project</h2>
-        <p class="final-text">
-            Explore more work and discover the creative process behind each unique project.
-        </p>
-        <a href="shortmovie.html" class="next-project">View Modis</a>
+        <a href="shortmovie.html" class="next-project">View next project</a>
     </section>
 
-  <script>
+    <script>
     const customCursor = document.querySelector('.custom-cursor');
     const openingContainer = document.querySelector('.opening-image-container');
     const openingSection = document.querySelector('.opening-image-section');
@@ -219,12 +213,12 @@
       customCursor.style.top = e.clientY + 'px';
     });
 
-    // Smooth zoom-out and scroll-up for opening video
+    // Smooth zoom-out and scroll-up for opening image
     window.addEventListener('scroll', () => {
       const scrollPos = window.scrollY;
-      const shrinkEnd = window.innerHeight * 1.2;
-      const scrollStart = window.innerHeight * 1.5;
-      const minScale = 0.65;
+      const shrinkEnd = 1000;
+      const scrollStart = 1400;
+      const minScale = 0.6;
 
       if (!openingContainer) return;
 
@@ -234,12 +228,14 @@
       if (scrollPos < shrinkEnd) {
         const progress = scrollPos / shrinkEnd;
         scale = 1 - progress * (1 - minScale);
+        translateY = 0;
       } else if (scrollPos < scrollStart) {
         scale = minScale;
+        translateY = 0;
       } else {
-        const offset = scrollPos - scrollStart;
+        const scrollOffset = scrollPos - scrollStart;
         scale = minScale;
-        translateY = -offset * 0.8;
+        translateY = -scrollOffset;
       }
 
       openingContainer.style.transform = `translate(-50%, calc(-50% + ${translateY}px)) scale(${scale})`;
@@ -254,19 +250,6 @@
     }, { threshold: 0.1 });
 
     document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-
-    // Keep content above video once you scroll past
-    window.addEventListener('scroll', () => {
-      const sectionHeight = openingSection.offsetHeight;
-      if (window.scrollY > sectionHeight - window.innerHeight) {
-        openingContainer.style.position = 'absolute';
-        openingContainer.style.top = 'auto';
-        openingContainer.style.bottom = '0';
-      } else {
-        openingContainer.style.position = 'fixed';
-        openingContainer.style.top = '50%';
-      }
-    });
   </script>
 </body>
 </html>

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Albums & Singles — Modis Layout</title>
+  <title>O Rapaz e o Mar – Madalena Velloso</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600&family=JetBrains+Mono:wght@300;400&display=swap');
 
@@ -85,6 +85,9 @@
     .grid-item { background: var(--light-gray); }
     .grid-item img, .grid-item video { width: 100%; height: 100%; object-fit: cover; }
 
+    /* Flipbook */
+    .flipbook-container { margin-bottom: 100px; }
+
     /* Full Image Overlay */
     .full-image-section { position: relative; height: 80vh; margin: 0 -40px 200px; background: var(--primary-black); }
     .full-image { width: 100%; height: 100%; object-fit: cover; }
@@ -139,11 +142,11 @@
 </head>
 <body>
   <div class="custom-cursor"><img src="images/Ilustração_Sem_Título.png" alt="cursor"></div>
-  <a href="index.html" class="back-button">Back to Main</a>
+  <a href="javascript:history.back()" class="back-button">Go Back</a>
 
   <section class="opening-image-section">
     <div class="opening-image-container">
-      <img class="opening-image" src="images/rapazeomar/IMG_0356 copy.JPG"></img>
+      <img class="opening-image" src="images/rapazeomar/IMG_0356 copy.JPG" alt="O Rapaz e o Mar">
     </div>
   </section>
 
@@ -164,10 +167,10 @@
       <div class="image-text-section">
         <div class="large-image"><img src="images/rapazeomar/tiktok1 copy.jpg" alt=""></div>
         <div class="side-text">
-          <div class="section-number">001 — Overview</div>
+          <div class="section-number">001 – Overview</div>
           <h2 class="section-title">The creative process</h2>
           <p class="text-block">This project is the first of many in this area, as I developed a strong interest in illustration during my last semester of college.
-            <i>O rapaz e o Mar</i> is a childrens book with a very specific goal: to slow down and be patient. 
+            <i>O rapaz e o Mar</i> is a children's book with a very specific goal: to slow down and be patient. 
           </p>
           <p class="text-block">The book was produced on Adobe Photoshop, however it started on paper with plenty of sketches and character studies</p>
         </div>
@@ -192,7 +195,7 @@ little boy, with so much curiosity, compassion, and love.
       </div>
     </section>
 
- <section class="section fade-in">
+    <section class="section fade-in">
       <div class="flipbook-container">
         <iframe 
           src="https://heyzine.com/flip-book/3ea0089d0c.html" 
@@ -206,14 +209,13 @@ little boy, with so much curiosity, compassion, and love.
     </section>
   </div>
 
-     <section class="final-section">
-        <h2 class="final-title">Next Project</h2>
-        <p class="final-text">
-            Explore more work and discover the creative process behind each unique project.
-        </p>
-        <a href="albums.html" class="next-project">View Modis</a>
-    </section>
-
+  <section class="final-section">
+    <h2 class="final-title">Next Project</h2>
+    <p class="final-text">
+      Explore more work and discover the creative process behind each unique project.
+    </p>
+    <a href="albums.html" class="next-project">View Albums & Singles</a>
+  </section>
 
   <script>
     const customCursor = document.querySelector('.custom-cursor');
@@ -226,12 +228,12 @@ little boy, with so much curiosity, compassion, and love.
       customCursor.style.top = e.clientY + 'px';
     });
 
-    // Smooth zoom-out and scroll-up for opening video
+    // Smooth zoom-out and scroll-up for opening image
     window.addEventListener('scroll', () => {
       const scrollPos = window.scrollY;
-      const shrinkEnd = window.innerHeight * 1.2;
-      const scrollStart = window.innerHeight * 1.5;
-      const minScale = 0.65;
+      const shrinkEnd = 1000;
+      const scrollStart = 1400;
+      const minScale = 0.6;
 
       if (!openingContainer) return;
 
@@ -241,12 +243,14 @@ little boy, with so much curiosity, compassion, and love.
       if (scrollPos < shrinkEnd) {
         const progress = scrollPos / shrinkEnd;
         scale = 1 - progress * (1 - minScale);
+        translateY = 0;
       } else if (scrollPos < scrollStart) {
         scale = minScale;
+        translateY = 0;
       } else {
-        const offset = scrollPos - scrollStart;
+        const scrollOffset = scrollPos - scrollStart;
         scale = minScale;
-        translateY = -offset * 0.8;
+        translateY = -scrollOffset;
       }
 
       openingContainer.style.transform = `translate(-50%, calc(-50% + ${translateY}px)) scale(${scale})`;
@@ -261,19 +265,6 @@ little boy, with so much curiosity, compassion, and love.
     }, { threshold: 0.1 });
 
     document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-
-    // Keep content above video once you scroll past
-    window.addEventListener('scroll', () => {
-      const sectionHeight = openingSection.offsetHeight;
-      if (window.scrollY > sectionHeight - window.innerHeight) {
-        openingContainer.style.position = 'absolute';
-        openingContainer.style.top = 'auto';
-        openingContainer.style.bottom = '0';
-      } else {
-        openingContainer.style.position = 'fixed';
-        openingContainer.style.top = '50%';
-      }
-    });
   </script>
 </body>
 </html>

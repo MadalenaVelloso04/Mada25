@@ -207,9 +207,10 @@
     .fade-in{opacity:0;transform:translateY(30px);transition:opacity .8s ease,transform .8s ease}
     .fade-in.visible{opacity:1;transform:translateY(0)}
 
-    /* footer */
-    footer{background:var(--primary-black);color:white;padding:80px 40px;text-align:center;margin-top:120px;z-index:2}
-    footer p{font-family:'JetBrains Mono';font-size:10px;text-transform:uppercase;letter-spacing:0.2em;color:var(--subtle-gray)}
+    /* Final Section */
+    .final-section { padding: 60px; margin: 0 -10px; text-align: center; }
+    .next-project { display: inline-flex; align-items: center; gap: 15px; font-family: 'JetBrains Mono', monospace; font-size: 9px; text-transform: uppercase; letter-spacing: 0.2em; text-decoration: none; color: rgba(0, 0, 0, 0.8); border: 1px solid rgba(0, 0, 0, 0.3); padding: 15px; transition: all 0.3s ease; }
+    .next-project:hover { color: rgb(0, 0, 0); border-color: rgba(0, 0, 0, 0.6); transform: translateY(-2px); }
 
     /* lightbox overlay */
     #lightbox-overlay{
@@ -240,7 +241,7 @@
   <div class="custom-cursor" id="customCursor" aria-hidden="true"></div>
 
   <!-- Back Button -->
-  <a href="index.html" class="back-button">Back to main</a>
+    <a href="javascript:history.back()" class="back-button">Go Back</a>
 
   <!-- Opening full-screen video -->
   <section class="opening-image-section" aria-hidden="true">
@@ -666,11 +667,7 @@
   </div>
 
    <section class="final-section">
-        <h2 class="final-title">Next Project</h2>
-        <p class="final-text">
-            Explore more work and discover the creative process behind each unique project.
-        </p>
-        <a href="petali.html" class="next-project">View Modis</a>
+        <a href="petali.html" class="next-project">View next project</a>
     </section>
 
   <script>

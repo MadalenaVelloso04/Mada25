@@ -368,56 +368,11 @@
             object-fit: cover;
         }
 
-        /* Final section */
-        .final-section {
-            background: var(--primary-black);
-            color: white;
-            padding: 120px 60px;
-            margin: 0 -40px;
-            text-align: center;
-        }
+         /* Final Section */
+    .final-section { padding: 60px; margin: 0 -10px; text-align: center; }
+    .next-project { display: inline-flex; align-items: center; gap: 15px; font-family: 'JetBrains Mono', monospace; font-size: 9px; text-transform: uppercase; letter-spacing: 0.2em; text-decoration: none; color: rgba(0, 0, 0, 0.8); border: 1px solid rgba(0, 0, 0, 0.3); padding: 15px; transition: all 0.3s ease; }
+    .next-project:hover { color: rgb(0, 0, 0); border-color: rgba(0, 0, 0, 0.6); transform: translateY(-2px); }
 
-        .final-title {
-            font-size: clamp(48px, 8vw, 96px);
-            font-weight: 200;
-            line-height: 1;
-            letter-spacing: -0.02em;
-            margin-bottom: 40px;
-        }
-
-        .final-text {
-            font-size: 14px;
-            line-height: 1.6;
-            color: rgba(255,255,255,0.7);
-            max-width: 500px;
-            margin: 0 auto 60px;
-        }
-
-        .next-project {
-            display: inline-flex;
-            align-items: center;
-            gap: 15px;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 9px;
-            text-transform: uppercase;
-            letter-spacing: 0.2em;
-            text-decoration: none;
-            color: rgba(255,255,255,0.8);
-            border: 1px solid rgba(255,255,255,0.3);
-            padding: 15px 25px;
-            transition: all 0.3s ease;
-        }
-
-        .next-project:hover {
-            color: white;
-            border-color: rgba(255,255,255,0.6);
-            transform: translateY(-2px);
-        }
-
-        .next-project::after {
-            content: '→';
-            font-size: 10px;
-        }
 
         /* Custom Cursor */
         .custom-cursor {
@@ -603,7 +558,7 @@
     </div>
 
     <!-- Back Button -->
-    <a href="index.html" class="back-button">Back to Main</a>
+       <a href="javascript:history.back()" class="back-button">Go Back</a>
 
     <!-- Full Screen Opening Image -->
     <section class="opening-image-section">
@@ -754,11 +709,7 @@
 
                <!-- Final Section / Next Project -->
     <section class="final-section">
-        <h2 class="final-title">Next Project</h2>
-        <p class="final-text">
-            Explore more work and discover the creative process behind each unique project.
-        </p>
-        <a href="gdo.html" class="next-project">View Modis</a>
+        <a href="gdo.html" class="next-project">View next project</a>
     </section>
 
 
