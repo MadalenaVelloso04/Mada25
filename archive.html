@@ -13,7 +13,7 @@
 
         body {
             font-family: 'Courier New', monospace;
-            background: #f5f5f5;
+            background: #ffffff;
             background-image: url('images/background.jpg');
             background-size: cover;
             background-position: center;
@@ -62,9 +62,10 @@
             text-align: center;
             margin-bottom: 80px;
             color: #333;
+            font-weight: lighter;
         }
 
-             /* Masonry layout for Illustration & 3D */
+        /* Masonry Grid - Same as projectsection.html */
         .masonry-grid {
             column-count: 3;
             column-gap: 12px;
@@ -85,74 +86,170 @@
             transform: scale(1.02);
             opacity: 0.9;
         }
-        .grid-item {
-            break-inside: avoid;
-            margin-bottom: 20px;
-            position: relative;
-            overflow: hidden;
+
+        /* Lightbox Styling */
+        .lightbox {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(255, 255, 255, 0.96);
+            backdrop-filter: blur(6px);
+            justify-content: center;
+            align-items: center;
+            z-index: 30000;
             cursor: none;
-            transition: transform 0.3s ease;
         }
 
-        .grid-item:hover {
-            transform: scale(1.02);
-            z-index: 10;
+        .lightbox.show {
+            display: flex;
         }
 
-        .grid-item img {
-            width: 100%;
-            height: auto;
+        .lightbox img,
+        .lightbox video {
+            max-width: 90%;
+            max-height: 85vh;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            transition: transform 0.4s ease;
+            display: none;
+        }
+
+        .lightbox img.active,
+        .lightbox video.active {
             display: block;
-            transition: filter 0.5s ease;
         }
 
-    
-
-        .grid-item:hover::after {
-            opacity: 0;
+        .lightbox img:hover,
+        .lightbox video:hover {
+            transform: scale(1.02);
         }
 
-        /* Different sizes for variety */
-        .grid-item:nth-child(3n + 1) {
-            transform: scale(1.1);
+        .lightbox-close {
+            position: fixed;
+            top: 40px;
+            right: 50px;
+            font-size: 1.2rem;
+            font-style: italic;
+            color: #333;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-family: 'Courier New', monospace;
+            z-index: 31000;
+            transition: color 0.2s ease;
         }
 
-        .grid-item:nth-child(5n + 2) {
-            transform: scale(0.9);
-        }
-
-        .grid-item:nth-child(7n + 3) {
-            transform: scale(1.05);
+        .lightbox-close:hover {
+            color: blue;
         }
 
         /* Responsive */
-        @media (max-width: 1200px) {
+        @media (max-width: 1024px) {
             .masonry-grid {
-                column-count: 3;
+                column-count: 2;
+                column-gap: 10px;
+            }
+
+            .masonry-grid img,
+            .masonry-grid video {
+                margin-bottom: 10px;
+            }
+
+            .archive-title {
+                font-size: 3rem;
+            }
+
+            body {
+                padding: 100px 30px 60px;
+            }
+
+            .little-me {
+                width: 80px;
+                top: 30px;
+                left: 30px;
             }
         }
 
         @media (max-width: 768px) {
+            body {
+                cursor: auto;
+                padding: 100px 20px 60px;
+            }
+
+            .custom-cursor {
+                display: none;
+            }
+
+            .masonry-grid img,
+            .masonry-grid video {
+                cursor: pointer;
+            }
+
             .masonry-grid {
                 column-count: 2;
+                padding: 0 20px;
             }
-            
+
             .archive-title {
-                font-size: 3rem;
+                font-size: 2.5rem;
+            }
+
+            .little-me {
+                width: 70px;
+                top: 20px;
+                left: 20px;
+            }
+
+            .lightbox-close {
+                top: 20px;
+                right: 20px;
+                font-size: 1rem;
+            }
+
+            .lightbox img,
+            .lightbox video {
+                max-width: 95%;
+                max-height: 80vh;
             }
         }
 
         @media (max-width: 480px) {
             .masonry-grid {
                 column-count: 1;
+                column-gap: 0;
+                padding: 0 15px;
             }
-            
+
+            .masonry-grid img,
+            .masonry-grid video {
+                margin-bottom: 12px;
+            }
+
             .archive-title {
                 font-size: 2rem;
+                margin-bottom: 60px;
             }
 
             body {
-                padding: 100px 20px 60px;
+                padding: 100px 15px 60px;
+            }
+
+            .little-me {
+                width: 60px;
+                top: 15px;
+                left: 15px;
+            }
+
+            .lightbox-close {
+                top: 15px;
+                right: 15px;
+                font-size: 0.95rem;
+            }
+
+            .lightbox img,
+            .lightbox video {
+                max-width: 95%;
+                max-height: 75vh;
             }
         }
     </style>
@@ -173,35 +270,33 @@
 
     <!-- Masonry Grid -->
     <div class="masonry-grid">
-        <div class="grid-item">
-            <img src="images/images copy/WebP/zine1.webp" alt="Archive item 2">
-        </div>
-        <div class="grid-item">
-            <img src="images/images copy/WebP/thatsenough.webp" alt="Archive item 3">
-        </div>
+               <img src="images/mockup1_MUPI.jpeg" alt="Archive item 2">
+                      <img src="images/Mockup2_MUPI.jpeg" alt="Archive item 2">
+               <img src="images/images copy/WebP/capa zine@72x.webp" alt="Archive item 2">
+        <img src="images/images copy/WebP/zine1.webp" alt="Archive item 2">
+                      <img src="images/images copy/WebP/mockupzine1.webp" alt="Archive item 2">
+                            <img src="images/images copy/WebP/mockupzine2.webp" alt="Archive item 2">
+                            <img src="images/images copy/WebP/mockupzine3.webp" alt="Archive item 2">
+        <img src="images/images copy/WebP/tejumupi1.webp" alt="Archive item 2">     
+          <img src="images/images copy/WebP/tejustand.webp" alt="Archive item 2">  
+                   <img src="images/WebP/billboard2.webp" alt="Archive item 2">  
+               <img src="images/images copy/WebP/signse.webp" alt="Archive item 2"> 
 
-        <div class="grid-item">
-            <img src="images/New Folder With Items 2/Infograph go copy.webp" alt="Archive item 5">
-        </div>
-        <div class="grid-item">
-            <img src="images/New Folder With Items 2/Design1.webp" alt="Archive item 6">
-        </div>
-     
-        <div class="grid-item">
-            <img src="images/New Folder With Items 2/Prancheta 1_1 copy.webp" alt="Archive item 8">
-        </div>
-        <div class="grid-item">
-            <img src="images/New Folder With Items 2/POSTERSGARE.webp" alt="Archive item 9">
-        </div>
-        <div class="grid-item">
-            <img src="images/Free Front View MacBook 16 Pro Mockup.jpeg" alt="Archive item 10">
-        </div>
-        <div class="grid-item">
-            <img src="images/mockup_2.jpeg" alt="Archive item 11">
-        </div>
-        <div class="grid-item">
-            <img src="images/behance-657d7cb1d67d7 copy.png" alt="Archive item 12">
-        </div>
+        <img src="images/images copy/WebP/thatsenough.webp" alt="Archive item 3">
+        <img src="images/New Folder With Items 2/Infograph go copy.webp" alt="Archive item 5">
+        <img src="images/New Folder With Items 2/Design1.webp" alt="Archive item 6">
+        <img src="images/New Folder With Items 2/Prancheta 1_1 copy.webp" alt="Archive item 8">
+        <img src="images/New Folder With Items 2/POSTERSGARE.webp" alt="Archive item 9">
+        <img src="images/Free Front View MacBook 16 Pro Mockup.jpeg" alt="Archive item 10">
+        <img src="images/mockup_2.jpeg" alt="Archive item 11">
+        <img src="images/behance-657d7cb1d67d7 copy.png" alt="Archive item 12">
+    </div>
+
+    <!-- Lightbox -->
+    <div id="lightbox" class="lightbox">
+        <button class="lightbox-close">close</button>
+        <img src="" alt="Expanded artwork">
+        <video src="" controls autoplay loop></video>
     </div>
 
     <script>
@@ -211,6 +306,44 @@
         document.addEventListener('mousemove', (e) => {
             customCursor.style.left = e.clientX + 'px';
             customCursor.style.top = e.clientY + 'px';
+        });
+
+        // Lightbox Functionality
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = lightbox.querySelector('img');
+        const lightboxVideo = lightbox.querySelector('video');
+        const closeBtn = document.querySelector('.lightbox-close');
+
+        document.querySelectorAll('.masonry-grid img, .masonry-grid video').forEach(media => {
+            media.addEventListener('click', () => {
+                if (media.tagName.toLowerCase() === 'img') {
+                    lightboxImg.src = media.src;
+                    lightboxImg.classList.add('active');
+                    lightboxVideo.classList.remove('active');
+                    lightboxVideo.pause();
+                } else {
+                    lightboxVideo.src = media.src;
+                    lightboxVideo.classList.add('active');
+                    lightboxImg.classList.remove('active');
+                }
+                lightbox.classList.add('show');
+            });
+        });
+
+        closeBtn.addEventListener('click', () => {
+            lightbox.classList.remove('show');
+            lightboxImg.classList.remove('active');
+            lightboxVideo.classList.remove('active');
+            lightboxVideo.pause();
+        });
+
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) {
+                lightbox.classList.remove('show');
+                lightboxImg.classList.remove('active');
+                lightboxVideo.classList.remove('active');
+                lightboxVideo.pause();
+            }
         });
     </script>
 </body>
