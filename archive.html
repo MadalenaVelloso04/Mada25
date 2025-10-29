@@ -64,14 +64,27 @@
             color: #333;
         }
 
-        /* Masonry Grid */
+             /* Masonry layout for Illustration & 3D */
         .masonry-grid {
-            column-count: 4;
-            column-gap: 20px;
-            max-width: 1600px;
-            margin: 0 auto;
+            column-count: 3;
+            column-gap: 12px;
+            padding: 0 40px;
         }
 
+        .masonry-grid img,
+        .masonry-grid video {
+            width: 100%;
+            margin-bottom: 12px;
+            display: block;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+            cursor: pointer;
+        }
+
+        .masonry-grid img:hover,
+        .masonry-grid video:hover {
+            transform: scale(1.02);
+            opacity: 0.9;
+        }
         .grid-item {
             break-inside: avoid;
             margin-bottom: 20px;
@@ -161,26 +174,19 @@
     <!-- Masonry Grid -->
     <div class="masonry-grid">
         <div class="grid-item">
-            <img src="images/images copy/WebP/001.webp" alt="Archive item 1">
-        </div>
-        <div class="grid-item">
             <img src="images/images copy/WebP/zine1.webp" alt="Archive item 2">
         </div>
         <div class="grid-item">
             <img src="images/images copy/WebP/thatsenough.webp" alt="Archive item 3">
         </div>
-        <div class="grid-item">
-            <img src="images/New Folder With Items 2/WebP/Ativo 1.webp" alt="Archive item 4">
-        </div>
+
         <div class="grid-item">
             <img src="images/New Folder With Items 2/Infograph go copy.webp" alt="Archive item 5">
         </div>
         <div class="grid-item">
             <img src="images/New Folder With Items 2/Design1.webp" alt="Archive item 6">
         </div>
-        <div class="grid-item">
-            <img src="images/New Folder With Items 2/WebP/Ativo 4.webp" alt="Archive item 7">
-        </div>
+     
         <div class="grid-item">
             <img src="images/New Folder With Items 2/Prancheta 1_1 copy.webp" alt="Archive item 8">
         </div>
@@ -195,30 +201,6 @@
         </div>
         <div class="grid-item">
             <img src="images/behance-657d7cb1d67d7 copy.png" alt="Archive item 12">
-        </div>
-        <div class="grid-item">
-            <img src="images/images copy/illustra/self_portrait copy.png" alt="Archive item 13">
-        </div>
-        <div class="grid-item">
-            <img src="images/archive14.jpg" alt="Archive item 14">
-        </div>
-        <div class="grid-item">
-            <img src="images/archive15.jpg" alt="Archive item 15">
-        </div>
-        <div class="grid-item">
-            <img src="images/archive16.jpg" alt="Archive item 16">
-        </div>
-        <div class="grid-item">
-            <img src="images/archive17.jpg" alt="Archive item 17">
-        </div>
-        <div class="grid-item">
-            <img src="images/archive18.jpg" alt="Archive item 18">
-        </div>
-        <div class="grid-item">
-            <img src="images/archive19.jpg" alt="Archive item 19">
-        </div>
-        <div class="grid-item">
-            <img src="images/archive20.jpg" alt="Archive item 20">
         </div>
     </div>
 
