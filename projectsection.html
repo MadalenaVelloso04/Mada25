@@ -240,6 +240,19 @@
   grid-column: 1 / -1;
 }
 
+.section-p {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+  font-size: 1rem;
+  text-align: center;
+  width: 300px;
+  color: #333;
+  font-weight: lighter;
+}
+
 @media (max-width: 1024px) {
   .masonry-gallery { column-count: 2; }
 }
@@ -801,12 +814,14 @@
     <!-- POSTERS SECTION - Stacking on Top -->
     <section class="posters-section" id="posters">
         <h2 class="section-title">Posters</h2>
-        <div class="posters-container">
-            <p>To show you why <i>my brain is still developing,</i>
+
+             <p class="section-p">To show you why <i>my brain is still developing,</i>
             I decided to start by showing you a compilation 
             of graphical works in the printing sfere.
             Completly diverse and true to themselves, 
             this experiments mean a lot as they grew beside me.</p>
+    
+        <div class="posters-container">
             <div class="poster-stack">
                 <div class="poster-item" data-index="0">
                     <img src="images/images copy/lisbonposters copy/lightmode.png" alt="Poster 0">
@@ -848,20 +863,26 @@
         <div class="project-title" id="currentProjectTitle"></div>
         <div class="projects-container">
             <div class="projects-scroll">
+                    <div class="project-item" data-title="Petali">
+                    <a href="petali.html"><img src="images/petali/cans.jpeg" alt="Petali"></a>
+                </div>
                 <div class="project-item" data-title="Modis Academia">
-                    <img src="images/MODIS/logodelimatations.png" alt="Modis Academia">
+                    <a href="modis.html"><img src="images/MODIS/logodelimatations.png" alt="Modis Academia"></a>
+                </div>
+                 <div class="project-item" data-title="Descarrilados">
+                     <a href="shortmovie.html"><img src="images/descarriladosfront.png" alt="desc"></a>
                 </div>
                 <div class="project-item" data-title="GDO">
-                    <img src="images/gare/App copy/mockups/Free iPhone 14 on Tripod Mockup copy.png" alt="GDO">
+                     <a href="gdo.html"><img src="images/gare/App copy/mockups/Free iPhone 14 on Tripod Mockup copy.png" alt="GDO"></a>
                 </div>
                 <div class="project-item" data-title="Olura Supplements">
-                    <img src="images/olura/mupi.jpg" alt="Olura Supplements">
+                   <a href="olura.html"> <img src="images/olura/mockup1.png" alt="Olura Supplements"></a>
                 </div>
                 <div class="project-item" data-title="Rapaz e o Mar">
-                    <img src="images/rapazeomar/tiktok1 copy.jpg" alt="Rapazeomar">
+                   <a href="rapaz.html">  <img src="images/rapazeomar/tiktok1 copy.jpg" alt="Rapazeomar"></a>
                 </div>
                 <div class="project-item" data-title="Albums & Singles">
-                    <img src="images/ezgif-6b00df97da6b47.gif" alt="Albums & Singles">
+                    <a href="albums.html"> <img src="images/ezgif-6b00df97da6b47.gif" alt="Albums & Singles"></a>
                 </div>
             </div>
         </div>
