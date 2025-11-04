@@ -521,6 +521,7 @@
             background: #ddd;
             position: relative;
             transition: transform 0.6s ease;
+            z-index: 60;
         }
 
         .work-image img,
@@ -530,64 +531,64 @@
             object-fit: cover;
         }
 
-        .hover-images {
-            position: absolute;
-            top: 68%;
-            left: 60%;
-            width: 0;
-            height: 0;
+        /* NEW FULLSCREEN GRID STYLES */
+        .hover-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            gap: 0;
+            z-index: 40;
+            opacity: 0;
             pointer-events: none;
-            z-index: 50;
+            transition: opacity 0.6s ease;
         }
 
-        .hover-img {
-            position: absolute;
-            width: 200px;
-            height: 200px;
-            border: 1px solid rgba(51, 51, 51, 0.3);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
-            opacity: 0;
-            transform: translate(-50%, -50%) scale(0.2);
-            transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
-            background: #fff;
-            overflow: hidden;
+        .work-item:hover .hover-grid {
+            opacity: 1;
         }
-        
-        .hover-img img,
-        .hover-img video {
+
+        .hover-grid-item {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background: #000;
+            transform: scale(0.85);
+            opacity: 0;
+            transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .work-item:hover .hover-grid-item {
+            transform: scale(1);
+            opacity: 0.9;
+        }
+
+        .work-item:hover .hover-grid-item:nth-child(1) {
+            transition-delay: 0s;
+        }
+
+        .work-item:hover .hover-grid-item:nth-child(2) {
+            transition-delay: 0.1s;
+        }
+
+        .work-item:hover .hover-grid-item:nth-child(3) {
+            transition-delay: 0.2s;
+        }
+
+        .work-item:hover .hover-grid-item:nth-child(4) {
+            transition-delay: 0.3s;
+        }
+
+        .hover-grid-item img,
+        .hover-grid-item video {
             width: 100%;
             height: 100%;
             object-fit: cover;
             display: block;
-        }
-
-        .work-item:hover .hover-img {
-            opacity: 1;
-        }
-
-        .work-item:hover .hover-img:nth-child(1) {
-            transform: translate(calc(-50% - 350px), calc(-50% - 280px)) scale(1) rotate(-8deg);
-            transition-delay: 0s;
-        }
-
-        .work-item:hover .hover-img:nth-child(2) {
-            transform: translate(calc(-50% + 150px), calc(-50% - 280px)) scale(1) rotate(8deg);
-            transition-delay: 0.08s;
-        }
-
-        .work-item:hover .hover-img:nth-child(3) {
-            transform: translate(calc(-50% - 350px), calc(-50% + 80px)) scale(1) rotate(8deg);
-            transition-delay: 0.16s;
-        }
-
-        .work-item:hover .hover-img:nth-child(4) {
-            transform: translate(calc(-50% + 150px), calc(-50% + 80px)) scale(1) rotate(-8deg);
-            transition-delay: 0.24s;
-        }
-
-        .work-item:hover .hover-img:nth-child(5) {
-            transform: translate(calc(-50% + 150px), calc(-50% + 80px)) scale(1) rotate(-8deg);
-            transition-delay: 0.24s;
         }
 
         .work-title {
@@ -600,9 +601,10 @@
             color: #ffffff;
             opacity: 0;
             transition: opacity 0.5s ease;
-            z-index: 40;
+            z-index: 70;
             pointer-events: none;
             text-align: center;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
         }
 
         .work-item:hover .work-title {
@@ -724,8 +726,9 @@
         }
 
         @media (max-width: 1024px) {
-            .hover-images {
-                display: none;
+            .hover-grid {
+                grid-template-columns: 1fr 1fr;
+                grid-template-rows: 1fr 1fr;
             }
 
             .hamburger {
@@ -835,6 +838,10 @@
 
             a, .work-item, .hamburger {
                 cursor: pointer;
+            }
+
+            .hover-grid {
+                display: none;
             }
 
             .hamburger {
@@ -1143,12 +1150,12 @@
 <body>
 
     <div class="loader-wrapper" aria-hidden="false">
-        <div class="loader-name" role="img" aria-label="Loading — Madalena Velloso">
+        <div class="loader-name" role="img" aria-label="Loading – Madalena Velloso">
         </div>
     </div>
 
     <div class="custom-cursor">
-        <img src="images/Ilustração_Sem_Título.png" alt="">
+        <img src="images/Ilustração_Sem_Título.png" alt="">
     </div>
 
     <div class="hamburger" onclick="toggleMenu()">
@@ -1216,29 +1223,41 @@
     </div>
 
     <div class="work-container">
+        <div class="work-item" data-work="ophie">
+            <div class="work-image">
+                <video autoplay muted loop src="images/ophie/lips.mp4" alt="Petali"></video>
+            </div>
+            <div class="hover-grid">
+                <div class="hover-grid-item"><img src="images/ophie/Firefly_Gemini Flash_High-end editorial still life photography shot from a perfectly overhead angle. A bla 744633 (1).png" alt="ophie 1"></div>
+                <div class="hover-grid-item"><img src="images/ophie/Firefly_Gemini Flash_-Editorial beauty portrait of woman lying on her side, appearing from chest up. Model 133097.png" alt="ophie 2"></div>
+                <div class="hover-grid-item"><img src="images/ophie/a lot of bottles.png" alt="ophie 3"></div>
+                <div class="hover-grid-item"><img src="images/ophie/caixapack.png" alt="ophie 4"></div>
+            </div>
+            <div class="work-title">Ophie Lip Oils</div>
+        </div>
+
         <div class="work-item" data-work="petali">
             <div class="work-image">
-                  <video autoplay muted loop src="images/petali/a close up shot of the can rotating on its axis, studio lighting, product photography.mp4" alt="Petali"></video>
-                <div class="hover-images">
-                    <div class="hover-img"><img src="images/petali/boxes.jpeg" alt="petali 1"></div>
-                    <div class="hover-img"><img src="images/petali/menumockup.jpeg" alt="petali 2"></div>
-                    <div class="hover-img"><img src="images/petali/soda2.jpeg" alt="petali 3"></div>
-                    <div class="hover-img"><img src="images/petali/cans.jpeg" alt="petali 4"></div>
-                </div>
+                <video autoplay muted loop src="images/petali/a close up shot of the can rotating on its axis, studio lighting, product photography.mp4" alt="Petali"></video>
+            </div>
+            <div class="hover-grid">
+                <div class="hover-grid-item"><img src="images/petali/boxes.jpeg" alt="petali 1"></div>
+                <div class="hover-grid-item"><img src="images/petali/menumockup.jpeg" alt="petali 2"></div>
+                <div class="hover-grid-item"><img src="images/petali/soda2.jpeg" alt="petali 3"></div>
+                <div class="hover-grid-item"><img src="images/petali/cans.jpeg" alt="petali 4"></div>
             </div>
             <div class="work-title">Petali Sodas</div>
         </div>
 
- 
         <div class="work-item" data-work="body-bloom">
             <div class="work-image">
                 <img src="images/MODIS/concept2.gif" alt="petali">
-                <div class="hover-images">
-                    <div class="hover-img"><img src="images/MODIS/notebook.png" alt="Modis 1"></div>
-                    <div class="hover-img"><img src="images/MODIS/banner.png" alt="Modis 2"></div>
-                    <div class="hover-img"><img src="images/MODIS/MUPI.png" alt="Modis 3"></div>
-                    <div class="hover-img"><img src="images/MODIS/website.png" alt="Modis 4"></div>
-                </div>
+            </div>
+            <div class="hover-grid">
+                <div class="hover-grid-item"><img src="images/MODIS/notebook.png" alt="Modis 1"></div>
+                <div class="hover-grid-item"><img src="images/MODIS/banner.png" alt="Modis 2"></div>
+                <div class="hover-grid-item"><img src="images/MODIS/MUPI.png" alt="Modis 3"></div>
+                <div class="hover-grid-item"><img src="images/MODIS/website.png" alt="Modis 4"></div>
             </div>
             <div class="work-title">Modis Academia</div>
         </div>
@@ -1246,12 +1265,12 @@
         <div class="work-item" data-work="nura">
             <div class="work-image">
                 <video autoplay muted loop playsinline src="images/gare/App copy/video_app_behance.mp4"></video>
-                <div class="hover-images">
-                    <div class="hover-img"><img src="images/gare/wall circles.jpeg" alt="GDO 1"></div>
-                    <div class="hover-img"><img src="images/gare/App copy/mockups/Bendito_Mockup-CMB-Iphone-02 copy.png" alt="GDO 2"></div>
-                    <div class="hover-img"><img src="images/gare/quote.png" alt="GDO 3"></div>
-                    <div class="hover-img"><img src="images/gare/ cubos.jpeg" alt="GDO 4"></div>
-                </div>
+            </div>
+            <div class="hover-grid">
+                <div class="hover-grid-item"><img src="images/gare/wall circles.jpeg" alt="GDO 1"></div>
+                <div class="hover-grid-item"><img src="images/gare/App copy/mockups/Bendito_Mockup-CMB-Iphone-02 copy.png" alt="GDO 2"></div>
+                <div class="hover-grid-item"><img src="images/gare/quote.png" alt="GDO 3"></div>
+                <div class="hover-grid-item"><img src="images/gare/ cubos.jpeg" alt="GDO 4"></div>
             </div>
             <div class="work-title">GDO Wayfinding</div>
         </div>
@@ -1259,12 +1278,12 @@
         <div class="work-item" data-work="Olura Supplements">
             <div class="work-image">
                 <img src="images/ezgif-60cb350fb4cf7e.gif" alt="Olura Supplements">
-                <div class="hover-images">
-                    <div class="hover-img"><img src="images/olura/mockup1.png" alt="Olura 1"></div>
-                    <div class="hover-img"><img src="images/olura/mupi3.png" alt="Olura 2"></div>
-                    <div class="hover-img"><img src="images/olura/mupi.jpg" alt="Olura 3"></div>
-                    <div class="hover-img"><img src="images/olura/mockup3.png" alt="Olura 4"></div>
-                </div>
+            </div>
+            <div class="hover-grid">
+                <div class="hover-grid-item"><img src="images/olura/mockup1.png" alt="Olura 1"></div>
+                <div class="hover-grid-item"><img src="images/olura/mupi3.png" alt="Olura 2"></div>
+                <div class="hover-grid-item"><img src="images/olura/mupi.jpg" alt="Olura 3"></div>
+                <div class="hover-grid-item"><img src="images/olura/mockup3.png" alt="Olura 4"></div>
             </div>
             <div class="work-title">Olura Supplements</div>
         </div>
@@ -1272,12 +1291,12 @@
         <div class="work-item" data-work="vintage-records">
             <div class="work-image">
                 <img src="images/rapazeomar/IMG_0356 copy.JPG" alt="Vintage Records">
-                <div class="hover-images">
-                    <div class="hover-img"><img src="images/rapazeomar/tiktok1 copy.jpg" alt="Book 1"></div>
-                    <div class="hover-img"><img src="images/rapazeomar/tiktok2 copy.jpg" alt="Book 2"></div>
-                    <div class="hover-img"><img src="images/rapazeomar/tiktok3 copy.png" alt="Book 3"></div>
-                    <div class="hover-img"><img src="images/rapazeomar/tiktok4 copy.jpg" alt="Book 4"></div>
-                </div>
+            </div>
+            <div class="hover-grid">
+                <div class="hover-grid-item"><img src="images/rapazeomar/tiktok1 copy.jpg" alt="Book 1"></div>
+                <div class="hover-grid-item"><img src="images/rapazeomar/tiktok2 copy.jpg" alt="Book 2"></div>
+                <div class="hover-grid-item"><img src="images/rapazeomar/tiktok3 copy.png" alt="Book 3"></div>
+                <div class="hover-grid-item"><img src="images/rapazeomar/tiktok4 copy.jpg" alt="Book 4"></div>
             </div>
             <div class="work-title">O Rapaz e o mar</div>
         </div>
@@ -1285,12 +1304,12 @@
         <div class="work-item" data-work="ocean-wave">
             <div class="work-image">
                 <img src="images/ezgif-6b00df97da6b47.gif" alt="Ocean Wave">
-                <div class="hover-images">
-                    <div class="hover-img"><img src="images/images copy/vinyl/mockup_backcover copy.png" alt="Albums 1"></div>
-                    <div class="hover-img"><img src="images/images copy/vinyl/Album_cover copy 3.png" alt="Albums 2"></div>
-                    <div class="hover-img"><img src="images/images copy/vinyl/mockup_single_2 copy.png" alt="Albums 3"></div>
-                    <div class="hover-img"><img src="images/images copy/vinyl/mockup_single_1.5 copy.jpeg" alt="Albums 4"></div>
-                </div>
+            </div>
+            <div class="hover-grid">
+                <div class="hover-grid-item"><img src="images/images copy/vinyl/mockup_backcover copy.png" alt="Albums 1"></div>
+                <div class="hover-grid-item"><img src="images/images copy/vinyl/Album_cover copy 3.png" alt="Albums 2"></div>
+                <div class="hover-grid-item"><img src="images/images copy/vinyl/mockup_single_2 copy.png" alt="Albums 3"></div>
+                <div class="hover-grid-item"><img src="images/images copy/vinyl/mockup_single_1.5 copy.jpeg" alt="Albums 4"></div>
             </div>
             <div class="work-title">Albums & Singles</div>
         </div>
@@ -1298,18 +1317,18 @@
         <div class="work-item" data-work="editorial-mix">
             <div class="work-image">
                 <video autoplay muted loop playsinline src="images/squaredfrontview.mp4"></video>
-                <div class="hover-images">
-                    <div class="hover-img"><video autoplay muted loop playsinline src="images/0000-0025 copy.mp4"></video></div>
-                    <div class="hover-img"><video autoplay muted loop playsinline src="images/0001-0090_001 copy.mp4"></video></div>
-                    <div class="hover-img"><video autoplay muted loop playsinline src="images/0001-0140_001.mp4"></video></div>
-                    <div class="hover-img"><video autoplay muted loop playsinline src="images/animation1.1.mp4"></video></div>
-                </div>
+            </div>
+            <div class="hover-grid">
+                <div class="hover-grid-item"><video autoplay muted loop playsinline src="images/0000-0025 copy.mp4"></video></div>
+                <div class="hover-grid-item"><video autoplay muted loop playsinline src="images/0001-0090_001 copy.mp4"></video></div>
+                <div class="hover-grid-item"><video autoplay muted loop playsinline src="images/0001-0140_001.mp4"></video></div>
+                <div class="hover-grid-item"><video autoplay muted loop playsinline src="images/animation1.1.mp4"></video></div>
             </div>
             <div class="work-title">Short-Movie</div>
         </div>
     </div>
 
-     <section class="info-section" id="about">
+    <section class="info-section" id="about">
         <div class="info-container">
             <div class="info-column">
                 <h3 class="info-heading">Profile</h3>
@@ -1317,7 +1336,7 @@
             <div class="info-column info-main profile-with-image">
                 <div class="info-content">
                     <p>Madalena Velloso</p>
-                   <p><a href="#" id="email-link" class="info-link">madalenavelloso04@gmail.com</a></p>
+                    <p><a href="#" id="email-link" class="info-link">madalenavelloso04@gmail.com</a></p>
                     <p>
                         <a href="https://www.instagram.com/naoseique.etal/" class="info-link">Instagram</a>
                     </p>
@@ -1589,7 +1608,15 @@
         const workItems = document.querySelectorAll('.work-item');
 
         const workData = {
-           'petali': {
+            'ophie': {
+                title: 'Ophie Lip Oils',
+                category: 'Brand Identity / Packaging',
+                description: 'A collection of fresh, sweet flavors that melt effortlessly onto your lips.',
+                year: '2025',
+                role: 'Visual Identity, packaging design',
+                status: 'Prototype'
+            },
+            'petali': {
                 title: 'Petali Sodas',
                 category: 'Brand Identity / Packaging',
                 description: 'Botanical sodas that celebrate fresh, organic, and fruity sensations.',
@@ -1687,6 +1714,7 @@
             item.addEventListener('click', () => {
                 const work = item.getAttribute('data-work');
                 const links = {
+                    'ophie': 'ophie.html',
                     'petali': 'petali.html',
                     'body-bloom': 'modis.html',
                     'nura': 'gdo.html',
