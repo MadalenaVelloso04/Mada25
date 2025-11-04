@@ -56,6 +56,7 @@
             user-select: none;
             transform: translateY(0);
             will-change: opacity, transform;
+            z-index: 100;
         }
 
         .loader-name .letter {
@@ -1155,7 +1156,7 @@
     </div>
 
     <div class="custom-cursor">
-        <img src="images/Ilustração_Sem_Título.png" alt="cursor">
+        <img src="images/cursor.png" alt="cursor">
     </div>
 
     <div class="hamburger" onclick="toggleMenu()">
@@ -1450,45 +1451,72 @@
     </div>
 
     <script>
-             // Loader initialization - creates twinkling letters
-        // Run immediately to ensure it happens before page load
-        const name = 'madalena velloso';
-        const container = document.querySelector('.loader-name');
+       // Loader initialization - creates twinkling letters
+// Run immediately to ensure it happens before page load
+const name = 'madalena velloso';
+const container = document.querySelector('.loader-name');
 
-        if (container) {
-            container.innerHTML = '';
-            const chars = Array.from(name);
-            chars.forEach((ch, i) => {
-                const span = document.createElement('span');
-                span.className = 'letter glow';
-                span.textContent = ch === ' ' ? '\u00A0' : ch;
-                const delay = (i * 0.07).toFixed(2);
-                span.style.animationDelay = `${delay}s`;
-                const dur = 0.95 + (i % 3) * 0.07;
-                span.style.animationDuration = `${dur}s`;
-                container.appendChild(span);
-            });
+if (container) {
+    container.innerHTML = '';
+    const chars = Array.from(name);
+    chars.forEach((ch, i) => {
+        const span = document.createElement('span');
+        span.className = 'letter glow';
+        span.textContent = ch === ' ' ? '\u00A0' : ch;
+        const delay = (i * 0.07).toFixed(2);
+        span.style.animationDelay = `${delay}s`;
+        const dur = 0.95 + (i % 3) * 0.07;
+        span.style.animationDuration = `${dur}s`;
+        container.appendChild(span);
+    });
+}
+
+// Ensure loader shows first
+document.addEventListener('DOMContentLoaded', () => {
+    const loaderWrapper = document.querySelector('.loader-wrapper');
+    loaderWrapper.style.display = 'flex';
+});
+
+// Hide loader ONLY after all images and videos are fully loaded
+window.addEventListener('load', () => {
+    const loaderWrapper = document.querySelector('.loader-wrapper');
+    const body = document.body;
+
+    // Get all images and videos on the page
+    const mediaElements = [...document.images, ...document.querySelectorAll('video')];
+    let loadedCount = 0;
+    const totalMedia = mediaElements.length;
+
+    if (totalMedia === 0) {
+        finishLoading();
+    } else {
+        mediaElements.forEach(media => {
+            if (media.complete || media.readyState >= 3) {
+                checkIfAllLoaded();
+            } else {
+                media.addEventListener('loadeddata', checkIfAllLoaded, { once: true });
+                media.addEventListener('canplaythrough', checkIfAllLoaded, { once: true });
+                media.addEventListener('load', checkIfAllLoaded, { once: true });
+                media.addEventListener('error', checkIfAllLoaded, { once: true }); // skip if failed
+            }
+        });
+    }
+
+    function checkIfAllLoaded() {
+        loadedCount++;
+        if (loadedCount >= totalMedia) {
+            finishLoading();
         }
+    }
 
-        // Ensure loader shows first
-        document.addEventListener('DOMContentLoaded', () => {
-            const loaderWrapper = document.querySelector('.loader-wrapper');
-            loaderWrapper.style.display = 'flex';
-        });
-
-        // Hide loader when page is fully loaded
-        window.addEventListener('load', () => {
-            const loaderWrapper = document.querySelector('.loader-wrapper');
-            
-            setTimeout(() => {
-                loaderWrapper.classList.add('fade-out');
-                document.body.classList.add('loaded');
-                
-                setTimeout(() => {
-                    loaderWrapper.style.display = 'none';
-                }, 500);
-            }, 300);
-        });
+    function finishLoading() {
+        loaderWrapper.classList.add('fade-out');
+        body.classList.add('loaded');
+        setTimeout(() => {
+            loaderWrapper.style.display = 'none';
+        }, 800);
+    }
+});
 
         const heroText = document.querySelector('.hero-text');
         const littleMe = document.querySelector('.little-me');
