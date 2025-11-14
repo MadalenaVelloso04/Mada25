@@ -1769,5 +1769,23 @@ window.addEventListener('load', () => {
             emailModal.classList.remove('show');
         });
     </script>
+
+    <script>
+document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll("video").forEach(video => {
+        video.muted = true;    // ensure muted
+        video.playsInline = true;
+        video.setAttribute("playsinline", "");
+        video.setAttribute("muted", "");
+        video.setAttribute("autoplay", "");
+        video.setAttribute("loop", "");
+
+        // try to play programmatically
+        video.play().catch(() => {
+            // some browsers block autoplay until interaction
+        });
+    });
+});
+</script>
 </body>
 </html>
