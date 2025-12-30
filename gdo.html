@@ -3,1076 +3,418 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="icon" type="image/png" href="images/white-circle.png">
-    <title>Gare do Oriente - Wayfinding</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600&family=JetBrains+Mono:wght@300;400&display=swap');
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+    <link rel="icon" type="image/png" href="images/white-circle.png">
+    <link rel="stylesheet" href="https://use.typekit.net/dju8mqp.css">
+    <title>Gare do Oriente - Madalena Velloso</title>
+   <style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-        :root {
-            --primary-black: #0a0a0a;
-            --secondary-black: #1a1a1a;
-            --accent-white: #ffffff;
-            --subtle-gray: #888;
-            --light-gray: #e5e5e5;
-            --accent-green: #ACD591;
-            --accent-pink: #D53D96;
-            --accent-blue: #3372A9;
-            --accent-purple: #9379AB;
-        }
+body {
+  font-family: dico-mono, mono;
+  background: #000;
+  color: #fff;
+  overflow-x: hidden;
+}
 
-        body {
-            font-family: 'Courier New', monospace;
-            background: var(--accent-white);
-            color: var(--primary-black);
-            line-height: 1.3;
-            font-weight: 300;
-            overflow-x: hidden;
-            cursor: none;
-        }
+/* FIXED UI */
+.info-text,
+.navbar,
+.middle,
+.project-info {
+  mix-blend-mode: difference;
+  position: fixed;
+  z-index: 100;
+}
 
-        /* OPENING FULL SCREEN IMAGE */
-        .opening-image-section {
-            height: 300vh;
-            position: relative;
-        }
+.info-text {
+  top: 20px;
+  left: 20px;
+  font-size: 10px;
+  letter-spacing: 1px;
+}
 
-        .opening-image-container {
+    .navbar {
             position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 100%;
-            height: 100vh;
-            overflow: hidden;
-            z-index: 1;
+            top: 20px;
+            right: 20px;
             display: flex;
-            align-items: center;
-            justify-content: center;
-            background: var(--primary-black);
-        }
-
-        .opening-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: all 0.1s linear;
-        }
-
-        /* BACK BUTTON */
-        .back-button {
-            position: fixed;
-            top: 40px;
-            left: 40px;
-            z-index: 999;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 9px;
+            gap: 30px;
+            font-size: 12px;
             text-transform: uppercase;
-            letter-spacing: 0.2em;
+            letter-spacing: 1px;
+            z-index: 100;
+            mix-blend-mode: difference;
+        }
+
+        .navbar a {
+            color: #ffffff;
             text-decoration: none;
-            color: var(--subtle-gray);
-            transition: color 0.3s ease;
+            mix-blend-mode: difference;
+            transition: opacity 0.3s;
         }
 
-        .back-button:hover {
-            color: var(--primary-black);
+        .navbar a:hover {
+            opacity: 0.6;
         }
 
-        .back-button::before {
-            content: '← ';
-            margin-right: 8px;
-        }
-
-        /* HERO SECTION */
-        .hero {
-            padding: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            position: relative;
-        }
-
-        .hero-content {
-            max-width: 900px;
-            padding: 0 40px;
-        }
-
-        .hero-subtitle {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 10px;
-            text-transform: uppercase;
-            letter-spacing: 0.3em;
-            color: var(--subtle-gray);
-            margin-bottom: 40px;
-        }
-
-        .hero-title {
-            font-size: clamp(60px, 10vw, 140px);
-            font-weight: 200;
-            line-height: 0.95;
-            letter-spacing: -0.03em;
-            margin-bottom: 50px;
-        }
-
-        .hero-description {
-            font-size: 15px;
-            line-height: 1.7;
-            color: var(--subtle-gray);
-            margin-bottom: 30px;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .hero-meta {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 20px;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 9px;
-            color: var(--subtle-gray);
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-            margin-top: 40px;
-        }
-
-        .hero-meta span {
-            padding: 8px 16px;
-            border: 1px solid var(--light-gray);
-        }
-
-        /* MAIN CONTENT */
-        .content {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 40px;
-        }
-
-        /* LAYOUT VARIATIONS */
-        .section {
-            margin-bottom: 200px;
-        }
-
-        /* Section with large image and side text */
-        .image-text-section {
-            display: grid;
-            grid-template-columns: 2.5fr 1fr;
-            gap: 80px;
-            align-items: start;
-        }
-
-        .large-image {
-            width: 100%;
-            aspect-ratio: 3/2;
-            background: var(--light-gray);
-            overflow: hidden;
-        }
-
-        .large-image img,
-        .large-image video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .side-text {
-            padding-top: 60px;
-        }
-
-        .section-number {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 9px;
-            color: var(--subtle-gray);
-            text-transform: uppercase;
-            letter-spacing: 0.2em;
-            margin-bottom: 30px;
-        }
-
-        .section-title {
-            font-size: 28px;
-            font-weight: 400;
-            line-height: 1.2;
-            margin-bottom: 30px;
-            letter-spacing: -0.01em;
-        }
-
-        .text-block {
-            font-size: 13px;
-            line-height: 1.6;
-            color: var(--subtle-gray);
-            margin-bottom: 25px;
-            max-width: 280px;
-        }
-
-        .text-block strong {
-            color: var(--primary-black);
-            font-weight: 500;
-        }
-
-        /* Full width image with overlay */
-        .full-image-section {
-            position: relative;
-            height: 80vh;
-            margin: 0 -40px 200px;
-            background: var(--primary-black);
-        }
-
-        .full-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .image-overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: linear-gradient(transparent, rgba(0,0,0,0.8));
-            color: white;
-            padding: 80px 60px 60px;
-        }
-
-        .overlay-title {
-            font-size: 42px;
-            font-weight: 300;
-            line-height: 1.1;
-            margin-bottom: 20px;
-            max-width: 500px;
-        }
-
-        .overlay-text {
-            font-size: 13px;
-            line-height: 1.6;
-            color: rgba(255,255,255,0.8);
-            max-width: 400px;
-        }
-
-        /* Grid mosaic - Modis style */
-        .grid-section {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            gap: 20px;
-            margin-bottom: 200px;
-            max-width: fit-content;
-            width: 100%;
-            justify-content: center;
-        }
-
-        .grid-item {
-            background: var(--light-gray);
-        }
-
-        .grid-item:first-child {
-            grid-row: span 2;
-            aspect-ratio: 1/1.5;
-        }
-
-        .grid-item:nth-child(2) {
-            aspect-ratio: 1;
-        }
-
-        .grid-item:nth-child(3) {
-            aspect-ratio: 1;
-        }
-
-        .grid-item:nth-child(4) {
-            grid-column: span 2;
-            aspect-ratio: 2/1;
-        }
-
-        .grid-item:nth-child(5) {
-            aspect-ratio: 1;
-        }
-
-        .grid-item img,
-        .grid-item video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        /* Text only section */
-        .text-section {
-            display: grid;
-            grid-template-columns: 1fr 2fr;
-            gap: 100px;
-            margin-bottom: 200px;
-            padding: 100px 0;
-        }
-
-        .text-section-left {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 9px;
-            color: var(--subtle-gray);
-            text-transform: uppercase;
-            letter-spacing: 0.2em;
-            line-height: 2;
-        }
-
-        .text-section-right {
-            padding-top: 20px;
-        }
-
-        .large-text {
-            font-size: 24px;
-            font-weight: 300;
-            line-height: 1.4;
-            margin-bottom: 40px;
-            letter-spacing: -0.01em;
-        }
-
-        /* Two column layout */
-        .two-column-section {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            margin-bottom: 200px;
-        }
-
-        .column-image {
-            aspect-ratio: 4/5;
-            background: var(--light-gray);
-            overflow: hidden;
-        }
-
-        .column-image img,
-        .column-image video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        /* Color palette */
-        .color-palette {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-            gap: 15px;
-            margin: 40px 0;
-        }
-
-        .color-swatch {
-            aspect-ratio: 1;
-            display: flex;
-            align-items: flex-end;
-            padding: 15px;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 10px;
-            color: white;
-            border-radius: 4px;
-        }
-
-        .color-acidgreen { background: #ACD591; color: #2C2B2B; }
-        .color-black { background: #2C2B2B; }
-        .color-white { background: #FFFFFF; color: #2C2B2B; border: 1px solid #e5e5e5; }
-        .color-pink { background: #D53D96; }
-        .color-blue { background: #3372A9; }
-        .color-purple { background: #9379AB; }
-
-        /* Quote section */
-        .quote-section {
-            text-align: center;
-            padding: 120px 40px;
-            margin-bottom: 200px;
-        }
-
-        .quote {
-            font-size: clamp(32px, 6vw, 56px);
-            font-weight: 300;
-            line-height: 1.2;
-            letter-spacing: -0.02em;
-            margin-bottom: 20px;
-        }
-
-        /* Process grid */
-        .process-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 60px;
-            margin: 60px 0;
-        }
-
-        .process-item {
-            text-align: left;
-        }
-
-        .process-number {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 48px;
-            font-weight: 200;
-            color: var(--accent-green);
-            margin-bottom: 20px;
-        }
-
-        .process-item h3 {
-            font-size: 18px;
-            font-weight: 400;
-            margin-bottom: 15px;
-        }
-
-        .process-item p {
-            font-size: 13px;
-            line-height: 1.6;
-            color: var(--subtle-gray);
-        }
-
-        /* Brand book section */
-        .brandbook-section {
-            background: var(--light-gray);
-            padding: 80px 60px;
-            margin: 0 -40px 200px;
-            text-align: center;
-        }
-
-        .brandbook-section h3 {
-            font-size: 32px;
-            font-weight: 300;
-            margin-bottom: 40px;
-        }
-
-        .pdf-container {
-            position: relative;
-            padding-top: max(70%, 324px);
-            width: 100%;
-            height: 0;
-            background: white;
-            border-radius: 8px;
-            overflow: hidden;
-        }
-
-        .pdf-container iframe {
-            position: absolute;
-            border: none;
-            width: 100%;
-            height: 100%;
-            left: 0;
-            top: 0;
-        }
-
-         /* Final Section */
-    .final-section { padding: 60px; margin: 0 -10px; text-align: center; }
-    .next-project { display: inline-flex; align-items: center; gap: 15px; font-family: 'JetBrains Mono', monospace; font-size: 9px; text-transform: uppercase; letter-spacing: 0.2em; text-decoration: none; color: rgba(0, 0, 0, 0.8); border: 1px solid rgba(0, 0, 0, 0.3); padding: 15px; transition: all 0.3s ease; }
-    .next-project:hover { color: rgb(0, 0, 0); border-color: rgba(0, 0, 0, 0.6); transform: translateY(-2px); }
-
-
-        /* Custom Cursor */
-        .custom-cursor {
-            position: fixed;
-            width: 52px;
-            height: 52px;
-            pointer-events: none;
-            z-index: 10000;
-            transform: translate(-50%, -50%);
-        }
-
-        .custom-cursor img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-        }
-
-        /* ANIMATIONS */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.8s ease, transform 0.8s ease;
-        }
-
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Lists */
-        ul {
-            list-style: none;
-            padding-left: 0;
-        }
-
-        ul li {
-            font-size: 13px;
-            line-height: 1.8;
-            color: var(--subtle-gray);
-            padding-left: 20px;
-            position: relative;
-            margin-bottom: 15px;
-        }
-
-        ul li::before {
-            content: '→';
-            position: absolute;
-            left: 0;
-            color: var(--accent-green);
-        }
-
-        /* RESPONSIVE */
-        @media (max-width: 1024px) {
-            .content {
-                padding: 0 30px;
-            }
-
-            .image-text-section {
-                grid-template-columns: 1fr;
-                gap: 60px;
-            }
-
-            .text-section {
-                grid-template-columns: 1fr;
-                gap: 60px;
-            }
-
-            .two-column-section {
-                grid-template-columns: 1fr;
-                gap: 40px;
-            }
-
-            .grid-section {
-                grid-template-columns: 1fr 1fr;
-            }
-
-            .grid-item:nth-child(4) {
-                grid-column: span 2;
-            }
-
-            .hero-meta {
-                flex-direction: column;
-                gap: 20px;
-            }
-
-            .full-image-section {
-                margin: 0 -30px 200px;
-                height: 60vh;
-            }
-
-            .final-section,
-            .brandbook-section {
-                margin: 0 -30px;
-                padding: 100px 30px;
-            }
-        }
-
-        @media (max-width: 768px) {
-            body {
-                cursor: auto;
-            }
-
-            .custom-cursor {
-                display: none;
-            }
-
-            .content {
-                padding: 0 20px;
-            }
-
-            .back-button {
-                top: 20px;
-                left: 20px;
-                font-size: 8px;
-            }
-
-            .hero-content {
-                padding: 0 20px;
-            }
-
-            .hero-title {
-                font-size: 50px;
-            }
-
-            .section {
-                margin-bottom: 120px;
-            }
-
-            .section-title {
-                font-size: 24px;
-            }
-
-            .large-text {
-                font-size: 20px;
-            }
-
-            .grid-section {
-                grid-template-columns: 1fr;
-                gap: 15px;
-            }
-
-            .grid-item:first-child {
-                grid-row: span 1;
-                aspect-ratio: 4/3;
-            }
-
-            .grid-item:nth-child(4) {
-                grid-column: span 1;
-                aspect-ratio: 4/3;
-            }
-
-            .full-image-section {
-                margin: 0 -20px 120px;
-                height: 50vh;
-            }
-
-            .image-overlay {
-                padding: 40px 30px 30px;
-            }
-
-            .overlay-title {
-                font-size: 28px;
-            }
-
-            .final-section,
-            .brandbook-section {
-                margin: 0 -20px;
-                padding: 80px 20px;
-            }
-
-            .text-section {
-                padding: 60px 0;
-            }
-
-            .process-grid {
-                grid-template-columns: 1fr;
-                gap: 40px;
-            }
-
-            .color-palette {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
+.middle.left {
+  left: 2vw;
+  top: 50%;
+  font-size: 12px;
+}
+
+.middle.center {
+  left: 20vw;
+  top: 50%;
+  font-size: 12px;
+}
+
+.project-info {
+  bottom: 20px;
+  left: 20px;
+  font-size: 10px;
+  max-width: 300px;
+}
+
+.project-info .title {
+  font-size: 20px;
+  font-style: italic;
+  margin: 12px 0;
+}
+
+/* CONTENT */
+.content-wrapper {
+  padding-top: 10px;
+}
+
+/* HERO */
+.hero-image {
+  width: 99vw;
+  margin: 0 auto 6px;
+}
+
+.hero-image img,
+.hero-image video {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* IMAGE GROUPS */
+.content-inner {
+  width: 99vw;
+  margin: 0 auto;
+}
+
+/* TWO IMAGES — KEEP NATURAL HEIGHT */
+.image-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  margin-bottom: 6px;
+}
+
+.image-row img,
+.image-row video {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* FULL WIDTH */
+.full-image {
+  margin-bottom: 6px;
+}
+
+.full-image img,
+.full-image video {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* TEXT */
+.text-section {
+  max-width: 1400px;
+  margin: 14vh auto;
+  padding: 0 5vw;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 80px;
+}
+
+.text-left {
+  font-size: 10px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.text-right h2 {
+  font-size: 24px;
+  font-weight: 400;
+  margin-bottom: 20px;
+}
+
+.text-right p {
+  font-size: 14px;
+  line-height: 1.8;
+  opacity: 0.8;
+}
+
+/* PDF */
+.pdf-container {
+  width: 100%;
+  height: 80vh;
+  margin-bottom: 6px;
+}
+
+.pdf-container iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+  .image-row {
+    grid-template-columns: 1fr;
+  }
+
+  .text-section {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+}
+
+@media (max-width: 768px) {
+  .info-text,
+  .middle {
+    display: none;
+  }
+
+  .navbar {
+    flex-direction: column;
+    gap: 10px;
+    font-size: 14px;
+  }
+}
     </style>
 </head>
 <body>
-    <!-- Custom Cursor -->
-    <div class="custom-cursor">
-        <img src="images/Ilustração_Sem_Título.png" alt="">
+    <!-- Fixed info text -->
+    <div class="info-text">
+        GARE DO ORIENTE — WAYFINDING / BRAND IDENTITY
     </div>
 
-    <!-- Back Button -->
-        <a href="index.html" class="back-button">Go Back</a>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <a href="./#about">ABOUT</a>
+        <a href="./#work">WORK</a>
+        <a href="./projectsection.html">POSTERS</a>
+        <a href="https://www.instagram.com/naoseique.etal/">INSTAGRAM</a>
+    </nav>
 
-    <!-- Full Screen Opening Image -->
-    <section class="opening-image-section">
-        <div class="opening-image-container">
-            <video src="images/animatic copy.mov" autoplay muted loop playsinline class="opening-image"></video>
+    <div class="middle left">
+        <p>open for projects and comissions</p>
+    </div>
+
+    <div class="middle center">
+        <p>madalenavelloso04@gmail.com</p>
+    </div>
+
+    <!-- Project info -->
+    <div class="project-info">
+        <div class="category">Wayfinding / Brand Identity / UX Design</div>
+        <div class="title">Gare do Oriente</div>
+        <div class="meta">
+            <div>Year: 2024</div>
+            <div>Role: Visual Identity, Wayfinding, UX/UI</div>
+            <div>Tools: SketchUp, Enscape, Blender, Figma, Adobe Suite</div>
         </div>
-    </section>
+    </div>
 
-    <!-- Hero -->
-    <section class="hero fade-in">
-        <div class="hero-content">
-            <div class="hero-subtitle">Wayfinding / Brand Identity / UX Design</div>
-            <h1 class="hero-title">Gare do Oriente:<br>A Visual System<br>for Navigation</h1>
-            <p class="hero-description">
-                A multidisciplinary project reimagining the identity and wayfinding of Portugal's busiest station, merging design, movement, and user-centered thinking into one cohesive visual system.
-                <br><br>
-                <em>Fifth semester of university, 2024</em>
-            </p>
-            <div class="hero-meta">
-                <span>SketchUp</span>
-                <span>Enscape</span>
-                <span>Blender</span>
-                <span>Figma</span>
-                <span>Adobe Illustrator</span>
-                <span>Adobe Photoshop</span>
-                <span>Adobe Premiere Pro</span>
-                <span>Adobe After Effects</span>
+    <!-- Main content -->
+    <div class="content-wrapper">
+        <!-- Hero image - STARTS IMMEDIATELY AT TOP -->
+          <div class="hero-image">
+                <img src="images/gare/quote.png" alt="Quote">
             </div>
-        </div>
-    </section>
 
-    <!-- Content -->
-    <div class="content">
-        <!-- Overview Section -->
-        <section class="section fade-in">
-            <div class="image-text-section">
-                <div class="large-image">
-                    <img src="images/gare/pavol-duracka-3MHvZoSnSMo-unsplash.jpg" alt="Wayfinding signage system">
-                </div>
-                <div class="side-text">
-                    <div class="section-number">01 — Overview</div>
-                    <h2 class="section-title">The Challenge</h2>
-                    <p class="text-block">
-                        How do you design a wayfinding system for a station that feels more like a sculpture than a place of movement?
-                    </p>
-                    <p class="text-block">
-                        Calatrava's Gare do Oriente is monumental, poetic, but difficult. From confusing signage and poorly placed ticket booths to a lack of visual identity, our first visits revealed real navigation challenges.
-                    </p>
-                    <p class="text-block">
-                        Our goal: create a <strong>user-first identity</strong> that restores clarity, builds trust, and turns Gare do Oriente into an intuitive, human-centered transport hub.
-                    </p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Text Section -->
-        <section class="section fade-in">
+        <!-- Rest of content -->
+        <div class="content-inner">
+            <!-- Text section -->
             <div class="text-section">
-                <div class="text-section-left">
-                    Research<br>
-                    Analysis<br>
-                    Discovery<br>
+                <div class="text-left">
+                    Concept<br>
+                    Overview<br>
                     —<br>
-                    Process
+                    001
                 </div>
-                <div class="text-section-right">
-                    <p class="large-text">
-                        This was more than just signage, it required a complete rethink of the station's presence, both physical and digital. We approached it systematically, combining architectural analysis with real user research.
-                    </p>
-                    <p class="text-block">
-                        Through multiple site visits, we documented circulation patterns, interviewed commuters and staff, and identified critical pain points in the current wayfinding system. These insights shaped every design decision that followed.
-                    </p>
+                <div class="text-right">
+                    <h2>The Challenge</h2>
+                    <p>Gare do Oriente is Portugal's busiest station—a stunning architectural sculpture by Calatrava. But beneath its beauty lies a navigation problem: confusing signage, poorly placed ticket booths, and a lack of clear visual identity.</p>
+                    <p>Our goal was to create a user-first wayfinding system that restores clarity, builds trust, and turns Gare do Oriente into an intuitive, human-centered transport hub.</p>
                 </div>
             </div>
-        </section>
 
+            <!-- Full width image -->
+         
 
-         <div class="large-image">
-                    <img style="margin-bottom: 40px;" src="images/gare/quote.png" alt="Architectural study">
-                
-                </div>
-
-      
-
-
-
-        <!-- Quote Section -->
-        <section class="quote-section fade-in">
-            <blockquote class="quote">"A better hub, for you."</blockquote>
-        </section>
-
-        <!-- Visual Identity Section -->
-        <section class="section fade-in">
+            <!-- Text section -->
             <div class="text-section">
-                <div class="text-section-left">
+                <div class="text-left">
                     Visual Identity<br>
                     Brand System<br>
-                    Typography<br>
                     —<br>
-                    Flexibility
+                    002
                 </div>
-                <div class="text-section-right">
-                    <div class="section-number">02 — Visual Identity</div>
-                    <h2 class="section-title">Flexible Brand System</h2>
-                    <p class="large-text">
-                        Gare do Oriente's visual identity starts with abstraction: looking at Calatrava's architecture from new angles, finding meaning in form, and grounding it in accessibility.
-                    </p>
-                    <p class="text-block">
-                        We created a clean, modern wordmark in two formats (stacked and horizontal), designed to remain legible and consistent at small sizes and complex environments.
-                    </p>
-                    <p class="text-block">
-                        We established a palette that balances clarity and energy:
-                    </p>
-                    
-                    <div class="color-palette">
-                        <div class="color-swatch color-acidgreen">#ACD591</div>
-                        <div class="color-swatch color-black">#2C2B2B</div>
-                        <div class="color-swatch color-white">#FFFFFF</div>
-                        <div class="color-swatch color-pink">#D53D96</div>
-                        <div class="color-swatch color-blue">#3372A9</div>
-                        <div class="color-swatch color-purple">#9379AB</div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-       
-      <section class="section fade-in">
-            <div class="two-column-section">
-                    <div class="large-image">
-                    <video autoplay loop muted playsinline src="images/animatic copy.mov" alt="Logo variations">
-                </div>
-                <div class="large-image">
-                    <img src="images/gare/logo.png" alt="Color applications">
-                </div>
-                   </div>
-        </section>
-  
-
-                 <!-- Two Column Images -->
-        <section class="section fade-in">
-            <div class="two-column-section">
-
-                
-                <div class="large-image">
-                    <video autoplay loop muted playsinline src="images/gare/App copy/changingshape.mov" alt="Architectural study">
-                </div>
-                <div class="large-image">
-                    <video autoplay loop muted playsinline src="images/gare/App copy/foryou.mov" alt="Billboard mockup">
-                </div>
-            </div>
-        </section>
-
- 
-        
-
-        <!-- Applications Section -->
-        <section class="section fade-in">
-            <div class="image-text-section">
-                <div class="large-image">
-                    <img src="images/gare/behance project spaces copy/photo05.png" alt="Colored ceiling signs mockup">
-                </div>
-                <div class="side-text">
-                    <div class="section-number">03 — Applications</div>
-                    <h2 class="section-title">Wayfinding in Context</h2>
-                    <p class="text-block">
-                        A visual identity only works if it's tested in the real world. We designed and prototyped signage, iconography, maps, and mobile screens across multiple user touchpoints.
-                    </p>
-                    <p class="text-block">
-                        From color-coded ceiling signs to platform identifiers and floor-specific maps, each element follows strict alignment and contrast rules to guarantee clarity.
-                    </p>
+                <div class="text-right">
+                    <h2>Flexible Brand System</h2>
+                    <p>We extracted shapes from Calatrava's architecture and created a clean, modern wordmark in two formats. The color palette balances clarity and energy: acid green (#ACD591), black (#2C2B2B), white, pink (#D53D96), blue (#3372A9), and purple (#9379AB).</p>
+                    <p>Every element was designed to remain legible at small sizes and in complex environments, ensuring consistency across digital and physical touchpoints.</p>
                 </div>
             </div>
 
-             <div class="process-grid">
-                        <div class="process-item">
-                            <div class="process-number">01</div>
-                            <h3>Site Visits & Interviews</h3>
-                            <p>We visited the station multiple times, documenting wayfinding gaps, talking to staff, and measuring key circulation zones.</p>
-                        </div>
-                        <div class="process-item">
-                            <div class="process-number">02</div>
-                            <h3>Component Design</h3>
-                            <p><p>Shapes were extracted from the architecture and aligned to a pixel grid to ensure consistency across digital and physical media.</p>
-                        </div>
-                        <div class="process-item">
-                            <div class="process-number">03</div>
-                            <h3>System Prototyping</h3>
-                            <p>We created signage mockups, a digital prototype in Figma, and 3D renders using SketchUp and Enscape to visualize the full system in use.</p>
-                        </div>
-                        <div class="process-item">
-                            <div class="process-number">04</div>
-                            <h3>Refinement & Testing</h3>
-                            <p>Typography, colors, and layout grids were optimized based on accessibility, contrast, and placement guidelines.</p>
-                        </div>
-
-                    </div>
-        </section>
-
-                           <!-- Two Column Images -->
-        <section class="section fade-in">
-            <div class="two-column-section">
-                <div class="column-image">
-                    <img src="images/gare/cubos.webp" alt="Architectural study">
-                </div>
-                <div class="column-image">
-                    <img src="images/gare/cubos2 copy.jpeg" alt="Billboard mockup">
-                </div>
+            <!-- Two images -->
+            <div class="image-row">
+                <video autoplay loop muted playsinline src="images/animatic copy.mov"></video>
+           <video autoplay loop muted playsinline src="images/gare/App copy/changingshape.mov"></video>
             </div>
-        </section>
 
-                     <!-- Two Column Images -->
-        <section class="section fade-in">
-            <div class="two-column-section">
-                <div class="column-image">
-                    <img src="images/gare/Rectangle_Stand_Mockup_2..1.jpg" alt="Architectural study">
-                </div>
-                <div class="column-image">
-                    <img src="images/gare/Rectangle_Stand_Mockup_3.jpg" alt="Billboard mockup">
-                </div>
+            <!-- Two images -->
+            <div class="full-image">
+               
+                <video autoplay loop muted playsinline src="images/gare/App copy/foryou.mov"></video>
             </div>
-        </section>
 
-        <!-- Application Images -->
-        <section class="section fade-in">
-            <div class="two-column-section">
-                <div class="column-image">
-                    <img src="images/gare/behance project spaces copy/photo06.png" alt="Platform signage">
-                </div>
-                <div class="column-image">
-                    <img src="images/gare/behance project spaces copy/photo24.png" alt="Floor map design">
-                </div>
-            </div>
-        </section>
-
-            <section class="section fade-in">
-            <div class="two-column-section">
-                <div class="column-image">
-                    <img src="images/gare/behance project spaces copy/photo16.png" alt="Platform signage">
-                </div>
-                <div class="column-image">
-                    <img src="images/gare/behance project spaces copy/photo19.png" alt="Floor map design">
-                </div>
-            </div>
-        </section>
-
-                <!-- Two Column Images -->
-        <section class="section fade-in">
-            <div class="two-column-section">
-                <div class="large-image">
-                    <img src="images/gare/wall circles.webp" alt="Architectural study">
-                </div>
-                <div class="large-image">
-                    <img src="images/gare/NebulaMockups_CONCRETE_Billboard_01.jpg" alt="Billboard mockup">
-                </div>
-            </div>
-        </section>
-
-        <!-- Gare App Section -->
-        <section class="section fade-in">
+            <!-- Text section -->
             <div class="text-section">
-                <div class="text-section-left">
+                <div class="text-left">
+                    Wayfinding<br>
+                    Applications<br>
+                    —<br>
+                    003
+                </div>
+                <div class="text-right">
+                    <h2>Wayfinding in Context</h2>
+                    <p>We designed and prototyped signage, iconography, maps, and mobile screens across multiple user touchpoints. From color-coded ceiling signs to platform identifiers and floor-specific maps, each element follows strict alignment and contrast rules.</p>
+                    <p>The system was tested through site visits, interviews with commuters and staff, and 3D renders to visualize implementation.</p>
+                </div>
+            </div>
+
+                <!-- Two images -->
+         <div class="image-row">
+                <img src="images/gare/cubos.webp" alt="Architectural cubes">
+                <img src="images/gare/cubos2 copy.jpeg" alt="Architectural study">
+            </div>
+
+            <!-- Two images -->
+            <div class="image-row">
+                <img src="images/gare/Rectangle_Stand_Mockup_2..1.jpg" alt="Stand mockup">
+                <img src="images/gare/Rectangle_Stand_Mockup_3.jpg" alt="Stand mockup">
+            </div>
+
+            <!-- Full width image -->
+            <div class="full-image">
+                <img src="images/gare/behance project spaces copy/photo16.png" alt="Ceiling signs">
+            </div>
+
+            <!-- Two images -->
+            <div class="image-row">
+                <img src="images/gare/behance project spaces copy/photo06.png" alt="Platform signage">
+                <img src="images/gare/behance project spaces copy/photo24.png" alt="Floor map">
+            </div>
+
+            <!-- Two images -->
+            <div class="image-row">
+                <img src="images/gare/behance project spaces copy/photo05.png" alt="Signage">
+                <img src="images/gare/behance project spaces copy/photo19.png" alt="Signage">
+            </div>
+
+            <!-- Two images -->
+            <div class="image-row">
+                <img src="images/gare/closeup2bus.jpeg" alt="Wall circles">
+                <img src="images/gare/behance project spaces copy/photo12.png" alt="Billboard">
+            </div>
+
+            <!-- Text section -->
+            <div class="text-section">
+                <div class="text-left">
                     Digital<br>
                     Mobile App<br>
                     UX/UI<br>
                     —<br>
-                    Innovation
+                    004
                 </div>
-
-                <div class="text-section-right">
-                    <div class="section-number">04 — The Gare App</div>
-                    <h2 class="section-title">Digital Presence: The Gare App</h2>
-                    <p class="large-text">
-                       Our app brings you closer to the authentic Lisbon experience: real people, real stories, and sustainable tourism.  
-Through engaging infographics and valuable data, we reveal the challenges of globalization while offering meaningful solutions. 
-                    
-                    <div class="process-grid">
-                        <div class="process-item">
-                            <div class="process-number">01</div>
-                            <h3>Key Features:</h3>
-                            <p>
-- Insightful Articles: In partnership with local cultural organizations, we share stories that capture Lisbon’s evolving identity.  <br>
-- Curated Routes by Local Guides: Explore the city through unique routes designed by locals, showcasing hidden gems and diverse perspectives. <br> 
-- User-Generated Content: Join a community where users share experiences, highlight small businesses, and celebrate Lisbon’s traditions.  <br>
-- Reward System: Contribute, engage, and earn rewards like train tickets from Gare do Oriente.  <br>
-- Interactive Transport Map: Easily navigate Lisbon with category filters (restaurants, museums, sites) and tailored public transport directions.  </p>
-                        </div>
-                        <div class="process-item">
-                            <div class="process-number">02</div>
-                            <h3>For Everyone<h3>
-                            <p>Whether you’re a local rediscovering your city or a visitor exploring for the first time, our app enhances your Lisbon experience and deepens your cultural connection.  
-Join us in celebrating the true spirit of Lisbon.</p>
-                        </div>
-
-                    </div>
+                <div class="text-right">
+                    <h2>The Gare App</h2>
+                    <p>Our app brings users closer to authentic Lisbon experiences through engaging infographics, curated routes by local guides, and user-generated content highlighting small businesses and cultural traditions.</p>
+                    <p>Key features include insightful articles in partnership with local organizations, a reward system for engagement, and an interactive transport map with category filters and tailored public transport directions.</p>
                 </div>
             </div>
-        </section>
 
-            <div class="large-image">
-                    <video autoplay loop muted playsinline src="images/gare/video_app_behance.mp4" style="margin-bottom: 40px;" alt="Architectural study"> 
-                    </video>
+            <!-- Full width video -->
+            <div class="full-image">
+                <video autoplay loop muted playsinline src="images/video_app_behance.mp4"></video>
+            </div>
+
+            <!-- Full width image -->
+            <div class="full-image">
+                <img src="images/gare/App copy/mockups/iPhone-16-Pro-Titanium-Free-psd-Mockup copy.png" alt="iPhone mockup">
+            </div>
+
+            <!-- Two images -->
+            <div class="image-row">
+                 <img src="images/gare/App copy/mockups/Free iPhone 14 on Tripod Mockup copy.jpeg" alt="iPhone mockup">
+                <img src="images/gare/App copy/mockups/Free iPhone 14 Pro on Sofa Mockup copy.jpeg" alt="iPhone mockup">
+            </div>
+
+              <div class="image-row">
+                 <img src="images/gare/behance_app copy/login.png" alt="iPhone mockup">
+                 <img src="images/gare/behance_app copy/Free Laying iPhone 16 Pro Mockup.png" alt="iPhone mockup">
+            </div>
+
+            <!-- Two images -->
+            <div class="image-row">
+                <img src="images/gare/App copy/mockups/Bendito_Mockup-CMB-Iphone-02 copy.jpeg" alt="iPhone mockup">
+                <img src="images/gare/App copy/mockups/Bendito_Mockup-MT-Iphone-01 copy.jpeg" alt="iPhone mockup">
+            </div>
+
+            <div class="full-image">
+                      <img  src="images/gare/appbuttons.gif" alt="App buttons">
+            </div>
+              
+        </div>
+         <!-- Text section for brand book -->
+            <div class="text-section">
+                <div class="text-left">
+                    Brand Book<br>
+                    Documentation<br>
+                    —<br>
+                    005
                 </div>
-
-                   <div>
-                    <br>
-                    <br>
-                      <br>
-                    <br>
-                </div>
-
-                   <div class="grid-item">
-                    <img src="images/gare/App copy/figma.png" alt="">
-                   </div>
-
-                <div>
-                    <br>
-                    <br>
-                      <br>
-                    <br>
-                </div>
-
-        <section class="section fade-in">
-            <div class="two-column-section">
-                <div class="large-image">
-                    <img src="images/gare/appbuttons.gif" alt="Platform signage">
-                </div>
-                <div class="large-image">
-                    <img src="images/gare/App copy/mockups/Free iPhone 14 Pro on Sofa Mockup copy.jpeg" alt="Floor map design">
+                <div class="text-right">
+                    <h2>Explore the Full Brand Book</h2>
+                    <p>Browse through the complete brand guidelines, wayfinding system specifications, and design documentation.</p>
                 </div>
             </div>
-        </section>
 
-         <section class="section fade-in">
-            <div class="grid-section">
-                <div class="grid-item">
-                   <img src="images/gare/App copy/mockups/Bendito_Mockup-CMB-Iphone-02 copy.jpeg" alt="Typography system">
-                </div>
-                <div class="grid-item">
-                     <img src="images/gare/App copy/mockups/Bendito_Mockup-MT-Iphone-01 copy.jpeg" alt="Logo variations">
-                </div>
-                <div class="grid-item">
-                      <img src="images/gare/App copy/mockups/Free iPhone 14 on Tripod Mockup copy.jpeg"  alt="Color applications">
-                </div>
-                <div class="grid-item">
-                    <img src="images/gare/App copy/mockups/iPhone-16-Pro-Titanium-Free-psd-Mockup copy.png" alt="Brand components">
-                </div>
-            </div>
-        </section>
-
-        <!-- Brand Book Section -->
-        <section class="brandbook-section fade-in">
-            <h3>Explore the Full Brand Book</h3>
+            <!-- PDF Container -->
             <div class="pdf-container">
                 <iframe src="https://online.fliphtml5.com/jftrp/etas/" seamless="seamless" scrolling="no" frameborder="0" allowtransparency="true" allowfullscreen="true"></iframe>
             </div>
-        </section>
-
+        </div>
     </div>
 
-                 <!-- Final Section / Next Project -->
-    <section class="final-section">
-        <a href="olura.html" class="next-project">View next project</a>
-    </section>
-
-
     <script>
-        // Custom cursor follow mouse
-        const customCursor = document.querySelector('.custom-cursor');
-        
-        document.addEventListener('mousemove', (e) => {
-            customCursor.style.left = e.clientX + 'px';
-            customCursor.style.top = e.clientY + 'px';
-        });
-
-        // Opening image zoom and scroll effect
-        const openingImage = document.querySelector('.opening-image');
-        const openingContainer = document.querySelector('.opening-image-container');
-
-        window.addEventListener('scroll', () => {
-            const scrollPos = window.scrollY;
-
-            if (openingImage && openingContainer) {
-                const shrinkEnd = 1000;
-                const scrollStart = 1400;
-                const minScale = 0.6;
-
-                let scale = 1;
-                let translateY = 0;
-
-                if (scrollPos < shrinkEnd) {
-                    const progress = scrollPos / shrinkEnd;
-                    scale = 1 - progress * (1 - minScale);
-                    translateY = 0;
-                } else if (scrollPos < scrollStart) {
-                    scale = minScale;
-                    translateY = 0;
-                } else {
-                    const scrollOffset = scrollPos - scrollStart;
-                    scale = minScale;
-                    translateY = -scrollOffset;
-                }
-
-                openingContainer.style.transform = `translate(-50%, calc(-50% + ${translateY}px)) scale(${scale})`;
-                openingContainer.style.transformOrigin = 'center center';
-            }
-        });
-
-        // Intersection Observer for fade-in animations
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, { threshold: 0.1 });
-
-        document.querySelectorAll('.fade-in').forEach(el => {
-            observer.observe(el);
+        // Ensure videos play
+        document.querySelectorAll('video').forEach(video => {
+            video.muted = true;
+            video.play().catch(() => {});
         });
     </script>
 </body>
