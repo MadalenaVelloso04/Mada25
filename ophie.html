@@ -3,807 +3,442 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="icon" type="image/png" href="images/white-circle.png">
-    <title>Modis Academy - Madalena Velloso</title>
+    <link rel="icon" type="image/png" href="images/white-circle.png">
+    <link rel="stylesheet" href="https://use.typekit.net/dju8mqp.css">
+    <title>Ophie - Madalena Velloso</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600&family=JetBrains+Mono:wght@300;400&display=swap');
-        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        :root {
-            --primary-black: #0a0a0a;
-            --secondary-black: #1a1a1a;
-            --accent-white:#ffffff;
-            --subtle-gray: #888;
-            --light-gray: #e5e5e5;
-            --accent-blue: #5e978c;
-            --warm-beige: #d5d4c8;
-        }
-
         body {
-            font-family: 'Courier New', monospace;
-            background: var(--accent-white);
-            color: var(--primary-black);
-            line-height: 1.3;
-            font-weight: 300;
+            font-family: dico-mono, mono;
+            font-weight: 400;
+            font-style: normal;
+            background: #000000;
+            color: #ffffff;
             overflow-x: hidden;
-            cursor: none;
         }
 
-        /* OPENING FULL SCREEN IMAGE */
-        .opening-image-section {
-            height: 300vh;
-            position: relative;
-        }
-
-        .opening-image-container {
+        /* Fixed info text */
+        .info-text {
             position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 100%;
-            height: 100vh;
-            overflow: hidden;
-            z-index: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .opening-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: all 0.1s linear;
-        }
-
-        /* BACK BUTTON */
-        .back-button {
-            position: fixed;
-            top: 40px;
-            left: 40px;
-            z-index: 999;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 9px;
-            text-transform: uppercase;
-            letter-spacing: 0.2em;
-            text-decoration: none;
-            color: var(--subtle-gray);
-            transition: color 0.3s ease;
-        }
-
-        .back-button:hover {
-            color: var(--primary-black);
-        }
-
-        .back-button::before {
-            content: '← ';
-            margin-right: 8px;
-        }
-
-        /* Little Me Character */
-        .little-me {
-            position: fixed;
-            top: 40px;
-            left: 40px;
-            width: 100px;
-            height: auto;
-            z-index: 998;
-            pointer-events: none;
-            opacity: 0.3;
-        }
-
-        /* HERO SECTION */
-        .hero {
-           padding: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            position: relative;
-        }
-
-        .hero-content {
-            max-width: 800px;
-            padding: 0 40px;
-        }
-
-        .hero-subtitle {
-            font-family: 'JetBrains Mono', monospace;
+            top: 20px;
+            left: 20px;
             font-size: 10px;
             text-transform: uppercase;
-            letter-spacing: 0.3em;
-            color: var(--subtle-gray);
-            margin-bottom: 40px;
+            letter-spacing: 1px;
+            z-index: 100;
+            mix-blend-mode: difference;
         }
 
-        .hero-title {
-            font-size: clamp(80px, 12vw, 160px);
-            font-weight: 200;
-            line-height: 0.9;
-            letter-spacing: -0.03em;
-            margin-bottom: 60px;
-        }
-
-        .hero-description {
-            font-size: 15px;
-            line-height: 1.7;
-            color: var(--subtle-gray);
-            margin-bottom: 30px;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .hero-meta {
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 20px;
+            right: 20px;
             display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 20px;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 9px;
-            color: var(--subtle-gray);
+            gap: 30px;
+            font-size: 12px;
             text-transform: uppercase;
-            letter-spacing: 0.15em;
-            margin-top: 40px;
+            letter-spacing: 1px;
+            z-index: 100;
+            mix-blend-mode: difference;
         }
 
-        .hero-meta span {
-            padding: 8px 16px;
-            border: 1px solid var(--light-gray);
+        .navbar a {
+            color: #ffffff;
+            text-decoration: none;
+            transition: opacity 0.3s;
         }
 
-        /* MAIN CONTENT */
-        .content {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 40px;
+        .navbar a:hover {
+            opacity: 0.6;
         }
 
-        /* LAYOUT VARIATIONS */
-        .section {
-            margin-bottom: 200px;
+        .middle {
+            font-size: 12px;
+            mix-blend-mode: difference;
+            position: fixed;
+            top: 50%;
+            z-index: 100;
         }
 
-        /* Section with large image and side text */
-        .image-text-section {
-            display: grid;
-            grid-template-columns: 2.5fr 1fr;
-            gap: 80px;
-            align-items: start;
+        .middle.left {
+            left: 2vw;
         }
 
-        .large-image {
-            width: 100%;
-            aspect-ratio: 3/2;
-            background: var(--light-gray);
-            overflow: hidden;
+        .middle.center {
+            left: 20vw;
         }
 
-        .large-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .large-image video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .side-text {
-            padding-top: 60px;
-        }
-
-        .section-number {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 9px;
-            color: var(--subtle-gray);
-            text-transform: uppercase;
-            letter-spacing: 0.2em;
-            margin-bottom: 30px;
-        }
-
-        .section-title {
-            font-size: 28px;
-            font-weight: 400;
-            line-height: 1.2;
-            margin-bottom: 30px;
-            letter-spacing: -0.01em;
-        }
-
-        .text-block {
-            font-size: 13px;
-            line-height: 1.6;
-            color: var(--subtle-gray);
-            margin-bottom: 25px;
-            max-width: 280px;
-        }
-
-        /* Full width image with overlay */
-        .full-image-section {
+        /* Main content - NO TOP PADDING */
+        .content-wrapper {
             position: relative;
-            height: 80vh;
-            margin: 0 -40px 200px;
-            background: var(--primary-black);
+            z-index: 10;
+            padding-top: 9px;
         }
 
-        .full-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .image-overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: linear-gradient(transparent, rgba(0,0,0,0.8));
-            color: white;
-            padding: 80px 60px 60px;
-        }
-
-        .overlay-title {
-            font-size: 42px;
-            font-weight: 300;
-            line-height: 1.1;
-            margin-bottom: 20px;
-            max-width: 500px;
-        }
-
-        .overlay-text {
-            font-size: 13px;
-            line-height: 1.6;
-            color: rgba(255,255,255,0.8);
-            max-width: 400px;
-        }
-
-        /* Grid mosaic */
-        .grid-section {
+        /* Hero image section*/
+        .hero-image {
             display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            gap: 20px;
-            margin-bottom: 200px;
-            max-width: fit-content;
-            width: 100%;
-            justify-content: center;
+            grid-template-columns: 1fr 1fr;
+            width: 99vw;
+            height: 99vh;
+            gap: 5px;
+            margin: 0 auto;
         }
 
-        .grid-item {
-            background: var(--light-gray);
-        }
-
-        .grid-item:first-child {
-            grid-row: span 2;
-            aspect-ratio: 1/1.5;
-        }
-
-        .grid-item:nth-child(2) {
-            aspect-ratio: 1;
-        }
-
-        .grid-item:nth-child(3) {
-            aspect-ratio: 1;
-        }
-
-        .grid-item:nth-child(4) {
-            grid-column: span 2;
-            aspect-ratio: 2/1;
-        }
-
-        .grid-item:nth-child(5) {
-            aspect-ratio: 1;
-        }
-
-        .grid-item img {
+        .hero-image img,
+        .hero-image video {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            display: block;
         }
 
-        .grid-item video {
+        /* Content after hero */
+        .content-inner {
+            padding: 5px 0;
+            width: 99vw;
+            margin: 0 auto;
+        }
+
+        /* Image grid - 2 then 1 full pattern */
+        .image-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5px;
+            margin-bottom: 5px;
+            width: 100%;
+            height: 99vh;
+        }
+
+   
+
+        .image-row img,
+        .image-row video {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            display: block;
         }
 
-        /* Text only section */
+        /* Text section */
         .text-section {
+            max-width: 1400px;
+            margin: 15vh auto;
+            padding: 0 5vw;
             display: grid;
             grid-template-columns: 1fr 2fr;
-            gap: 100px;
-            margin-bottom: 200px;
-            padding: 100px 0;
+            gap: 80px;
         }
 
-        .text-section-left {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 9px;
-            color: var(--subtle-gray);
+        .text-left {
+            font-size: 10px;
             text-transform: uppercase;
-            letter-spacing: 0.2em;
+            letter-spacing: 1px;
             line-height: 2;
         }
 
-        .text-section-right {
-            padding-top: 20px;
-        }
-
-        .large-text {
+        .text-right h2 {
             font-size: 24px;
-            font-weight: 300;
-            line-height: 1.4;
-            margin-bottom: 40px;
-            letter-spacing: -0.01em;
+            font-weight: 400;
+            margin-bottom: 30px;
         }
 
-        /* Two column layout */
-        .two-column-section {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            margin-bottom: 200px;
+        .text-right p {
+            font-size: 14px;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            opacity: 0.8;
         }
 
-        .column-image {
-            aspect-ratio: 4/5;
-            background: var(--light-gray);
-            overflow: hidden;
-        }
-
-        .column-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .column-image video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-         /* Final Section */
-    .final-section { padding: 60px; margin: 0 -10px; text-align: center; }
-    .next-project { display: inline-flex; align-items: center; gap: 15px; font-family: 'JetBrains Mono', monospace; font-size: 9px; text-transform: uppercase; letter-spacing: 0.2em; text-decoration: none; color: rgba(0, 0, 0, 0.8); border: 1px solid rgba(0, 0, 0, 0.3); padding: 15px; transition: all 0.3s ease; }
-    .next-project:hover { color: rgb(0, 0, 0); border-color: rgba(0, 0, 0, 0.6); transform: translateY(-2px); }
-
-
-        /* Custom Cursor */
-        .custom-cursor {
+        /* Project info overlay */
+        .project-info {
             position: fixed;
-            width: 52px;
-            height: 52px;
-            pointer-events: none;
-            z-index: 10000;
-            transform: translate(-50%, -50%);
+            bottom: 20px;
+            left: 20px;
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            z-index: 100;
+            mix-blend-mode: difference;
+            max-width: 300px;
         }
 
-        .custom-cursor img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
+        .project-info .category {
+            margin-bottom: 10px;
+            opacity: 0.6;
         }
 
-        /* ANIMATIONS */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.8s ease, transform 0.8s ease;
+        .project-info .title {
+            font-size: 20px;
+            font-style: italic;
+            margin-bottom: 15px;
+            text-transform: none;
+            letter-spacing: 0;
         }
 
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
+        .project-info .meta {
+            display: grid;
+            gap: 5px;
+            font-size: 9px;
         }
 
         /* RESPONSIVE */
         @media (max-width: 1024px) {
-            .content {
-                padding: 0 30px;
+            .hero-image {
+                grid-template-columns: 1fr;
+                height: auto;
             }
 
-            .image-text-section {
-                grid-template-columns: 1fr;
-                gap: 60px;
+            .hero-image img,
+            .hero-image video {
+                height: 70vh;
+            }
+
+            .image-row {
+                display: flex;
+                flex-direction: row;
+                height: 70vh;
             }
 
             .text-section {
                 grid-template-columns: 1fr;
-                gap: 60px;
-            }
-
-            .two-column-section {
-                grid-template-columns: 1fr;
                 gap: 40px;
-            }
-
-            .grid-section {
-                grid-template-columns: 1fr 1fr;
-            }
-
-            .grid-item:nth-child(4) {
-                grid-column: span 2;
-            }
-
-            .hero-meta {
-                flex-direction: column;
-                gap: 20px;
-            }
-
-            .full-image-section {
-                margin: 0 -30px 200px;
-                height: 60vh;
-            }
-
-            .final-section {
-                margin: 0 -30px;
-                padding: 100px 30px;
             }
         }
 
         @media (max-width: 768px) {
-            body {
-                cursor: auto;
-            }
-
-            .custom-cursor {
+            .info-text {
                 display: none;
             }
 
-            .content {
-                padding: 0 20px;
+            .middle {
+                display: none;
             }
 
-            .back-button {
-                top: 20px;
-                left: 20px;
-                font-size: 8px;
+            .navbar {
+                flex-direction: column;
+                gap: 10px;
+                font-size: 15px;
+                align-items: flex-end;
             }
 
-            .little-me {
-                top: 20px;
-                left: 20px;
-                width: 60px;
-            }
-
-            .hero-content {
-                padding: 0 20px;
-            }
-
-            .hero-title {
-                font-size: 60px;
-            }
-
-            .section {
-                margin-bottom: 120px;
-            }
-
-            .section-title {
-                font-size: 24px;
-            }
-
-            .large-text {
-                font-size: 20px;
-            }
-
-            .grid-section {
+            .hero-image {
                 grid-template-columns: 1fr;
-                gap: 15px;
+                height: auto;
             }
 
-            .grid-item:first-child {
-                grid-row: span 1;
-                aspect-ratio: 4/3;
+            .hero-image img,
+            .hero-image video {
+                height: 60vh;
             }
 
-            .grid-item:nth-child(4) {
-                grid-column: span 1;
-                aspect-ratio: 4/3;
+            .image-row {
+                display: flex;
+                flex-direction: row;
+                height: 60vh;
             }
 
-            .full-image-section {
-                margin: 0 -20px 120px;
-                height: 50vh;
+            .content-inner {
+                padding: 5px 0;
             }
 
-            .image-overlay {
-                padding: 40px 30px 30px;
-            }
-
-            .overlay-title {
-                font-size: 28px;
-            }
-
-            .final-section {
-                margin: 0 -20px;
-                padding: 80px 20px;
+            .project-info {
+        top:20px;
+        width: 200px;
             }
 
             .text-section {
-                padding: 60px 0;
+                margin: 10vh auto;
+                padding: 0 5vw;
             }
         }
 
         @media (max-width: 480px) {
-            .back-button {
-                top: 15px;
-                left: 15px;
-                font-size: 8px;
+            .hero-image img,
+            .hero-image video {
+                height: 50vh;
             }
 
-            .little-me {
-                width: 60px;
+            .image-row {
+                display: flex;
+                flex-direction: row;
+                height: 50vh;
             }
 
-            .hero-title {
-                font-size: 50px;
+            .navbar {
+                font-size: 14px;
+                gap: 8px;
             }
 
-            .section {
-                margin-bottom: 100px;
+            .text-right h2 {
+                font-size: 20px;
+            }
+
+            .text-right p {
+                font-size: 13px;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Custom Cursor -->
-    <div class="custom-cursor">
-        <img src="images/Ilustração_Sem_Título.png" alt="">
+    <!-- Fixed info text -->
+    <div class="info-text">
+        OPHIE LIP OILS — BRANDING / PACKAGING
     </div>
 
-    <!-- Back Button -->
-        <a href="index.html" class="back-button">Go Back</a>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <a href="index.html">HOME</a>
+        <a href="index.html#about">ABOUT</a>
+        <a href="index.html#work">WORK</a>
+        <a href="https://www.instagram.com/naoseique.etal/">INSTAGRAM</a>
+    </nav>
 
-    <!-- Full Screen Opening Image -->
-    <section class="opening-image-section">
-        <div class="opening-image-container">
-            <img src="images/ophie/collage.jpg" alt="Project Opening" class="opening-image">
+    <div class="middle left">
+        <p>open for projects and comissions</p>
+    </div>
+
+    <div class="middle center">
+        <p>madalenavelloso04@gmail.com</p>
+    </div>
+
+    <!-- Project info -->
+    <div class="project-info">
+        <div class="category">Branding / Packaging</div>
+        <div class="title">Ophie Lip Oils</div>
+        <div class="meta">
+            <div>Year: 2025</div>
+            <div>Role: Visual Identity, Packaging Design</div>
+            <div>Tools: Adobe Illustrator, Photoshop, Firefly</div>
         </div>
-    </section>
+    </div>
 
-    <!-- Hero -->
-    <section class="hero fade-in">
-        <div class="hero-content">
-            <div class="hero-subtitle">Branding / Editorial</div>
-            <h1 class="hero-title">Ophies<br>Lip Oil</h1>
-            <p class="hero-description">
-               Ophie is your daily essential: a touch of ultra hydration and irresistible gloss.
-A collection of fresh, sweet flavors that melt effortlessly onto your lips.
-Each translucent oil delivers a subtle tint and mirror-like shine for a clean, radiant look that feels as good as it appears.
-                <br><br>
-                <em>Personal project, 2025</em>
-            </p>
-            <div class="hero-meta">
-                <span>Adobe Illustrator</span>
-                <span>Adobe Photoshop</span>
-                <span>Adobe Firefly</span>
-            </div>
+    <!-- Main content -->
+    <div class="content-wrapper">
+        <!-- Hero image - STARTS IMMEDIATELY AT TOP -->
+        <div class="hero-image">
+            <img src="images/ophie/a lot of bottles.jpg" alt="Ophie bottles">
+                <img src="images/ophie/raparigacomportachaves.jpg" alt="Ophie">
         </div>
-    </section>
 
-    <!-- Content -->
-    <div class="content">
-        <!-- Overview Section -->
-        <section class="section fade-in">
-            <div class="image-text-section">
-                <div class="large-image">
-                    <video autoplay loop muted playsinline src="images/ophie/lips.mp4" alt="Form Light Shadow"></video>
-                </div>
-                <div class="side-text">
-                    <div class="section-number">001 — Overview</div>
-                    <h2 class="section-title">Concept</h2>
-                    <p class="text-block">
-                      Ophie is a lip oil brand created for your everyday beauty routine. Designed for the clean girl who wants to glow effortlessly, Ophie combines hydrating ingredients that nourish and comfort your lips with a formula that looks as good as it feels. Through sleek packaging and refined branding, Ophie embodies a modern, feminine aesthetic — simple, dewy, and undeniably fresh.
-                    </p>
-                    <p class="text-block">
-                   This was my first project where I experimented with AI tool, in this case Adobe Firefly as I had a very specific art direction that i wanted to follow, and there were 
-                   no actual mockups that I could use to achieve it.
-                    </p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Text Section -->
-        <section class="section fade-in">
+        <!-- Rest of content -->
+        <div class="content-inner">
+            <!-- Text section -->
             <div class="text-section">
-                <div class="text-section-left">
-                    Methodology<br>
-                    Research<br>
+                <div class="text-left">
+                    Concept<br>
+                    Overview<br>
+                    —<br>
+                    001
+                </div>
+                <div class="text-right">
+                    <h2>Concept</h2>
+                    <p>Ophie is your daily essential: a touch of ultra hydration and irresistible gloss. A collection of fresh, sweet flavors that melt effortlessly onto your lips. Each translucent oil delivers a subtle tint and mirror-like shine for a clean, radiant look that feels as good as it appears.</p>
+                    <p>Ophie is a lip oil brand created for your everyday beauty routine. Designed for the clean girl who wants to glow effortlessly, Ophie combines hydrating ingredients that nourish and comfort your lips with a formula that looks as good as it feels.</p>
+                </div>
+            </div>
+
+            <!-- Two images -->
+            <div class="image-row">
+                  <img src="images/ophie/collage.jpg" alt="Ophie">
+            <video autoplay loop muted playsinline src="images/ophie/lips.mp4"></video>
+            </div>
+
+            <!-- One full image -->
+            <div class="image-row">
+                <img src="images/ophie/purple one.png" alt="Purple bottle">
+                <img src="images/ophie/whiteswatche.png" alt="White swatches">
+            </div>
+
+            <!-- Text section -->
+            <div class="text-section">
+                <div class="text-left">
+                    Process<br>
                     Development<br>
                     —<br>
-                    Process
+                    002
                 </div>
-                <div class="text-section-right">
-                         <h2 class="section-title">The Bottle Design and Formulas</h2>
-                    <p class="large-text">
-                 The bottle design was inspired by an existing serum bottle that the brand had used to represent the fluidity of their product, a concept that perfectly aligned with my own vision for Ophie. My goal was the same: to capture a sense of movement and softness that reflects the texture and essence of the lip oil itself. 
-                 Beyond the product design, I also developed the formulas. As a fan of lip oils and hydrating textures, I truly enjoyed the research process. I concluded that the best combination is always sweet and glossy. With that in mind, I began moodboarding and eventually defined four main flavors and colors: Strawberry Chocolate, Lime Pie, Blueberry Extract, and Tiramisu Dessert.
-                    </p>
-                    <p class="text-block">
-                   Furthermore, when I realized that the individual packaging design would be complex and irregular, I decided to follow the path of less is more for the logo and text.
-                   I used the font Hurme Geometric Sans, which was also applied to the secondary text. This typeface is extremely clean, readable, and subtly feminine — making it the perfect match for Ophie's modern and refined identity.
-                    </p>
+                <div class="text-right">
+                    <h2>The Bottle Design and Formulas</h2>
+                    <p>The bottle design was inspired by an existing serum bottle that the brand had used to represent the fluidity of their product, a concept that perfectly aligned with my own vision for Ophie. My goal was the same: to capture a sense of movement and softness that reflects the texture and essence of the lip oil itself.</p>
+                    <p>Beyond the product design, I also developed the formulas. As a fan of lip oils and hydrating textures, I truly enjoyed the research process. I concluded that the best combination is always sweet and glossy. With that in mind, I began moodboarding and eventually defined four main flavors and colors: Strawberry Chocolate, Lime Pie, Blueberry Extract, and Tiramisu Dessert.</p>
                 </div>
             </div>
-        </section>
 
-        <!-- Two Column Images -->
-        <section class="section fade-in">
-            <div class="two-column-section">
-                <div class="column-image">
-                    <img src="images/ophie/a lot of bottles.jpg" alt="Development Process">
-                </div>
-                <div class="column-image">
-                    <img src="images/ophie/raparigacomportachaves.jpg" alt="Visual Research">
-                </div>
+            <!-- Two images -->
+            <div class="image-row">
+                <img src="images/ophie/sagegreen.png" alt="Sage green">
+                <img src="images/ophie/pinkone.png" alt="Pink bottle">
             </div>
-        </section>
 
-        <!-- Grid Mosaic -->
-        <section class="section fade-in">
-            <div class="grid-section">
-                <div class="grid-item">
-                    <img src="images/ophie/purple one.png" alt="Detail 1">
+
+            <!-- Two images -->
+            <div class="image-row">
+                <img src="images/ophie/turcoise.png" alt="Turquoise">
+                <img src="images/ophie/three.png" alt="Three bottles">
+            </div>
+
+            <!-- Text section -->
+            <div class="text-section">
+                <div class="text-left">
+                    Packaging<br>
+                    Design<br>
+                    —<br>
+                    003
                 </div>
-                <div class="grid-item">
-                    <img src="images/ophie/sagegreen.png" alt="Detail 2">
-                </div>
-                <div class="grid-item">
-                    <img src="images/ophie/pinkone.png" alt="Detail 3">
-                </div>
-                <div class="grid-item">
-                    <img src="images/ophie/whiteswatche.png" alt="Detail 4"></img>
-                </div>
-                <div class="grid-item">
-                    <img src="images/ophie/turcoise.png" alt="Detail 5">
-                </div>
-                <div class="grid-item">
-                    <img src="images/ophie/nudeone.png" alt="Detail 6"></img>
-                </div>
-                <div class="grid-item">
-                    <img src="images/ophie/model3.png" alt="Detail 7">
+                <div class="text-right">
+                    <h2>The Creative Process</h2>
+                    <p>I created two main packaging types: the Individual and the Pack. Both share one main motif which is the bottle silhouette that represents the most recognizable element of the brand. The second key aspect is color.</p>
+                    <p>For the individual package I followed a clean minimalist approach with the lip oil shade embossed silhouette logo product description and flavor name. On the side I added an image of the flavor ingredient so buyers can visually connect with their choice along with a short phrase about the natural and organic origin of the formula.</p>
                 </div>
             </div>
-        </section>
+
+            <!-- One full image -->
+            <div class="image-row">
+                <img src="images/ophie/nudeone.png" alt="Nude">
+                <img src="images/ophie/model3.png" alt="Model">
+            </div>
+
+            <!-- Two images -->
+            <div class="image-row">
+                <img src="images/ophie/suitcase.png" alt="Suitcase">
+                <img src="images/ophie/boxandbottle.png" alt="Box and bottle">
+            </div>
+
+
+            <!-- Two images -->
+            <div class="image-row">
+                <img src="images/ophie/boxblue.png" alt="Blue box">
+                <img src="images/ophie/basket.png" alt="Basket">
+            </div>
+
+            <!-- One full image -->
+            <div class="image-row">
+                <img src="images/ophie/ophiewritten.png" alt="Ophie written">
+                 <img src="images/ophie/caixapack2.png" alt="Pack 2">
+            </div>
+
+            <!-- Two images -->
+            <div class="image-row">
+                <img src="images/ophie/modelwithindividula.png" alt="Model">
+                <img src="images/ophie/caixapack.png" alt="Pack">
+            </div>
 
            
-
-        <br>
-        <br>
-        <br>
-
-           <section class="section fade-in">
-            <div class="image-text-section">
-                <div class="large-image">
-                    <img src="images/ophie/three.png" alt="Form Light Shadow"></img>
-                </div>
-                <div class="side-text">
-                    <div class="section-number">002 — Packaging</div>
-                    <h2 class="section-title">The creative process</h2>
-                    <p class="text-block">
-                    I created two main packaging types: the Individual and the Pack. Both share one main motif which is the bottle silhouette that represents the most recognizable element of the brand. The second key aspect is color. For the individual package I followed a clean minimalist approach with the lip oil shade embossed silhouette logo product description and flavor name. On the side I added an image of the flavor ingredient so buyers can visually connect with their choice along with a short phrase about the natural and organic origin of the formula.
-                    </p>
-                    <p class="text-block">
-                 For the Pack box I kept the same concept but without color since it contains multiple flavors. The white embossed silhouette on the lid adds a subtle element of surprise while the textured interior enhances the experience with a natural and organic feel. The bottles are placed in cutout silhouettes side by side for a balanced and luxurious presentation.
-                    </p>
-                </div>
-            </div>
-        </section>
-
-        <section class="section fade-in">
-            <div class="two-column-section">
-                <div class="column-image">
-                    <img src="images/ophie/suitcase.png" alt="Development Process">
-                </div>
-                <div class="column-image">
-                    <img src="images/ophie/boxandbottle.png" alt="Visual Research">
-                </div>
-            </div>
-        </section>
-
-        <!-- Grid Mosaic -->
-        <section class="section fade-in">
-            <div class="grid-section">
-                <div class="grid-item">
-                    <img src="images/ophie/boxblue.png" alt="Detail 1">
-                </div>
-                <div class="grid-item">
-                    <img src="images/ophie/basket.png" alt="Detail 2">
-                </div>
-                <div class="grid-item">
-                    <img src="images/ophie/ophiewritten.png" alt="Detail 3">
-                </div>
-                <div class="grid-item">
-                    <img src="images/ophie/modelwithindividula.png" alt="Detail 4">
-                </div>
-            </div>
-        </section>
-
-        <section class="section fade-in">
-            <div class="two-column-section">
-                <div class="column-image">
-                    <img src="images/ophie/caixapack.png" alt="Development Process">
-                </div>
-                <div class="column-image">
-                    <img src="images/ophie/caixapack2.png" alt="Visual Research">
-                </div>
-            </div>
-        </section>
+        </div>
     </div>
 
-               <!-- Final Section / Next Project -->
-    <section class="final-section">
-        <a href="petali.html" class="next-project">View next project</a>
-    </section>
-
-
-
     <script>
-        // Get elements
-        const customCursor = document.querySelector('.custom-cursor');
-        const openingImage = document.querySelector('.opening-image');
-        const openingSection = document.querySelector('.opening-image-section');
-        const openingContainer = document.querySelector('.opening-image-container');
-        
-        // Custom cursor follow mouse
-        document.addEventListener('mousemove', (e) => {
-            customCursor.style.left = e.clientX + 'px';
-            customCursor.style.top = e.clientY + 'px';
-        });
-
-      // Smooth scroll + zoom-out fix for opening image
-window.addEventListener('scroll', () => {
-    const scrollPos = window.scrollY;
-
-    if (openingImage && openingContainer) {
-        const shrinkEnd = 1000;    // zoom-out duration
-        const scrollStart = 1400;  // when upward movement begins
-        const minScale = 0.6;
-
-        let scale = 1;
-        let translateY = 0;
-
-        if (scrollPos < shrinkEnd) {
-            // Phase 1: Zoom out
-            const progress = scrollPos / shrinkEnd;
-            scale = 1 - progress * (1 - minScale);
-            translateY = 0;
-        } else if (scrollPos < scrollStart) {
-            // Phase 2: Hold steady (paused zoom-out)
-            scale = minScale;
-            translateY = 0;
-        } else {
-            // Phase 3: Move up
-            const scrollOffset = scrollPos - scrollStart;
-            scale = minScale;
-            translateY = -scrollOffset; // move upward
-        }
-
-        // ✅ Combine translate and scale in one transform string
-        openingContainer.style.transform = `translate(-50%, calc(-50% + ${translateY}px)) scale(${scale})`;
-        openingContainer.style.transformOrigin = 'center center';
-    }
-});
-
-
-        // Intersection Observer for fade-in animations
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, { threshold: 0.1 });
-
-        document.querySelectorAll('.fade-in').forEach(el => {
-            observer.observe(el);
+        // Ensure videos play
+        document.querySelectorAll('video').forEach(video => {
+            video.muted = true;
+            video.play().catch(() => {});
         });
     </script>
 </body>
