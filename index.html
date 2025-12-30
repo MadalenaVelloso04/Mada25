@@ -14,9 +14,9 @@
         }
 
         body {
-          font-family: dico-mono, mono;
-font-weight: 400;
-font-style: normal;
+            font-family: dico-mono, mono;
+            font-weight: 400;
+            font-style: normal;
             background: #000000;
             color: #ffffff;
             overflow-x: hidden;
@@ -42,7 +42,7 @@ font-style: normal;
             line-height: 0.9;
             text-transform: uppercase;
             font-family: "giramisu-variable", sans-serif;
-font-variation-settings: "wdth" 50, "slnt" 0;
+            font-variation-settings: "wdth" 50, "slnt" 0;
         }
 
         .bg-name.left {
@@ -64,7 +64,7 @@ font-variation-settings: "wdth" 50, "slnt" 0;
             top: 80%;
             left: 63%;
             transform: translate(-50%, -50%);
-               filter: brightness(0) invert(1);
+            filter: brightness(0) invert(1);
             mix-blend-mode: difference;
         }
 
@@ -106,7 +106,7 @@ font-variation-settings: "wdth" 50, "slnt" 0;
         }
 
         /* Work container */
-           .work-scroll {
+        .work-scroll {
             position: relative;
             z-index: 10;
             padding: 100vh 0 50vh;
@@ -215,11 +215,11 @@ font-variation-settings: "wdth" 50, "slnt" 0;
         }
 
         .middle {
-          font-size: 12px;
-          mix-blend-mode: difference;
-          position: fixed;
-          top: 50%;
-          z-index: 100;
+            font-size: 12px;
+            mix-blend-mode: difference;
+            position: fixed;
+            top: 50%;
+            z-index: 100;
         }
 
         .left {
@@ -230,8 +230,6 @@ font-variation-settings: "wdth" 50, "slnt" 0;
             left: 20vw;
         }
 
-      
-
         /* About section */
         .about-section {
             position: relative;
@@ -241,7 +239,7 @@ font-variation-settings: "wdth" 50, "slnt" 0;
             align-items: left;
             justify-content: right;
             padding: 100px 50px;
-          mix-blend-mode: difference;
+            mix-blend-mode: difference;
             margin-bottom: 200px;
         }
 
@@ -250,80 +248,260 @@ font-variation-settings: "wdth" 50, "slnt" 0;
             text-align: left;
         }
 
-        .about-content h2 {
-            font-size: 38px;
+        .about-content h3 {
+            font-size: 28px;
             font-style: italic;
             font-weight: normal;
-            margin-bottom: 40px;
+            margin-bottom: 30px;
+            margin-top: 50px;
+        }
+
+        .about-content h3:first-child {
+            margin-top: 0;
         }
 
         .about-content p {
             font-size: 15px;
-            line-height: 1.2;
-            margin-bottom: 30px;
+            line-height: 1.6;
+            margin-bottom: 20px;
         }
 
-        /* Responsive */
+        /* TABLET STYLES */
         @media (max-width: 1024px) {
             .bg-name {
-                font-size: 25vw;
+                font-size: 22vw;
+            }
+
+            .bg-icon {
+                width: 35vw;
+                top: 75%;
+                left: 60%;
+            }
+
+            .info-text {
+                font-size: 9px;
+                top: 15px;
+                left: 15px;
+            }
+
+            .navbar {
+                gap: 20px;
+                font-size: 11px;
+                top: 15px;
+                right: 15px;
+            }
+
+            .middle {
+                font-size: 11px;
+            }
+
+            .work-scroll {
+                padding: 80vh 0 40vh;
+                padding-left: 3vw;
+                padding-right: 3vw;
+            }
+
+            .work-item {
+                margin-bottom: 12vh;
+            }
+
+            .work-item:nth-child(odd) {
+                padding-right: 15%;
+            }
+
+            .work-item:nth-child(even) {
+                padding-left: 20%;
+                margin-top: -8vh;
+            }
+
+            .work-item:nth-child(3n) {
+                padding-left: 8%;
+                padding-right: 12%;
             }
 
             .work-image-container {
-                width: 70vw;
-                height: 60vh;
+                height: 65vh;
             }
 
             .work-info-sidebar {
                 right: 30px;
-                width: 250px;
+                width: 280px;
                 padding: 25px;
+            }
+
+            .work-info-sidebar h3 {
+                font-size: 18px;
+            }
+
+            .work-info-sidebar .description {
+                font-size: 13px;
+            }
+
+            .about-section {
+                padding: 80px 40px;
+                margin-bottom: 150px;
+            }
+
+            .about-content h3 {
+                font-size: 24px;
+                margin-bottom: 25px;
+                margin-top: 40px;
+            }
+
+            .about-content p {
+                font-size: 14px;
             }
         }
 
+        /* MOBILE STYLES */
         @media (max-width: 768px) {
+            .bg-name {
+                font-size: 20vw;
+            }
+
+            .bg-name.left {
+                left: 10px;
+                bottom: 50%;
+            }
+
+            .bg-name.right {
+                right: 10px;
+                  bottom: 50%;
+            }
+
+            .bg-icon {
+                width: 45vw;
+                top: 42vh;
+                left: 65%;
+            }
+
+            /* Hide fixed text elements on mobile for cleaner look */
+            .info-text {
+                display: none;
+            }
+
+            .middle {
+                display: none;
+            }
+
+            .navbar {
+                flex-direction: column;
+                gap: 10px;
+                font-size: 15px;
+                top: 15px;
+                right: 15px;
+                align-items: flex-end;
+            }
+
+            .work-scroll {
+                padding: 55vh 0 30vh;
+                padding-left: 5vw;
+                padding-right: 5vw;
+            }
+
+            /* Simplify work item layout on mobile */
+            .work-item,
+            .work-item:nth-child(odd),
+            .work-item:nth-child(even),
+            .work-item:nth-child(3n) {
+                padding-left: 0;
+                padding-right: 0;
+                margin-top: 0;
+                margin-bottom: 10vh;
+            }
+
+            .work-image-container {
+                height: 50vh;
+            }
+
+            /* Move sidebar to bottom on mobile */
+            .work-info-sidebar {
+            display: none; }
+
+            .about-section {
+                padding: 60px 20px;
+                margin-bottom: 100px;
+            }
+
+            .about-content h3 {
+                font-size: 20px;
+                margin-bottom: 20px;
+                margin-top: 35px;
+            }
+
+            .about-content p {
+                font-size: 13px;
+                line-height: 1.5;
+                margin-bottom: 18px;
+            }
+        }
+
+        /* EXTRA SMALL MOBILE */
+        @media (max-width: 480px) {
             .bg-name {
                 font-size: 30vw;
             }
 
             .bg-name.left {
-                left: -10vw;
+                left: 30px;
+                bottom: 50%;
             }
 
             .bg-name.right {
-                right: -10vw;
+               left: 30px;
+                bottom: 38%;
+            }
+
+            .bg-icon {
+                width: 40vw;
+                top: 57vh;
+                left: 50%;
             }
 
             .navbar {
-                flex-direction: column;
-                gap: 15px;
+                gap: 10px;
+                font-size: 14px;
+                top: 12px;
+                right: 12px;
+            }
+
+            .work-scroll {
+                padding: 100vh 0 25vh;
+                padding-left: 4vw;
+                padding-right: 4vw;
+            }
+
+            .work-item {
+                margin-bottom: 8vh;
             }
 
             .work-image-container {
-                width: 85vw;
-                height: 50vh;
+                height: 45vh;
             }
 
             .work-info-sidebar {
-                position: fixed;
-                bottom: 20px;
-                right: 20px;
-                left: 20px;
-                top: auto;
-                width: auto;
-                transform: none;
+              display: none; }
+
+          
+
+            .about-section {
+                padding: 50px 15px;
+                margin-bottom: 80px;
             }
 
-            .about-content h2 {
-                font-size: 32px;
+            .about-content h3 {
+                font-size: 18px;
+                margin-bottom: 18px;
+                margin-top: 30px;
             }
 
             .about-content p {
-                font-size: 16px;
+                font-size: 12px;
+                line-height: 1.4;
+                margin-bottom: 15px;
             }
         }
     </style>
-   
 </head>
 <body>
 
@@ -348,11 +526,11 @@ font-variation-settings: "wdth" 50, "slnt" 0;
     </nav>
 
     <div class="middle left">
-      <p>open for projects and comissions</p>
+        <p>open for projects and comissions</p>
     </div>
 
-      <div class="middle center">
-      <p>madalenavelloso04@gmail.com</p>
+    <div class="middle center">
+        <p>madalenavelloso04@gmail.com</p>
     </div>
 
     <!-- Work info sidebar -->
@@ -378,41 +556,45 @@ font-variation-settings: "wdth" 50, "slnt" 0;
 
     <!-- Work scroll section -->
     <div class="work-scroll">
-           <div class="work-item" data-work="cinnapop" id="work">
+        <div class="work-item" data-work="cinnapop" id="work">
             <div class="work-image-container">
-                <img src="images/cinnapop/JPG/2-cards-world-brand-design.jpg"></img>
+                <img src="images/cinnapop/JPG/2-cards-world-brand-design.jpg" alt="Cinnapop">
             </div>
         </div>
-               <div class="work-item" data-work="magn8" id="work">
+
+        <div class="work-item" data-work="magn8">
             <div class="work-image-container">
-                <img src="images/magn'8/swaetband copy.jpg"></img>
+                <img src="images/magn'8/swaetband copy.jpg" alt="Magn8">
             </div>
         </div>
-              <div class="work-item" data-work="bonbon" id="work">
+
+        <div class="work-item" data-work="bonbon">
             <div class="work-image-container">
-                <img  src="images/bonbon/6-quotes-world-brand-design.jpg"></img>
+                <img src="images/bonbon/6-quotes-world-brand-design.jpg" alt="BonBon">
             </div>
         </div>
- <div class="work-item" data-work="uncledough" id="work">
+
+        <div class="work-item" data-work="uncledough">
             <div class="work-image-container">
-                <img  src="images/uncledough/bag.png"></img>
+                <img src="images/uncledough/bag.png" alt="Uncle Dough">
             </div>
         </div>
-        <div class="work-item" data-work="ophie" id="work">
+
+        <div class="work-item" data-work="ophie">
             <div class="work-image-container">
-                <img src="images/ophie/a lot of bottles.jpg"></img>
+                <img src="images/ophie/a lot of bottles.jpg" alt="Ophie">
             </div>
         </div>
 
         <div class="work-item" data-work="petali">
             <div class="work-image-container">
-                <img src="images/petali/cans.jpeg"></img>
+                <img src="images/petali/cans.jpeg" alt="Petali">
             </div>
         </div>
 
         <div class="work-item" data-work="modis">
             <div class="work-image-container">
-                <img src="images/MODIS/poster4.jpeg"></img>
+                <img src="images/MODIS/poster4.jpeg" alt="Modis">
             </div>
         </div>
 
@@ -424,7 +606,7 @@ font-variation-settings: "wdth" 50, "slnt" 0;
 
         <div class="work-item" data-work="olura">
             <div class="work-image-container">
-                <img src="images/olura/mupibanner.jpg"></img>
+                <img src="images/olura/mupibanner.jpg" alt="Olura">
             </div>
         </div>
 
@@ -450,47 +632,21 @@ font-variation-settings: "wdth" 50, "slnt" 0;
     <!-- About section -->
     <section class="about-section" id="about">
         <div class="about-content">
-     
             <h3>About</h3>
-<p>I'm Madalena Velloso, a Portuguese freshly graduated graphic design student at IADE faculty in Lisbon. With a background in fine arts and a curious mind that rarely sits still, I’m always exploring across mediums, disciplines, and ideas. I’m drawn to the creative process in all its forms, and I see design as a space where thinking, making, and experimenting constantly come together.</p>
-<p>I began my path at Escola Artística António Arroio, which gave me a strong foundation in visual arts. Later, during an Erasmus semester in Milan, I discovered not only a new city but also a new level of creative independence and confidence. What drives me most is learning, not just within design but far beyond it. I'm inspired by conversation, especially the kind that stays with you after it ends. Many of my professors have shaped how I think, ask questions, and approach the work with more intention.</p>
+            <p>I'm Madalena Velloso, a Portuguese freshly graduated graphic design student at IADE faculty in Lisbon. With a background in fine arts and a curious mind that rarely sits still, I'm always exploring across mediums, disciplines, and ideas. I'm drawn to the creative process in all its forms, and I see design as a space where thinking, making, and experimenting constantly come together.</p>
+            <p>I began my path at Escola Artística António Arroio, which gave me a strong foundation in visual arts. Later, during an Erasmus semester in Milan, I discovered not only a new city but also a new level of creative independence and confidence. What drives me most is learning, not just within design but far beyond it. I'm inspired by conversation, especially the kind that stays with you after it ends. Many of my professors have shaped how I think, ask questions, and approach the work with more intention.</p>
 
-<h3>Education</h3>
-<br>
-<p><strong>IADE - Creative University</strong>
-<br>Bachelor in Global Design
-<br>2022 - 2025
-</p>
+            <h3>Education</h3>
+            <p><strong>IADE - Creative University</strong><br>Bachelor in Global Design<br>2022 - 2025</p>
+            <p><strong>NABA - Nuova Academia di Belle Arti</strong><br>Erasmus Semester (art direction and graphic design)<br>2025</p>
 
-<p><strong>NABA - Nuova Academia di Belle Arti</strong>
-<br>Erasmus Semester (art direction and graphic design)
-<br>2025
-</p>
+            <h3>Experience</h3>
+            <p><strong>Freelance Designer</strong><br>Brand identity, illustration, web design, and everything in between<br>2023 - Present</p>
+            <p><strong>Designer at Skardy Studio</strong><br>Brand Design<br>Lisbon, Portugal<br>2022 / 1y</p>
+            <p><strong>Graphic Design Apprentice at Desisto Studio</strong><br>Print lab<br>Lisbon, Portugal<br>2022</p>
 
-
-<h3>Experience</h3>
-<br>
-<p><strong>Freelance Designer</strong>
-<br>Brand identity, illustration, web design, and everything in between
-<br>2023 - Present
-</p>
-
-<p><strong>Designer at Skardy Studio</strong>
-<br>Brand Design
-<br>Lisbon, Portugal
-<br>2022 / 1y
-</p>
-
-<p><strong>Graphic Design Apprentice at Desisto Studio</strong>
-<br>Print lab
-<br>Lisbon, Portugal
-<br>2022
-</p>
-
-<h3>Skills</h3>
-<br>
-<p>Brand Identity, Editorial Design, Typography, Web Design, 3D Modeling, Illustration, Print Design, Motion Graphics</p>
-
+            <h3>Skills</h3>
+            <p>Brand Identity, Editorial Design, Typography, Web Design, 3D Modeling, Illustration, Print Design, Motion Graphics</p>
         </div>
     </section>
 
@@ -499,12 +655,11 @@ font-variation-settings: "wdth" 50, "slnt" 0;
             cinnapop: {
                 title: "Cinnapop Gingerbread cookies",
                 category: "Brand Identity / Packaging",
-                description: "A pop of color and flavor, Cinnapop is Santa’s favorite gingerbread cookie.",
+                description: "A pop of color and flavor, Cinnapop is Santa's favorite gingerbread cookie.",
                 year: "2025",
                 role: "Visual Identity, Packaging Design",
                 status: "Completed"
             },
-
             magn8: {
                 title: "Magn'8 magnesium supplements",
                 category: "Brand Identity / Packaging",
@@ -513,7 +668,6 @@ font-variation-settings: "wdth" 50, "slnt" 0;
                 role: "Visual Identity, Packaging Design",
                 status: "Completed"
             },
-
             bonbon: {
                 title: "BonBon Handcrafted Chocolate",
                 category: "Brand Identity / Packaging",
@@ -522,8 +676,7 @@ font-variation-settings: "wdth" 50, "slnt" 0;
                 role: "Visual Identity, Packaging Design",
                 status: "Completed"
             },
-
-              uncledough: {
+            uncledough: {
                 title: "Uncledough Bakery",
                 category: "Brand Identity / Packaging",
                 description: "A little messy, a little stubborn, and full of personality. A brand meant to make people laugh, trust, and enjoy",
@@ -531,7 +684,6 @@ font-variation-settings: "wdth" 50, "slnt" 0;
                 role: "Visual Identity, Packaging Design",
                 status: "Completed"
             },
-
             ophie: {
                 title: "Ophie Lip Oils",
                 category: "Brand Identity / Packaging",
@@ -600,7 +752,6 @@ font-variation-settings: "wdth" 50, "slnt" 0;
 
         const workItems = document.querySelectorAll('.work-item');
         const sidebar = document.getElementById('workInfoSidebar');
-        let currentWork = null;
 
         workItems.forEach(item => {
             item.addEventListener('mouseenter', () => {
