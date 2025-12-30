@@ -4,1406 +4,177 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="icon" type="image/png" href="images/white-circle.png">
+        <link rel="stylesheet" href="https://use.typekit.net/dju8mqp.css">
     <title>Madalena Velloso - Portfolio</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
 
-        body {
-            font-family: 'Courier New', monospace;
-            background: #ffffff;
-            background-image: url('images/background.jpg');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+  body {
+          font-family: dico-mono, mono;
+font-weight: 400;
+font-style: normal;
+            background: #000000;
+            color: #ffffff;
             overflow-x: hidden;
-            cursor: none;
         }
 
-        a, .work-item, .poster-item, .project-item {
-            cursor: none;
+                .middle {
+          font-size: 12px;
+          mix-blend-mode: difference;
+          position: fixed;
+          top: 50%;
+          z-index: 100;
         }
 
-        /* Custom Cursor */
-        .custom-cursor {
+        .left {
+            left: 2vw;
+        }
+
+        .center {
+            left: 20vw;
+        }
+
+
+ /* Navigation */
+        .navbar {
             position: fixed;
-            width: 52px;
-            height: 52px;
-            pointer-events: none;
-            z-index: 10000;
-            transform: translate(-50%, -50%);
-        }
-
-        .custom-cursor img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-        }
-
-        /* Scroll Progress Indicator */
-        .scroll-progress {
-            position: fixed;
-            right: 60px;
-            top: 50%;
-            transform: translateY(-50%);
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 30px;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
             z-index: 100;
-            opacity: 1;
-            transition: opacity 1s ease;
+            mix-blend-mode: difference;
         }
-
-        .scroll-shape {
-            width: 80px;
-            height: 80px;
-            transition: transform 0.1s linear;
-        }
-
-        .scroll-shape img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-        }
-
-        /* Little Me Character */
-        .little-me {
+           /* Fixed info text */
+        .info-text {
             position: fixed;
-            width: 100px;
-            height: auto;
-            top: 15px;
+            top: 20px;
             left: 20px;
-            z-index: 500;
-            opacity: 1;
-            visibility: visible;
-        }
-
-        /* Project Menu */
-        .project-menu {
-            position: fixed;
-            left: 140px;
-            top: 40px;
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
             z-index: 100;
-            opacity: 1;
+            mix-blend-mode: difference;
         }
 
-        .project-menu a {
-            display: block;
-            font-size: 1.5rem;
-            font-style: italic;
-            color: #333;
+        .navbar a {
+            color: #ffffff;
             text-decoration: none;
-            margin: 15px 0;
-            transition: color 0.3s ease;
+            mix-blend-mode: difference;
+            transition: opacity 0.3s;
         }
 
-        .project-menu a:hover,
-        .project-menu a.active {
-            color: blue;
+        .navbar a:hover {
+            opacity: 0.6;
         }
 
-        /* Posters Section - Stacking on Top from Side */
-        .posters-section {
-            min-height: 500vh;
-            position: relative;
-            padding: 100px 0;
-        }
+/* GRID */
+.poster-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 5px;
 
-        .posters-container {
-            position: sticky;
-            top: 0;
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .posters-container p {
-            width: 100%;
-            max-width: 400px;
-            left: 5vw;
-            margin-right: 30px;
-        }
-
-        .poster-stack {
-            position: relative;
-            width: 500px;
-            height: 700px;
-        }
-
-        .poster-item {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background: #fff;
-            transition: all 0.1s ease-out;
-            left: 0;
-            top: 0;
-            transform: translateX(120%);
-            opacity: 0;
-        }
-
-        .poster-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        /* Complete Projects Section - Horizontal Scroll */
-        .projects-section {
-            min-height: 600vh;
-            position: relative;
-            padding: 100px 0;
-        }
-
-        .projects-container {
-            position: sticky;
-            top: 0;
-            height: 100vh;
-            overflow: hidden;
-        }
-
-        .projects-scroll {
-            display: flex;
-            height: 100%;
-            width: max-content;
-            transition: transform 0.1s ease-out;
-        }
-
-        .project-item {
-            width: 100vw;
-            height: 100%;
-            flex-shrink: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 0 200px;
-        }
-
-        .project-item img {
-            max-width: 100%;
-            max-height: 80vh;
-            object-fit: contain;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-        }
-
-        .project-title {
-            position: fixed;
-            right: 100px;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 3rem;
-            font-style: italic;
-            color: #333;
-            z-index: 50;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.3s ease;
-        }
-
-        .project-title.visible {
-            opacity: 1;
-        }
-
-       /* Masonry layout for Illustration & 3D */
-        .masonry-gallery {
-            column-count: 3;
-            column-gap: 12px;
-            padding: 0 40px;
-        }
-
-        .masonry-gallery img,
-        .masonry-gallery video {
-            width: 100%;
-            margin-bottom: 12px;
-            display: block;
-            transition: transform 0.3s ease, opacity 0.3s ease;
-            cursor: pointer;
-        }
-
-        .masonry-gallery img:hover,
-        .masonry-gallery video:hover {
-            transform: scale(1.02);
-            opacity: 0.9;
-        }
-
-        .section-title {
-            font-size: 4rem;
-            font-style: italic;
-            text-align: center;
-            margin-bottom: 60px;
-            color: #333;
-            font-weight: lighter;
-            width: 100%;
-            grid-column: 1 / -1;
-        }
-
-        .section-p {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            margin: 0 auto;
-            font-size: 1rem;
-            text-align: center;
-            width: 400px;
-            color: #333;
-            font-weight: lighter;
-        }
-
-        /* Collection Toggle Buttons */
-        .collection-toggle {
-            display: flex;
-            justify-content: flex-end;
-            gap: 15px;
-            padding: 0 40px;
-            margin-bottom: 40px;
-        }
-
-        .collection-btn {
-            font-family: 'Courier New', monospace;
-            font-size: 1rem;
-            font-style: italic;
-            padding: 12px 24px;
-            border: 1px solid #333;
-            background: transparent;
-            color: #333;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            pointer-events: auto;
-        }
-
-        .collection-btn:hover {
-            background: #333;
-            color: #fff;
-        }
-
-        .collection-btn.active {
-            background: #333;
-            color: #fff;
-        }
-
-        .collection-gallery {
-            display: none;
-        }
-
-        .collection-gallery.active {
-            display: block;
-            column-count: 3;
-            column-gap: 12px;
-        }
-
-        @media (max-width: 1024px) {
-            .masonry-gallery { column-count: 2; }
-            .collection-gallery.active { column-count: 2; }
-        }
-        @media (max-width: 600px) {
-            .masonry-gallery { column-count: 1; }
-            .collection-gallery.active { column-count: 1; }
-            .collection-toggle {
-                justify-content: center;
-                padding: 0 20px;
-            }
-            .collection-btn {
-                font-size: 0.9rem;
-                padding: 10px 20px;
-            }
-        }
-
-        /* Lightbox Styling */
-        .lightbox {
-            display: none;
-            position: fixed;
-            inset: 0;
-            background: rgba(255, 255, 255, 0.96);
-            backdrop-filter: blur(6px);
-            justify-content: center;
-            align-items: center;
-            z-index: 30000;
-            cursor: none;
-        }
-
-        .lightbox.show {
-            display: flex;
-        }
-
-        .lightbox img,
-        .lightbox video {
-            max-width: 90%;
-            max-height: 85vh;
-            border-radius: 12px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
-            transition: transform 0.4s ease;
-            display: none;
-        }
-
-        .lightbox img.active,
-        .lightbox video.active {
-            display: block;
-        }
-
-        .lightbox img:hover,
-        .lightbox video:hover {
-            transform: scale(1.02);
-        }
-
-        .lightbox-close {
-            position: fixed;
-            top: 40px;
-            right: 50px;
-            font-size: 1.2rem;
-            font-style: italic;
-            color: #333;
-            background: none;
-            border: none;
-            cursor: pointer;
-            font-family: 'Courier New', monospace;
-            z-index: 31000;
-            transition: color 0.2s ease;
-        }
-
-        .lightbox-close:hover {
-            color: blue;
-        }
-
-     /* ===================================
-   BASE STYLES (Desktop First)
-   =================================== */
-
-/* Keep all your existing base styles here */
-
-/* ===================================
-   RESPONSIVE BREAKPOINTS
-   =================================== */
-
-/* LARGE DESKTOP (1400px+) */
-@media (min-width: 1400px) {
-    .section-title {
-        font-size: 5rem;
-    }
-    
-    .poster-stack {
-        width: 600px;
-        height: 840px;
-    }
-    
-    .posters-container p {
-        max-width: 500px;
-        font-size: 1.2rem;
-    }
-    
-    .project-title {
-        font-size: 3.5rem;
-    }
 }
 
-/* STANDARD DESKTOP (1200px - 1399px) */
-@media (min-width: 1200px) and (max-width: 1399px) {
-    .section-title {
-        font-size: 4.5rem;
-    }
-    
-    .poster-stack {
-        width: 550px;
-        height: 770px;
-    }
-    
-    .posters-container p {
-        max-width: 450px;
-        font-size: 1.1rem;
-    }
+/* POSTER */
+.poster {
+  position: relative;
+  width: 100%;
 }
 
-/* LAPTOP (1024px - 1199px) */
-@media (max-width: 1199px) {
-    .scroll-progress {
-        right: 40px;
-    }
-
-    .scroll-shape {
-        width: 70px;
-        height: 70px;
-    }
-
-    .little-me {
-        width: 85px;
-    }
-
-    .project-menu {
-        left: 120px;
-        top: 30px;
-    }
-
-    .project-menu a {
-        font-size: 1.4rem;
-        margin: 13px 0;
-    }
-
-    .section-title {
-        font-size: 3.5rem;
-        margin-bottom: 50px;
-    }
-
-    .poster-stack {
-        width: 450px;
-        height: 630px;
-    }
-
-    .posters-container p {
-        max-width: 350px;
-        font-size: 1rem;
-    }
-
-    .project-item {
-        padding: 0 120px;
-    }
-
-    .project-item img {
-        max-height: 75vh;
-    }
-
-    .project-title {
-        right: 80px;
-        font-size: 2.8rem;
-    }
-
-    .masonry-gallery {
-        column-count: 3;
-        padding: 0 35px;
-    }
+.poster img {
+  width: 100%;
+  height: auto;
+  display: block;
 }
 
-/* TABLET LANDSCAPE & SMALL LAPTOP (768px - 1023px) */
-@media (max-width: 1023px) {
-    .scroll-progress {
-        right: 30px;
-    }
+/* DESALINHAMENTO ORGÂNICO */
 
-    .scroll-shape {
-        width: 60px;
-        height: 60px;
-    }
 
-    .little-me {
-        width: 75px;
-        left: 15px;
-        top: 15px;
-    }
-
-    .project-menu {
-        left: 100px;
-        top: 20px;
-    }
-
-    .project-menu a {
-        font-size: 1.2rem;
-        margin: 10px 0;
-    }
-
-    .section-title {
-        font-size: 3rem;
-        margin-bottom: 40px;
-    }
-
-    .section-p {
-        width: 90%;
-        max-width: 350px;
-        font-size: 0.95rem;
-    }
-
-    .posters-section {
-        min-height: 400vh;
-    }
-
-    .poster-stack {
-        width: 380px;
-        height: 530px;
-    }
-
-    .posters-container {
-        gap: 30px;
-        padding: 0 25px;
-    }
-
-    .posters-container p {
-        max-width: 280px;
-        font-size: 0.95rem;
-    }
-
-    .projects-section {
-        min-height: 500vh;
-    }
-
-    .project-item {
-        padding: 0 80px;
-    }
-
-    .project-item img {
-        max-height: 70vh;
-    }
-
-    .project-title {
-        right: 50px;
-        font-size: 2.4rem;
-    }
-
-    .masonry-gallery,
-    .collection-gallery.active {
-        column-count: 2;
-        column-gap: 10px;
-        padding: 0 25px;
-    }
-
-    .collection-toggle {
-        padding: 0 25px;
-    }
+/* RESPONSIVE */
+@media (max-width: 1200px) {
+  .poster-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
-/* TABLET PORTRAIT (600px - 767px) */
-@media (max-width: 767px) {
-    body {
-        cursor: auto;
-    }
-
-    .custom-cursor {
-        display: none;
-    }
-
-    a, .work-item, .poster-item, .project-item {
-        cursor: pointer;
-    }
-
-    .scroll-progress {
-        right: 20px;
-        top: auto;
-        bottom: 20px;
-        transform: none;
-    }
-
-    .scroll-shape {
-        width: 50px;
-        height: 50px;
-    }
-
-    .little-me {
-        width: 65px;
-        left: 12px;
-        top: 12px;
-    }
-
-    .project-menu {
-        position: static;
-        padding: 70px 20px 25px;
-        display: flex;
-        flex-wrap: wrap;
-        gap: 12px;
-        justify-content: center;
-        background: rgba(255, 255, 255, 0.92);
-        backdrop-filter: blur(8px);
-        border-bottom: 1px solid rgba(51, 51, 51, 0.15);
-    }
-
-    .project-menu a {
-        font-size: 1rem;
-        margin: 4px 8px;
-    }
-
-    .section-title {
-        font-size: 2.5rem;
-        padding-top: 50px;
-        margin-bottom: 35px;
-    }
-
-    .section-p {
-        width: 90%;
-        font-size: 0.92rem;
-        padding: 0 15px;
-    }
-
-    .posters-section {
-        min-height: 350vh;
-        padding: 0 0 50px;
-    }
-
-    .posters-container {
-        flex-direction: column;
-        padding: 15px;
-        gap: 25px;
-    }
-
-    .posters-container p {
-        max-width: 100%;
-        text-align: center;
-        font-size: 0.92rem;
-        padding: 0 15px;
-    }
-
-    .poster-stack {
-        width: 85vw;
-        max-width: 380px;
-        height: 520px;
-    }
-
-    .projects-section {
-        min-height: 450vh;
-        padding: 0 0 50px;
-    }
-
-    .project-item {
-        padding: 0 30px;
-    }
-
-    .project-item img {
-        max-height: 60vh;
-    }
-
-    .project-title {
-        right: 20px;
-        top: auto;
-        bottom: 80px;
-        transform: none;
-        font-size: 1.9rem;
-        text-align: right;
-        max-width: calc(100vw - 40px);
-    }
-
-    .masonry-gallery,
-    .collection-gallery.active {
-        column-count: 2;
-        column-gap: 8px;
-        padding: 0 15px;
-    }
-
-    .masonry-gallery img,
-    .masonry-gallery video {
-        margin-bottom: 8px;
-    }
-
-    .collection-toggle {
-        padding: 0 15px;
-        gap: 10px;
-        justify-content: center;
-        margin-bottom: 30px;
-    }
-
-    .collection-btn {
-        font-size: 0.9rem;
-        padding: 10px 18px;
-    }
-
-    .lightbox-close {
-        top: 20px;
-        right: 20px;
-        font-size: 1rem;
-    }
-
-    .lightbox img,
-    .lightbox video {
-        max-width: 92%;
-        max-height: 80vh;
-    }
+@media (max-width: 800px) {
+  .poster-grid {
+    grid-template-columns: repeat(2, 1fr);
+    padding: 30px;
+  }
 }
 
-/* MOBILE (480px - 599px) */
-@media (max-width: 599px) {
-    .little-me {
-        width: 55px;
-        left: 10px;
-        top: 10px;
-    }
-
-    .scroll-progress {
-        right: 15px;
-        bottom: 15px;
-    }
-
-    .scroll-shape {
-        width: 45px;
-        height: 45px;
-    }
-
-    .project-menu {
-        padding: 65px 15px 20px;
-        gap: 10px;
-    }
-
-    .project-menu a {
-        font-size: 0.92rem;
-        margin: 3px 6px;
-    }
-
-    .section-title {
-        font-size: 2rem;
-        padding-top: 40px;
-        margin-bottom: 25px;
-    }
-
-    .section-p {
-        font-size: 0.88rem;
-        padding: 0 12px;
-    }
-
-    .posters-section {
-        min-height: 320vh;
-    }
-
-    .posters-container {
-        padding: 12px;
-        gap: 20px;
-    }
-
-    .posters-container p {
-        font-size: 0.88rem;
-        padding: 0 12px;
-    }
-
-    .poster-stack {
-        width: 88vw;
-        max-width: 340px;
-        height: 476px;
-    }
-
-    .projects-section {
-        min-height: 400vh;
-    }
-
-    .project-item {
-        padding: 0 20px;
-    }
-
-    .project-item img {
-        max-height: 55vh;
-    }
-
-    .project-title {
-        right: 15px;
-        bottom: 70px;
-        font-size: 1.7rem;
-        max-width: calc(100vw - 30px);
-    }
-
-    .masonry-gallery,
-    .collection-gallery.active {
-        column-count: 1;
-        column-gap: 0;
-        padding: 0 12px;
-    }
-
-    .masonry-gallery img,
-    .masonry-gallery video {
-        margin-bottom: 10px;
-    }
-
-    .collection-toggle {
-        flex-direction: column;
-        align-items: stretch;
-        padding: 0 12px;
-        gap: 8px;
-    }
-
-    .collection-btn {
-        font-size: 0.85rem;
-        padding: 9px 15px;
-        width: 100%;
-    }
-
-    .lightbox-close {
-        top: 15px;
-        right: 15px;
-        font-size: 0.95rem;
-    }
-
-    .lightbox img,
-    .lightbox video {
-        max-width: 94%;
-        max-height: 75vh;
-    }
+@media (max-width: 500px) {
+  .poster-grid {
+    grid-template-columns: 1fr;
+  }
 }
-
-/* SMALL MOBILE (360px - 479px) */
-@media (max-width: 479px) {
-    .little-me {
-        width: 50px;
-        left: 8px;
-        top: 8px;
-    }
-
-    .scroll-shape {
-        width: 40px;
-        height: 40px;
-    }
-
-    .project-menu a {
-        font-size: 0.85rem;
-        margin: 2px 5px;
-    }
-
-    .section-title {
-        font-size: 1.8rem;
-    }
-
-    .section-p {
-        font-size: 0.85rem;
-    }
-
-    .poster-stack {
-        width: 90vw;
-        height: 450px;
-    }
-
-    .project-title {
-        font-size: 1.5rem;
-        bottom: 65px;
-    }
-}
-
-/* VERY SMALL MOBILE (< 360px) */
-@media (max-width: 359px) {
-    .little-me {
-        width: 45px;
-    }
-
-    .scroll-shape {
-        width: 35px;
-        height: 35px;
-    }
-
-    .section-title {
-        font-size: 1.6rem;
-    }
-
-    .section-p {
-        font-size: 0.82rem;
-    }
-
-    .poster-stack {
-        height: 420px;
-    }
-
-    .project-title {
-        font-size: 1.3rem;
-        bottom: 60px;
-    }
-}
-
-/* ===================================
-   LANDSCAPE ORIENTATIONS
-   =================================== */
-
-/* MOBILE LANDSCAPE (max-height 500px) */
-@media (max-width: 900px) and (max-height: 500px) and (orientation: landscape) {
-    .little-me {
-        width: 45px;
-        top: 6px;
-        left: 6px;
-    }
-
-    .scroll-progress {
-        bottom: 8px;
-        right: 8px;
-    }
-
-    .scroll-shape {
-        width: 38px;
-        height: 38px;
-    }
-
-    .project-menu {
-        padding: 55px 12px 12px;
-    }
-
-    .project-menu a {
-        font-size: 0.85rem;
-        margin: 2px 6px;
-    }
-
-    .section-title {
-        font-size: 1.8rem;
-        padding-top: 25px;
-        margin-bottom: 20px;
-    }
-
-    .section-p {
-        font-size: 0.82rem;
-        max-width: 280px;
-    }
-
-    .posters-section {
-        min-height: 250vh;
-    }
-
-    .poster-stack {
-        width: 280px;
-        height: 70vh;
-        max-height: 400px;
-    }
-
-    .posters-container {
-        gap: 25px;
-        padding: 8px;
-    }
-
-    .posters-container p {
-        font-size: 0.82rem;
-        max-width: 240px;
-    }
-
-    .projects-section {
-        min-height: 300vh;
-    }
-
-    .project-item {
-        padding: 0 50px;
-    }
-
-    .project-item img {
-        max-height: 70vh;
-    }
-
-    .project-title {
-        font-size: 1.5rem;
-        bottom: 50px;
-        right: 12px;
-    }
-
-    .masonry-gallery,
-    .collection-gallery.active {
-        column-count: 2;
-        padding: 0 15px;
-    }
-
-    .collection-toggle {
-        margin-bottom: 25px;
-    }
-}
-
-/* TABLET LANDSCAPE (768px - 1024px) */
-@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
-    .project-menu {
-        left: 95px;
-        top: 18px;
-    }
-
-    .project-menu a {
-        font-size: 1.15rem;
-        margin: 9px 0;
-    }
-
-    .section-title {
-        font-size: 2.8rem;
-    }
-
-    .poster-stack {
-        width: 360px;
-        height: 68vh;
-    }
-
-    .project-item img {
-        max-height: 72vh;
-    }
-
-    .project-title {
-        font-size: 2.2rem;
-    }
-}
-
-/* ===================================
-   PRINT STYLES (Optional)
-   =================================== */
-
-@media print {
-    .custom-cursor,
-    .scroll-progress,
-    .little-me,
-    .project-menu,
-    .lightbox {
-        display: none;
-    }
-
-    body {
-        background: white;
-    }
-
-    .posters-section,
-    .projects-section {
-        min-height: auto;
-    }
-}
-    </style>
+</style>
 </head>
+
 <body>
-    <!-- Custom Cursor -->
-    <div class="custom-cursor">
-        <img src="images/Ilustração_Sem_Título.png" alt="">
+
+      <!-- Fixed info text -->
+    <div class="info-text">
+        ART DIRECTION, ILLUSTRATION, BRANDING, PACKAGING, WEB DESIGN
     </div>
 
-    <!-- Scroll Progress -->
-    <div class="scroll-progress">
-        <div class="scroll-shape">
-            <img src="images/flower.GIF" alt="Scroll indicator">
-        </div>
+       <div class="middle left">
+      <p>open for projects and collabs</p>
     </div>
 
-    <!-- Little Me Character -->
-    <a href="./index.html">
-        <img class="little-me" src="images/IMG_0465.GIF" alt="Little Me">
-    </a>
+      <div class="middle center">
+      <p>madalenavelloso04@gmail.com</p>
+    </div>
 
-    <!-- Project Menu -->
-    <nav class="project-menu">
-        <a href="#posters" class="menu-link" data-section="posters">Posters</a>
-        <a href="#collections" class="menu-link" data-section="collections">Poster Collections</a>
-        <a href="#projects" class="menu-link" data-section="projects">Complete Projects</a>
-        <a href="#illustration" class="menu-link" data-section="illustration">Illustration</a>
-        <a href="#3d" class="menu-link" data-section="3d">3d Modeling</a>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <a href="./#about">ABOUT</a>
+        <a href="./#work">WORK</a>
+        <a href="./projectsection.html">POSTERS</a>
+        <a href="https://www.instagram.com/naoseique.etal/">INSTAGRAM</a>
     </nav>
 
-    <!-- POSTERS SECTION - Stacking on Top -->
-    <section class="posters-section" id="posters">
-        <h2 class="section-title">Posters</h2>
+<div class="poster-grid">
 
-        <p class="section-p">To show you why my brain is <i>still developing,</i>
-I decided to begin with a compilation of my graphic works in the printing sphere.
-Completely diverse and true to themselves, these experiments mean a lot to me, as they grew alongside me.</p>
-    
-        <div class="posters-container">
-            <div class="poster-stack">
-                <div class="poster-item" data-index="0">
-                    <img src="images/images copy/lisbonposters copy/lightmode.png" alt="Poster 0">
-                </div>
-                <div class="poster-item" data-index="1">
-                    <img src="images/images copy/lisbonposters copy/darkmode.png" alt="Poster 7">
-                </div>
-                <div class="poster-item" data-index="2">
-                    <img src="images/images copy/newposters/EXPERIMENTALGRAPHICS2.webp" alt="Poster 2">
-                </div>
-                <div class="poster-item" data-index="3">
-                    <img src="images/images copy/newposters/madalena_araras.png" alt="Poster 3">
-                </div>
-                <div class="poster-item" data-index="4">
-                    <img src="images/images copy/newposters/madalena_never2small copy.png" alt="Poster 4">
-                </div>
-                <div class="poster-item" data-index="5">
-                    <img src="images/images copy/newposters/DOWELOVE_01.png" alt="Poster 5">
-                </div>
-                <div class="poster-item" data-index="6">
-                    <img src="images/images copy/newposters/Encapsulate_culture@5x.webp" alt="Poster 6">
-                </div>
-                <div class="poster-item" data-index="7">
-                    <img src="images/images copy/newposters/mitcover.webp" alt="Poster 8">
-                </div>
-                <div class="poster-item" data-index="8">
-                    <img src="images/images copy/newposters/brains.jpg" alt="Poster 9">
-                </div>
-            </div>
-        </div>
-    </section>
+  <!-- Posters iniciais -->
+    <div class="poster"><img src="images/images copy/newposters/flyers_feiradolivro copy/final_png/Flyer_02@5x 2.jpeg"></div>
+  <div class="poster"><img src="images/images copy/lisbonposters copy/lightmode.png"></div>
+    <div class="poster"><img src="images/mononcle/mo1.jpg"></div>
+    <div class="poster"><img src="images/images copy/newposters/flyers_feiradolivro copy/final_png/flyer_03@5x copy 2.jpeg"></div>
+    <div class="poster"><img src="images/mononcle/mo6.jpg"></div>
+  <div class="poster"><img src="images/images copy/newposters/EXPERIMENTALGRAPHICS2.webp"></div>
+      <div class="poster"><img src="images/images copy/newposters/flyers_feiradolivro copy/final_png/Flyer_04@5x 2.jpeg"></div>
+  <div class="poster"><img src="images/images copy/newposters/madalena_araras.png"></div>
 
-    <!-- POSTER COLLECTIONS SECTION - Masonry Grid with Toggle -->
-    <section class="gallery-section" id="collections">
-        <h2 class="section-title">Also some collections :)</h2>
-        
-        <!-- Collection Toggle Buttons -->
-        <div class="collection-toggle">
-            <button class="collection-btn active" data-collection="collection1">Poetry Fair</button>
-            <button class="collection-btn" data-collection="collection2">Mon Oncle Movie</button>
-        </div>
+      <div class="poster"><img src="images/mononcle/mo3.jpg"></div>
+  <div class="poster"><img src="images/images copy/newposters/madalena_never2small copy.png"></div>
+  <div class="poster"><img src="images/images copy/newposters/DOWELOVE_01.png"></div>
+  <div class="poster"><img src="images/images copy/newposters/Encapsulate_culture@5x.webp"></div>
+    <div class="poster"><img src="images/mononcle/mo2.jpg"></div>
+    <div class="poster"><img src="images/images copy/newposters/flyers_feiradolivro copy/final_png/Flyer_5@5x 2.jpeg"></div>
+  <div class="poster"><img src="images/images copy/newposters/mitcover.webp"></div>
+    <div class="poster"><img src="images/mononcle/mo4.jpg"></div>
+  <div class="poster"><img src="images/images copy/newposters/brains.jpg"></div>
+    <div class="poster"><img src="images/images copy/lisbonposters copy/darkmode.png"></div>
+      <div class="poster"><img src="images/mononcle/mo5.jpg"></div>
+          <div class="poster"><img src="images/images copy/newposters/flyers_feiradolivro copy/final_png/Flyer_01@5x 2.jpeg"></div>
 
-        <!-- Collection 1 -->
-        <div class="masonry-gallery collection-gallery active" id="collection1">
-            <img src="images/images copy/newposters/flyers_feiradolivro copy/final_png/Flyer_01@5x 2.jpeg" alt="Collection 1 - 3">
-            <img src="images/images copy/newposters/flyers_feiradolivro copy/final_png/Flyer_02@5x 2.jpeg" alt="Collection 1 - 4">
-            <img src="images/images copy/newposters/flyers_feiradolivro copy/final_png/flyer_03@5x copy 2.jpeg" alt="Collection 1 - 5">
-            <img src="images/images copy/newposters/flyers_feiradolivro copy/final_png/Flyer_04@5x 2.jpeg" alt="Collection 1 - 6">
-            <img src="images/images copy/newposters/flyers_feiradolivro copy/final_png/Flyer_5@5x 2.jpeg" alt="Collection 1 - 7">
-                    <img src="images/images copy/newposters/flyers_feiradolivro copy/final_png/Neglige-Bendito-Mockup.jpeg" alt="Collection 1 - 8">
-        </div>
 
-        <!-- Collection 2 -->
-        <div class="masonry-gallery collection-gallery" id="collection2">
-            <img src="images/images copy/WebP/mononcle1.webp" alt="Collection 2 - 1">
-            <img src="images/images copy/WebP/mononcle2.webp" alt="Collection 2 - 2">
-            <img src="images/images copy/WebP/mononcle3.webp" alt="Collection 2 - 3">
-            <img src="images/images copy/WebP/mononcle4.webp" alt="Collection 2 - 4">
-            <img src="images/images copy/WebP/mononcle5.webp" alt="Collection 2 - 5">
-        </div>
-    </section>
 
-    <!-- COMPLETE PROJECTS SECTION - Horizontal Scroll with Changing Title -->
-    <section class="projects-section" id="projects">
-        <h2 class="section-title">Complete Projects</h2>
-        <div class="project-title" id="currentProjectTitle"></div>
-        <div class="projects-container">
-            <div class="projects-scroll" id="projectsScroll">
-                <div class="project-item" data-title="Petali">
-                    <a href="petali.html"><img src="images/petali/cans.jpeg" alt="Petali"></a>
-                </div>
-                <div class="project-item" data-title="Modis Academia">
-                    <a href="modis.html"><img src="images/MODIS/logodelimatations.png" alt="Modis Academia"></a>
-                </div>
-                <div class="project-item" data-title="Descarrilados">
-                    <a href="shortmovie.html"><img src="images/descarriladospostermockup.jpg" alt="desc"></a>
-                </div>
-                <div class="project-item" data-title="GDO">
-                    <a href="gdo.html"><img src="images/gare/App copy/mockups/Free iPhone 14 on Tripod Mockup copy.png" alt="GDO"></a>
-                </div>
-                <div class="project-item" data-title="Olura Supplements">
-                    <a href="olura.html"><img src="images/olura/mockup1.png" alt="Olura Supplements"></a>
-                </div>
-                <div class="project-item" data-title="Rapaz e o Mar">
-                    <a href="rapaz.html"><img src="images/rapazeomar/tiktok1 copy.jpg" alt="Rapazeomar"></a>
-                </div>
-                <div class="project-item" data-title="Albums & Singles">
-                    <a href="albums.html"><img src="images/ezgif-6b00df97da6b47.gif" alt="Albums & Singles"></a>
-                </div>
-            </div>
-        </div>
-    </section>
+ 
 
-    <!-- Illustration Section -->
-    <section id="illustration" class="gallery-section">
-        <h2 class="section-title">Illustration</h2>
-        <div class="masonry-gallery">
-            <img src="images/New Folder With Items 2/WebP/Ativo 2 (1).webp" alt="Illustration 4">
-            <img src="images/images copy/illustra/bluegirl copy.png" alt="Illustration 1">
-            <img src="images/images copy/illustra/IMG_0142.JPG" alt="Illustration 4">
-            <img src="images/images copy/illustra/praia.jpg" alt="Illustration 5">
-            <img src="images/images copy/illustra/fashion2.png" alt="Illustration 3">
-            <img src="images/images copy/illustra/oldcouple.jpg" alt="Illustration 6">
-            <img src="images/images copy/illustra/sleeping.jpg" alt="Illustration 3">
-            <img src="images/New Folder With Items 2/WebP/Ativo 4.webp" alt="Illustration 4">
-            <img src="images/New Folder With Items 2/WebP/Ativo 3.webp" alt="Illustration 4">
-            <img src="images/images copy/illustra/self_portrait copy.png" alt="Illustration 4">
-            <img src="images/images copy/illustra/story1.JPG" alt="Illustration 5">
-            <img src="images/images copy/illustra/story2.JPG" alt="Illustration 6">
-            <img src="images/images copy/illustra/story3.JPG" alt="Illustration 5">
-            <img src="images/images copy/illustra/story4.JPG" alt="Illustration 6">
-            <img src="images/New Folder With Items 2/WebP/Ativo 1.webp" alt="Illustration 4">
-            <img src="images/New Folder With Items 2/WebP/Ativo 6.webp" alt="Illustration 4">
-        </div>
-    </section>
 
-    <!-- 3D Section -->
-    <section id="3d" class="gallery-section">
-        <h2 class="section-title">3D</h2>
-        <div class="masonry-gallery">
-            <img src="images/images copy/WebP/001.webp" alt="3D Model 1">
-            <img src="images/littleboy.png" alt="3D Model 3">
-            <img src="images/thatsenough.jpg" alt="3D Model 2">
-            <img src="images/ecoex.png" alt="3D Model 4">
-        </div>
-    </section>
+</div>
 
-    <br>
-    <br>
-
-    <!-- Lightbox -->
-    <div id="lightbox" class="lightbox">
-        <button class="lightbox-close">close</button>
-        <img src="" alt="Expanded artwork">
-        <video src="" controls autoplay loop></video>
-    </div>
-
-    <script>
-        const customCursor = document.querySelector('.custom-cursor');
-        const scrollShape = document.querySelector('.scroll-shape');
-
-        // Custom cursor follow mouse
-        document.addEventListener('mousemove', (e) => {
-            customCursor.style.left = e.clientX + 'px';
-            customCursor.style.top = e.clientY + 'px';
-        });
-
-        // Posters stacking effect - slide from side and stack on top
-        function updatePosterStack() {
-            const postersSection = document.querySelector('.posters-section');
-            const posterItems = document.querySelectorAll('.poster-item');
-            const sectionRect = postersSection.getBoundingClientRect();
-            const sectionHeight = postersSection.offsetHeight;
-            
-            const rawProgress = -sectionRect.top / (sectionHeight - window.innerHeight);
-            const scrollProgress = Math.max(0, Math.min(1, rawProgress));
-            
-            posterItems.forEach((item, index) => {
-                const itemProgress = Math.max(0, Math.min(1, (scrollProgress * posterItems.length) - index));
-                const translateX = (1 - itemProgress) * 120;
-                const zIndex = index;
-                
-                item.style.transform = `translateX(${translateX}%)`;
-                item.style.opacity = itemProgress > 0 ? 1 : 0;
-                item.style.zIndex = zIndex;
-            });
-        }
-        
-        // Complete projects horizontal scroll with title
-        function updateProjectsScroll() {
-            const projectsSection = document.querySelector('.projects-section#projects');
-            const projectsScroll = document.getElementById('projectsScroll');
-            const projectItems = document.querySelectorAll('#projects .project-item');
-            const projectTitle = document.getElementById('currentProjectTitle');
-            const sectionRect = projectsSection.getBoundingClientRect();
-            const sectionHeight = projectsSection.offsetHeight;
-            
-            const inProjectsSection = sectionRect.top < window.innerHeight && sectionRect.bottom > 0;
-            
-            if (inProjectsSection) {
-                const rawProgress = -sectionRect.top / (sectionHeight - window.innerHeight);
-                const scrollProgress = Math.max(0, Math.min(1, rawProgress));
-                
-                let adjustedProgress = 0;
-                if (scrollProgress < 0.15) {
-                    adjustedProgress = 0;
-                } else if (scrollProgress > 0.95) {
-                    adjustedProgress = 1;
-                } else {
-                    adjustedProgress = (scrollProgress - 0.15) / 0.8;
-                }
-                
-                const maxScroll = projectsScroll.scrollWidth - window.innerWidth;
-                const scrollAmount = adjustedProgress * maxScroll;
-                projectsScroll.style.transform = `translateX(-${scrollAmount}px)`;
-                
-                if (scrollProgress > 0.1 && scrollProgress < 0.98) {
-                    const titleProgress = (scrollProgress - 0.1) / 0.88;
-                    const currentIndex = Math.min(
-                        projectItems.length - 1, 
-                        Math.floor(titleProgress * projectItems.length)
-                    );
-                    const currentProject = projectItems[currentIndex];
-                    if (currentProject) {
-                        projectTitle.textContent = currentProject.dataset.title;
-                        projectTitle.classList.add('visible');
-                    }
-                } else {
-                    projectTitle.classList.remove('visible');
-                }
-            } else {
-                projectTitle.classList.remove('visible');
-            }
-        }
-
-        // Main scroll handler
-        window.addEventListener('scroll', () => {
-            const scrollPos = window.scrollY;
-
-            // Update poster stacking
-            updatePosterStack();
-            
-            // Update projects horizontal scroll
-            updateProjectsScroll();
-
-            // Rotate scroll indicator
-            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-            const scrollPercent = scrollPos / docHeight;
-            const rotation = scrollPercent * 360;
-            scrollShape.style.transform = `rotate(${rotation}deg)`;
-
-            // Update active menu link
-            const sections = document.querySelectorAll('section[id]');
-            sections.forEach(section => {
-                const rect = section.getBoundingClientRect();
-                if (rect.top <= window.innerHeight / 2 && rect.bottom >= window.innerHeight / 2) {
-                    document.querySelectorAll('.menu-link').forEach(link => {
-                        link.classList.remove('active');
-                        if (link.dataset.section === section.id) {
-                            link.classList.add('active');
-                        }
-                    });
-                }
-            });
-        });
-
-        // Smooth scroll for menu links
-        document.querySelectorAll('.menu-link').forEach(link => {
-            link.addEventListener('click', (e) => {
-                e.preventDefault();
-                const target = link.getAttribute('href');
-                document.querySelector(target).scrollIntoView({ behavior: 'smooth' });
-            });
-        });
-
-        // Initialize on load
-        window.addEventListener('load', () => {
-            updatePosterStack();
-            updateProjectsScroll();
-        });
-
-        // Collection Toggle Functionality
-        const collectionBtns = document.querySelectorAll('.collection-btn');
-        const collectionGalleries = document.querySelectorAll('.collection-gallery');
-
-        collectionBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                console.log('Button clicked:', btn.getAttribute('data-collection')); // Debug
-                
-                // Remove active class from all buttons and galleries
-                collectionBtns.forEach(b => b.classList.remove('active'));
-                collectionGalleries.forEach(g => g.classList.remove('active'));
-
-                // Add active class to clicked button
-                btn.classList.add('active');
-
-                // Show corresponding gallery
-                const collectionId = btn.getAttribute('data-collection');
-                const targetGallery = document.getElementById(collectionId);
-                
-                if (targetGallery) {
-                    targetGallery.classList.add('active');
-                    console.log('Activated gallery:', collectionId); // Debug
-                } else {
-                    console.error('Gallery not found:', collectionId); // Debug
-                }
-            });
-        });
-
-        // Make sure lightbox works for collection images too
-        document.addEventListener('click', (e) => {
-            if (e.target.matches('.collection-gallery img')) {
-                lightboxImg.src = e.target.src;
-                lightboxImg.classList.add('active');
-                lightboxVideo.classList.remove('active');
-                lightboxVideo.pause();
-                lightbox.classList.add('show');
-            }
-        });
-
-        // Lightbox Functionality (supports images & videos)
-        const lightbox = document.getElementById('lightbox');
-        const lightboxImg = lightbox.querySelector('img');
-        const lightboxVideo = lightbox.querySelector('video');
-        const closeBtn = document.querySelector('.lightbox-close');
-
-        document.querySelectorAll('.masonry-gallery img, .masonry-gallery video').forEach(media => {
-            media.addEventListener('click', () => {
-                if (media.tagName.toLowerCase() === 'img') {
-                    lightboxImg.src = media.src;
-                    lightboxImg.classList.add('active');
-                    lightboxVideo.classList.remove('active');
-                    lightboxVideo.pause();
-                } else {
-                    lightboxVideo.src = media.src;
-                    lightboxVideo.classList.add('active');
-                    lightboxImg.classList.remove('active');
-                }
-                lightbox.classList.add('show');
-            });
-        });
-
-        closeBtn.addEventListener('click', () => {
-            lightbox.classList.remove('show');
-            lightboxImg.classList.remove('active');
-            lightboxVideo.classList.remove('active');
-            lightboxVideo.pause();
-        });
-
-        lightbox.addEventListener('click', (e) => {
-            if (e.target === lightbox) {
-                lightbox.classList.remove('show');
-                lightboxImg.classList.remove('active');
-                lightboxVideo.classList.remove('active');
-                lightboxVideo.pause();
-            }
-        });
-    </script>
 </body>
 </html>
