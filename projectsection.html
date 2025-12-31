@@ -118,6 +118,52 @@ font-style: normal;
     grid-template-columns: 1fr;
   }
 }
+
+   @media (max-width: 1024px) {
+
+            .info-text {
+                font-size: 9px;
+                top: 15px;
+                left: 15px;
+            }
+
+            .navbar {
+                gap: 20px;
+                font-size: 11px;
+                top: 15px;
+                right: 15px;
+            }
+
+            .middle {
+                font-size: 11px;
+            }
+
+        }
+
+        /* MOBILE STYLES */
+        @media (max-width: 768px) {
+         
+
+            .navbar {
+                flex-direction: column;
+                gap: 10px;
+                font-size: 15px;
+                top: 15px;
+                right: 15px;
+                align-items: flex-end;
+            }
+        }
+
+        /* EXTRA SMALL MOBILE */
+        @media (max-width: 480px) {
+            .navbar {
+                gap: 10px;
+                font-size: 14px;
+                top: 12px;
+                right: 12px;
+            }
+        }
+    </style>
 </style>
 </head>
 
