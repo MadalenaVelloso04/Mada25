@@ -79,7 +79,6 @@
         .content-wrapper {
             position: relative;
             z-index: 10;
-            padding-top: 9px;
         }
 
         /* Hero image section*/
@@ -109,12 +108,12 @@
 
         /* Image grid - 2 then 1 full pattern */
         .image-row {
-            display: grid;
+             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 5px;
+            gap: 7px;
             margin-bottom: 5px;
             width: 100%;
-            height: 99vh;
+            height: auto;  
         }
 
         .image-full {
@@ -129,12 +128,10 @@
             object-fit: cover;
         }
 
-   
-
         .image-row img,
         .image-row video {
             width: 100%;
-            height: 100%;
+               height: auto;  
             object-fit: cover;
             display: block;
         }
@@ -150,6 +147,7 @@
         }
 
         .text-left {
+             margin-top: 30px;
             font-size: 10px;
             text-transform: uppercase;
             letter-spacing: 1px;
@@ -157,6 +155,7 @@
         }
 
         .text-right h2 {
+                margin-top: 30px;
             font-size: 24px;
             font-weight: 400;
             margin-bottom: 30px;
@@ -407,7 +406,7 @@
             </div>
 
             <!-- Two images -->
-            <div class="image-full">
+            <div class="image-row">
                 <img src="images/cinnapop/JPG/13.jpg" alt="Suitcase">
                 <img src="images/cinnapop/JPG/14.jpg" alt="Suitcase">
             </div>           
