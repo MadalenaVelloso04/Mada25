@@ -190,100 +190,113 @@
         }
 
         /* RESPONSIVE */
-        @media (max-width: 1024px) {
-            .hero-image {
-                grid-template-columns: 1fr;
-                height: auto;
-            }
+     @media (max-width: 1024px) {
+    .hero-image {
+        grid-template-columns: 1fr;
+        height: auto;
+    }
 
-            .hero-image img,
-            .hero-image video {
-                height: 70vh;
-            }
+    .hero-image img,
+    .hero-image video {
+        height: 70vh;
+    }
 
-            .image-row {
-                display: flex;
-                flex-direction: row;
-                height: 70vh;
-            }
+    .image-row {
+        grid-template-columns: 1fr; /* Keep grid, just change to 1 column */
+        height: auto; /* Let height be auto instead of fixed */
+    }
+    
+    .image-row img,
+    .image-row video {
+        height: 70vh;
+    }
 
-            .text-section {
-                grid-template-columns: 1fr;
-                gap: 40px;
-            }
-        }
+    .text-section {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+}
 
-        @media (max-width: 768px) {
-            .info-text {
-                display: none;
-            }
+@media (max-width: 768px) {
+    .info-text {
+        display: none;
+    }
 
-            .middle {
-                display: none;
-            }
+    .middle {
+        display: none;
+    }
 
-            .navbar {
-                flex-direction: column;
-                gap: 10px;
-                font-size: 15px;
-                align-items: flex-end;
-            }
+    .navbar {
+        flex-direction: column;
+        gap: 10px;
+        font-size: 15px;
+        align-items: flex-end;
+    }
 
-            .hero-image {
-                grid-template-columns: 1fr;
-                height: auto;
-            }
+    .hero-image {
+        grid-template-columns: 1fr;
+        height: auto;
+    }
 
-            .hero-image img,
-            .hero-image video {
-                height: 60vh;
-            }
+    .hero-image img,
+    .hero-image video {
+        height: 60vh;
+    }
 
-            .image-row {
-                display: flex;
-                flex-direction: row;
-                height: 60vh;
-            }
+    .image-row {
+        grid-template-columns: 1fr; /* Keep grid */
+        height: auto;
+    }
+    
+    .image-row img,
+    .image-row video {
+        height: 60vh;
+    }
 
-            .content-inner {
-                padding: 5px 0;
-            }
+    .content-inner {
+        padding: 5px 0;
+    }
 
-            .project-info {
-        top:20px;
+    .project-info {
+        top: 20px;
         width: 200px;
-            }
+    }
 
-            .text-section {
-                margin: 10vh auto;
-                padding: 0 5vw;
-            }
-        }
+    .text-section {
+        margin: 10vh auto;
+        padding: 0 5vw;
+    }
+}
 
-        @media (max-width: 480px) {
-            .hero-image img,
-            .hero-image video {
-                height: 50vh;
-            }
+@media (max-width: 480px) {
+    .hero-image img,
+    .hero-image video {
+        height: 50vh;
+    }
 
-            .image-row {
-                display: flex;
-                flex-direction: row;
-                height: 50vh;
-            }
+    .image-row {
+        grid-template-columns: 1fr; /* Keep grid */
+        height: auto;
+    }
+    
+    .image-row img,
+    .image-row video {
+        height: 50vh;
+    }
 
-            .navbar {
-                font-size: 14px;
-                gap: 8px;
-            }
+    .navbar {
+        font-size: 14px;
+        gap: 8px;
+    }
 
-            .text-right h2 {
-                font-size: 20px;
-            }
+    .text-right h2 {
+        font-size: 20px;
+    }
 
-            .text-right p {
-                font-size: 13px;
-            }
+    .text-right p {
+        font-size: 13px;
+    }
+
         }
     </style>
 </head>

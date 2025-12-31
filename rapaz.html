@@ -1,266 +1,360 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <link rel="icon" type="image/png" href="images/white-circle.png">
-  <title>O Rapaz e o Mar – Madalena Velloso</title>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600&family=JetBrains+Mono:wght@300;400&display=swap');
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="images/white-circle.png">
+    <link rel="stylesheet" href="https://use.typekit.net/dju8mqp.css">
+    <title>O Rapaz e o Mar - Madalena Velloso</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: dico-mono, mono;
+            font-weight: 400;
+            font-style: normal;
+            background: #000000;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
 
-    :root {
-      --primary-black: #0a0a0a;
-      --secondary-black: #1a1a1a;
-      --accent-white: #ffffff;
-      --subtle-gray: #888;
-      --light-gray: #e5e5e5;
-      --accent-blue: #5e978c;
-      --warm-beige: #d5d4c8;
-    }
+        /* Fixed info text */
+        .info-text {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            z-index: 100;
+            mix-blend-mode: difference;
+        }
 
-    body {
-      font-family: 'Courier New', monospace;
-      background: var(--accent-white);
-      color: var(--primary-black);
-      line-height: 1.3;
-      font-weight: 300;
-      overflow-x: hidden;
-      cursor: none;
-    }
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 30px;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            z-index: 100;
+            mix-blend-mode: difference;
+        }
 
-    /* Opening Image Section */
-    .opening-image-section { height: 300vh; position: relative; }
-    .opening-image-container {
-      position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
-      width: 100%; height: 100vh; overflow: hidden; z-index: 1;
-      display: flex; align-items: center; justify-content: center;
-    }
-    .opening-image, .opening-video { width: 100%; height: 100%; object-fit: cover; transition: all 0.1s linear; }
+        .navbar a {
+            color: #ffffff;
+            text-decoration: none;
+            mix-blend-mode: difference;
+            transition: opacity 0.3s;
+        }
 
-    /* Back Button */
-    .back-button {
-      position: fixed; top: 40px; left: 40px; z-index: 999;
-      font-family: 'JetBrains Mono', monospace; font-size: 9px; text-transform: uppercase;
-      letter-spacing: 0.2em; text-decoration: none; color: var(--subtle-gray);
-      transition: color 0.3s ease;
-    }
-    .back-button:hover { color: var(--primary-black); }
-    .back-button::before { content: '← '; margin-right: 8px; }
+        .navbar a:hover {
+            opacity: 0.6;
+        }
 
-    /* Hero */
-    .hero { padding: 40px; display: flex; align-items: center; justify-content: center; text-align: center; position: relative; }
-    .hero-content { max-width: 800px; padding: 0 40px; }
-    .hero-subtitle { font-family: 'JetBrains Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 0.3em; color: var(--subtle-gray); margin-bottom: 40px; }
-    .hero-title { font-size: clamp(80px, 12vw, 160px); font-weight: 200; line-height: 0.9; letter-spacing: -0.03em; margin-bottom: 60px; }
-    .hero-meta { display: flex; justify-content: center; gap: 60px; font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--subtle-gray); text-transform: uppercase; letter-spacing: 0.15em; }
+        .middle {
+            font-size: 12px;
+            mix-blend-mode: difference;
+            position: fixed;
+            top: 50%;
+            z-index: 100;
+        }
 
-    /* Content */
-    .content { max-width: 1400px; margin: 0 auto; padding: 0 40px; position: relative; z-index: 2; }
+        .middle.left {
+            left: 2vw;
+        }
 
-    .section { margin-bottom: 200px; }
+        .middle.center {
+            left: 20vw;
+        }
 
-    /* Image + Text Section */
-    .image-text-section { display: grid; grid-template-columns: 2.5fr 1fr; gap: 80px; align-items: start; margin-top: 100px;}
-    .large-image { width: 100%; aspect-ratio: 3/2; background: var(--light-gray); overflow: hidden; }
-    .large-image img, .large-image video { width: 100%; height: 100%; object-fit: cover; }
-    .side-text { padding-top: 60px; }
-    .section-number { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--subtle-gray); text-transform: uppercase; letter-spacing: 0.2em; margin-bottom: 30px; }
-    .section-title { font-size: 28px; font-weight: 400; line-height: 1.2; margin-bottom: 30px; letter-spacing: -0.01em; }
-    .text-block { font-size: 13px; line-height: 1.6; color: var(--subtle-gray); margin-bottom: 25px; max-width: 280px; }
+        /* Main content */
+        .content-wrapper {
+            position: relative;
+            z-index: 10;
+        }
 
-    /* Text Section */
-    .text-section { display: grid; grid-template-columns: 1fr 2fr; gap: 100px; margin-bottom: 60px; padding: 50px 0; }
-    .text-section-left { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--subtle-gray); text-transform: uppercase; letter-spacing: 0.2em; line-height: 2; }
-    .text-section-right { padding-top: 20px; }
-    .large-text { font-size: 24px; font-weight: 300; line-height: 1.4; margin-bottom: 40px; letter-spacing: -0.01em; }
+        /* Hero image section */
+        .hero-image {
+            display: flex;
+            width: 99vw;
+            height: 99vh;
+            margin: 0 auto;
+        }
 
-    /* Two Column Section */
-    .two-column-section { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; margin-bottom: 200px; }
-    .column-image { aspect-ratio: 4/5; background: var(--light-gray); overflow: hidden; }
-    .column-image img, .column-image video { width: 100%; height: 100%; object-fit: cover; }
+        .hero-image img,
+        .hero-image video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
 
-    /* Grid Section */
-    .grid-section { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; margin-bottom: 200px; max-width: fit-content; width: 100%; justify-content: center; }
-    .grid-item { background: var(--light-gray); }
-    .grid-item img, .grid-item video { width: 100%; height: 100%; object-fit: cover; }
+        /* Single image hero variant */
+        .hero-image.single {
+            grid-template-columns: 1fr;
+        }
 
-    /* Flipbook */
-    .flipbook-container { margin-bottom: 100px; }
+        /* Content after hero */
+        .content-inner {
+            padding: 5px 0;
+            width: 99vw;
+            margin: 0 auto;
+        }
 
-    /* Full Image Overlay */
-    .full-image-section { position: relative; height: 80vh; margin: 0 -40px 200px; background: var(--primary-black); }
-    .full-image { width: 100%; height: 100%; object-fit: cover; }
-    .image-overlay { position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(transparent, rgba(0,0,0,0.8)); color: white; padding: 80px 60px 60px; }
-    .overlay-title { font-size: 42px; font-weight: 300; line-height: 1.1; margin-bottom: 20px; max-width: 500px; }
-    .overlay-text { font-size: 13px; line-height: 1.6; color: rgba(255,255,255,0.8); max-width: 400px; }
+        /* Text section */
+        .text-section {
+            max-width: 1400px;
+            margin: 15vh auto;
+            padding: 0 5vw;
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 80px;
+        }
 
-   
-    /* Final Section */
-    .final-section { padding: 60px; margin: 0 -10px; text-align: center; }
-    .next-project { display: inline-flex; align-items: center; gap: 15px; font-family: 'JetBrains Mono', monospace; font-size: 9px; text-transform: uppercase; letter-spacing: 0.2em; text-decoration: none; color: rgba(0, 0, 0, 0.8); border: 1px solid rgba(0, 0, 0, 0.3); padding: 15px; transition: all 0.3s ease; }
-    .next-project:hover { color: rgb(0, 0, 0); border-color: rgba(0, 0, 0, 0.6); transform: translateY(-2px); }
+        .text-left {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            line-height: 2;
+        }
 
-    /* Cursor */
-    .custom-cursor { position: fixed; width: 52px; height: 52px; pointer-events: none; z-index: 10000; transform: translate(-50%, -50%); }
-    .custom-cursor img { width: 100%; height: 100%; object-fit: contain; }
+        .text-right h2 {
+            font-size: 24px;
+            font-weight: 400;
+            margin-bottom: 30px;
+        }
 
-    .fade-in { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease, transform 0.8s ease; }
-    .fade-in.visible { opacity: 1; transform: translateY(0); }
+        .text-right p {
+            font-size: 14px;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            opacity: 0.8;
+        }
 
-    /* RESPONSIVE */
-    @media (max-width: 1024px) {
-      .content { padding: 0 30px; }
-      .image-text-section { grid-template-columns: 1fr; gap: 60px; }
-      .text-section { grid-template-columns: 1fr; gap: 60px; }
-      .two-column-section { grid-template-columns: 1fr; gap: 40px; }
-      .grid-section { grid-template-columns: 1fr 1fr; }
-      .hero-meta { flex-direction: column; gap: 20px; }
-      .full-image-section { margin: 0 -30px 200px; height: 60vh; }
-      .final-section { margin: 0 -30px; padding: 100px 30px; }
-    }
+        /* PDF Embed Section */
+        .pdf-section {
+            width: 99vw;
+            margin: 0 auto 5px;
+            padding: 0;
+        }
 
-    @media (max-width: 768px) {
-      body { cursor: auto; }
-      .custom-cursor { display: none; }
-      .content { padding: 0 20px; }
-      .back-button { top: 20px; left: 20px; font-size: 8px; }
-      .hero-content { padding: 0 20px; }
-      .hero-title { font-size: 50px; }
-      .section { margin-bottom: 120px; }
-      .section-title { font-size: 24px; }
-      .large-text { font-size: 20px; }
-      .grid-section { grid-template-columns: 1fr; gap: 15px; }
-      .full-image-section { margin: 0 -20px 120px; height: 50vh; }
-      .image-overlay { padding: 40px 30px 30px; }
-      .overlay-title { font-size: 28px; }
-      .final-section { margin: 0 -20px; padding: 80px 20px; }
-      .text-section { padding: 60px 0; }
-    }
-  </style>
+        .pdf-container {
+            width: 100%;
+            height: 99vh;
+            background: #1a1a1a;
+            border: none;
+        }
+
+        .pdf-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            display: block;
+        }
+
+        /* Project info overlay */
+        .project-info {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            z-index: 100;
+            mix-blend-mode: difference;
+            max-width: 300px;
+        }
+
+        .project-info .category {
+            margin-bottom: 10px;
+            opacity: 0.6;
+        }
+
+        .project-info .title {
+            font-size: 20px;
+            font-style: italic;
+            margin-bottom: 15px;
+            text-transform: none;
+            letter-spacing: 0;
+        }
+
+        .project-info .meta {
+            display: grid;
+            gap: 5px;
+            font-size: 9px;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 1024px) {
+      
+
+            .hero-image img,
+            .hero-image video {
+                height: 70vh;
+            }
+
+            .text-section {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .pdf-container {
+                height: 70vh;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .info-text {
+                display: none;
+            }
+
+            .middle {
+                display: none;
+            }
+
+            .navbar {
+                flex-direction: column;
+                gap: 10px;
+                font-size: 15px;
+                align-items: flex-end;
+            }
+
+       
+
+            .hero-image img,
+            .hero-image video {
+                height: 60vh;
+            }
+
+            .content-inner {
+                padding: 5px 0;
+            }
+
+            .project-info {
+                top: 20px;
+                width: 200px;
+            }
+
+            .text-section {
+                margin: 10vh auto;
+                padding: 0 5vw;
+            }
+
+            .pdf-container {
+                height: 60vh;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-image img,
+            .hero-image video {
+                height: 50vh;
+            }
+
+            .navbar {
+                font-size: 14px;
+                gap: 8px;
+            }
+
+            .text-right h2 {
+                font-size: 20px;
+            }
+
+            .text-right p {
+                font-size: 13px;
+            }
+
+            .pdf-container {
+                height: 50vh;
+            }
+        }
+    </style>
 </head>
 <body>
-  <div class="custom-cursor"><img src="images/Ilustração_Sem_Título.png" alt="cursor"></div>
-  <a href="index.html" class="back-button">Go Back</a>
-
-  <section class="opening-image-section">
-    <div class="opening-image-container">
-      <img class="opening-image" src="images/rapazeomar/rapaz.jpg" alt="O Rapaz e o Mar">
+    <!-- Fixed info text -->
+    <div class="info-text">
+        O RAPAZ E O MAR — BOOK ILLUSTRATION / STORYTELLING
     </div>
-  </section>
 
-  <section class="hero fade-in">
-    <div class="hero-content">
-      <div class="hero-subtitle">Book Illustration / Storytelling</div>
-      <h1 class="hero-title">O Rapaz <br>e o Mar</h1>
-      <div class="hero-meta">
-        <span>Client: Serpa Award Challenge</span>
-        <span>Year: 2025</span>
-        <span>Duration: 1 Month</span>
-      </div>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <a href="./#about">ABOUT</a>
+        <a href="./#work">WORK</a>
+        <a href="./projectsection.html">POSTERS</a>
+        <a href="https://www.instagram.com/naoseique.etal/">INSTAGRAM</a>
+    </nav>
+
+    <div class="middle left">
+        <p>open for projects and comissions</p>
     </div>
-  </section>
 
-  <div class="content">
-    <section class="section fade-in">
-      <div class="image-text-section">
-        <div class="large-image"><img src="images/rapazeomar/tiktok1 copy.jpg" alt=""></div>
-        <div class="side-text">
-          <div class="section-number">001 – Overview</div>
-          <h2 class="section-title">The creative process</h2>
-          <p class="text-block">This project is the first of many in this area, as I developed a strong interest in illustration during my last semester of college.
-            <i>O rapaz e o Mar</i> is a children's book with a very specific goal: to slow down and be patient. 
-          </p>
-          <p class="text-block">The book was produced on Adobe Photoshop, however it started on paper with plenty of sketches and character studies</p>
+    <div class="middle center">
+        <p>madalenavelloso04@gmail.com</p>
+    </div>
+
+    <!-- Project info -->
+    <div class="project-info">
+        <div class="category">Book Illustration / Storytelling</div>
+        <div class="title">O Rapaz e o Mar</div>
+        <div class="meta">
+            <div>Year: 2025</div>
+            <div>Client: Serpa Award Challenge</div>
+            <div>Tools: Adobe Photoshop, Paper Sketches</div>
         </div>
-      </div>
-    </section>
+    </div>
 
-    <section class="section fade-in">
-      <div class="text-section">
-        <div class="text-section-left">Concept<br>Simbolism<br>Process</div>
-        <div class="text-section-right">
-          <p class="large-text">As I introduced in the first paragraph, this book is a reflection of what I believe kids <b>need</b> in this day and age: slow dopamine. We are living in a challenging time
-where children are constantly overstimulated and triggered. Even in traditional formats, such as books, there's a tendency to create fast-paced, quickly
-resolved, and loud compositions and stories. That is exactly what I decided to move away from. <br>
-In that sense, <i>O Rapaz e o Mar</i> tells the story of a boy and his sea, their cyclical connection and harmony,
-how nature embraces humans, and how humans should also embrace nature and its natural movement. The goal is to calm children's minds and let them imagine what it would be like if they were like this 
-little boy, with so much curiosity, compassion, and love.
-          </p>
-          <p class="text-block">It is certainly one of my favorite projects so far, and being able to show it almost complete 
-            is a lifetime goal.
-          </p>
+    <!-- Main content -->
+    <div class="content-wrapper">
+        <!-- Hero image -->
+        <div class="hero-image">
+            <img src="images/rapazeomar/tiktok1 copy.jpg" alt="O Rapaz e o Mar">
+  
         </div>
-      </div>
-    </section>
 
-    <section class="section fade-in">
-      <div class="flipbook-container">
-        <iframe 
-          src="https://heyzine.com/flip-book/3ea0089d0c.html" 
-          width="100%" 
-          height="600" 
-          frameborder="0" 
-          allowfullscreen
-          style="border: none;">
-        </iframe>
-      </div>
-    </section>
-  </div>
+        <!-- Rest of content -->
+        <div class="content-inner">
+            <!-- Text section -->
+            <div class="text-section">
+                <div class="text-left">
+                    Concept<br>
+                    Overview<br>
+                    —<br>
+                    001
+                </div>
+                <div class="text-right">
+                    <h2>The Creative Process</h2>
+                    <p>This project is the first of many in this area, as I developed a strong interest in illustration during my last semester of college. <i>O Rapaz e o Mar</i> is a children's book with a very specific goal: to slow down and be patient.</p>
+                    <p>As I introduced, this book is a reflection of what I believe kids need in this day and age: slow dopamine. We are living in a challenging time where children are constantly overstimulated and triggered. Even in traditional formats, such as books, there's a tendency to create fast-paced, quickly resolved, and loud compositions and stories. That is exactly what I decided to move away from.</p>
+                    <p><i>O Rapaz e o Mar</i> tells the story of a boy and his sea, their cyclical connection and harmony, how nature embraces humans, and how humans should also embrace nature and its natural movement. The goal is to calm children's minds and let them imagine what it would be like if they were like this little boy, with so much curiosity, compassion, and love.</p>
+                </div>
+            </div>
 
-  <section class="final-section">
-    <a href="albums.html" class="next-project">View next project</a>
-  </section>
+            <!-- PDF Section -->
+            <div class="pdf-section">
+                <div class="pdf-container">
+                    <iframe 
+                        src="https://heyzine.com/flip-book/3ea0089d0c.html" 
+                        allowfullscreen>
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </div>
 
-  <script>
-    const customCursor = document.querySelector('.custom-cursor');
-    const openingContainer = document.querySelector('.opening-image-container');
-    const openingSection = document.querySelector('.opening-image-section');
-
-    // Cursor follow
-    document.addEventListener('mousemove', e => {
-      customCursor.style.left = e.clientX + 'px';
-      customCursor.style.top = e.clientY + 'px';
-    });
-
-    // Smooth zoom-out and scroll-up for opening image
-    window.addEventListener('scroll', () => {
-      const scrollPos = window.scrollY;
-      const shrinkEnd = 1000;
-      const scrollStart = 1400;
-      const minScale = 0.6;
-
-      if (!openingContainer) return;
-
-      let scale = 1;
-      let translateY = 0;
-
-      if (scrollPos < shrinkEnd) {
-        const progress = scrollPos / shrinkEnd;
-        scale = 1 - progress * (1 - minScale);
-        translateY = 0;
-      } else if (scrollPos < scrollStart) {
-        scale = minScale;
-        translateY = 0;
-      } else {
-        const scrollOffset = scrollPos - scrollStart;
-        scale = minScale;
-        translateY = -scrollOffset;
-      }
-
-      openingContainer.style.transform = `translate(-50%, calc(-50% + ${translateY}px)) scale(${scale})`;
-      openingContainer.style.transformOrigin = 'center center';
-    });
-
-    // Fade-in observer
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) entry.target.classList.add('visible');
-      });
-    }, { threshold: 0.1 });
-
-    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-  </script>
+    <script>
+        // Ensure videos play
+        document.querySelectorAll('video').forEach(video => {
+            video.muted = true;
+            video.play().catch(() => {});
+        });
+    </script>
 </body>
 </html>
