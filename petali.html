@@ -6,8 +6,8 @@
     <link rel="icon" type="image/png" href="images/white-circle.png">
     <link rel="stylesheet" href="https://use.typekit.net/dju8mqp.css">
     <title>Petali Sodas - Madalena Velloso</title>
-    <style>
-        * {
+      <style>
+  * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
@@ -51,7 +51,6 @@
         .navbar a {
             color: #ffffff;
             text-decoration: none;
-            mix-blend-mode: difference;
             transition: opacity 0.3s;
         }
 
@@ -79,15 +78,14 @@
         .content-wrapper {
             position: relative;
             z-index: 10;
+
         }
 
         /* Hero image section */
         .hero-image {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
+            display: flex;
             width: 99vw;
             height: 99vh;
-            gap: 5px;
             margin: 0 auto;
         }
 
@@ -113,7 +111,7 @@
             gap: 5px;
             margin-bottom: 5px;
             width: 100%;
-            height: 99vh;
+            min-height: 99vh;
         }
 
         .image-row img,
@@ -139,7 +137,7 @@
             display: block;
         }
 
-        /* Grid mosaic - 3 columns */
+        /* Grid mosaic - 3 columns for variety */
         .grid-section {
             display: grid;
             grid-template-columns: 1fr 1fr 1fr;
@@ -235,137 +233,171 @@
         }
 
         /* RESPONSIVE */
-        @media (max-width: 1024px) {
-            .hero-image {
-                grid-template-columns: 1fr;
-                height: auto;
-            }
+       /* RESPONSIVE */
+@media (max-width: 1024px) {
+    .hero-image {
+        height: auto;
+    }
 
-            .hero-image img,
-            .hero-image video {
-                height: 70vh;
-            }
+    .hero-image img,
+    .hero-image video {
+        height: auto;
+        width: 99vw;
+    }
 
-            .image-row {
-                display: flex;
-                flex-direction: row;
-                height: 70vh;
-            }
+    .image-row {
+        grid-template-columns: 1fr; /* Stack in single column */
+        height: auto; /* Remove fixed height */
+    }
+    
+    .image-row img,
+    .image-row video {
+        height: auto; /* Height adjusts to content */
+        width: 100%; /* Full width of container */
+    }
 
-            .full-image {
-                height: 70vh;
-            }
+    .full-image {
+        height: auto;
+    }
+    
+    .full-image img,
+    .full-image video {
+        height: auto;
+        width: 100%;
+    }
 
-            .grid-section {
-                grid-template-columns: 1fr 1fr;
-                height: auto;
-            }
+    .grid-section {
+        grid-template-columns: 1fr 1fr;
+        height: auto;
+    }
 
-            .grid-tall {
-                grid-row: span 1;
-            }
+    .grid-tall {
+        grid-row: span 1;
+    }
 
-            .text-section {
-                grid-template-columns: 1fr;
-                gap: 40px;
-            }
-        }
+    .text-section {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+}
 
-        @media (max-width: 768px) {
-            .info-text {
-                display: none;
-            }
+@media (max-width: 768px) {
+    .info-text {
+        display: none;
+    }
 
-            .middle {
-                display: none;
-            }
+    .middle {
+        display: none;
+    }
 
-            .navbar {
-                flex-direction: column;
-                gap: 10px;
-                font-size: 15px;
-                align-items: flex-end;
-            }
+    .navbar {
+        flex-direction: column;
+        gap: 10px;
+        font-size: 15px;
+        align-items: flex-end;
+    }
 
-            .hero-image {
-                grid-template-columns: 1fr;
-                height: auto;
-            }
+    .hero-image img,
+    .hero-image video {
+        height: auto;
+        width: 99vw;
+    }
 
-            .hero-image img,
-            .hero-image video {
-                height: 60vh;
-            }
+    .image-row {
+        grid-template-columns: 1fr; /* Single column */
+        height: auto; /* Remove fixed height */
+    }
+    
+    .image-row img,
+    .image-row video {
+        height: auto; /* Height adjusts to content */
+        width: 100%; /* Full width */
+    }
 
-            .image-row {
-                display: flex;
-                flex-direction: row;
-                height: 60vh;
-            }
+    .full-image {
+        height: auto;
+    }
+    
+    .full-image img,
+    .full-image video {
+        height: auto;
+        width: 100%;
+    }
 
-            .full-image {
-                height: 60vh;
-            }
+    .grid-section {
+        grid-template-columns: 1fr; /* Single column */
+        height: auto;
+    }
 
-            .grid-section {
-                grid-template-columns: 1fr;
-                height: auto;
-            }
+    .grid-section img,
+    .grid-section video {
+        height: auto;
+        width: 100%;
+    }
 
-            .grid-section img,
-            .grid-section video {
-                height: 60vh;
-            }
+    .project-info {
+        top: 20px;
+        width: 200px;
+    }
 
-            .content-inner {
-                padding: 5px 0;
-            }
+    .text-section {
+        margin: 10vh auto;
+        padding: 0 5vw;
+    }
+}
 
-            .project-info {
-                top: 20px;
-                width: 200px;
-            }
+@media (max-width: 480px) {
+    .hero-image img,
+    .hero-image video {
+        height: auto;
+        width: 99vw;
+    }
 
-            .text-section {
-                margin: 10vh auto;
-                padding: 0 5vw;
-            }
-        }
+    .image-row {
+        grid-template-columns: 1fr; /* Single column */
+        height: auto; /* Remove fixed height */
+    }
+    
+    .image-row img,
+    .image-row video {
+        height: auto; /* Height adjusts to content */
+        width: 100%; /* Full width */
+    }
 
-        @media (max-width: 480px) {
-            .hero-image img,
-            .hero-image video {
-                height: 50vh;
-            }
+    .full-image {
+        height: auto;
+    }
+    
+    .full-image img,
+    .full-image video {
+        height: auto;
+        width: 100%;
+    }
 
-            .image-row {
-                display: flex;
-                flex-direction: row;
-                height: 50vh;
-            }
+    .grid-section {
+        grid-template-columns: 1fr; /* Single column */
+        height: auto;
+    }
+    
+    .grid-section img,
+    .grid-section video {
+        height: auto;
+        width: 100%;
+    }
 
-            .full-image {
-                height: 50vh;
-            }
+    .navbar {
+        font-size: 14px;
+        gap: 8px;
+    }
 
-            .grid-section img,
-            .grid-section video {
-                height: 50vh;
-            }
+    .text-right h2 {
+        font-size: 20px;
+    }
 
-            .navbar {
-                font-size: 14px;
-                gap: 8px;
-            }
-
-            .text-right h2 {
-                font-size: 20px;
-            }
-
-            .text-right p {
-                font-size: 13px;
-            }
-        }
+    .text-right p {
+        font-size: 13px;
+    }
+}
     </style>
 </head>
 <body>
@@ -404,7 +436,7 @@
     <!-- Main content -->
     <div class="content-wrapper">
         <!-- Hero image -->
-        <div class="hero-image">
+        <div class="image-row">
             <video autoplay loop muted playsinline src="images/petali/a close up shot of the can rotating on its axis, studio lighting, product photography.mp4"></video>
             <video autoplay loop muted playsinline src="images/petali/soda2.0_1.mov"></video>
         </div>
@@ -454,12 +486,13 @@
             </div>
 
             <!-- Grid mosaic -->
-            <div class="grid-section">
-                <img class="grid-tall" src="images/petali/menumockup.jpeg" alt="Menu">
+            <div class="image-row">
+                <img src="images/petali/menumockup.jpeg" alt="Menu">
                 <img src="images/petali/mockup3.jpeg" alt="Mockup">
+                    </div>
+            <div class="image-row">      
                 <img src="images/petali/FOLDER.jpeg" alt="Folder">
-                <img class="grid-wide" src="images/petali/Delivery_Van_Mockup_1.jpeg" alt="Delivery van">
-                <img src="images/petali/sketchbook.jpeg" alt="Sketchbook">
+                <img src="images/petali/sketchbook.jpeg" alt="Delivery van">
             </div>
 
             <!-- Text section -->
@@ -475,6 +508,10 @@
                     <p>The identity extends across multiple touchpoints—from packaging and print materials to environmental graphics. Each application maintains the soft, magical aesthetic while adapting to its specific context.</p>
                     <p>The result is a cohesive system that feels enchanting and premium, reinforcing Petali's position as a unique botanical soda brand.</p>
                 </div>
+            </div>
+
+   <div class="full-image">
+                  <img src="images/petali/Delivery_Van_Mockup_1.jpeg" alt="Delivery van"> 
             </div>
 
             <!-- Two images -->
