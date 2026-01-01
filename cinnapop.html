@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" href="images/white-circle.png">
     <link rel="stylesheet" href="https://use.typekit.net/dju8mqp.css">
-    <title>Ophie - Madalena Velloso</title>
+    <title>Cinnapop - Madalena Velloso</title>
     <style>
         * {
             margin: 0;
@@ -35,7 +35,7 @@
         }
 
         /* Navigation */
-    .navbar {
+        .navbar {
             position: fixed;
             top: 20px;
             right: 20px;
@@ -75,13 +75,13 @@
             left: 20vw;
         }
 
-        /* Main content - NO TOP PADDING */
+        /* Main content */
         .content-wrapper {
             position: relative;
             z-index: 10;
         }
 
-        /* Hero image section*/
+        /* Hero image section */
         .hero-image {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -106,32 +106,19 @@
             margin: 0 auto;
         }
 
-        /* Image grid - 2 then 1 full pattern */
+        /* Image grid - 2 column pattern */
         .image-row {
-             display: grid;
+            display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 7px;
+            gap: 5px;
             margin-bottom: 5px;
             width: 100%;
-            height: auto;  
-        }
-
-        .image-full {
-            width: 99vw;
-            height: 99vh;
-  
-        }
-
-        .image-full img {
-             width: 100%;
-            height: 100%;
-            object-fit: cover;
         }
 
         .image-row img,
         .image-row video {
             width: 100%;
-               height: auto;  
+            height: auto;
             object-fit: cover;
             display: block;
         }
@@ -147,7 +134,6 @@
         }
 
         .text-left {
-             margin-top: 30px;
             font-size: 10px;
             text-transform: uppercase;
             letter-spacing: 1px;
@@ -155,7 +141,6 @@
         }
 
         .text-right h2 {
-                margin-top: 30px;
             font-size: 24px;
             font-weight: 400;
             margin-bottom: 30px;
@@ -213,8 +198,12 @@
             }
 
             .image-row {
-                display: flex;
-                flex-direction: row;
+                grid-template-columns: 1fr;
+                height: auto;
+            }
+            
+            .image-row img,
+            .image-row video {
                 height: 70vh;
             }
 
@@ -251,18 +240,18 @@
             }
 
             .image-row {
-                display: flex;
-                flex-direction: row;
-                height: 60vh;
+                grid-template-columns: 1fr;
+                height: auto;
             }
+            
+         
 
             .content-inner {
                 padding: 5px 0;
             }
 
             .project-info {
-        top:20px;
-        width: 200px;
+                width: 200px;
             }
 
             .text-section {
@@ -278,10 +267,11 @@
             }
 
             .image-row {
-                display: flex;
-                flex-direction: row;
-                height: 50vh;
+                grid-template-columns: 1fr;
+                height: auto;
             }
+            
+     
 
             .navbar {
                 font-size: 14px;
@@ -301,12 +291,12 @@
 <body>
     <!-- Fixed info text -->
     <div class="info-text">
-        OPHIE LIP OILS — BRANDING / PACKAGING
+        CINNAPOP — BRANDING / PACKAGING
     </div>
 
     <!-- Navigation -->
     <nav class="navbar">
-          <a href="./#about">ABOUT</a>
+        <a href="./#about">ABOUT</a>
         <a href="./#work">WORK</a>
         <a href="./projectsection.html">POSTERS</a>
         <a href="https://www.instagram.com/naoseique.etal/">INSTAGRAM</a>
@@ -323,20 +313,20 @@
     <!-- Project info -->
     <div class="project-info">
         <div class="category">Branding / Packaging</div>
-        <div class="title">Ophie Lip Oils</div>
+        <div class="title">Cinnapop</div>
         <div class="meta">
             <div>Year: 2025</div>
             <div>Role: Visual Identity, Packaging Design</div>
-            <div>Tools: Adobe Illustrator, Photoshop, Firefly</div>
+            <div>Tools: Adobe Illustrator, Photoshop</div>
         </div>
     </div>
 
     <!-- Main content -->
     <div class="content-wrapper">
-        <!-- Hero image - STARTS IMMEDIATELY AT TOP -->
+        <!-- Hero image -->
         <div class="hero-image">
-            <img src="images/cinnapop/JPG/1.jpg" alt="Ophie bottles">
-                <img src="images/cinnapop/JPG/2.jpg" alt="Ophie">
+            <img src="images/cinnapop/JPG/1.jpg" alt="Cinnapop">
+            <img src="images/cinnapop/JPG/2.jpg" alt="Cinnapop">
         </div>
 
         <!-- Rest of content -->
@@ -347,26 +337,25 @@
                     Concept<br>
                     Overview<br>
                     —<br>
+                    001
                 </div>
                 <div class="text-right">
                     <h2>Concept</h2>
-                    <p>A pop of color and a pop of flavor, Cinnapop is Santa’s favorite gingerbread cookie. It’s made for the holidays, for gifting, or honestly just for whenever you want something sweet and spiced. The flavor is warm and comforting but still exciting, hitting that balance between cozy gingerbread spice and just the right amount of sweetness.</p>
-
-<p>For this brief, my main goal was to avoid creating “granny’s cookies.” I didn’t want the packaging to feel old-fashioned, muted, or overly traditional. Gingerbread has so much personality, and I wanted the branding to reflect that. The direction was modern, playful, and bold, while still keeping small touches of nostalgia through type, outlines, and familiar shapes. Those elements are there to spark memory, but not to take over the design.</p>
-                    
+                    <p>A pop of color and a pop of flavor, Cinnapop is Santa's favorite gingerbread cookie. It's made for the holidays, for gifting, or honestly just for whenever you want something sweet and spiced. The flavor is warm and comforting but still exciting, hitting that balance between cozy gingerbread spice and just the right amount of sweetness.</p>
+                    <p>For this brief, my main goal was to avoid creating "granny's cookies." I didn't want the packaging to feel old-fashioned, muted, or overly traditional. Gingerbread has so much personality, and I wanted the branding to reflect that. The direction was modern, playful, and bold, while still keeping small touches of nostalgia through type, outlines, and familiar shapes. Those elements are there to spark memory, but not to take over the design.</p>
                 </div>
             </div>
 
             <!-- Two images -->
             <div class="image-row">
-                  <img src="images/cinnapop/JPG/3.jpg" alt="Ophie">
-            <img src="images/cinnapop/JPG/4.jpg" alt="4">
+                <img src="images/cinnapop/JPG/3.jpg" alt="Cinnapop">
+                <img src="images/cinnapop/JPG/4.jpg" alt="Cinnapop">
             </div>
 
-            <!-- One full image -->
+            <!-- Two images -->
             <div class="image-row">
-                <img src="images/cinnapop/JPG/5.jpg" alt="Purple bottle">
-                <img src="images/cinnapop/JPG/6.jpg" alt="White swatches">
+                <img src="images/cinnapop/JPG/5.jpg" alt="Cinnapop">
+                <img src="images/cinnapop/JPG/6.jpg" alt="Cinnapop">
             </div>
 
             <!-- Text section -->
@@ -378,38 +367,35 @@
                     002
                 </div>
                 <div class="text-right">
-                    <h2>The packagig Design</h2>
-              
-<p>Color, pattern, and variety were key throughout the process. I used strong contrasts and bright, unexpected color combinations to give the brand energy and make it feel fun and craveable. The graphics are layered and collage-like, inspired by cookie cutters, stamps, and packaging ephemera, creating a sense of movement and abundance rather than something too clean or minimal.</p>
-
-<p>The setting stays festive and wintery, but that wasn’t the point of the brand. Cinnapop is meant to be an experience you can enjoy any day, not just during the holidays. Even when leaning into a Christmas feel for this art direction, the goal was to show how the brand can live beyond the season—playful, bold, and full of flavor, no matter the moment.</p>
+                    <h2>The Packaging Design</h2>
+                    <p>Color, pattern, and variety were key throughout the process. I used strong contrasts and bright, unexpected color combinations to give the brand energy and make it feel fun and craveable. The graphics are layered and collage-like, inspired by cookie cutters, stamps, and packaging ephemera, creating a sense of movement and abundance rather than something too clean or minimal.</p>
+                    <p>The setting stays festive and wintery, but that wasn't the point of the brand. Cinnapop is meant to be an experience you can enjoy any day, not just during the holidays. Even when leaning into a Christmas feel for this art direction, the goal was to show how the brand can live beyond the season—playful, bold, and full of flavor, no matter the moment.</p>
                 </div>
             </div>
 
             <!-- Two images -->
             <div class="image-row">
-                <img src="images/cinnapop/JPG/7.jpg" alt="Sage green">
-                <img src="images/cinnapop/JPG/8.jpg" alt="Pink bottle">
-            </div>
-
-
-            <!-- Two images -->
-            <div class="image-row">
-                <img src="images/cinnapop/JPG/9.jpg" alt="Turquoise">
-                <img src="images/cinnapop/JPG/10.jpg" alt="Three bottles">
-            </div>
-
-            <!-- One full image -->
-            <div class="image-row">
-                <img src="images/cinnapop/JPG/11.jpg" alt="Nude">
-                <img src="images/cinnapop/JPG/12.jpg" alt="Model">
+                <img src="images/cinnapop/JPG/7.jpg" alt="Cinnapop">
+                <img src="images/cinnapop/JPG/8.jpg" alt="Cinnapop">
             </div>
 
             <!-- Two images -->
             <div class="image-row">
-                <img src="images/cinnapop/JPG/13.jpg" alt="Suitcase">
-                <img src="images/cinnapop/JPG/14.jpg" alt="Suitcase">
-            </div>           
+                <img src="images/cinnapop/JPG/9.jpg" alt="Cinnapop">
+                <img src="images/cinnapop/JPG/10.jpg" alt="Cinnapop">
+            </div>
+
+            <!-- Two images -->
+            <div class="image-row">
+                <img src="images/cinnapop/JPG/11.jpg" alt="Cinnapop">
+                <img src="images/cinnapop/JPG/12.jpg" alt="Cinnapop">
+            </div>
+
+            <!-- Two images -->
+            <div class="image-row">
+                <img src="images/cinnapop/JPG/13.jpg" alt="Cinnapop">
+                <img src="images/cinnapop/JPG/14.jpg" alt="Cinnapop">
+            </div>
         </div>
     </div>
 
