@@ -22,6 +22,7 @@
             overflow-x: hidden;
         }
 
+   
         /* Fixed background elements */
         .bg-fixed {
             position: fixed;
@@ -576,7 +577,7 @@
 
         <div class="work-item" data-work="uncledough">
             <div class="work-image-container">
-                <img src="images/uncledough/bag.png" alt="Uncle Dough">
+                <img style="object-fit: contain;" src="images/uncledough/text2.png" alt="Uncle Dough">
             </div>
         </div>
 
@@ -655,6 +656,7 @@
     </section>
 
     <script>
+
         const workData = {
             cinnapop: {
                 title: "Cinnapop Gingerbread cookies",
@@ -822,5 +824,7 @@
             video.play().catch(() => {});
         });
     </script>
+
+    
 </body>
 </html>
