@@ -300,7 +300,7 @@
     .hero-image img,
     .hero-image video {
         height: auto;
-        width: 99vw;
+        width: 100vw;
     }
 
     .image-row {
@@ -336,7 +336,6 @@
     }
 
     .project-info {
-        top: 20px;
         width: 200px;
     }
 
@@ -350,18 +349,21 @@
     .hero-image img,
     .hero-image video {
         height: auto;
-        width: 99vw;
+        width: 100vw;
     }
 
     .image-row {
         grid-template-columns: 1fr; /* Single column */
-        height: auto; /* Remove fixed height */
+        min-height: 55vh; /* Remove fixed height */
+        width: 99vw;
+        gap: 5px;
     }
     
     .image-row img,
     .image-row video {
-        height: auto; /* Height adjusts to content */
+        height: 100%; /* Height adjusts to content */
         width: 100%; /* Full width */
+        object-fit: cover;
     }
 
     .full-image {
@@ -489,7 +491,8 @@
             <div class="image-row">
                 <img src="images/petali/menumockup.jpeg" alt="Menu">
                 <img src="images/petali/mockup3.jpeg" alt="Mockup">
-                    </div>
+            </div>
+
             <div class="image-row">      
                 <img src="images/petali/FOLDER.jpeg" alt="Folder">
                 <img src="images/petali/sketchbook.jpeg" alt="Delivery van">
