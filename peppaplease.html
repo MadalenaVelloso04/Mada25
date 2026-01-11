@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="images/white-circle.png">
+    <link rel="stylesheet" href="https://use.typekit.net/dju8mqp.css">
+    <title>Cinnapop - Madalena Velloso</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: dico-mono, mono;
+            font-weight: 400;
+            font-style: normal;
+            background: #000000;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        /* Fixed info text */
+        .info-text {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            z-index: 100;
+            mix-blend-mode: difference;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 30px;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            z-index: 100;
+            mix-blend-mode: difference;
+        }
+
+        .navbar a {
+            color: #ffffff;
+            text-decoration: none;
+            mix-blend-mode: difference;
+            transition: opacity 0.3s;
+        }
+
+        .navbar a:hover {
+            opacity: 0.6;
+        }
+
+        .middle {
+            font-size: 12px;
+            mix-blend-mode: difference;
+            position: fixed;
+            top: 50%;
+            z-index: 100;
+        }
+
+        .middle.left {
+            left: 2vw;
+        }
+
+        .middle.center {
+            left: 20vw;
+        }
+
+        /* Main content */
+        .content-wrapper {
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Hero image section */
+        .hero-image {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            width: 99vw;
+            height: 99vh;
+            gap: 5px;
+            margin: 0 auto;
+        }
+
+        .hero-image img,
+        .hero-image video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* Content after hero */
+        .content-inner {
+            padding: 5px 0;
+            width: 99vw;
+            margin: 0 auto;
+        }
+
+                /* FULL WIDTH */
+.full-image {
+    min-height: 97vh;
+  margin-bottom: 6px;
+}
+
+.full-image img,
+.full-image video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+
+        /* Image grid - 2 column pattern */
+        .image-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5px;
+            margin-bottom: 5px;
+            width: 100%;
+        }
+
+        .image-row img,
+        .image-row video {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* Text section */
+        .text-section {
+            max-width: 1400px;
+            margin: 15vh auto;
+            padding: 0 5vw;
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 80px;
+        }
+
+        .text-left {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            line-height: 2;
+        }
+
+        .text-right h2 {
+            font-size: 24px;
+            font-weight: 400;
+            margin-bottom: 30px;
+        }
+
+        .text-right p {
+            font-size: 14px;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            opacity: 0.8;
+        }
+
+        /* Project info overlay */
+        .project-info {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            z-index: 100;
+            mix-blend-mode: difference;
+            max-width: 300px;
+        }
+
+        .project-info .category {
+            margin-bottom: 10px;
+            opacity: 0.6;
+        }
+
+        .project-info .title {
+            font-size: 20px;
+            font-style: italic;
+            margin-bottom: 15px;
+            text-transform: none;
+            letter-spacing: 0;
+        }
+
+        .project-info .meta {
+            display: grid;
+            gap: 5px;
+            font-size: 9px;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 1024px) {
+            .hero-image {
+                grid-template-columns: 1fr;
+                height: auto;
+            }
+
+            .hero-image img,
+            .hero-image video {
+                height: 70vh;
+            }
+
+            .image-row {
+                grid-template-columns: 1fr;
+                height: auto;
+            }
+            
+            .image-row img,
+            .image-row video {
+                height: 70vh;
+            }
+
+            .text-section {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .info-text {
+                display: none;
+            }
+
+            .middle {
+                display: none;
+            }
+
+            .navbar {
+                flex-direction: column;
+                gap: 10px;
+                font-size: 15px;
+                align-items: flex-end;
+            }
+
+            .hero-image {
+                grid-template-columns: 1fr;
+                height: auto;
+            }
+
+            .hero-image img,
+            .hero-image video {
+                height: 60vh;
+            }
+
+            .image-row {
+                grid-template-columns: 1fr;
+                height: auto;
+            }
+            
+         
+
+            .content-inner {
+                padding: 5px 0;
+            }
+
+            .project-info {
+                width: 200px;
+            }
+
+            .text-section {
+                margin: 10vh auto;
+                padding: 0 5vw;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-image img,
+            .hero-image video {
+                height: 50vh;
+            }
+
+            .image-row {
+                grid-template-columns: 1fr;
+                height: auto;
+            }
+            
+     
+
+            .navbar {
+                font-size: 14px;
+                gap: 8px;
+            }
+
+            .text-right h2 {
+                font-size: 20px;
+            }
+
+            .text-right p {
+                font-size: 13px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Fixed info text -->
+    <div class="info-text">
+        CINNAPOP — BRANDING / PACKAGING
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <a href="./#about">ABOUT</a>
+        <a href="./#work">WORK</a>
+        <a href="./projectsection.html">POSTERS</a>
+        <a href="https://www.instagram.com/naoseique.etal/">INSTAGRAM</a>
+    </nav>
+
+    <div class="middle left">
+        <p>open for projects and comissions</p>
+    </div>
+
+    <div class="middle center">
+        <p>madalenavelloso04@gmail.com</p>
+    </div>
+
+    <!-- Project info -->
+    <div class="project-info">
+        <div class="category">Branding / Packaging</div>
+        <div class="title">BonBon - World Brand Design feature</div>
+        <div class="meta">
+            <div>Year: 2025</div>
+            <div>Role: Visual Identity, Packaging Design</div>
+            <div>Tools: Adobe Illustrator, Photoshop</div>
+        </div>
+    </div>
+
+    <!-- Main content -->
+    <div class="content-wrapper">
+        <!-- Hero image -->
+        <div class="hero-image">
+            <img src="images/peppaplease/best.png" alt="Cinnapop">
+            <img src="images/peppaplease/edited5.png" alt="Cinnapop">
+        </div>
+
+        <!-- Rest of content -->
+        <div class="content-inner">
+            <!-- Text section -->
+            <div class="text-section">
+                <div class="text-left">
+                    Concept<br>
+                    Overview<br>
+                    —<br>
+                    001
+                </div>
+                <div class="text-right">
+                    <h2>Concept</h2>
+                    <p>BonBon is a brand of artisanal chocolate bonbons designed to capture the curiosity of anyone who appreciates delicacy, refinement, and patience in the objects and experiences they choose. Its striking, colorful, and thoughtfully structured design reflects these values. The brand draws inspiration from sweetness itself, giving it form, identity, and personality. It balances elegance and modernity with a playful, approachable touch, creating a system that functions as both emblem and ornament, guiding the experience from the moment the box is seen to the final bite of chocolate.</p>
+                </div>
+            </div>
+
+            <!-- Two images -->
+            <div class="image-row">
+                <img src="images/peppaplease/untitled.png" alt="Cinnapop">
+                <img src="images/peppaplease/OPENLID.png" alt="Cinnapop">
+            </div>
+
+            <!-- Two images -->
+            <div class="image-row">
+                         <img src="images/peppaplease/LEVITATING.png" alt="Cinnapop">
+            <img src="images/peppaplease/FURTHER.png" alt="Cinnapop">
+            </div>
+
+            <!-- Text section -->
+            <div class="text-section">
+                <div class="text-left">
+                    Process<br>
+                    Development<br>
+                    —<br>
+                    002
+                </div>
+                <div class="text-right">
+                    <h2>The Packaging Design</h2>
+                    <p>The silhouette pattern on the packaging gives a subtle glimpse of what lies inside. These shapes represent the bonbons themselves, and their smooth, enticing gradients enhance the visual appeal while hinting at the treats within. The checkered pattern introduces a sense of sweetened structure, a nod to the traditional chocolate industry's values of precision, control, and symmetry, while maintaining a playful and modern aesthetic.</p>
+<p>The drawer-style box was carefully designed to create a memorable unboxing experience. Sliding open the compartment evokes a homely sense of curiosity and delight, reminiscent of a “candy drawer” full of surprises.</p>
+<p>Typography plays an equally important role, harmoniously combining serif and sans serif styles. The Giramisu VF typeface from Adobe Fonts communicates modernity, originality, and visual prominence, while PP Right Serif Mono from Pangram Pangram reinforces the elegance, discipline, and timelessness of classic confectionery branding, particularly in the world of chocolate. Together, these elements create a brand identity that is approachable, collectible, and visually as delightful as the taste of the chocolates themselves.</p>
+                    
+                </div>
+            </div>
+
+            <!-- Two images -->
+            <div class="image-row">
+                <img src="images/bonbon/7-keyvisual-world-brand-design.jpg" alt="Cinnapop">
+                <img src="images/bonbon/8-flavours-world-brand-design.jpg" alt="Cinnapop">
+            </div>
+
+            <!-- Two images -->
+            <div class="image-row">
+                <img src="images/bonbon/9-stand-world-brand-design.jpg" alt="Cinnapop">
+                <img src="images/bonbon/10-flavours2-world-brand-design.jpg" alt="Cinnapop">
+            </div>
+
+            <!-- Two images -->
+            <div class="full-image">
+                <img src="images/bonbon/11-bags-world-brand-design.jpg" alt="Cinnapop">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Ensure videos play
+        document.querySelectorAll('video').forEach(video => {
+            video.muted = true;
+            video.play().catch(() => {});
+        });
+    </script>
+</body>
+</html>
