@@ -557,6 +557,12 @@
 
     <!-- Work scroll section -->
     <div class="work-scroll">
+            <div class="work-item"  id="work" data-work="peppaplease">
+            <div class="work-image-container">
+                <img src="images/peppaplease/perfection.png" alt="peppaplease">
+            </div>
+        </div>
+
         <div class="work-item"  id="work" data-work="cinnapop">
             <div class="work-image-container">
                 <img src="images/cinnapop/JPG/2.jpg" alt="Cinnapop">
@@ -642,8 +648,9 @@
             <p><strong>NABA - Nuova Academia di Belle Arti</strong><br>Erasmus Semester (art direction and graphic design)<br>2025</p>
 
               <h3>Features and Awards</h3>
+               <p><strong>Designer Briefs</strong><br>Modis Project First Place<br>2025</p>
+               <p><strong>The Best Packaging Design Platform</strong><br>Petali Project feauture<br>2025</p>
             <p><strong>World Brand Design Society</strong><br>BonBon Project feature<br>2025</p>
-            <p><strong>Designer Briefs</strong><br>Modis Project First Place<br>2025</p>
 
             <h3>Experience</h3>
             <p><strong>Freelance Designer</strong><br>Brand identity, illustration, web design, and everything in between<br>2023 - Present</p>
@@ -658,6 +665,14 @@
     <script>
 
         const workData = {
+             peppaplease: {
+                title: "Peppa Please Hot sauce",
+                category: "Brand Identity / Packaging / Product Design",
+                description: "Fun and cheeky branding, innovative product, and impactful packaging",
+                year: "2026",
+                role: "Visual Identity, Packaging Design, Product Modeling",
+                status: "Completed"
+            },
             cinnapop: {
                 title: "Cinnapop Gingerbread cookies",
                 category: "Brand Identity / Packaging",
@@ -699,7 +714,7 @@
                 status: "Completed"
             },
             petali: {
-                title: "Petali Sodas",
+                title: "Petali Sodas - featured by The Best Packaging Design Platform",
                 category: "Brand Identity / Packaging",
                 description: "Botanical sodas that celebrate fresh, organic, and fruity sensations.",
                 year: "2025",
@@ -774,6 +789,7 @@
             item.addEventListener('click', () => {
                 const workKey = item.getAttribute('data-work');
                 const links = {
+                    peppaplease: 'peppaplease.html',
                    magn8: 'magn8.html',
                        uncledough: 'uncledough.html',
                      bonbon: 'bonbon.html',
