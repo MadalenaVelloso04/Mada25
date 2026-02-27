@@ -557,6 +557,11 @@
 
     <!-- Work scroll section -->
     <div class="work-scroll">
+         <div class="work-item"  id="work" data-work="bareearth">
+            <div class="work-image-container">
+                <img src="images/bareearth/4-fourth-world-brand-design.jpg" alt="bareearth">
+            </div>
+        </div>
             <div class="work-item"  id="work" data-work="peppaplease">
             <div class="work-image-container">
                 <img style="object-position: top center;" src="images/peppaplease/perfection.png" alt="peppaplease">
@@ -665,6 +670,14 @@
     <script>
 
         const workData = {
+                bareearth: {
+                title: "Bare Earth - Body Care (World Brand Design Higlight)",
+                category: "Brand Identity / Packaging / Product Design",
+                description: "Tactile, Intuitive and honest. An identity that is efortless",
+                year: "2026",
+                role: "Visual Identity, Packaging Design, Product Modeling",
+                status: "Completed"
+            },
              peppaplease: {
                 title: "Peppa Please Hot sauce",
                 category: "Brand Identity / Packaging / Product Design",
@@ -789,6 +802,7 @@
             item.addEventListener('click', () => {
                 const workKey = item.getAttribute('data-work');
                 const links = {
+                    bareearth: 'bareearth.html',
                     peppaplease: 'peppaplease.html',
                    magn8: 'magn8.html',
                        uncledough: 'uncledough.html',
