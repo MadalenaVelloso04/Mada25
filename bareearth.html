@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="images/white-circle.png" />
+    <link rel="stylesheet" href="https://use.typekit.net/dju8mqp.css" />
+    <title>Cinnapop - Madalena Velloso</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: dico-mono, mono;
+        font-weight: 400;
+        font-style: normal;
+        background: #000000;
+        color: #ffffff;
+        overflow-x: hidden;
+      }
+
+      /* Fixed info text */
+      .info-text {
+        position: fixed;
+        top: 20px;
+        left: 20px;
+        font-size: 10px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        z-index: 100;
+        mix-blend-mode: difference;
+      }
+
+      /* Navigation */
+      .navbar {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        display: flex;
+        gap: 30px;
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        z-index: 100;
+        mix-blend-mode: difference;
+      }
+
+      .navbar a {
+        color: #ffffff;
+        text-decoration: none;
+        mix-blend-mode: difference;
+        transition: opacity 0.3s;
+      }
+
+      .navbar a:hover {
+        opacity: 0.6;
+      }
+
+      .middle {
+        font-size: 12px;
+        mix-blend-mode: difference;
+        position: fixed;
+        top: 50%;
+        z-index: 100;
+      }
+
+      .middle.left {
+        left: 2vw;
+      }
+
+      .middle.center {
+        left: 20vw;
+      }
+
+      /* Main content */
+      .content-wrapper {
+        position: relative;
+        z-index: 10;
+      }
+
+      /* Hero image section */
+      .hero-image {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        width: 99vw;
+        height: 99vh;
+        gap: 5px;
+        margin: 0 auto;
+        margin-bottom: 7vh;
+      }
+
+      .hero-image img,
+      .hero-image video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+
+      /* Content after hero */
+      .content-inner {
+        padding: 5px 0;
+        width: 99vw;
+        margin: 0 auto;
+      }
+
+      /* FULL WIDTH */
+      .full-image {
+        min-height: 97vh;
+        margin-bottom: 6px;
+      }
+
+      .full-image img,
+      .full-image video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+
+      /* Image grid - 2 column pattern */
+      .image-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 5px;
+        margin-bottom: 5px;
+        width: 100%;
+      }
+
+      .image-row img,
+      .image-row video {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+        display: block;
+      }
+
+      /* Text section */
+      .text-section {
+        max-width: 1400px;
+        margin: 15vh auto;
+        padding: 0 5vw;
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        gap: 80px;
+      }
+
+      .text-left {
+        font-size: 10px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        line-height: 2;
+      }
+
+      .text-right h2 {
+        font-size: 24px;
+        font-weight: 400;
+        margin-bottom: 30px;
+      }
+
+      .text-right p {
+        font-size: 14px;
+        line-height: 1.8;
+        margin-bottom: 20px;
+        opacity: 0.8;
+      }
+
+      .horizontal-list {
+        list-style: none; /* remove default bullets */
+        display: flex; /* make list items appear in a row */
+        gap: 20px; /* space between items */
+        padding: 0; /* remove default padding */
+        margin: 0; /* optional, remove default margin */
+      }
+
+      .horizontal-list li::before {
+        content: "•"; /* add custom bullet */
+        margin-right: 8px; /* space between bullet and text */
+        color: rgb(255, 255, 255); /* bullet color */
+      }
+
+      /* Project info overlay */
+      .project-info {
+        position: fixed;
+        bottom: 20px;
+        left: 20px;
+        font-size: 10px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        z-index: 100;
+        mix-blend-mode: difference;
+        max-width: 300px;
+      }
+
+      .project-info .category {
+        margin-bottom: 10px;
+        opacity: 0.6;
+      }
+
+      .project-info .title {
+        font-size: 20px;
+        font-style: italic;
+        margin-bottom: 15px;
+        text-transform: none;
+        letter-spacing: 0;
+      }
+
+      .project-info .meta {
+        display: grid;
+        gap: 5px;
+        font-size: 9px;
+      }
+
+      /* RESPONSIVE */
+      @media (max-width: 1024px) {
+        .hero-image {
+          grid-template-columns: 1fr;
+          height: auto;
+        }
+
+        .hero-image img,
+        .hero-image video {
+          height: 70vh;
+        }
+
+        .image-row {
+          grid-template-columns: 1fr;
+          height: auto;
+        }
+
+        .image-row img,
+        .image-row video {
+          height: 70vh;
+        }
+
+        .text-section {
+          grid-template-columns: 1fr;
+          gap: 40px;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .info-text {
+          display: none;
+        }
+
+        .middle {
+          display: none;
+        }
+
+        .navbar {
+          flex-direction: column;
+          gap: 10px;
+          font-size: 15px;
+          align-items: flex-end;
+        }
+
+        .hero-image {
+          grid-template-columns: 1fr;
+          height: auto;
+        }
+
+        .hero-image img,
+        .hero-image video {
+          height: 60vh;
+        }
+
+        .image-row {
+          grid-template-columns: 1fr;
+          height: auto;
+        }
+
+        .content-inner {
+          padding: 5px 0;
+        }
+
+        .project-info {
+          width: 200px;
+        }
+
+        .text-section {
+          margin: 10vh auto;
+          padding: 0 5vw;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .hero-image img,
+        .hero-image video {
+          height: 50vh;
+        }
+
+        .image-row {
+          grid-template-columns: 1fr;
+          height: auto;
+        }
+
+        .navbar {
+          font-size: 14px;
+          gap: 8px;
+        }
+
+        .text-right h2 {
+          font-size: 20px;
+        }
+
+        .text-right p {
+          font-size: 13px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Fixed info text -->
+    <div class="info-text">Bare Earth — BRANDING / PACKAGING</div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+      <a href="./#about">ABOUT</a>
+      <a href="./#work">WORK</a>
+      <a href="./projectsection.html">POSTERS</a>
+      <a href="https://www.instagram.com/naoseique.etal/">INSTAGRAM</a>
+    </nav>
+
+    <div class="middle left">
+      <p>open for projects and comissions</p>
+    </div>
+
+    <div class="middle center">
+      <p>madalenavelloso04@gmail.com</p>
+    </div>
+
+    <!-- Project info -->
+    <div class="project-info">
+      <div class="category">Branding / Packaging</div>
+      <div class="title">Peppa Please</div>
+      <div class="meta">
+        <div>Year: 2026</div>
+        <div>Role: Visual Identity, Packaging Design, Product Design</div>
+        <div>Tools: Adobe Illustrator, Adobe Photoshop, Adobe Firefly</div>
+      </div>
+    </div>
+
+    <!-- Main content -->
+    <div class="content-wrapper">
+      <!-- Hero image -->
+      <div class="hero-image">
+          <img src="images/bareearth/1-first-world-brand-design.jpg" alt="Cinnapop" />
+          <img src="images/bareearth/2-second-world-brand-design.jpg" alt="Cinnapop" />
+        </div>
+
+      <!-- Rest of content -->
+      <div class="content-inner">
+        <!-- Text section -->
+        <div class="text-section">
+          <div class="text-left">
+            Concept<br />
+            Overview<br />
+            —<br />
+            001
+          </div>
+          <div class="text-right">
+            <h2>Concept</h2>
+            <p>
+             Nakedness is often perceived as something bold, almost provocative. Yet when its meaning is truly understood, it reveals something far quieter, purity of form, the natural state of elements, the honesty of self.
+
+The beauty found in nature, its textures, moisture, and softness, forms the fundamental essence of Bare Earth. The packaging design becomes an homage to the way natural textures enrich the user experience.
+
+In nature, every surface carries its own identity, shaping how we perceive and interact with the world around us. These subtle tactile encounters elevate human connection, transforming it into a multisensory, memorable, and deeply emotional experience.
+            </p>
+            <br />
+            <p>
+             This philosophy guided the development of the concept, where materiality becomes the primary visual language. Instead of relying on printed graphics or strong chromatic contrasts, the design embraces embossing as a central expressive tool. Light and shadow replace ink, revealing details only through movement and perception.
+
+The packaging therefore communicates through restraint. It invites touch, curiosity, and a slower interaction, encouraging the user to experience the object rather than merely observe it. Texture becomes narrative, and surface becomes emotion.
+
+By reducing visual excess, the project reflects the brand’s core values: purity, transparency, and authenticity. The result is a design that feels honest, sensory, and timeless, an object that speaks softly yet leaves a lasting impression. Pure in essence
+            </p>
+          </div>
+        </div>
+
+        <!-- Two images -->
+        <div class="image-row">
+          <img src="images/bareearth/3-third-world-brand-design.jpg" alt="Cinnapop" />
+          <img src="images/bareearth/4-fourth-world-brand-design.jpg" alt="Cinnapop" />
+        </div>
+
+        <div class="image-row">
+          <img src="images/bareearth/5-fith-world-brand-design.jpg">
+          <img
+            src="images/bareearth/6-sixth-world-brand-design.jpg"
+          >
+        </div>
+
+        <div class="image-row">
+          <img src="images/bareearth/7-seventh-world-brand-design.jpg" alt="Cinnapop" />
+          <img src="images/bareearth/8-eigth-world-brand-design.jpg" alt="Cinnapop" />
+        </div>
+
+        <div class="image-row">
+          <img
+            src="images/bareearth/9-ninth-world-brand-design.jpg"
+            alt="Cinnapop"
+          />
+          <img src="images/bareearth/10-tenth-world-brand-design.jpg">
+        </div>
+
+      
+
+        <!-- Two images -->
+
+    <script>
+      // Ensure videos play
+      document.querySelectorAll("video").forEach((video) => {
+        video.muted = true;
+        video.play().catch(() => {});
+      });
+    </script>
+  </body>
+</html>
